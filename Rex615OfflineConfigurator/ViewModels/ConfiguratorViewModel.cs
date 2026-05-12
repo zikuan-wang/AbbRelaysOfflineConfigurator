@@ -626,7 +626,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
         var window = new CombinationCodeImportWindow(
             "导入订货号",
             "输入订货号，系统会按当前 PCL 版本在线反查组合代码。例如：REX615_11MV5。",
-            "反查")
+            "反查",
+            "REX615_11MV5")
         {
             Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(window => window.IsActive)
         };
