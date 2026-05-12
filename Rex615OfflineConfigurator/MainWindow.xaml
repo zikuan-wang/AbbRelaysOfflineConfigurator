@@ -991,35 +991,21 @@
                                                         <Grid Grid.Row="2"
                                                               Background="{DynamicResource SurfaceBrush}">
                                                             <Button Click="SlotDiagram_OnClick"
-                                                                    IsEnabled="{Binding HasTerminalDiagram}"
                                                                     Background="Transparent"
                                                                     BorderThickness="0"
                                                                     Padding="0"
                                                                     ToolTip="{Binding TerminalDiagramToolTip}"
-                                                                    Cursor="Hand"
                                                                     VerticalAlignment="Stretch"
                                                                     HorizontalAlignment="Stretch"
                                                                     HorizontalContentAlignment="Center"
                                                                     VerticalContentAlignment="Bottom">
-                                                                <Canvas Width="82"
-                                                                        Height="256"
-                                                                        ClipToBounds="True">
-                                                                    <TextBlock Canvas.Left="32"
-                                                                               Canvas.Top="238"
-                                                                               Text="{Binding Description, Mode=OneWay}"
-                                                                               Width="226"
-                                                                               FontSize="14"
-                                                                               FontWeight="SemiBold"
-                                                                               Foreground="{StaticResource TextBrush}"
-                                                                               TextAlignment="Left"
-                                                                               TextWrapping="NoWrap"
-                                                                               TextTrimming="CharacterEllipsis"
-                                                                               ToolTip="{Binding Description, Mode=OneWay}">
-                                                                        <TextBlock.RenderTransform>
-                                                                            <RotateTransform Angle="-90" />
-                                                                        </TextBlock.RenderTransform>
-                                                                    </TextBlock>
-                                                                </Canvas>
+                                                                <views:SlotDescriptionText Text="{Binding Description, Mode=OneWay}"
+                                                                                           Width="82"
+                                                                                           Height="256"
+                                                                                           FontSize="14"
+                                                                                           FontWeight="SemiBold"
+                                                                                           Foreground="{StaticResource TextBrush}"
+                                                                                           ToolTip="{Binding Description, Mode=OneWay}" />
                                                             </Button>
                                                         </Grid>
                                                     </Grid>
