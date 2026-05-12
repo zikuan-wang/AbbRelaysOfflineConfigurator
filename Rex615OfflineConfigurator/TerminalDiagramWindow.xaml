@@ -1,0 +1,58 @@
+<Window x:Class="Rex615OfflineConfigurator.TerminalDiagramWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="REX615 接线图"
+        Width="1100"
+        Height="760"
+        MinWidth="760"
+        MinHeight="520"
+        Icon="Assets/rex615.ico"
+        WindowStartupLocation="CenterOwner"
+        FontFamily="Segoe UI, Microsoft YaHei UI"
+        FontSize="13"
+        Background="#F3F6FA">
+    <Window.Resources>
+        <Style x:Key="DialogButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinWidth" Value="96" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock x:Name="TitleTextBlock"
+                       Text="REX615 接线图"
+                       FontSize="18"
+                       FontWeight="SemiBold" />
+            <TextBlock Text="图纸由本地 DWG 文件转换生成。"
+                       Foreground="#64748B"
+                       Margin="0,3,0,0" />
+        </StackPanel>
+
+        <TabControl x:Name="DiagramTabControl"
+                    Grid.Row="1"
+                    Background="White"
+                    BorderBrush="#D8E0EA"
+                    BorderThickness="1" />
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,12,0,0">
+            <Button Content="打开图片"
+                    Style="{StaticResource DialogButtonStyle}"
+                    Click="OpenImageButton_OnClick" />
+            <Button Content="关闭"
+                    Style="{StaticResource DialogButtonStyle}"
+                    Margin="0"
+                    Click="CloseButton_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

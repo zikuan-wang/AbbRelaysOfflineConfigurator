@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+	<MainCodes>
+		<Digit Location="1+2+3+4+5+6" Group="REX615产品" IsMandatory="True">
+			<Option Id="REX615" Version="*" Description="REX615 保护和控制继电器"/>
+		</Digit>
+		<Digit Location="7" Group="机箱" IsMandatory="True">
+			<Option Id="A" Version="*" Description="标准机箱" Validity="开关量模块=!2x BIO5,!3x BIO5,!2x BIO7&amp;模拟量模块=!2x AIM4&amp;RTD模块=!1x RTD2,!1x RTD3,!2x RTD3"/>
+			<Option Id="B" Version="*" Description="宽机箱(更多I/O)" Validity="模拟量模块=!2x AIM4,!AIM18,!AIM19&amp;RTD模块=!1x RTD1"/>
+			<Option Id="C" Version="*" Description="宽机箱(更多电压和电流)" Validity="开关量模块=!3x BIO5,!1x BIO6&amp;模拟量模块=1x AIM4,2x AIM4&amp;模拟量模块=2x AIM4,AIM13,AIM16,AIM17&amp;模拟量模块=!AIM3,!AIM5,!AIM6,!AIM15,!AIM18,!AIM19,!SIM5&amp;RTD模块=!1x RTD1,!2x RTD3"/>
+		</Digit>
+		<Digit Location="8" Group="产品版本" IsMandatory="True">
+			<Option Id="1" Version="*" Description="产品版本"/>
+		</Digit>
+		<Digit Location="9" Group="接口级别" IsMandatory="True">
+			<Option Id="0" Version="*" Description="接口级别"/>
+		</Digit>
+		<Digit Location="10" Group="选项1" IsMandatory="True">
+			<Option Id="G" Version="*" Description="全球语言包:英语、中文、克罗地亚语、捷克语、芬兰语、法语、德语、匈牙利语、意大利语、波兰语、葡萄牙语、西班牙语、瑞典语、土耳其语"/>
+			<Option Id="C" Version="*" Description="中国语言包:简体中文"/>
+		</Digit>
+		<Digit Location="11" Group="保形涂层" IsMandatory="True">
+			<Option Id="N" Version="*" Description="不带保形涂层"/>
+			<Option Id="C" Version="*" Description="带保形涂层"/>
+		</Digit>
+	</MainCodes>
+	<SlotConstraints Version="PCL1" Source="官方 REX615_PCL1.xml">
+		<Housing Id="A" Description="标准机箱">
+			<Slot Id="X110" Capacity="1" Modules="BIO5,BIO7" CodeOrder="3"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM5,AIM15,AIM16,AIM17,AIM18,AIM19" CodeOrder="1"/>
+			<Slot Id="X130" Capacity="1" Modules="BIO6,AIM3,AIM6,RTD1,SIM5" CodeOrder="2"/>
+			<Requirement Id="A_ANALOG_REQUIRED" Type="AtLeastOne" Slots="X120,X130" Modules="AIM3,AIM4,AIM5,AIM6,AIM15,AIM16,AIM17,AIM18,AIM19,SIM5"/>
+		</Housing>
+		<Housing Id="B" Description="宽机箱(更多I/O)">
+			<Slot Id="X105" Capacity="1" Modules="BIO5,BIO7,RTD3" CodeOrder="1"/>
+			<Slot Id="X110" Capacity="1" Modules="BIO5,RTD3" CodeOrder="2"/>
+			<Slot Id="X115" Capacity="1" Modules="BIO5" CodeOrder="5"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM5,AIM15,AIM16,AIM17" CodeOrder="3"/>
+			<Slot Id="X130" Capacity="1" Modules="AIM3,AIM6,RTD2,SIM5" CodeOrder="4"/>
+			<Requirement Id="B_ANALOG_REQUIRED" Type="AtLeastOne" Slots="X120,X130" Modules="AIM3,AIM4,AIM5,AIM6,AIM15,AIM16,AIM17,SIM5"/>
+		</Housing>
+		<Housing Id="C" Description="宽机箱(更多电压和电流)">
+			<Slot Id="X105" Capacity="1" Modules="BIO5,BIO7,RTD3" CodeOrder="1"/>
+			<Slot Id="X110" Capacity="1" Modules="BIO5" CodeOrder="5"/>
+			<Slot Id="X115" Capacity="1" Modules="AIM4" CodeOrder="2"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM16,AIM17" CodeOrder="3"/>
+			<Slot Id="X130" Capacity="1" Modules="RTD2" CodeOrder="4"/>
+			<Requirement Id="C_AIM4_ALWAYS_INCLUDED" Type="SlotMustContain" Slot="X115" Modules="AIM4"/>
+			<Requirement Id="C_ANALOG_REQUIRED" Type="SlotMustContain" Slot="X120" Modules="AIM4,AIM16,AIM17"/>
+		</Housing>
+	</SlotConstraints>
+	<SlotConstraints Version="PCL2" Source="官方 REX615_PCL2.xml">
+		<Housing Id="A" Description="标准机箱">
+			<Slot Id="X110" Capacity="1" Modules="BIO5,BIO7" CodeOrder="3"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM5,AIM13,AIM15,AIM16,AIM17,AIM18,AIM19" CodeOrder="1"/>
+			<Slot Id="X130" Capacity="1" Modules="BIO6,AIM3,AIM6,RTD1,SIM5" CodeOrder="2"/>
+			<Requirement Id="A_ANALOG_REQUIRED" Type="AtLeastOne" Slots="X120,X130" Modules="AIM3,AIM4,AIM5,AIM6,AIM13,AIM15,AIM16,AIM17,AIM18,AIM19,SIM5"/>
+		</Housing>
+		<Housing Id="B" Description="宽机箱(更多I/O)">
+			<Slot Id="X105" Capacity="1" Modules="BIO5,BIO7,RTD3" CodeOrder="1"/>
+			<Slot Id="X110" Capacity="1" Modules="BIO5,BIO7,RTD3" CodeOrder="2"/>
+			<Slot Id="X115" Capacity="1" Modules="BIO5,BIO7" CodeOrder="5"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM5,AIM13,AIM15,AIM16,AIM17" CodeOrder="3"/>
+			<Slot Id="X130" Capacity="1" Modules="BIO6,AIM3,AIM6,RTD2,SIM5" CodeOrder="4"/>
+			<Requirement Id="B_ANALOG_REQUIRED" Type="AtLeastOne" Slots="X120,X130" Modules="AIM3,AIM4,AIM5,AIM6,AIM13,AIM15,AIM16,AIM17,SIM5"/>
+		</Housing>
+		<Housing Id="C" Description="宽机箱(更多电压和电流)">
+			<Slot Id="X105" Capacity="1" Modules="BIO5,BIO7,RTD3" CodeOrder="1"/>
+			<Slot Id="X110" Capacity="1" Modules="BIO5,BIO7" CodeOrder="5"/>
+			<Slot Id="X115" Capacity="1" Modules="AIM4" CodeOrder="2"/>
+			<Slot Id="X120" Capacity="1" Modules="AIM4,AIM13,AIM16,AIM17" CodeOrder="3"/>
+			<Slot Id="X130" Capacity="1" Modules="RTD2" CodeOrder="4"/>
+			<Requirement Id="C_AIM4_ALWAYS_INCLUDED" Type="SlotMustContain" Slot="X115" Modules="AIM4"/>
+			<Requirement Id="C_ANALOG_REQUIRED" Type="SlotMustContain" Slot="X120" Modules="AIM4,AIM13,AIM16,AIM17"/>
+		</Housing>
+	</SlotConstraints>
+	<OptionCodes>
+		<Category Name="通讯模块" IsMandatory="True">
+			<Option Id="COM1" Version="*" Description="COM1 - 100M 以太网接口(RJ45)" ShortDescription="COM1 - 1xRJ45" Validity="通讯规约=CMP1,CMP2,CMP4,CMP5&amp;应用包=!APP6"/>
+			<Option Id="COM11" Version="*" Description="COM11 - 100M 以太网接口(RJ45) + RS 485(包括 IRIG-B)" ShortDescription="COM11 - 1xRJ45 + RS 485(IRIG-B)" Validity="应用包=!APP6"/>
+			<Option Id="COM12" Version="*" Description="COM12 - 100M 以太网接口(LC) + RS 485(包括 IRIG-B)" ShortDescription="COM12 - 1xMM LC + RS 485(IRIG-B)" Validity="应用包=!APP6"/>
+			<Option Id="COM13" Version="*" Description="COM13 - 100M 以太网接口(RJ45) + RS 485(包括 IRIG-B)+ 弧光传感器接口x3" ShortDescription="COM13 - 1xRJ45 + RS 485(IRIG-B)+ ARCx3" Validity="应用包=!APP6"/>
+			<Option Id="COM14" Version="*" Description="COM14 - 100M 以太网接口(LC) + RS 485(包括 IRIG-B)+ 弧光传感器接口x3" ShortDescription="COM14 - 1xMM LC + RS 485(IRIG-B)+ ARCx3" Validity="应用包=!APP6"/>
+			<Option Id="COM16" Version="*" Description="COM16 - 100M 以太网接口(3xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口" ShortDescription="COM16 - 3xRJ45+ RS 485(IRIG-B) + ST" Validity="应用包=!APP6"/>
+			<Option Id="COM17" Version="*" Description="COM17 - 100M 以太网接口(2xRJ45，1x多模LC)，带 HSR/PRP/RSTP 和IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口" ShortDescription="COM17 - 2xRJ45 + 1xMM LC + RS 485(IRIG-B) + ST" Validity="应用包=!APP6"/>
+			<Option Id="COM18" Version="*" Description="COM18 - 100M 以太网接口(3x多模LC)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口" ShortDescription="COM18 - 3xMM LC + RS 485(IRIG-B) + ST" Validity="应用包=!APP6"/>
+			<Option Id="COM31" Version="*" Description="COM31 - 100M 以太网接口(3xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE" ShortDescription="COM31 - 3xRJ45" Validity="通讯规约=CMP1,CMP2,CMP4,CMP5&amp;应用包=!APP6"/>
+			<Option Id="COM32" Version="*" Description="COM32 - 100M 以太网接口(2x多模LC，1xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + 玻璃光纤 ST 串口 + 弧光传感器接口x3" ShortDescription="COM32 - 2xMM LC + 1xRJ45 + ST + ARCx3" Validity="应用包=!APP6"/>
+			<Option Id="COM33" Version="*" Description="COM33 - 100M 以太网接口(3xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + 玻璃光纤 ST 串口 + 弧光传感器接口x3" ShortDescription="COM33 - 3xRJ45 + ST + ARCx3" Validity="应用包=!APP6"/>
+			<Option Id="COM34" Version="*" Description="COM34 - 100M 以太网接口(2xRJ45，1x多模LC)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + 玻璃光纤 ST 串口 + 弧光传感器接口x3" ShortDescription="COM34 - 2xRJ45，1xMM LC + ST + ARCx3" Validity="应用包=!APP6"/>
+			<Option Id="COM37" Version="*" Description="COM37 - 100M 以太网接口(2x多模LC，1xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE" ShortDescription="COM37 - 2xMM LC，1xRJ45" Validity="通讯规约=CMP1,CMP2,CMP4,CMP5&amp;应用包=!APP6"/>
+			<Option Id="COM8" Version="*" Description="COM8 - 1x光差多模LC + 100M 以太网接口(2xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口(需 APP6！)" ShortDescription="1xMM LD LC + 2xRJ45 + RS 485(IRIG-B) + ST(APP6!)" Requires="应用包=APP6"/>
+			<Option Id="COM9" Version="*" Description="COM9 - 1x光差多模LC + 100M 以太网接口(2x多模LC)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口(需 APP6！)" ShortDescription="1xMM LD LC + 2xMM LC + RS 485(IRIG-B) + ST(APP6!)" Requires="应用包=APP6"/>
+			<Option Id="COM10" Version="*" Description="COM10 - 1x光差单模LC + 100M 以太网接口(2xRJ45)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口(需 APP6！)" ShortDescription="1xSM LD LC + 2xRJ45 + RS 485(IRIG-B) + ST(APP6!)" Requires="应用包=APP6"/>
+			<Option Id="COM15" Version="*" Description="COM15 - 1x光差单模LC + 100M 以太网接口(2x多模LC)，带 HSR/PRP/RSTP 和 IEC61850-9-2LE + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口(需 APP6！)" ShortDescription="1xSM LD LC + 2xMM LC + RS 485(IRIG-B) + ST(APP6!)" Requires="应用包=APP6"/>
+			<Option Id="COM27" Version="*" Description="COM27 - 100M 以太网接口(RJ45) + RS 232/485 + RS 485(包括 IRIG-B)+ 玻璃光纤 ST 串口" ShortDescription="COM27 - 1xRJ45 + RS 232/485 + RS 485(IRIG-B) + ST" Validity="版本=PCL2&amp;应用包=!APP6"/>
+		</Category>
+
+		<Category Name="开关量模块" IsMandatory="False" IsMultiple="True">
+			<Option Id="1x BIO5" Version="*" Description="开关量模块: 8个开入 + 4个开出" ShortDescription="BIO: 8BI + 4BO" ModuleType="BIO5" ModuleCount="1" BI="8" BO="4" Validity="机箱=A,B,C&amp;开关量模块=!2x BIO5,!3x BIO5"/>
+			<Option Id="2x BIO5" Version="*" Description="开关量模块: 16个开入 + 8个开出" ShortDescription="BIO: 16BI + 8BO" ModuleType="BIO5" ModuleCount="2" BI="16" BO="8" Validity="机箱=B,C&amp;开关量模块=!1x BIO5,!3x BIO5,!2x BIO7&amp;RTD模块=!2x RTD3"/>
+			<Option Id="3x BIO5" Version="*" Description="开关量模块: 24个开入 + 12个开出" ShortDescription="BIO: 24BI + 12BO" ModuleType="BIO5" ModuleCount="3" BI="24" BO="12" Validity="机箱=B&amp;开关量模块=!1x BIO5,!2x BIO5,!1x BIO7,!2x BIO7&amp;RTD模块=!1x RTD3,!2x RTD3"/>
+			<Option Id="1x BIO7" Version="*" Description="开关量模块: 8个开入 + 3个快速开出" ShortDescription="BIO: 8BI + 3HSO" ModuleType="BIO7" ModuleCount="1" BI="8" HSO="3" Validity="机箱=A,B,C&amp;开关量模块=!2x BIO7"/>
+			<Option Id="2x BIO7" Version="*" Description="开关量模块: 16个开入 + 6个快速开出" ShortDescription="BIO: 16BI + 6HSO" ModuleType="BIO7" ModuleCount="2" BI="16" HSO="6" Validity="版本=PCL2&amp;机箱=B,C&amp;开关量模块=!1x BIO7"/>
+			<Option Id="1x BIO6" Version="*" Description="开关量模块: 6个开入 + 3个开出" ShortDescription="BIO: 6BI + 3BO" ModuleType="BIO6" ModuleCount="1" BI="6" BO="3" Validity="机箱=A,B&amp;模拟量模块=!AIM3,!AIM6,!SIM5&amp;RTD模块=!1x RTD1,!1x RTD2"/>
+		</Category>
+
+		<Category Name="模拟量模块" IsMandatory="True" IsMultiple="True">
+			<Option Id="AIM3" Version="*" Description="模拟量模块: 5个电压 + 2个电阻温度检测接口(RTD) + 1个毫安量接口" ShortDescription="AIM: 5VT + 2RTD + 1mA" ModuleType="AIM3" ModuleCount="1" VT="5" RTD="2" mA="1" Validity="机箱=A,B&amp;模拟量模块=!AIM6,!SIM5&amp;开关量模块=!1x BIO6&amp;RTD模块=!1x RTD1,!1x RTD2"/>
+			<Option Id="1x AIM4" Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 3个电压" ShortDescription="AIM: 4CT (Io 1/5A) + 3VT" ModuleType="AIM4" ModuleCount="1" CT="4" VT="3" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM15,!AIM18,!AIM19"/>
+			<Option Id="2x AIM4" Version="*" Description="模拟量模块: 8个电流(零序电流 1/5A) + 6个电压" ShortDescription="AIM: 8CT (Io 1/5A) + 6VT" ModuleType="AIM4" ModuleCount="2" CT="8" VT="6" Validity="机箱=C&amp;模拟量模块=!1x AIM4,!AIM13,!AIM16,!AIM17"/>
+			<Option Id="AIM5" Version="*" Description="模拟量模块: 7个电流(零序电流 1/5A)" ShortDescription="AIM: 7CT (Io 1/5A)" ModuleType="AIM5" ModuleCount="1" CT="7" Validity="机箱=A,B&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM13,!AIM15,!AIM16,!AIM17,!AIM18,!AIM19"/>
+			<Option Id="AIM6" Version="*" Description="模拟量模块: 5个电压 + 4个开入" ShortDescription="AIM: 5VT + 4BI" ModuleType="AIM6" ModuleCount="1" VT="5" BI="4" Validity="机箱=A,B&amp;模拟量模块=!AIM3,!SIM5&amp;开关量模块=!1x BIO6&amp;RTD模块=!1x RTD1,!1x RTD2"/>
+			<Option Id="AIM13" Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 3个电压" ShortDescription="AIM: 4CT (Io 0.2/1A) + 3VT" ModuleType="AIM13" ModuleCount="1" CT="4" VT="3" Validity="版本=PCL2&amp;机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM15,!AIM16,!AIM17,!AIM18,!AIM19"/>
+			<Option Id="AIM15"  Version="*" Description="模拟量模块: 7个电流(零序电流 0.2/1A)"  ShortDescription="AIM: 7CT (Io 0.2/1A)" ModuleType="AIM15" ModuleCount="1" CT="7" Validity="机箱=A,B&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM16,!AIM17,!AIM18,!AIM19"/>
+			<Option Id="AIM16" Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 4个开入" ShortDescription="AIM: 4CT (Io 1/5A) + 4BI" ModuleType="AIM16" ModuleCount="1" CT="4" BI="4" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM17,!AIM18,!AIM19"/>
+			<Option Id="AIM17"  Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 4个开入"  ShortDescription="AIM: 4CT (Io 0.2/1A) + 4BI" ModuleType="AIM17" ModuleCount="1" CT="4" BI="4" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM18,!AIM19"/>
+			<Option Id="AIM18"  Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 1个电压 + 3个开入"  ShortDescription="AIM: 4CT (Io 1/5A) + 1VT + 3BI" ModuleType="AIM18" ModuleCount="1" CT="4" VT="1" BI="3" Validity="机箱=A&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM17,!AIM19"/>
+			<Option Id="AIM19" Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 1个电压 + 3个开入" ShortDescription="AIM: 4CT (Io 0.2/1A) + 1VT + 3BI" ModuleType="AIM19" ModuleCount="1" CT="4" VT="1" BI="3" Validity="机箱=A&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM17,!AIM18"/>
+			<Option Id="SIM5" Version="*" Description="模拟量模块: 3个电流传感器 + 3个电压传感器 + 1个零序电流(0.2/1A) IEC61869接口" ShortDescription="SIM: 3Is + 3Us + 1CT (Io 0.2/1A) IEC61869" ModuleType="SIM5" ModuleCount="1" Is="3" Us="3" CT="1" Validity="机箱=A,B&amp;模拟量模块=!AIM3,!1x AIM4,!2x AIM4,!AIM5,!AIM6,!AIM13,!AIM15,!AIM16,!AIM17,!AIM18,!AIM19&amp;开关量模块=!1x BIO6&amp;RTD模块=!1x RTD1,!1x RTD2"/>
+		</Category>
+
+		<Category Name="RTD模块" IsMandatory="False" IsMultiple="True">
+			<Option Id="1x RTD1" Version="*" Description="RTD模块: 6个电阻温度检测接口(RTD) + 2个毫安量接口(输入)" ShortDescription="RTD: 6RTD + 2mA(in)" ModuleType="RTD1" ModuleCount="1" RTD="6" mA="2" Validity="机箱=A&amp;开关量模块=!1x BIO6&amp;模拟量模块=!AIM3,!AIM6,!SIM5"/>
+			<Option Id="1x RTD2" Version="*" Description="RTD模块: 2个电阻温度检测接口(RTD) + 1个毫安量接口(输入) + 3个开出" ShortDescription="RTD: 2RTD + 1mA(in) + 3BO" ModuleType="RTD2" ModuleCount="1" RTD="2" mA="1" BO="3" Validity="机箱=B,C&amp;开关量模块=!1x BIO6&amp;模拟量模块=!AIM3,!AIM6,!SIM5"/>
+			<Option Id="1x RTD3" Version="*" Description="RTD模块: 6个电阻温度检测接口(RTD) + 2个毫安量接口(输入)" ShortDescription="RTD: 6RTD + 2mA(in)" ModuleType="RTD3" ModuleCount="1" RTD="6" mA="2" Validity="机箱=B,C&amp;RTD模块=!2x RTD3"/>
+			<Option Id="2x RTD3" Version="*" Description="RTD模块: 12个电阻温度检测接口(RTD) + 4个毫安量接口(输入)" ShortDescription="RTD: 12RTD + 4mA(in)" ModuleType="RTD3" ModuleCount="2" RTD="12" mA="4" Validity="机箱=B&amp;RTD模块=!1x RTD3&amp;开关量模块=!2x BIO5,!3x BIO5,!2x BIO7"/>
+		</Category>
+
+		<Category Name="电源模块" IsMandatory="True">
+			<Option Id="PSM4" Version="*" Description="PSM4 - 60-250 Vdc; 100-240 Vac; 6个开出" ShortDescription="PSM4 - 60-250 Vdc; 100-240 Vac; 6BO" BO="6"/>
+			<Option Id="PSM3" Version="*" Description="PSM3 - 24-60 Vdc; 6个开出" ShortDescription="PSM3 - 24-60 Vdc; 6BO" BO="6"/>
+		</Category>
+
+		<Category Name="LHMI面板" Slot="HMI" IsMandatory="True">
+			<Option Id="HMI1" Version="*" Description="英文LHMI面板" Validity="选项1=G"/>
+			<Option Id="HMI2" Version="*" Description="中文LHMI面板" Validity="选项1=G,C"/>
+		</Category>
+
+		<Category Name="应用包" IsMandatory="False" IsMultiple="True">
+			<Option Id="APP1" Version="*" Description="APP1 - 电流保护包"/>
+			<Option Id="APP2" Version="*" Description="APP2 - 接地保护扩展包"/>
+			<Option Id="APP3" Version="*" Description="APP3 - 馈线保护扩展包"/>
+			<Option Id="APP4" Version="*" Description="APP4 - 故障定位包"/>
+			<Option Id="APP5" Version="*" Description="APP5 - 电压保护包"/>
+			<Option Id="APP6" Version="*" Description="APP6 - 线路差动保护包(需要选择光差通信模块)" Validity="通讯模块=COM8,COM9,COM10,COM15"/>
+			<Option Id="APP7" Version="*" Description="APP7 - 并联电容器保护包"/>
+			<Option Id="APP8" Version="*" Description="APP8 - 互连保护包"/>
+			<Option Id="APP9" Version="*" Description="APP9 - 电机保护包"/>
+			<Option Id="ADD1" Version="*" Description="ADD1 - 同步电机附加包" Validity="应用包=!ADD2&amp;应用包=APP9"/>
+			<Option Id="ADD2" Version="*" Description="ADD2 - 电机差动附加包" Validity="应用包=!ADD1&amp;应用包=APP9"/>
+			<Option Id="APP10" Version="*" Description="APP10 - 电力变压器保护包"/>
+			<Option Id="APP11" Version="*" Description="APP11 - 母线保护包"/>
+			<Option Id="APP12" Version="*" Description="APP12 - 有载调压控制器控制包"/>
+		</Category>
+		<Category Name="通讯规约" IsMandatory="True">
+			<IsMultiple Version="PCL2" Value="True"/>
+			<Option Id="CMP1" Version="*" Description="CMP1 - IEC 61850"/>
+			<Option Id="CMP2" Version="*" Description="CMP2 - IEC 61850 + Modbus"/>
+			<Option Id="CMP3" Version="*" Description="CMP3 - IEC 61850 + IEC 103" Validity="通讯模块=COM11,COM12,COM13,COM14,COM15,COM16,COM17,COM18,COM27,COM32,COM33,COM34,COM8,COM9,COM10"/>
+			<Option Id="CMP4" Version="*" Description="CMP4 - IEC 61850 + DNP3"/>
+			<Option Id="CMP5" Version="*" Description="CMP5 - IEC 61850 + IEC 104"/>
+			<Option Id="CMP30" Version="*" Description="CMP30 - IEC 61850 + Modbus (Master)" Validity="版本=PCL2&amp;通讯模块=COM11,COM12,COM13,COM14,COM15,COM16,COM17,COM18,COM27,COM32,COM33,COM34,COM8,COM9,COM10"/>
+		</Category>
+
+		<Category Name="信号端子" IsMandatory="True" IsMultiple="False">
+			<Option Id="SCT1" Version="*" Description="SCT1 - 压接型信号端子"/>
+			<Option Id="SCT2" Version="*" Description="SCT2 - 环形接线片型信号端子"/>
+		</Category>
+
+		<Category Name="版本" IsMandatory="True">
+			<Option Id="PCL1" Version="*" Description="版本 PCL1"/>
+			<Option Id="PCL2" Version="*" Description="版本 PCL2"/>
+		</Category>
+	</OptionCodes>
+</ProductTypeCode>

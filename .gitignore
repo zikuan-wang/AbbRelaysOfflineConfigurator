@@ -1,0 +1,40 @@
+# Build outputs
+bin/
+obj/
+Generated/
+.vs/
+
+# User and IDE state
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Installer and publish artifacts
+*.msi
+*.cab
+*.appx
+*.msix
+*.zip
+
+# Source reference documents and CAD files are not committed.
+*.pdf
+*.dwg
+*.xlsm
+*.7z
+REX615 Terminal diagrams/
+REX615_PCL*.xml
+REX615_ROL.xml
+!Rex615OfflineConfigurator/Data/REX615_ROL.xml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+~$*
+
+# Local authorization signing material. Do not commit private keys or generated license files.
+Rex615AuthorizationTool/AuthorizationPrivateKeyProvider.local.cs
+authorization-private-key.txt
+*.zwreq
+*.zwlic
