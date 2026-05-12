@@ -1,7 +1,7 @@
 param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "1.1.1"
+    [string]$ProductVersion = "1.1.2"
 )
 
 $ErrorActionPreference = "Stop"
@@ -185,7 +185,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if (-not (Test-Path -LiteralPath $msiPath)) {
-    $shortNameMsi = Get-ChildItem -LiteralPath $outputRoot -Filter "REX615*.MSI" |
+    $shortNameMsi = Get-ChildItem -LiteralPath $outputRoot -Filter "*.MSI" |
         Where-Object { $_.LastWriteTime -ge $wixBuildStartedAt.AddSeconds(-5) } |
         Sort-Object LastWriteTime -Descending |
         Select-Object -First 1
