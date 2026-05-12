@@ -6,6 +6,8 @@ namespace Rex615OfflineConfigurator.Views;
 
 public sealed class SlotDescriptionText : FrameworkElement
 {
+    private const double HorizontalPadding = 12;
+
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         nameof(Text),
         typeof(string),
@@ -68,6 +70,24 @@ public sealed class SlotDescriptionText : FrameworkElement
         set => SetValue(FontWeightProperty, value);
     }
 
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        var width = double.IsNaN(Width) ? 82 : Width;
+        var height = double.IsNaN(Height) ? 256 : Height;
+
+        if (!double.IsInfinity(availableSize.Width))
+        {
+            width = Math.Min(width, availableSize.Width);
+        }
+
+        if (!double.IsInfinity(availableSize.Height))
+        {
+            height = Math.Min(height, availableSize.Height);
+        }
+
+        return new Size(Math.Max(1, width), Math.Max(1, height));
+    }
+
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
@@ -92,17 +112,16 @@ public sealed class SlotDescriptionText : FrameworkElement
             dpi.PixelsPerDip)
         {
             MaxLineCount = 1,
-            MaxTextWidth = Math.Max(1, ActualHeight - 28),
+            MaxTextWidth = Math.Max(1, ActualHeight - (HorizontalPadding * 2)),
             Trimming = TextTrimming.CharacterEllipsis
         };
 
-        var x = Math.Max(0, (ActualWidth - formattedText.Height) / 2);
-        var y = ActualHeight - 16;
+        var x = -(ActualHeight - HorizontalPadding);
+        var y = Math.Max(0, (ActualWidth - formattedText.Height) / 2);
+
         drawingContext.PushClip(new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight)));
-        drawingContext.PushTransform(new TranslateTransform(x, y));
         drawingContext.PushTransform(new RotateTransform(-90));
-        drawingContext.DrawText(formattedText, new Point(0, 0));
-        drawingContext.Pop();
+        drawingContext.DrawText(formattedText, new Point(x, y));
         drawingContext.Pop();
         drawingContext.Pop();
     }
