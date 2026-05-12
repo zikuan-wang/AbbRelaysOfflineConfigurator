@@ -1202,6 +1202,16 @@
                                                     <TextBlock Text="打开发布页" Margin="6,0,0,0" />
                                                 </StackPanel>
                                             </Button>
+                                            <Button x:Name="DownloadInstallUpdateButton"
+                                                    Click="DownloadInstallUpdateButton_OnClick"
+                                                    IsEnabled="False"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    MinHeight="34">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="DownloadBoxOutline" Width="18" Height="18" />
+                                                    <TextBlock Text="下载并安装" Margin="6,0,0,0" />
+                                                </StackPanel>
+                                            </Button>
                                         </WrapPanel>
                                     </StackPanel>
                                 </Border>

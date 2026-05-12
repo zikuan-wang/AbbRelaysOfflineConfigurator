@@ -17,6 +17,8 @@ public partial class MainWindow : Window
 {
     private readonly UpdateCheckService _updateCheckService = new();
     private string? _updateReleaseUrl;
+    private string? _updateDownloadUrl;
+    private string? _updateDownloadAssetName;
 
     public MainWindow()
     {
@@ -57,6 +59,9 @@ public partial class MainWindow : Window
     {
         CheckUpdateButton.IsEnabled = false;
         OpenUpdateReleaseButton.IsEnabled = false;
+        DownloadInstallUpdateButton.IsEnabled = false;
+        _updateDownloadUrl = null;
+        _updateDownloadAssetName = null;
         UpdateStatusTextBlock.Text = "正在检查 GitHub Release 更新...";
 
         try
@@ -74,12 +79,15 @@ public partial class MainWindow : Window
                 ? UpdateCheckService.ReleaseRepositoryUrl + "/releases"
                 : result.ReleaseUrl;
             OpenUpdateReleaseButton.IsEnabled = true;
+            _updateDownloadUrl = result.DownloadUrl;
+            _updateDownloadAssetName = result.DownloadAssetName;
 
             if (result.HasUpdate)
             {
                 var assetText = string.IsNullOrWhiteSpace(result.DownloadAssetName)
                     ? "请打开发布页下载最新安装包。"
                     : $"可下载：{result.DownloadAssetName}";
+                DownloadInstallUpdateButton.IsEnabled = !string.IsNullOrWhiteSpace(result.DownloadUrl);
                 UpdateStatusTextBlock.Text =
                     $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}";
             }
@@ -103,6 +111,46 @@ public partial class MainWindow : Window
 
     private void OpenUpdateReleaseButton_OnClick(object sender, RoutedEventArgs e) =>
         UpdateCheckService.OpenReleasePage(_updateReleaseUrl);
+
+    private async void DownloadInstallUpdateButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(_updateDownloadUrl))
+        {
+            UpdateStatusTextBlock.Text = "没有可下载的安装包，请先检查更新。";
+            return;
+        }
+
+        CheckUpdateButton.IsEnabled = false;
+        OpenUpdateReleaseButton.IsEnabled = false;
+        DownloadInstallUpdateButton.IsEnabled = false;
+
+        try
+        {
+            var progress = new Progress<UpdateDownloadProgress>(value =>
+            {
+                var percentText = value.Percent is null ? "" : $" {value.Percent}%";
+                UpdateStatusTextBlock.Text = $"正在下载安装包{percentText}...";
+            });
+            var installerPath = await _updateCheckService.DownloadInstallerAsync(
+                _updateDownloadUrl,
+                _updateDownloadAssetName,
+                progress);
+
+            UpdateStatusTextBlock.Text = $"安装包已下载：{installerPath}。正在启动安装程序...";
+            UpdateCheckService.StartInstaller(installerPath);
+            UpdateStatusTextBlock.Text = "安装程序已启动。如安装器提示文件占用，请先关闭本工具后继续安装。";
+        }
+        catch (Exception ex)
+        {
+            UpdateStatusTextBlock.Text = $"下载或安装失败：{ex.Message}";
+            OpenUpdateReleaseButton.IsEnabled = true;
+            DownloadInstallUpdateButton.IsEnabled = true;
+        }
+        finally
+        {
+            CheckUpdateButton.IsEnabled = true;
+        }
+    }
 
     private void AppFunctionCatalogButton_OnClick(object sender, RoutedEventArgs e)
     {
