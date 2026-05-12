@@ -753,6 +753,11 @@
                                                 <TextBlock Text="{Binding ChineseName}"
                                                            Margin="8,0,0,0"
                                                            Foreground="{DynamicResource MutedBrush}" />
+                                                <TextBlock Text="{Binding EnglishName}"
+                                                           Margin="8,0,0,0"
+                                                           MaxWidth="260"
+                                                           TextWrapping="Wrap"
+                                                           Foreground="{DynamicResource MutedBrush}" />
                                                 <Button Click="RequestedFunctionRemove_OnClick"
                                                         Background="Transparent"
                                                         BorderThickness="0"
@@ -949,8 +954,8 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Border Width="72"
-                                                        Height="318"
+                                                <Border Width="82"
+                                                        Height="326"
                                                         Style="{StaticResource SlotColumnBorderStyle}">
                                                     <Grid>
                                                         <Grid.RowDefinitions>
@@ -993,22 +998,26 @@
                                                                     ToolTip="{Binding TerminalDiagramToolTip}"
                                                                     Cursor="Hand"
                                                                     VerticalAlignment="Stretch"
-                                                                    HorizontalAlignment="Stretch">
-                                                                <TextBlock Text="{Binding Description, Mode=OneWay}"
-                                                                            Width="240"
-                                                                            FontSize="13"
-                                                                            Foreground="{StaticResource TextBrush}"
-                                                                            VerticalAlignment="Bottom"
-                                                                            HorizontalAlignment="Center"
-                                                                            Margin="0,0,0,12"
-                                                                            TextAlignment="Center"
-                                                                            TextWrapping="NoWrap"
-                                                                            TextTrimming="CharacterEllipsis"
-                                                                            ToolTip="{Binding Description, Mode=OneWay}">
-                                                                    <TextBlock.LayoutTransform>
-                                                                        <RotateTransform Angle="-90" />
-                                                                    </TextBlock.LayoutTransform>
-                                                                </TextBlock>
+                                                                    HorizontalAlignment="Stretch"
+                                                                    HorizontalContentAlignment="Center"
+                                                                    VerticalContentAlignment="Bottom">
+                                                                <Viewbox Stretch="Uniform"
+                                                                         StretchDirection="DownOnly"
+                                                                         Margin="0,0,0,12"
+                                                                         MaxHeight="242">
+                                                                    <TextBlock Text="{Binding Description, Mode=OneWay}"
+                                                                               Width="258"
+                                                                               FontSize="13"
+                                                                               Foreground="{StaticResource TextBrush}"
+                                                                               TextAlignment="Center"
+                                                                               TextWrapping="NoWrap"
+                                                                               TextTrimming="None"
+                                                                               ToolTip="{Binding Description, Mode=OneWay}">
+                                                                        <TextBlock.LayoutTransform>
+                                                                            <RotateTransform Angle="-90" />
+                                                                        </TextBlock.LayoutTransform>
+                                                                    </TextBlock>
+                                                                </Viewbox>
                                                             </Button>
                                                         </Grid>
                                                     </Grid>

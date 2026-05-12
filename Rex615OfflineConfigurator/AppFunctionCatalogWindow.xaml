@@ -31,7 +31,10 @@
         <Style x:Key="CellWrapTextStyle" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,4" />
+            <Setter Property="TextTrimming" Value="None" />
+            <Setter Property="LineHeight" Value="17" />
+            <Setter Property="Margin" Value="0,6" />
+            <Setter Property="Padding" Value="4,0" />
         </Style>
     </Window.Resources>
     <Border Background="White"
@@ -94,18 +97,18 @@
                       IsReadOnly="True"
                       GridLinesVisibility="Horizontal"
                       HeadersVisibility="Column"
-                      RowHeight="58"
+                      MinRowHeight="58"
                       RowHeaderWidth="0"
                       AlternatingRowBackground="#F8FAFC"
                       BorderBrush="#D8E0EA"
                       BorderThickness="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ABB Code" Binding="{Binding AbbCode}" Width="120" />
-                    <DataGridTextColumn Header="ANSI Code" Binding="{Binding AnsiCode}" Width="130" />
+                    <DataGridTextColumn Header="ABB Code" Binding="{Binding AbbCode}" Width="120" ElementStyle="{StaticResource CellWrapTextStyle}" />
+                    <DataGridTextColumn Header="ANSI Code" Binding="{Binding AnsiCode}" Width="130" ElementStyle="{StaticResource CellWrapTextStyle}" />
                     <DataGridTextColumn Header="中文名称" Binding="{Binding ChineseName}" Width="190" ElementStyle="{StaticResource CellWrapTextStyle}" />
                     <DataGridTextColumn Header="English name" Binding="{Binding EnglishName}" Width="230" ElementStyle="{StaticResource CellWrapTextStyle}" />
-                    <DataGridTextColumn Header="APP" Binding="{Binding Apps}" Width="150" />
-                    <DataGridTextColumn Header="PCS" Binding="{Binding Pcs}" Width="60" />
+                    <DataGridTextColumn Header="APP" Binding="{Binding Apps}" Width="150" ElementStyle="{StaticResource CellWrapTextStyle}" />
+                    <DataGridTextColumn Header="PCS" Binding="{Binding Pcs}" Width="60" ElementStyle="{StaticResource CellWrapTextStyle}" />
                     <DataGridTemplateColumn Header="保护原理说明" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
