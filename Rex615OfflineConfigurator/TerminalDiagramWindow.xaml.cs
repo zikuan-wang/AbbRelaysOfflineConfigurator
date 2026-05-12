@@ -13,9 +13,13 @@ public partial class TerminalDiagramWindow : Window
     private const double MaxDiagramDisplayHeight = 560;
     private const double MinDiagramDisplayHeight = 320;
     private const double DiagramViewportPadding = 72;
+    private const double MinZoomFactor = 0.5;
+    private const double MaxZoomFactor = 3.0;
+    private const double ZoomStep = 0.25;
 
     private readonly IReadOnlyList<TerminalDiagram> _diagrams;
     private readonly List<Image> _diagramImages = [];
+    private double _zoomFactor = 1.0;
 
     public TerminalDiagramWindow(string code, IReadOnlyList<TerminalDiagram> diagrams)
     {
@@ -52,7 +56,7 @@ public partial class TerminalDiagramWindow : Window
                 Content = new ScrollViewer
                 {
                     HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                     Background = Brushes.White,
                     Content = new Grid
                     {
@@ -85,13 +89,35 @@ public partial class TerminalDiagramWindow : Window
             : MaxDiagramDisplayHeight;
         var displayHeight = Math.Clamp(availableHeight, MinDiagramDisplayHeight, MaxDiagramDisplayHeight);
         var maxWidth = Math.Max(420, DiagramTabControl.ActualWidth - DiagramViewportPadding);
+        var scaledHeight = displayHeight * _zoomFactor;
+        var scaledMaxWidth = maxWidth * _zoomFactor;
 
         foreach (var image in _diagramImages)
         {
-            image.Height = displayHeight;
-            image.MaxHeight = displayHeight;
-            image.MaxWidth = maxWidth;
+            image.Height = scaledHeight;
+            image.MaxHeight = scaledHeight;
+            image.MaxWidth = scaledMaxWidth;
         }
+
+        ZoomTextBlock.Text = $"{_zoomFactor:P0}";
+    }
+
+    private void ZoomOutButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _zoomFactor = Math.Max(MinZoomFactor, _zoomFactor - ZoomStep);
+        UpdateDiagramImageSizes();
+    }
+
+    private void FitWindowButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _zoomFactor = 1.0;
+        UpdateDiagramImageSizes();
+    }
+
+    private void ZoomInButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _zoomFactor = Math.Min(MaxZoomFactor, _zoomFactor + ZoomStep);
+        UpdateDiagramImageSizes();
     }
 
     private void OpenImageButton_OnClick(object sender, RoutedEventArgs e)

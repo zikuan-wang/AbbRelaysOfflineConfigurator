@@ -206,7 +206,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             : null;
     }
 
-    private static List<ModuleUnit> BuildModuleUnits(IEnumerable<RuleOption> selectedOptions, bool useFullDescription)
+    private List<ModuleUnit> BuildModuleUnits(IEnumerable<RuleOption> selectedOptions, bool useFullDescription)
     {
         var units = new List<ModuleUnit>();
         foreach (var option in selectedOptions)
@@ -223,11 +223,31 @@ public sealed class SelectionValidator(ProductRuleSet rules)
                     option.GroupName,
                     option.Id,
                     index,
-                    DisplayDescription(option, useFullDescription)));
+                    DisplaySlotDescription(option, useFullDescription)));
             }
         }
 
         return units;
+    }
+
+    private string DisplaySlotDescription(RuleOption option, bool useFullDescription)
+    {
+        return DisplayDescription(FindSingleModuleOption(option) ?? option, useFullDescription);
+    }
+
+    private RuleOption? FindSingleModuleOption(RuleOption option)
+    {
+        if (option.ModuleCount <= 1 || string.IsNullOrWhiteSpace(option.ModuleType))
+        {
+            return null;
+        }
+
+        return rules.OptionGroups
+            .SelectMany(group => group.Options)
+            .FirstOrDefault(candidate =>
+                candidate.ModuleCount == 1 &&
+                candidate.GroupName.Equals(option.GroupName, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(candidate.ModuleType, option.ModuleType, StringComparison.OrdinalIgnoreCase));
     }
 
     private IReadOnlyList<SlotAssignment> BuildSlotAssignments(

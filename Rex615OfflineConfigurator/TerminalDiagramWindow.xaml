@@ -31,9 +31,6 @@
                        Text="REX615 接线图"
                        FontSize="18"
                        FontWeight="SemiBold" />
-            <TextBlock Text="图纸由本地数据包提供；X000 通讯模块图由用户提供的 SVG 图纸裁切生成。"
-                       Foreground="#64748B"
-                       Margin="0,3,0,0" />
         </StackPanel>
 
         <TabControl x:Name="DiagramTabControl"
@@ -46,6 +43,21 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="0,12,0,0">
+            <Button Content="缩小"
+                    Style="{StaticResource DialogButtonStyle}"
+                    Click="ZoomOutButton_OnClick" />
+            <Button Content="适应窗口"
+                    Style="{StaticResource DialogButtonStyle}"
+                    Click="FitWindowButton_OnClick" />
+            <TextBlock x:Name="ZoomTextBlock"
+                       Width="58"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Foreground="#475569"
+                       Text="100%" />
+            <Button Content="放大"
+                    Style="{StaticResource DialogButtonStyle}"
+                    Click="ZoomInButton_OnClick" />
             <Button Content="打开图片"
                     Style="{StaticResource DialogButtonStyle}"
                     Click="OpenImageButton_OnClick" />
