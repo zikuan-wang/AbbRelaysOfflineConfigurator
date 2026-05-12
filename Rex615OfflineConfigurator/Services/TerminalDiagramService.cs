@@ -30,6 +30,24 @@ public static class TerminalDiagramService
         ["BIO5"] = ["REX615_BIO5.png"],
         ["BIO6"] = ["REX615_BIO6.png"],
         ["BIO7"] = ["REX615_BIO7.png"],
+        ["COM1"] = ["REX615_X000_COM1.png"],
+        ["COM8"] = ["REX615_X000_COM8.png"],
+        ["COM9"] = ["REX615_X000_COM9.png"],
+        ["COM10"] = ["REX615_X000_COM10.png"],
+        ["COM11"] = ["REX615_X000_COM11.png"],
+        ["COM12"] = ["REX615_X000_COM12.png"],
+        ["COM13"] = ["REX615_X000_COM13.png"],
+        ["COM14"] = ["REX615_X000_COM14.png"],
+        ["COM15"] = ["REX615_X000_COM15.png"],
+        ["COM16"] = ["REX615_X000_COM16.png"],
+        ["COM17"] = ["REX615_X000_COM17.png"],
+        ["COM18"] = ["REX615_X000_COM18.png"],
+        ["COM27"] = ["REX615_X000_COM27.png"],
+        ["COM31"] = ["REX615_X000_COM31.png"],
+        ["COM32"] = ["REX615_X000_COM32.png"],
+        ["COM33"] = ["REX615_X000_COM33.png"],
+        ["COM34"] = ["REX615_X000_COM34.png"],
+        ["COM37"] = ["REX615_X000_COM37.png"],
         ["PSM3"] = ["REX615_PSM3_4.png"],
         ["PSM4"] = ["REX615_PSM3_4.png"],
         ["RTD1"] = ["REX615_RTD1.png"],
@@ -56,6 +74,11 @@ public static class TerminalDiagramService
 
     private static string BuildTitle(string code, string fileName)
     {
+        if (fileName.StartsWith("REX615_X000_", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"{code} X000 通讯模块图";
+        }
+
         if (fileName.Contains("high-impedance", StringComparison.OrdinalIgnoreCase))
         {
             return $"{code} 高阻接地差动";

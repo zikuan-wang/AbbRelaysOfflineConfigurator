@@ -407,7 +407,7 @@ def main() -> None:
                 "id": "615_CN_5_0_FP1",
                 "name": "615 CN 5.0 FP1",
                 "description": "615 系列 CN 5.0 FP1 装置订货号选型",
-                "sourceDocuments": ["615选型指南5.1中文版.pdf"],
+                "sourceDocuments": [],
                 "devices": parse_615_pdf(),
             },
             {
