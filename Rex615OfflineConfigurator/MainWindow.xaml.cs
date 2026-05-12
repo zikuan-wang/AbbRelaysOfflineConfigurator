@@ -15,6 +15,9 @@ namespace Rex615OfflineConfigurator;
 
 public partial class MainWindow : Window
 {
+    private readonly UpdateCheckService _updateCheckService = new();
+    private string? _updateReleaseUrl;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -49,6 +52,57 @@ public partial class MainWindow : Window
     }
 
     private void AboutLicensePageButton_OnClick(object sender, RoutedEventArgs e) => MainTabControl.SelectedIndex = 3;
+
+    private async void CheckUpdateButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        CheckUpdateButton.IsEnabled = false;
+        OpenUpdateReleaseButton.IsEnabled = false;
+        UpdateStatusTextBlock.Text = "正在检查 GitHub Release 更新...";
+
+        try
+        {
+            var result = await _updateCheckService.CheckLatestAsync();
+            if (!result.IsSuccess)
+            {
+                _updateReleaseUrl = UpdateCheckService.ReleaseRepositoryUrl + "/releases";
+                UpdateStatusTextBlock.Text = $"检查失败：{result.ErrorMessage}";
+                OpenUpdateReleaseButton.IsEnabled = true;
+                return;
+            }
+
+            _updateReleaseUrl = string.IsNullOrWhiteSpace(result.ReleaseUrl)
+                ? UpdateCheckService.ReleaseRepositoryUrl + "/releases"
+                : result.ReleaseUrl;
+            OpenUpdateReleaseButton.IsEnabled = true;
+
+            if (result.HasUpdate)
+            {
+                var assetText = string.IsNullOrWhiteSpace(result.DownloadAssetName)
+                    ? "请打开发布页下载最新安装包。"
+                    : $"可下载：{result.DownloadAssetName}";
+                UpdateStatusTextBlock.Text =
+                    $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}";
+            }
+            else
+            {
+                UpdateStatusTextBlock.Text =
+                    $"已是最新版本。当前版本 {result.CurrentVersion}，最新发布 {result.LatestVersion}。";
+            }
+        }
+        catch (Exception ex)
+        {
+            _updateReleaseUrl = UpdateCheckService.ReleaseRepositoryUrl + "/releases";
+            UpdateStatusTextBlock.Text = $"检查失败：{ex.Message}";
+            OpenUpdateReleaseButton.IsEnabled = true;
+        }
+        finally
+        {
+            CheckUpdateButton.IsEnabled = true;
+        }
+    }
+
+    private void OpenUpdateReleaseButton_OnClick(object sender, RoutedEventArgs e) =>
+        UpdateCheckService.OpenReleasePage(_updateReleaseUrl);
 
     private void AppFunctionCatalogButton_OnClick(object sender, RoutedEventArgs e)
     {

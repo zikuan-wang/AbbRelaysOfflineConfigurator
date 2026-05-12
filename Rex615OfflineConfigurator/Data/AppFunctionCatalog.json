@@ -1,7 +1,7 @@
 {
   "FormatVersion": 3,
   "Source": "REX615 product guides REX615_pg_001867_ENb pages 150-167 and REX615_pg_001867_ENc pages 157-175; ABB REX615 Technical Manual functionality pages.",
-  "GeneratedAt": "2026-05-12T05:10:00+00:00",
+  "GeneratedAt": "2026-05-12T06:28:27.289752+00:00",
   "AppPriority": [
     "APP2",
     "APP4",
@@ -294,9 +294,9 @@
           "Apps": [
             "APP3",
             "APP8",
+            "ADD1",
             "ADD2",
-            "APP10",
-            "ADD1"
+            "APP10"
           ],
           "ChineseAliases": [
             "反向功率/方向过功率保护"
@@ -317,10 +317,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相独立方向高段过电流保护",
@@ -343,10 +343,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相独立方向低段过电流保护",
@@ -369,10 +369,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相方向高段过电流保护",
@@ -395,10 +395,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相方向低段过电流保护",
@@ -422,9 +422,9 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP12",
+            "ADD1",
             "APP10",
-            "ADD1"
+            "APP12"
           ],
           "ChineseAliases": [
             "三相功率方向元件"
@@ -468,9 +468,9 @@
           "IsBase": false,
           "Apps": [
             "APP3",
+            "ADD1",
             "ADD2",
-            "APP10",
-            "ADD1"
+            "APP10"
           ],
           "ChineseAliases": [
             "低功率保护"
@@ -713,10 +713,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "A相高阻抗差动保护",
@@ -737,10 +737,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "B相高阻抗差动保护",
@@ -761,10 +761,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "C相高阻抗差动保护",
@@ -1075,8 +1075,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "高阻抗或磁通平衡差动保护",
@@ -1121,8 +1121,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "电机稳态和瞬时差动保护",
@@ -1169,8 +1169,8 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "低功率因数保护"
@@ -1280,8 +1280,8 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "过励磁保护"
@@ -1651,8 +1651,8 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相电压闭锁/电压相关过电流保护",
@@ -1812,8 +1812,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "转子热过负荷保护"
@@ -2002,8 +2002,8 @@
           "Pcs": 3,
           "IsBase": false,
           "Apps": [
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相低阻抗保护"
@@ -2090,8 +2090,10 @@
           "ChineseName": "自动重合闸",
           "Category": "Control",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP1"
+          ],
           "ChineseAliases": [
             "DARREC",
             "79",
@@ -2100,7 +2102,7 @@
             "重合闸"
           ],
           "FunctionalityCode": "DARREC",
-          "PrincipleSummary": "功能说明：自动重合闸。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：自动重合闸。该功能属于控制，在 PCL1 中需通过 APP1 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - DARREC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/DARREC-Functionality"
         },
@@ -2157,8 +2159,10 @@
           "ChineseName": "紧急启动",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP9"
+          ],
           "ChineseAliases": [
             "ESMGAPC",
             "62",
@@ -2166,7 +2170,7 @@
             "控制"
           ],
           "FunctionalityCode": "ESMGAPC",
-          "PrincipleSummary": "功能说明：紧急启动。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：紧急启动。该功能属于控制，在 PCL1 中需通过 APP9 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - ESMGAPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/ESMGAPC-Functionality"
         },
@@ -2223,8 +2227,10 @@
           "ChineseName": "带电压调节器的分接开关控制",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OL5ATCC",
             "90V",
@@ -2232,7 +2238,7 @@
             "控制"
           ],
           "FunctionalityCode": "OL5ATCC",
-          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制。该功能属于控制，在 PCL1 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - OL5ATCC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/OL5ATCC-Functionality"
         },
@@ -2244,8 +2250,10 @@
           "ChineseName": "带电压调节器的分接开关控制（传统）",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OLATCC",
             "90V",
@@ -2253,7 +2261,7 @@
             "控制"
           ],
           "FunctionalityCode": "OLATCC",
-          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制（传统）。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制（传统）。该功能属于控制，在 PCL1 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - OLATCC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/OLATCC-Functionality"
         },
@@ -2265,15 +2273,17 @@
           "ChineseName": "变压器数据合成",
           "Category": "Control",
           "Pcs": 5,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OLGAPC",
             "变压器数据合成",
             "控制"
           ],
           "FunctionalityCode": "OLGAPC",
-          "PrincipleSummary": "功能说明：变压器数据合成。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器数据合成。该功能属于控制，在 PCL1 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - OLGAPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/OLGAPC-Functionality"
         },
@@ -2285,8 +2295,10 @@
           "ChineseName": "同期及带电检查",
           "Category": "Control",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "SECRSYN",
             "25",
@@ -2296,7 +2308,7 @@
             "合闸检查"
           ],
           "FunctionalityCode": "SECRSYN",
-          "PrincipleSummary": "功能说明：同期及带电检查。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：同期及带电检查。该功能属于控制，在 PCL1 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - SECRSYN Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/SECRSYN-Functionality"
         },
@@ -2308,8 +2320,11 @@
           "ChineseName": "分接开关位置指示",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10",
+            "APP12"
+          ],
           "ChineseAliases": [
             "TPOSYLTC",
             "84T",
@@ -2317,7 +2332,7 @@
             "控制"
           ],
           "FunctionalityCode": "TPOSYLTC",
-          "PrincipleSummary": "功能说明：分接开关位置指示。该功能属于控制，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：分接开关位置指示。该功能属于控制，在 PCL1 中需通过 APP10, APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - TPOSYLTC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/TPOSYLTC-Functionality"
         },
@@ -2373,8 +2388,10 @@
           "ChineseName": "变压器电流回路监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10"
+          ],
           "ChineseAliases": [
             "CTSRCTF",
             "I2",
@@ -2382,7 +2399,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "CTSRCTF",
-          "PrincipleSummary": "功能说明：变压器电流回路监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器电流回路监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP10 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - CTSRCTF Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/CTSRCTF-Functionality"
         },
@@ -2416,8 +2433,10 @@
           "ChineseName": "变压器热点和绝缘老化率监测",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10"
+          ],
           "ChineseAliases": [
             "HSARSPTR",
             "26/49HS",
@@ -2425,7 +2444,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HSARSPTR",
-          "PrincipleSummary": "功能说明：变压器热点和绝缘老化率监测。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器热点和绝缘老化率监测。该功能属于状态监测与监视，在 PCL1 中需通过 APP10 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - HSARSPTR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/HSARSPTR-Functionality"
         },
@@ -2437,8 +2456,10 @@
           "ChineseName": "高阻抗保护方案A相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "A",
             "HZCCASPVC",
@@ -2447,7 +2468,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCASPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案A相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案A相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - HZCCASPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/HZCCASPVC-Functionality"
         },
@@ -2459,8 +2480,10 @@
           "ChineseName": "高阻抗保护方案B相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "B",
             "HZCCBSPVC",
@@ -2469,7 +2492,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCBSPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案B相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案B相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - HZCCBSPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/HZCCBSPVC-Functionality"
         },
@@ -2481,8 +2504,10 @@
           "ChineseName": "高阻抗保护方案C相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "C",
             "HZCCCSPVC",
@@ -2491,7 +2516,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCCSPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案C相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案C相电流互感器监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - HZCCCSPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/HZCCCSPVC-Functionality"
         },
@@ -2503,8 +2528,10 @@
           "ChineseName": "线路差动电流回路监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP6"
+          ],
           "ChineseAliases": [
             "LNCTSRCTF",
             "I2",
@@ -2512,7 +2539,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "LNCTSRCTF",
-          "PrincipleSummary": "功能说明：线路差动电流回路监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：线路差动电流回路监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP6 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - LNCTSRCTF Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/LNCTSRCTF-Functionality"
         },
@@ -2545,8 +2572,10 @@
           "ChineseName": "三相残压欠电压监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "MSVPR",
             "27R",
@@ -2554,7 +2583,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "MSVPR",
-          "PrincipleSummary": "功能说明：三相残压欠电压监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：三相残压欠电压监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - MSVPR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/MSVPR-Functionality"
         },
@@ -2566,8 +2595,10 @@
           "ChineseName": "保护通信监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP6"
+          ],
           "ChineseAliases": [
             "PCSITPC",
             "PCS",
@@ -2575,7 +2606,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "PCSITPC",
-          "PrincipleSummary": "功能说明：保护通信监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：保护通信监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP6 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - PCSITPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/PCSITPC-Functionality"
         },
@@ -2587,15 +2618,17 @@
           "ChineseName": "电压存在监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "PHSVPR",
             "电压存在监视",
             "状态监测与监视"
           ],
           "FunctionalityCode": "PHSVPR",
-          "PrincipleSummary": "功能说明：电压存在监视。该功能属于状态监测与监视，在 PCL1 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：电压存在监视。该功能属于状态监测与监视，在 PCL1 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL1 - ????????ABB ???? - PHSVPR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL1/en-US/PHSVPR-Functionality"
         },
@@ -5705,9 +5738,9 @@
           "Apps": [
             "APP3",
             "APP8",
+            "ADD1",
             "ADD2",
-            "APP10",
-            "ADD1"
+            "APP10"
           ],
           "ChineseAliases": [
             "反向功率/方向过功率保护"
@@ -5728,10 +5761,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相独立方向高段过电流保护",
@@ -5754,10 +5787,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相独立方向低段过电流保护",
@@ -5780,10 +5813,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相方向高段过电流保护",
@@ -5806,10 +5839,10 @@
           "IsBase": false,
           "Apps": [
             "APP3",
-            "APP8",
             "APP6",
-            "APP10",
-            "ADD1"
+            "APP8",
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相方向低段过电流保护",
@@ -5833,9 +5866,9 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP12",
+            "ADD1",
             "APP10",
-            "ADD1"
+            "APP12"
           ],
           "ChineseAliases": [
             "三相功率方向元件"
@@ -5879,9 +5912,9 @@
           "IsBase": false,
           "Apps": [
             "APP3",
+            "ADD1",
             "ADD2",
-            "APP10",
-            "ADD1"
+            "APP10"
           ],
           "ChineseAliases": [
             "低功率保护"
@@ -6124,10 +6157,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "A相高阻抗差动保护",
@@ -6148,10 +6181,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "B相高阻抗差动保护",
@@ -6172,10 +6205,10 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP11",
+            "ADD1",
             "ADD2",
             "APP10",
-            "ADD1"
+            "APP11"
           ],
           "ChineseAliases": [
             "C相高阻抗差动保护",
@@ -6486,8 +6519,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "高阻抗或磁通平衡差动保护",
@@ -6532,8 +6565,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "电机稳态和瞬时差动保护",
@@ -6580,8 +6613,8 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "低功率因数保护"
@@ -6691,8 +6724,8 @@
           "Pcs": 2,
           "IsBase": false,
           "Apps": [
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "过励磁保护"
@@ -7062,8 +7095,8 @@
           "Apps": [
             "APP3",
             "APP8",
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相电压闭锁/电压相关过电流保护",
@@ -7243,8 +7276,8 @@
           "Pcs": 1,
           "IsBase": false,
           "Apps": [
-            "ADD2",
-            "ADD1"
+            "ADD1",
+            "ADD2"
           ],
           "ChineseAliases": [
             "转子热过负荷保护"
@@ -7433,8 +7466,8 @@
           "Pcs": 3,
           "IsBase": false,
           "Apps": [
-            "APP10",
-            "ADD1"
+            "ADD1",
+            "APP10"
           ],
           "ChineseAliases": [
             "三相低阻抗保护"
@@ -7521,8 +7554,10 @@
           "ChineseName": "自动重合闸",
           "Category": "Control",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP1"
+          ],
           "ChineseAliases": [
             "DARREC",
             "79",
@@ -7531,7 +7566,7 @@
             "重合闸"
           ],
           "FunctionalityCode": "DARREC",
-          "PrincipleSummary": "功能说明：自动重合闸。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：自动重合闸。该功能属于控制，在 PCL2 中需通过 APP1 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - DARREC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/DARREC-Functionality"
         },
@@ -7588,8 +7623,10 @@
           "ChineseName": "紧急启动",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP9"
+          ],
           "ChineseAliases": [
             "ESMGAPC",
             "62",
@@ -7597,7 +7634,7 @@
             "控制"
           ],
           "FunctionalityCode": "ESMGAPC",
-          "PrincipleSummary": "功能说明：紧急启动。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：紧急启动。该功能属于控制，在 PCL2 中需通过 APP9 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - ESMGAPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/ESMGAPC-Functionality"
         },
@@ -7654,8 +7691,10 @@
           "ChineseName": "带电压调节器的分接开关控制",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OL5ATCC",
             "90V",
@@ -7663,7 +7702,7 @@
             "控制"
           ],
           "FunctionalityCode": "OL5ATCC",
-          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制。该功能属于控制，在 PCL2 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - OL5ATCC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/OL5ATCC-Functionality"
         },
@@ -7675,8 +7714,10 @@
           "ChineseName": "带电压调节器的分接开关控制（传统）",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OLATCC",
             "90V",
@@ -7684,7 +7725,7 @@
             "控制"
           ],
           "FunctionalityCode": "OLATCC",
-          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制（传统）。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：带电压调节器的分接开关控制（传统）。该功能属于控制，在 PCL2 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - OLATCC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/OLATCC-Functionality"
         },
@@ -7696,15 +7737,17 @@
           "ChineseName": "变压器数据合成",
           "Category": "Control",
           "Pcs": 5,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP12"
+          ],
           "ChineseAliases": [
             "OLGAPC",
             "变压器数据合成",
             "控制"
           ],
           "FunctionalityCode": "OLGAPC",
-          "PrincipleSummary": "功能说明：变压器数据合成。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器数据合成。该功能属于控制，在 PCL2 中需通过 APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - OLGAPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/OLGAPC-Functionality"
         },
@@ -7716,8 +7759,10 @@
           "ChineseName": "同期及带电检查",
           "Category": "Control",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "SECRSYN",
             "25",
@@ -7727,7 +7772,7 @@
             "合闸检查"
           ],
           "FunctionalityCode": "SECRSYN",
-          "PrincipleSummary": "功能说明：同期及带电检查。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：同期及带电检查。该功能属于控制，在 PCL2 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - SECRSYN Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/SECRSYN-Functionality"
         },
@@ -7739,8 +7784,11 @@
           "ChineseName": "分接开关位置指示",
           "Category": "Control",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10",
+            "APP12"
+          ],
           "ChineseAliases": [
             "TPOSYLTC",
             "84T",
@@ -7748,7 +7796,7 @@
             "控制"
           ],
           "FunctionalityCode": "TPOSYLTC",
-          "PrincipleSummary": "功能说明：分接开关位置指示。该功能属于控制，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：分接开关位置指示。该功能属于控制，在 PCL2 中需通过 APP10, APP12 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - TPOSYLTC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/TPOSYLTC-Functionality"
         },
@@ -7804,8 +7852,10 @@
           "ChineseName": "变压器电流回路监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10"
+          ],
           "ChineseAliases": [
             "CTSRCTF",
             "I2",
@@ -7813,7 +7863,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "CTSRCTF",
-          "PrincipleSummary": "功能说明：变压器电流回路监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器电流回路监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP10 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - CTSRCTF Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/CTSRCTF-Functionality"
         },
@@ -7847,8 +7897,10 @@
           "ChineseName": "变压器热点和绝缘老化率监测",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP10"
+          ],
           "ChineseAliases": [
             "HSARSPTR",
             "26/49HS",
@@ -7856,7 +7908,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HSARSPTR",
-          "PrincipleSummary": "功能说明：变压器热点和绝缘老化率监测。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：变压器热点和绝缘老化率监测。该功能属于状态监测与监视，在 PCL2 中需通过 APP10 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - HSARSPTR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/HSARSPTR-Functionality"
         },
@@ -7868,8 +7920,10 @@
           "ChineseName": "高阻抗保护方案A相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "A",
             "HZCCASPVC",
@@ -7878,7 +7932,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCASPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案A相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案A相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - HZCCASPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/HZCCASPVC-Functionality"
         },
@@ -7890,8 +7944,10 @@
           "ChineseName": "高阻抗保护方案B相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "B",
             "HZCCBSPVC",
@@ -7900,7 +7956,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCBSPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案B相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案B相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - HZCCBSPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/HZCCBSPVC-Functionality"
         },
@@ -7912,8 +7968,10 @@
           "ChineseName": "高阻抗保护方案C相电流互感器监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP11"
+          ],
           "ChineseAliases": [
             "C",
             "HZCCCSPVC",
@@ -7922,7 +7980,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "HZCCCSPVC",
-          "PrincipleSummary": "功能说明：高阻抗保护方案C相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：高阻抗保护方案C相电流互感器监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP11 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - HZCCCSPVC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/HZCCCSPVC-Functionality"
         },
@@ -7934,8 +7992,10 @@
           "ChineseName": "线路差动电流回路监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP6"
+          ],
           "ChineseAliases": [
             "LNCTSRCTF",
             "I2",
@@ -7943,7 +8003,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "LNCTSRCTF",
-          "PrincipleSummary": "功能说明：线路差动电流回路监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：线路差动电流回路监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP6 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - LNCTSRCTF Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/LNCTSRCTF-Functionality"
         },
@@ -7976,8 +8036,10 @@
           "ChineseName": "三相残压欠电压监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "MSVPR",
             "27R",
@@ -7985,7 +8047,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "MSVPR",
-          "PrincipleSummary": "功能说明：三相残压欠电压监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：三相残压欠电压监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - MSVPR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/MSVPR-Functionality"
         },
@@ -7997,8 +8059,10 @@
           "ChineseName": "保护通信监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 1,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP6"
+          ],
           "ChineseAliases": [
             "PCSITPC",
             "PCS",
@@ -8006,7 +8070,7 @@
             "状态监测与监视"
           ],
           "FunctionalityCode": "PCSITPC",
-          "PrincipleSummary": "功能说明：保护通信监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：保护通信监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP6 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - PCSITPC Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/PCSITPC-Functionality"
         },
@@ -8018,15 +8082,17 @@
           "ChineseName": "电压存在监视",
           "Category": "Condition Monitoring and Supervision",
           "Pcs": 2,
-          "IsBase": true,
-          "Apps": [],
+          "IsBase": false,
+          "Apps": [
+            "APP5"
+          ],
           "ChineseAliases": [
             "PHSVPR",
             "电压存在监视",
             "状态监测与监视"
           ],
           "FunctionalityCode": "PHSVPR",
-          "PrincipleSummary": "功能说明：电压存在监视。该功能属于状态监测与监视，在 PCL2 中作为基础功能提供。",
+          "PrincipleSummary": "功能说明：电压存在监视。该功能属于状态监测与监视，在 PCL2 中需通过 APP5 应用包提供。",
           "PrincipleSource": "ABB REX615 ???? PCL2 - ????????ABB ???? - PHSVPR Functionality",
           "PrincipleSourceUrl": "https://techdoc.relays.protection-control.abb/r/REX615-Technical-Manual/PCL2/en-US/PHSVPR-Functionality"
         },
