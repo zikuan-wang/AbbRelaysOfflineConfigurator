@@ -315,7 +315,7 @@
                                                     <TextBlock Text="{Binding SelectedSummary, Mode=OneWay}"
                                                                Foreground="{StaticResource TextBrush}"
                                                                FontWeight="SemiBold"
-                                                               FontSize="11"
+                                                               FontSize="13"
                                                                TextWrapping="Wrap" />
                                                 </Border>
                                             </Grid>
@@ -386,7 +386,7 @@
                                                     <TextBlock Text="{Binding SelectedSummary, Mode=OneWay}"
                                                                Foreground="{StaticResource TextBrush}"
                                                                FontWeight="SemiBold"
-                                                               FontSize="11"
+                                                               FontSize="13"
                                                                TextWrapping="Wrap" />
                                                 </Border>
                                             </Grid>
