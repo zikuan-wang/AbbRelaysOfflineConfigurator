@@ -116,12 +116,12 @@ public sealed class SlotDescriptionText : FrameworkElement
             Trimming = TextTrimming.CharacterEllipsis
         };
 
-        var x = -(ActualHeight - HorizontalPadding);
-        var y = Math.Max(0, (ActualWidth - formattedText.Height) / 2);
+        var x = Math.Max(0, (ActualWidth - formattedText.Height) / 2);
+        var y = Math.Max(HorizontalPadding, ActualHeight - HorizontalPadding);
 
         drawingContext.PushClip(new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight)));
-        drawingContext.PushTransform(new RotateTransform(-90));
-        drawingContext.DrawText(formattedText, new Point(x, y));
+        drawingContext.PushTransform(new MatrixTransform(new Matrix(0, -1, 1, 0, x, y)));
+        drawingContext.DrawText(formattedText, new Point(0, 0));
         drawingContext.Pop();
         drawingContext.Pop();
     }
