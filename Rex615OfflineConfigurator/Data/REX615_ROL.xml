@@ -2,25 +2,25 @@
 <ProductTypeCode>
 	<MainCodes>
 		<Digit Location="1+2+3+4+5+6" Group="REX615产品" IsMandatory="True">
-			<Option Id="REX615" Version="*" Description="REX615 保护和控制继电器"/>
+			<Option Id="REX615" Version="*" Description="REX615 保护和控制继电器" IsDefault="True"/>
 		</Digit>
 		<Digit Location="7" Group="机箱" IsMandatory="True">
-			<Option Id="A" Version="*" Description="标准机箱" Validity="开关量模块=!2x BIO5,!3x BIO5,!2x BIO7&amp;模拟量模块=!2x AIM4&amp;RTD模块=!1x RTD2,!1x RTD3,!2x RTD3"/>
+			<Option Id="A" Version="*" Description="标准机箱" Validity="开关量模块=!2x BIO5,!3x BIO5,!2x BIO7&amp;模拟量模块=!2x AIM4&amp;RTD模块=!1x RTD2,!1x RTD3,!2x RTD3" IsDefault="True"/>
 			<Option Id="B" Version="*" Description="宽机箱(更多I/O)" Validity="模拟量模块=!2x AIM4,!AIM18,!AIM19&amp;RTD模块=!1x RTD1"/>
 			<Option Id="C" Version="*" Description="宽机箱(更多电压和电流)" Validity="开关量模块=!3x BIO5,!1x BIO6&amp;模拟量模块=1x AIM4,2x AIM4&amp;模拟量模块=2x AIM4,AIM13,AIM16,AIM17&amp;模拟量模块=!AIM3,!AIM5,!AIM6,!AIM15,!AIM18,!AIM19,!SIM5&amp;RTD模块=!1x RTD1,!2x RTD3"/>
 		</Digit>
 		<Digit Location="8" Group="产品版本" IsMandatory="True">
-			<Option Id="1" Version="*" Description="产品版本"/>
+			<Option Id="1" Version="*" Description="产品版本" IsDefault="True"/>
 		</Digit>
 		<Digit Location="9" Group="接口级别" IsMandatory="True">
-			<Option Id="0" Version="*" Description="接口级别"/>
+			<Option Id="0" Version="*" Description="接口级别" IsDefault="True"/>
 		</Digit>
 		<Digit Location="10" Group="选项1" IsMandatory="True">
-			<Option Id="G" Version="*" Description="全球语言包:英语、中文、克罗地亚语、捷克语、芬兰语、法语、德语、匈牙利语、意大利语、波兰语、葡萄牙语、西班牙语、瑞典语、土耳其语"/>
+			<Option Id="G" Version="*" Description="全球语言包:英语、中文、克罗地亚语、捷克语、芬兰语、法语、德语、匈牙利语、意大利语、波兰语、葡萄牙语、西班牙语、瑞典语、土耳其语" IsDefault="True"/>
 			<Option Id="C" Version="*" Description="中国语言包:简体中文"/>
 		</Digit>
 		<Digit Location="11" Group="保形涂层" IsMandatory="True">
-			<Option Id="N" Version="*" Description="不带保形涂层"/>
+			<Option Id="N" Version="*" Description="不带保形涂层" IsDefault="True"/>
 			<Option Id="C" Version="*" Description="带保形涂层"/>
 		</Digit>
 	</MainCodes>
@@ -76,7 +76,7 @@
 	</SlotConstraints>
 	<OptionCodes>
 		<Category Name="通讯模块" IsMandatory="True">
-			<Option Id="COM1" Version="*" Description="COM1 - 100M 以太网接口(RJ45)" ShortDescription="COM1 - 1xRJ45" Validity="通讯规约=CMP1,CMP2,CMP4,CMP5&amp;应用包=!APP6"/>
+			<Option Id="COM1" Version="*" Description="COM1 - 100M 以太网接口(RJ45)" ShortDescription="COM1 - 1xRJ45" Validity="通讯规约=CMP1,CMP2,CMP4,CMP5&amp;应用包=!APP6" IsDefault="True"/>
 			<Option Id="COM11" Version="*" Description="COM11 - 100M 以太网接口(RJ45) + RS 485(包括 IRIG-B)" ShortDescription="COM11 - 1xRJ45 + RS 485(IRIG-B)" Validity="应用包=!APP6"/>
 			<Option Id="COM12" Version="*" Description="COM12 - 100M 以太网接口(LC) + RS 485(包括 IRIG-B)" ShortDescription="COM12 - 1xMM LC + RS 485(IRIG-B)" Validity="应用包=!APP6"/>
 			<Option Id="COM13" Version="*" Description="COM13 - 100M 以太网接口(RJ45) + RS 485(包括 IRIG-B)+ 弧光传感器接口x3" ShortDescription="COM13 - 1xRJ45 + RS 485(IRIG-B)+ ARCx3" Validity="应用包=!APP6"/>
@@ -97,7 +97,7 @@
 		</Category>
 
 		<Category Name="开关量模块" IsMandatory="False" IsMultiple="True">
-			<Option Id="1x BIO5" Version="*" Description="开关量模块: 8个开入 + 4个开出" ShortDescription="BIO: 8BI + 4BO" ModuleType="BIO5" ModuleCount="1" BI="8" BO="4" Validity="机箱=A,B,C&amp;开关量模块=!2x BIO5,!3x BIO5"/>
+			<Option Id="1x BIO5" Version="*" Description="开关量模块: 8个开入 + 4个开出" ShortDescription="BIO: 8BI + 4BO" ModuleType="BIO5" ModuleCount="1" BI="8" BO="4" Validity="机箱=A,B,C&amp;开关量模块=!2x BIO5,!3x BIO5" IsDefault="True"/>
 			<Option Id="2x BIO5" Version="*" Description="开关量模块: 16个开入 + 8个开出" ShortDescription="BIO: 16BI + 8BO" ModuleType="BIO5" ModuleCount="2" BI="16" BO="8" Validity="机箱=B,C&amp;开关量模块=!1x BIO5,!3x BIO5,!2x BIO7&amp;RTD模块=!2x RTD3"/>
 			<Option Id="3x BIO5" Version="*" Description="开关量模块: 24个开入 + 12个开出" ShortDescription="BIO: 24BI + 12BO" ModuleType="BIO5" ModuleCount="3" BI="24" BO="12" Validity="机箱=B&amp;开关量模块=!1x BIO5,!2x BIO5,!1x BIO7,!2x BIO7&amp;RTD模块=!1x RTD3,!2x RTD3"/>
 			<Option Id="1x BIO7" Version="*" Description="开关量模块: 8个开入 + 3个快速开出" ShortDescription="BIO: 8BI + 3HSO" ModuleType="BIO7" ModuleCount="1" BI="8" HSO="3" Validity="机箱=A,B,C&amp;开关量模块=!2x BIO7"/>
@@ -110,10 +110,10 @@
 			<Option Id="1x AIM4" Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 3个电压" ShortDescription="AIM: 4CT (Io 1/5A) + 3VT" ModuleType="AIM4" ModuleCount="1" CT="4" VT="3" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM15,!AIM18,!AIM19"/>
 			<Option Id="2x AIM4" Version="*" Description="模拟量模块: 8个电流(零序电流 1/5A) + 6个电压" ShortDescription="AIM: 8CT (Io 1/5A) + 6VT" ModuleType="AIM4" ModuleCount="2" CT="8" VT="6" Validity="机箱=C&amp;模拟量模块=!1x AIM4,!AIM13,!AIM16,!AIM17"/>
 			<Option Id="AIM5" Version="*" Description="模拟量模块: 7个电流(零序电流 1/5A)" ShortDescription="AIM: 7CT (Io 1/5A)" ModuleType="AIM5" ModuleCount="1" CT="7" Validity="机箱=A,B&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM13,!AIM15,!AIM16,!AIM17,!AIM18,!AIM19"/>
-			<Option Id="AIM6" Version="*" Description="模拟量模块: 5个电压 + 4个开入" ShortDescription="AIM: 5VT + 4BI" ModuleType="AIM6" ModuleCount="1" VT="5" BI="4" Validity="机箱=A,B&amp;模拟量模块=!AIM3,!SIM5&amp;开关量模块=!1x BIO6&amp;RTD模块=!1x RTD1,!1x RTD2"/>
+			<Option Id="AIM6" Version="*" Description="模拟量模块: 5个电压 + 4个开入" ShortDescription="AIM: 5VT + 4BI" ModuleType="AIM6" ModuleCount="1" VT="5" BI="4" Validity="机箱=A,B&amp;模拟量模块=!AIM3,!SIM5&amp;开关量模块=!1x BIO6&amp;RTD模块=!1x RTD1,!1x RTD2" IsDefault="True"/>
 			<Option Id="AIM13" Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 3个电压" ShortDescription="AIM: 4CT (Io 0.2/1A) + 3VT" ModuleType="AIM13" ModuleCount="1" CT="4" VT="3" Validity="版本=PCL2&amp;机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM15,!AIM16,!AIM17,!AIM18,!AIM19"/>
 			<Option Id="AIM15"  Version="*" Description="模拟量模块: 7个电流(零序电流 0.2/1A)"  ShortDescription="AIM: 7CT (Io 0.2/1A)" ModuleType="AIM15" ModuleCount="1" CT="7" Validity="机箱=A,B&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM16,!AIM17,!AIM18,!AIM19"/>
-			<Option Id="AIM16" Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 4个开入" ShortDescription="AIM: 4CT (Io 1/5A) + 4BI" ModuleType="AIM16" ModuleCount="1" CT="4" BI="4" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM17,!AIM18,!AIM19"/>
+			<Option Id="AIM16" Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 4个开入" ShortDescription="AIM: 4CT (Io 1/5A) + 4BI" ModuleType="AIM16" ModuleCount="1" CT="4" BI="4" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM17,!AIM18,!AIM19" IsDefault="True"/>
 			<Option Id="AIM17"  Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 4个开入"  ShortDescription="AIM: 4CT (Io 0.2/1A) + 4BI" ModuleType="AIM17" ModuleCount="1" CT="4" BI="4" Validity="机箱=A,B,C&amp;模拟量模块=!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM18,!AIM19"/>
 			<Option Id="AIM18"  Version="*" Description="模拟量模块: 4个电流(零序电流 1/5A) + 1个电压 + 3个开入"  ShortDescription="AIM: 4CT (Io 1/5A) + 1VT + 3BI" ModuleType="AIM18" ModuleCount="1" CT="4" VT="1" BI="3" Validity="机箱=A&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM17,!AIM19"/>
 			<Option Id="AIM19" Version="*" Description="模拟量模块: 4个电流(零序电流 0.2/1A) + 1个电压 + 3个开入" ShortDescription="AIM: 4CT (Io 0.2/1A) + 1VT + 3BI" ModuleType="AIM19" ModuleCount="1" CT="4" VT="1" BI="3" Validity="机箱=A&amp;模拟量模块=!1x AIM4,!2x AIM4,!AIM5,!AIM13,!AIM15,!AIM16,!AIM17,!AIM18"/>
@@ -128,17 +128,17 @@
 		</Category>
 
 		<Category Name="电源模块" IsMandatory="True">
-			<Option Id="PSM4" Version="*" Description="PSM4 - 60-250 Vdc; 100-240 Vac; 6个开出" ShortDescription="PSM4 - 60-250 Vdc; 100-240 Vac; 6BO" BO="6"/>
+			<Option Id="PSM4" Version="*" Description="PSM4 - 60-250 Vdc; 100-240 Vac; 6个开出" ShortDescription="PSM4 - 60-250 Vdc; 100-240 Vac; 6BO" BO="6" IsDefault="True"/>
 			<Option Id="PSM3" Version="*" Description="PSM3 - 24-60 Vdc; 6个开出" ShortDescription="PSM3 - 24-60 Vdc; 6BO" BO="6"/>
 		</Category>
 
 		<Category Name="LHMI面板" Slot="HMI" IsMandatory="True">
-			<Option Id="HMI1" Version="*" Description="英文LHMI面板" Validity="选项1=G"/>
+			<Option Id="HMI1" Version="*" Description="英文LHMI面板" Validity="选项1=G" IsDefault="True"/>
 			<Option Id="HMI2" Version="*" Description="中文LHMI面板" Validity="选项1=G,C"/>
 		</Category>
 
 		<Category Name="应用包" IsMandatory="False" IsMultiple="True">
-			<Option Id="APP1" Version="*" Description="APP1 - 电流保护包"/>
+			<Option Id="APP1" Version="*" Description="APP1 - 电流保护包" IsDefault="True"/>
 			<Option Id="APP2" Version="*" Description="APP2 - 接地保护扩展包"/>
 			<Option Id="APP3" Version="*" Description="APP3 - 馈线保护扩展包"/>
 			<Option Id="APP4" Version="*" Description="APP4 - 故障定位包"/>
@@ -155,7 +155,7 @@
 		</Category>
 		<Category Name="通讯规约" IsMandatory="True">
 			<IsMultiple Version="PCL2" Value="True"/>
-			<Option Id="CMP1" Version="*" Description="CMP1 - IEC 61850"/>
+			<Option Id="CMP1" Version="*" Description="CMP1 - IEC 61850" IsDefault="True"/>
 			<Option Id="CMP2" Version="*" Description="CMP2 - IEC 61850 + Modbus"/>
 			<Option Id="CMP3" Version="*" Description="CMP3 - IEC 61850 + IEC 103" Validity="通讯模块=COM11,COM12,COM13,COM14,COM15,COM16,COM17,COM18,COM27,COM32,COM33,COM34,COM8,COM9,COM10"/>
 			<Option Id="CMP4" Version="*" Description="CMP4 - IEC 61850 + DNP3"/>
@@ -164,12 +164,12 @@
 		</Category>
 
 		<Category Name="信号端子" IsMandatory="True" IsMultiple="False">
-			<Option Id="SCT1" Version="*" Description="SCT1 - 压接型信号端子"/>
+			<Option Id="SCT1" Version="*" Description="SCT1 - 压接型信号端子" IsDefault="True"/>
 			<Option Id="SCT2" Version="*" Description="SCT2 - 环形接线片型信号端子"/>
 		</Category>
 
 		<Category Name="版本" IsMandatory="True">
-			<Option Id="PCL1" Version="*" Description="版本 PCL1"/>
+			<Option Id="PCL1" Version="*" Description="版本 PCL1" IsDefault="True"/>
 			<Option Id="PCL2" Version="*" Description="版本 PCL2"/>
 		</Category>
 	</OptionCodes>

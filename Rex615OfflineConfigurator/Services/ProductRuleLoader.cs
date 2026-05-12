@@ -168,7 +168,8 @@ public sealed class ProductRuleLoader
             Validity = NullableAttr(element, "Validity"),
             ModuleType = NullableAttr(element, "ModuleType"),
             ModuleCount = IntAttr(element, "ModuleCount", 0),
-            IsMainCode = isMainCode
+            IsMainCode = isMainCode,
+            IsDefault = BoolAttr(element, "IsDefault", false)
         };
 
         foreach (var attribute in element.Attributes())

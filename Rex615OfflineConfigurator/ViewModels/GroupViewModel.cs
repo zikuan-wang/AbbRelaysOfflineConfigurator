@@ -103,6 +103,25 @@ public sealed class GroupViewModel : ObservableObject
             return;
         }
 
+        var defaults = Options.Where(option => option.Option.IsDefault).ToList();
+        if (defaults.Count > 0)
+        {
+            if (AllowsMultiple)
+            {
+                foreach (var option in defaults)
+                {
+                    option.SetSelectedSilently(true);
+                }
+            }
+            else
+            {
+                defaults[0].SetSelectedSilently(true);
+            }
+
+            OnPropertyChanged(nameof(SelectedSummary));
+            return;
+        }
+
         if (Group.IsMandatory || Group.IsMainCode)
         {
             Options[0].SetSelectedSilently(true);

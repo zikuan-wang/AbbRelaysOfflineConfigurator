@@ -72,6 +72,7 @@ public sealed class RuleOption
     public string? ModuleType { get; init; }
     public int ModuleCount { get; init; }
     public bool IsMainCode { get; init; }
+    public bool IsDefault { get; init; }
     public Dictionary<string, string> Attributes { get; } = new(StringComparer.OrdinalIgnoreCase);
 }
 
