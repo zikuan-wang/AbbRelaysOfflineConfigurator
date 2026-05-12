@@ -1,10 +1,17 @@
 param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "1.1.5"
+    [string]$ProductVersion = "1.1.6"
 )
 
 $ErrorActionPreference = "Stop"
+
+$productVersionParts = $ProductVersion.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)
+if ($productVersionParts.Count -ne 3) {
+    throw "ProductVersion must use three segments, for example 1.1.6."
+}
+
+$assemblyVersion = "$ProductVersion.0"
 
 $root = Split-Path -Parent $PSScriptRoot
 $outputRoot = Join-Path $root "Generated\Package"
@@ -25,8 +32,8 @@ dotnet publish (Join-Path $root "Rex615OfflineConfigurator\Rex615OfflineConfigur
     --self-contained true `
     -o $appPublish `
     /p:Version=$ProductVersion `
-    /p:AssemblyVersion="$ProductVersion.0" `
-    /p:FileVersion="$ProductVersion.0" `
+    /p:AssemblyVersion=$assemblyVersion `
+    /p:FileVersion=$assemblyVersion `
     /p:InformationalVersion=$ProductVersion `
     /p:PublishSingleFile=false `
     /p:DebugType=None `
@@ -38,8 +45,8 @@ dotnet publish (Join-Path $root "Rex615AuthorizationTool\Rex615AuthorizationTool
     --self-contained true `
     -o $authPublish `
     /p:Version=$ProductVersion `
-    /p:AssemblyVersion="$ProductVersion.0" `
-    /p:FileVersion="$ProductVersion.0" `
+    /p:AssemblyVersion=$assemblyVersion `
+    /p:FileVersion=$assemblyVersion `
     /p:InformationalVersion=$ProductVersion `
     /p:PublishSingleFile=true `
     /p:IncludeNativeLibrariesForSelfExtract=true `
