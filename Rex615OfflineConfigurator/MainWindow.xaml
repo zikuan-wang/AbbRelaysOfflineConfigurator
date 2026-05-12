@@ -991,36 +991,28 @@
                                                         <Grid Grid.Row="2"
                                                               Background="{DynamicResource SurfaceBrush}"
                                                               ClipToBounds="True">
-                                                            <Button Click="SlotDiagram_OnClick"
+                                                            <Border MouseLeftButtonUp="SlotDiagram_OnClick"
                                                                     Background="Transparent"
-                                                                    BorderThickness="0"
-                                                                    Padding="0"
-                                                                    ToolTip="{Binding TerminalDiagramToolTip}"
-                                                                    VerticalAlignment="Stretch"
-                                                                    HorizontalAlignment="Stretch"
-                                                                    HorizontalContentAlignment="Center"
-                                                                    VerticalContentAlignment="Bottom">
-                                                                <Canvas Width="82"
-                                                                        Height="256"
-                                                                        ClipToBounds="True"
-                                                                        ToolTip="{Binding Description, Mode=OneWay}">
-                                                                    <TextBlock Text="{Binding Description, Mode=OneWay}"
-                                                                               Width="232"
-                                                                               Canvas.Left="32"
-                                                                               Canvas.Top="244"
-                                                                               FontSize="14"
-                                                                               FontWeight="SemiBold"
-                                                                               Foreground="{StaticResource TextBrush}"
-                                                                               TextTrimming="CharacterEllipsis"
-                                                                               TextWrapping="NoWrap"
-                                                                               LineStackingStrategy="BlockLineHeight"
-                                                                               LineHeight="18">
-                                                                        <TextBlock.RenderTransform>
-                                                                            <RotateTransform Angle="-90" />
-                                                                        </TextBlock.RenderTransform>
-                                                                    </TextBlock>
-                                                                </Canvas>
-                                                            </Button>
+                                                                    Cursor="Hand"
+                                                                    ToolTip="{Binding TerminalDiagramToolTip}">
+                                                                <TextBlock Text="{Binding Description, Mode=OneWay}"
+                                                                           Width="232"
+                                                                           Margin="0,0,0,12"
+                                                                           HorizontalAlignment="Center"
+                                                                           VerticalAlignment="Bottom"
+                                                                           FontSize="14"
+                                                                           FontWeight="SemiBold"
+                                                                           Foreground="{StaticResource TextBrush}"
+                                                                           TextTrimming="CharacterEllipsis"
+                                                                           TextWrapping="NoWrap"
+                                                                           LineStackingStrategy="BlockLineHeight"
+                                                                           LineHeight="18"
+                                                                           ToolTip="{Binding Description, Mode=OneWay}">
+                                                                    <TextBlock.LayoutTransform>
+                                                                        <RotateTransform Angle="-90" />
+                                                                    </TextBlock.LayoutTransform>
+                                                                </TextBlock>
+                                                            </Border>
                                                         </Grid>
                                                     </Grid>
                                                 </Border>
