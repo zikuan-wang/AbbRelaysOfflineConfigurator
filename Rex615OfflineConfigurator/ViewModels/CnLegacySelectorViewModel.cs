@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Rex615OfflineConfigurator.Models;
 using Rex615OfflineConfigurator.Services;
@@ -21,6 +23,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         Devices = [];
         Groups = [];
         SummaryItems = [];
+        IoSummaryItems = [];
         ValidationMessages = [];
 
         CopyOrderingCodeCommand = new RelayCommand(CopyOrderingCode, () => !string.IsNullOrWhiteSpace(OrderingCode));
@@ -38,6 +41,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
     public ObservableCollection<CnLegacyDeviceViewModel> Devices { get; }
     public ObservableCollection<CnLegacyGroupViewModel> Groups { get; }
     public ObservableCollection<CnLegacySelectionSummaryItemViewModel> SummaryItems { get; }
+    public ObservableCollection<IoSummaryItemViewModel> IoSummaryItems { get; }
     public ObservableCollection<CnLegacyValidationMessageViewModel> ValidationMessages { get; }
     public RelayCommand CopyOrderingCodeCommand { get; }
     public RelayCommand ImportOrderingCodeCommand { get; }
@@ -122,6 +126,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
     {
         RefreshAvailability();
         RefreshSummary();
+        RefreshIoSummary();
         RefreshOrderingCode();
         RefreshValidationMessages();
     }
@@ -175,6 +180,89 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 group.SelectedOption?.Code ?? "",
                 group.SelectedOption?.Description ?? ""));
         }
+    }
+
+    private void RefreshIoSummary()
+    {
+        IoSummaryItems.Clear();
+        foreach (var item in BuildIoSummary())
+        {
+            IoSummaryItems.Add(item);
+        }
+    }
+
+    private IEnumerable<IoSummaryItemViewModel> BuildIoSummary()
+    {
+        var communication = Groups
+            .Where(IsCommunicationHardwareGroup)
+            .Select(BuildCommunicationSummaryPart)
+            .Where(part => !string.IsNullOrWhiteSpace(part))
+            .ToList();
+
+        if (communication.Count > 0)
+        {
+            yield return new IoSummaryItemViewModel("通讯模块", string.Join("；", communication));
+        }
+
+        var selectedDescriptions = Groups
+            .Select(group => group.SelectedOption)
+            .Where(option => option is not null)
+            .Select(option => option!.DescriptionSource)
+            .Where(description => !string.IsNullOrWhiteSpace(description))
+            .ToList();
+
+        foreach (var key in new[] { "CT", "VT", "BI", "BO", "HSO", "RTD", "mA" })
+        {
+            var value = selectedDescriptions.Sum(description => GetIoCount(description, key));
+            if (value > 0)
+            {
+                yield return new IoSummaryItemViewModel(key, value.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+    }
+
+    private static bool IsCommunicationHardwareGroup(CnLegacyGroupViewModel group) =>
+        group.Position.Equals("9", StringComparison.OrdinalIgnoreCase) ||
+        group.Position.Equals("10", StringComparison.OrdinalIgnoreCase) ||
+        group.Position.Equals("9-10", StringComparison.OrdinalIgnoreCase);
+
+    private static string? BuildCommunicationSummaryPart(CnLegacyGroupViewModel group)
+    {
+        var option = group.SelectedOption;
+        if (option is null || IsNoneOption(option))
+        {
+            return null;
+        }
+
+        return $"{group.Name}: {option.ShortDescription}";
+    }
+
+    private static bool IsNoneOption(CnLegacyOptionViewModel option)
+    {
+        var text = $"{option.Code} {option.ShortDescription} {option.Description}";
+        return option.Code.Equals("N", StringComparison.OrdinalIgnoreCase) &&
+               (text.Contains("None", StringComparison.OrdinalIgnoreCase) ||
+                text.Contains('无'));
+    }
+
+    private static int GetIoCount(string source, string key)
+    {
+        var pattern = key switch
+        {
+            "CT" => @"(?<![A-Za-z])(\d+)\s*(?:I|CT)(?![A-Za-z])",
+            "VT" => @"(?<![A-Za-z])(\d+)\s*(?:U|VT)(?![A-Za-z])",
+            "BI" => @"(?<![A-Za-z])(\d+)\s*BI(?![A-Za-z])",
+            "BO" => @"(?<![A-Za-z])(\d+)\s*BO(?![A-Za-z])",
+            "HSO" => @"(?<![A-Za-z])(\d+)\s*HSO(?![A-Za-z])",
+            "RTD" => @"(?<![A-Za-z])(\d+)\s*RTD(?![A-Za-z])",
+            "mA" => @"(?<![A-Za-z])(\d+)\s*mA(?![A-Za-z])",
+            _ => ""
+        };
+
+        return string.IsNullOrWhiteSpace(pattern)
+            ? 0
+            : Regex.Matches(source, pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)
+                .Sum(match => int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture));
     }
 
     private void RefreshAvailability()
@@ -392,6 +480,12 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         lines.Add("当前选择：");
         lines.AddRange(SummaryItems.Select(item => $"{item.Position} {item.GroupName}：{item.Code} - {item.Description}"));
 
+        lines.Add("");
+        lines.Add("I/O 摘要：");
+        lines.Add(IoSummaryItems.Count == 0
+            ? "无"
+            : string.Join("；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
+
         if (ValidationMessages.Count > 0)
         {
             lines.Add("");
@@ -552,6 +646,7 @@ public sealed class CnLegacyOptionViewModel : ObservableObject
     public string Code => Model.Code;
     public string Description => Model.Description;
     public string ShortDescription => string.IsNullOrWhiteSpace(Model.ShortDescription) ? Model.Description : Model.ShortDescription;
+    public string DescriptionSource => string.IsNullOrWhiteSpace(Model.Description) ? ShortDescription : Model.Description;
     public string DisplayText => $"{Code}：{Description}";
 
     public bool IsSelected
