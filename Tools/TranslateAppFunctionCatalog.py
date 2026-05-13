@@ -250,7 +250,7 @@ def clean_aliases(function: dict, zh_name: str, cat_zh: str) -> list[str]:
 
 
 def main() -> None:
-    path = Path("Rex615OfflineConfigurator/Data/AppFunctionCatalog.json")
+    path = Path("AbbRelaysOfflineConfigurator/Data/AppFunctionCatalog.json")
     data = json.loads(path.read_text(encoding="utf-8-sig"))
 
     updated = 0

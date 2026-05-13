@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "REX615 Terminal diagrams"
 DXF_DIR = ROOT / "Generated" / "TerminalDiagramsDxf"
-PNG_DIR = ROOT / "Rex615OfflineConfigurator" / "Data" / "TerminalDiagrams"
+PNG_DIR = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "TerminalDiagrams"
 
 
 def configure_oda() -> None:

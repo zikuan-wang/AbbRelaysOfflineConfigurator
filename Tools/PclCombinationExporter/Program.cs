@@ -1,12 +1,12 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
-using Rex615OfflineConfigurator.Models;
-using Rex615OfflineConfigurator.Services;
+using AbbRelaysOfflineConfigurator.Models;
+using AbbRelaysOfflineConfigurator.Services;
 
 const string version = "PCL1";
 
 var root = FindWorkspaceRoot();
-var dataPath = Path.Combine(root, "Rex615OfflineConfigurator", "Data", "REX615_ROL.xml");
+var dataPath = Path.Combine(root, "AbbRelaysOfflineConfigurator", "Data", "REX615_ROL.xml");
 var outputPath = args.FirstOrDefault(arg => !arg.StartsWith("--", StringComparison.OrdinalIgnoreCase))
     ?? Path.Combine(root, "Generated", $"REX615_{version}_CombinationCodes.txt");
 var writeAll = args.Any(arg => arg.Equals("--write-all", StringComparison.OrdinalIgnoreCase));
@@ -91,7 +91,7 @@ static string FindWorkspaceRoot()
     while (current is not null)
     {
         if (File.Exists(Path.Combine(current.FullName, "REX615_ROL.xml")) &&
-            Directory.Exists(Path.Combine(current.FullName, "Rex615OfflineConfigurator")))
+            Directory.Exists(Path.Combine(current.FullName, "AbbRelaysOfflineConfigurator")))
         {
             return current.FullName;
         }

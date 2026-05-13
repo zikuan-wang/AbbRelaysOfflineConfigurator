@@ -136,7 +136,7 @@ def summary_for(function: dict, version: str) -> str:
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    catalog_path = root / "Rex615OfflineConfigurator" / "Data" / "AppFunctionCatalog.json"
+    catalog_path = root / "AbbRelaysOfflineConfigurator" / "Data" / "AppFunctionCatalog.json"
     data = json.loads(catalog_path.read_text(encoding="utf-8-sig"))
 
     total_changed = 0

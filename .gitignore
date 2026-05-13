@@ -1,4 +1,4 @@
-# Build outputs
+﻿# Build outputs
 bin/
 obj/
 Generated/
@@ -25,7 +25,7 @@ Generated/
 REX615 Terminal diagrams/
 REX615_PCL*.xml
 REX615_ROL.xml
-!Rex615OfflineConfigurator/Data/REX615_ROL.xml
+!AbbRelaysOfflineConfigurator/Data/REX615_ROL.xml
 
 # Logs and temporary files
 *.log
@@ -34,7 +34,7 @@ REX615_ROL.xml
 ~$*
 
 # Local authorization signing material. Do not commit private keys or generated license files.
-Rex615AuthorizationTool/AuthorizationPrivateKeyProvider.local.cs
+AbbRelaysAuthorizationTool/AuthorizationPrivateKeyProvider.local.cs
 authorization-private-key.txt
 *.zwreq
 *.zwlic

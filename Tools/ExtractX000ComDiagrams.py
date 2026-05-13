@@ -12,7 +12,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "Tools" / "SourceX000Diagrams"
 RENDER_DIR = ROOT / "Generated" / "SvgRender"
-OUTPUT_DIR = ROOT / "Rex615OfflineConfigurator" / "Data" / "TerminalDiagrams"
+OUTPUT_DIR = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "TerminalDiagrams"
 
 
 @dataclass(frozen=True)

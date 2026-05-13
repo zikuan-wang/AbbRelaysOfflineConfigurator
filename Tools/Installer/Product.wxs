@@ -1,11 +1,11 @@
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-  <Package Name="REX615 Offline Configurator"
+  <Package Name="ABB Relays Offline Configurator"
            Manufacturer="zikuan wang"
            Version="$(var.ProductVersion)"
            UpgradeCode="{F1DF6DF5-78C1-4F93-A604-179652719948}"
            Scope="perMachine">
-    <MajorUpgrade DowngradeErrorMessage="A newer version of REX615 Offline Configurator is already installed." />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of ABB Relays Offline Configurator is already installed." />
     <MediaTemplate EmbedCab="yes" />
     <Icon Id="ProductIcon.ico" SourceFile="$(var.AppIconPath)" />
     <Property Id="ARPPRODUCTICON" Value="ProductIcon.ico" />
@@ -13,30 +13,30 @@
     <ui:WixUI Id="WixUI_InstallDir" />
     <WixVariable Id="WixUILicenseRtf" Value="$(var.UserDeclarationRtfPath)" />
 
-    <Feature Id="MainFeature" Title="REX615 Offline Configurator" Level="1">
+    <Feature Id="MainFeature" Title="ABB Relays Offline Configurator" Level="1">
       <ComponentGroupRef Id="PublishedAppFiles" />
       <ComponentRef Id="StartMenuShortcutComponent" />
       <ComponentRef Id="DesktopShortcutComponent" />
     </Feature>
 
     <StandardDirectory Id="ProgramFiles64Folder">
-      <Directory Id="INSTALLFOLDER" Name="REX615 Offline Configurator" />
+      <Directory Id="INSTALLFOLDER" Name="ABB Relays Offline Configurator" />
     </StandardDirectory>
 
     <StandardDirectory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="REX615 Offline Configurator" />
+      <Directory Id="ApplicationProgramsFolder" Name="ABB Relays Offline Configurator" />
     </StandardDirectory>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="StartMenuShortcutComponent" Guid="{9296DAE2-4630-4F35-94C6-EED99D2F1F7C}">
         <Shortcut Id="ApplicationStartMenuShortcut"
-                  Name="REX615 Offline Configurator"
+                  Name="ABB Relays Offline Configurator"
                   Icon="ProductIcon.ico"
-                  Target="[INSTALLFOLDER]Rex615OfflineConfigurator.exe"
+                  Target="[INSTALLFOLDER]AbbRelaysOfflineConfigurator.exe"
                   WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
         <RegistryValue Root="HKCU"
-                       Key="Software\ZikuanWang\REX615OfflineConfigurator"
+                       Key="Software\ZikuanWang\ABBRelaysOfflineConfigurator"
                        Name="Installed"
                        Type="integer"
                        Value="1"
@@ -47,12 +47,12 @@
     <StandardDirectory Id="DesktopFolder">
       <Component Id="DesktopShortcutComponent" Guid="{A9E8D234-6D04-42B0-AFE1-72B9557B42B8}">
         <Shortcut Id="ApplicationDesktopShortcut"
-                  Name="REX615 Offline Configurator"
+                  Name="ABB Relays Offline Configurator"
                   Icon="ProductIcon.ico"
-                  Target="[INSTALLFOLDER]Rex615OfflineConfigurator.exe"
+                  Target="[INSTALLFOLDER]AbbRelaysOfflineConfigurator.exe"
                   WorkingDirectory="INSTALLFOLDER" />
         <RegistryValue Root="HKCU"
-                       Key="Software\ZikuanWang\REX615OfflineConfigurator"
+                       Key="Software\ZikuanWang\ABBRelaysOfflineConfigurator"
                        Name="DesktopShortcut"
                        Type="integer"
                        Value="1"

@@ -6,8 +6,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REX_XML = ROOT / "Rex615OfflineConfigurator" / "Data" / "REX615_ROL.xml"
-CN_JSON = ROOT / "Rex615OfflineConfigurator" / "Data" / "CnLegacySelectionRules.json"
+REX_XML = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "REX615_ROL.xml"
+CN_JSON = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "CnLegacySelectionRules.json"
 
 
 def code_length(position: str) -> int:

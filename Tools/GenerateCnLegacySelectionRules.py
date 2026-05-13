@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEXT_DIR = ROOT / "Generated" / "PdfText"
-OUTPUT = ROOT / "Rex615OfflineConfigurator" / "Data" / "CnLegacySelectionRules.json"
+OUTPUT = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "CnLegacySelectionRules.json"
 
 
 GROUP_NAMES = {

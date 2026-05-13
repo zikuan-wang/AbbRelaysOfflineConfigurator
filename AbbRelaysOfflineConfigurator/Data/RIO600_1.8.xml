@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+	<OrderCodes>
+		<Digit Location = "1" Group = "PowerSupply2">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Power_NC"/>
+			<Option value = "A" name = "PSM" Version = "*" Description = "Power_MOD"/>
+		</Digit>
+		<Digit Location = "2" Group = "PowerSupply2HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Power_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Power_HW_LV"/>
+		</Digit>
+		<Digit Location = "3" Group = "PowerSupply2SW">
+			<Option value = "-" name = "Not applicable" Version = "*" Description = "Power_SW_NA"/>
+		</Digit>
+		<Digit Location = "4" Group = "PowerSupply1">
+			<Option value = "A" name = "PSM" Version = "*" Description = "Power_MOD"/>
+		</Digit>
+		<Digit Location = "5" Group = "PowerSupply1HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Power_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Power_HW_LV"/>
+		</Digit>
+		<Digit Location = "6" Group = "PowerSupply1SW">
+			<Option value = "-" name = "Not applicable" Version = "*" Description = "Power_SW_NA"/>
+		</Digit>
+		<Digit Location = "7" Group = "CommunicationModule">
+			<Option value = "L" name = "LECM" Version = "*" Description = "ComMod_LECM"/>
+		</Digit>
+		<Digit Location = "8" Group = "CommunicationModuleHW">
+			<Option value = "A" name = "Electrical" Version = "*" Description = "ComMod_HW_ELE"/>
+			<Option value = "B" name = "Optical" Version = "E,F,G" Description = "ComMod_HW_OPT"/>
+		</Digit>
+		<Digit Location = "9" Group = "CommunicationModuleSW">
+			<Option value = "A" name = "A" Version = "*" Description = "ComMod_SW_Version1"/>
+			<Option value = "B" name = "B" Version = "*" Description = "ComMod_SW_Version2"/>
+			<Option value = "C" name = "C" Version = "*" Description = "ComMod_SW_Version3"/>
+			<Option value = "D" name = "D" Version = "*" Description = "ComMod_SW_Version4"/>
+			<Option value = "E" name = "E" Version = "*" Description = "ComMod_SW_Version5"/>
+			<Option value = "F" name = "F" Version = "*" Description = "ComMod_SW_Version6"/>
+			<Option value = "G" name = "G" Version = "*" Description = "ComMod_SW_Version7"/>
+		</Digit>
+		<Digit Location = "10" Group = "Postion1">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "11" Group = "Postion1HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "12" Group = "Postion1SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "13" Group = "Postion2">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "14" Group = "Postion2HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "15" Group = "Postion2SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "16" Group = "Postion3">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "17" Group = "Postion3HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "18" Group = "Postion3SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "19" Group = "Postion4">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "20" Group = "Postion4HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "21" Group = "Postion4SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "22" Group = "Postion5">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "23" Group = "Postion5HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "24" Group = "Postion5SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "25" Group = "Postion6">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "26" Group = "Postion6HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "27" Group = "Postion6SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "28" Group = "Postion7">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "29" Group = "Postion7HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "30" Group = "Postion7SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "31" Group = "Postion8">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "32" Group = "Postion8HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "33" Group = "Postion8SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "34" Group = "Postion9">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "35" Group = "Postion9HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "36" Group = "Postion9SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "37" Group = "Postion10">
+			<Option value = "-" name = "Not configured" Version = "*" Description = "Position_NC"/>
+			<Option value = "C" name = "DIM8" Version = "*" Description = "Position_DIM8"/>
+			<Option value = "B" name = "DOM" Version = "*" Description = "Position_DOM"/>
+			<Option value = "D" name = "RTD" Version = "C,D,E,F,G" Description = "Position_RTD"/>
+			<Option value = "E" name = "AOM" Version = "C,D,E,F,G" Description = "Position_AOM"/>
+			<Option value = "F" name = "SIM8F" Version = "D,E,F,G" Description = "Position_SIM8F"/>
+			<Option value = "G" name = "SCM" Version = "E,F,G" Description = "Position_SCM"/>
+			<Option value = "H" name = "SIM4F" Version = "G" Description = "Position_SIM4F"/>
+		</Digit>
+		<Digit Location = "38" Group = "Postion10HW">
+			<Option value = "A" name = "High voltage" Version = "*" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "Low Voltage" Version = "B,C,D,E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "-" name = "Contact" Version = "*" Description = "Position_HW_CON"/>
+			<Option value = "D" name = "RTD/mA in" Version = "C,D,E,F,G" Description = "Position_HW_RTD"/>
+			<Option value = "E" name = "mA out" Version = "C,D,E,F,G" Description = "Position_HW_AOM"/>
+			<Option value = "F" name = "Sensor input" Version = "D,E,F,G" Description = "Position_HW_SIM8F"/>
+			<Option value = "G" name = "Sensor input" Version = "G" Description = "Position_HW_SIM4F"/>
+		</Digit>
+		<Digit Location = "39" Group = "Postion10SW">
+			<Option value = "A" name = "A" Version = "*" Description = "Position_SW_Version1"/>
+		</Digit>
+		<Digit Location = "" Group = "ApplicationTypes">
+			<Option value = "-" name = "Not configured" ManageType = "-" Version = "E,F,G" Description = "Position_NC"/>
+			<Option value = "A" name = "4I4O" ManageType = "0" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "B" name = "3 Position Switch" ManageType = "1" Version = "E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "C" name = "Disconnector" ManageType = "2" Version = "E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "D" name = "Earthing Switch" ManageType = "3" Version = "E,F,G" Description = "Position_HW_LV"/>
+			<Option value = "E" name = "Circuit Breaker" ManageType = "4" Version = "E,F,G" Description = "Position_HW_LV"/>
+		</Digit>
+		<Digit Location = "" Group = "ApplicationTypePositions">
+			<Option value = "F" name = "1" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "G" name = "2" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "H" name = "3" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "I" name = "4" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "J" name = "5" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "K" name = "6" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "L" name = "7" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "M" name = "8" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "N" name = "9" Version = "E,F,G" Description = "Position_HW_HV"/>
+			<Option value = "O" name = "10" Version = "E,F,G" Description = "Position_HW_HV"/>
+		</Digit>
+		<Digit Location = "" Group = "CommunicationModuleOptSW">
+			<Option value = "E" name = "E" Version = "*" Description = "ComMod_SW_Version5"/>
+			<Option value = "F" name = "F" Version = "*" Description = "ComMod_SW_Version6"/>
+			<Option value = "G" name = "G" Version = "*" Description = "ComMod_SW_Version7"/>
+		</Digit>
+	</OrderCodes>
+	<Default OrderCode = "---AA-LAG------------------------------"/>
+	<OrderCodeVersions>
+		<Version Id = "A" IED_version = "1.0" Conpack_version = "1.0"/>
+		<Version Id = "B" IED_version = "1.1" Conpack_version = "1.1"/>
+		<Version Id = "C" IED_version = "1.2" Conpack_version = "1.2"/>
+		<Version Id = "D" IED_version = "1.5" Conpack_version = "1.5"/>
+		<Version Id = "E" IED_version = "1.6" Conpack_version = "1.6"/>
+		<Version Id = "F" IED_version = "1.7" Conpack_version = "1.7"/>
+		<Version Id = "G" IED_version = "1.8" Conpack_version = "1.8"/>
+	</OrderCodeVersions>
+	<ValidOrderCodes>
+		<PowerSupply>
+			<!--XYZ - X=Power Supply Type. Y=H/W Version, Z=S/W Version , " * "=means Supported by all Version -->
+			<Rule nr = "1" Version = "*">AA-</Rule>
+			<!--<Rule nr = "2" Version = "*">BA-</Rule> -->
+			<Rule nr = "2" Version = "B,C,D,E,F,G">AB-</Rule>
+			<!--<Rule nr = "4" Version = "*">BB-</Rule>-->
+		</PowerSupply>
+		<CommunicationModule>
+			<!--XYZ - X=Communication Module Type. Y=H/W Version, Z=S/W Version-->
+			<Rule nr = "1" Version = "*">LAA</Rule>
+			<Rule nr = "2" Version = "*">LAB</Rule>
+			<Rule nr = "3" Version = "*">LAC</Rule>
+			<Rule nr = "4" Version = "*">LAD</Rule>
+			<Rule nr = "5" Version = "*">LAE</Rule>
+			<Rule nr = "6" Version = "*">LBE</Rule>
+			<Rule nr = "7" Version = "*">LAF</Rule>
+			<Rule nr = "8" Version = "*">LBF</Rule>
+			<Rule nr = "9" Version = "*">LAG</Rule>
+			<Rule nr = "10" Version = "*">LBG</Rule>
+		</CommunicationModule>
+		<Position>
+			<!--XYZ - X=Type. Y=H/W Version, Z=S/W Version-->
+			<Rule nr = "1" Version = "*">CAA</Rule>
+			<Rule nr = "2" Version = "*">B-A</Rule>
+			<Rule nr = "3" Version = "B,C,D,E,F,G">CBA</Rule>
+			<Rule nr = "4" Version = "C,D,E,F,G">DDA</Rule>
+			<Rule nr = "5" Version = "C,D,E,F,G">EEA</Rule>
+			<Rule nr = "6" Version = "D,E,F,G">FFA</Rule>
+			<Rule nr = "7" Version = "E,F,G">GAA</Rule>
+			<Rule nr = "8" Version = "E,F,G">GBA</Rule>
+			<Rule nr = "9" Version = "G">HGA</Rule>
+		</Position>
+	</ValidOrderCodes>
+	<Configurations>
+		<Configuration Name = "RIO01" CommunicationModule = "A" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAA------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40">
+				<IOModule name = "DIM8" channel = "8" char = "C"/>
+				<IOModule name = "DOM" channel = "4" char = "B"/>
+				<IOModule name = "Not configured" channel = "0" char = "-"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "B" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAB------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40">
+				<IOModule name = "DIM8" channel = "8" char = "C"/>
+				<IOModule name = "DOM" channel = "4" char = "B"/>
+				<IOModule name = "Not configured" channel = "0" char = "-"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "C" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAC------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "D" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAD------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "E" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAE------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "E" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBE------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "E" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAE------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "E" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBE------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "F" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAF------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "F" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBF------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "F" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAF------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "F" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBF------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "G" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAG------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SIM4F" channel = "8" char = "H" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "G" Edition = "ED2" File = "RIO01_complete.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBG------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "SIM4F" channel = "8" char = "H" points = "2"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "G" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LAG------------------------------"/>
+			<OrderCode Name = "###AA#LA###############################"/>
+			<OrderCode Name = "###AB#LA###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "SIM4F" channel = "8" char = "H" points = "2"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "0"/>
+			</IOModules>
+		</Configuration>
+		<Configuration Name = "RIO01" CommunicationModule = "G" File = "RIO01_complete_ed1.xml" ModulesFile = "RIO01_products.xml" LayoutFile = "RIO01_layout.xml">
+			<Default OrderCode = "---AA-LBG------------------------------"/>
+			<OrderCode Name = "###AA#LB###############################"/>
+			<OrderCode Name = "###AB#LB###############################"/>
+			<IOModules channelLimit = "20" maxChannels = "40" pointsLimit = "10" maxPoints = "20">
+				<IOModule name = "DIM8" channel = "8" char = "C" points = "1"/>
+				<IOModule name = "DOM" channel = "4" char = "B" points = "2"/>
+				<IOModule name = "RTD" channel = "4" char = "D" points = "2"/>
+				<IOModule name = "AOM" channel = "4" char = "E" points = "5"/>
+				<IOModule name = "SIM8F" channel = "8" char = "F" points = "2"/>
+				<IOModule name = "SCM" channel = "8" char = "G" points = "3"/>
+				<IOModule name = "SIM4F" channel = "8" char = "H" points = "2"/>
+				<IOModule name = "Not configured" channel = "0" char = "-" points = "0"/>
+				<IOModule name = "Optical" channel = "0" char = "L" points = "2"/>
+			</IOModules>
+		</Configuration>
+	</Configurations>
+</ProductTypeCode>

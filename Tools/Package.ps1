@@ -1,14 +1,14 @@
-param(
+﻿param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "1.1.9"
+    [string]$ProductVersion = "1.3.2"
 )
 
 $ErrorActionPreference = "Stop"
 
 $productVersionParts = $ProductVersion.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)
 if ($productVersionParts.Count -ne 3) {
-    throw "ProductVersion must use three segments, for example 1.1.9."
+    throw "ProductVersion must use three segments, for example 1.3.2."
 }
 
 $assemblyVersion = "$ProductVersion.0"
@@ -18,15 +18,15 @@ $outputRoot = Join-Path $root "Generated\Package"
 $appPublish = Join-Path $outputRoot "App"
 $authPublish = Join-Path $outputRoot "AuthorizationTool"
 $installerWork = Join-Path $outputRoot "Installer"
-$msiPath = Join-Path $outputRoot "REX615OfflineConfigurator_$ProductVersion.msi"
-$latestMsiPath = Join-Path $outputRoot "REX615OfflineConfigurator.msi"
-$appIconPath = Join-Path $root "Rex615OfflineConfigurator\Assets\rex615.ico"
+$msiPath = Join-Path $outputRoot "ABBRelaysOfflineConfigurator_$ProductVersion.msi"
+$latestMsiPath = Join-Path $outputRoot "ABBRelaysOfflineConfigurator.msi"
+$appIconPath = Join-Path $root "AbbRelaysOfflineConfigurator\Assets\abb-relays.ico"
 $userDeclarationTextPath = Join-Path $root "Tools\Installer\UserDeclaration.txt"
 $userDeclarationRtfPath = Join-Path $installerWork "UserDeclaration.rtf"
 
 New-Item -ItemType Directory -Force -Path $outputRoot, $appPublish, $authPublish, $installerWork | Out-Null
 
-dotnet publish (Join-Path $root "Rex615OfflineConfigurator\Rex615OfflineConfigurator.csproj") `
+dotnet publish (Join-Path $root "AbbRelaysOfflineConfigurator\AbbRelaysOfflineConfigurator.csproj") `
     -c $Configuration `
     -r $Runtime `
     --self-contained true `
@@ -39,7 +39,7 @@ dotnet publish (Join-Path $root "Rex615OfflineConfigurator\Rex615OfflineConfigur
     /p:DebugType=None `
     /p:DebugSymbols=false
 
-dotnet publish (Join-Path $root "Rex615AuthorizationTool\Rex615AuthorizationTool.csproj") `
+dotnet publish (Join-Path $root "AbbRelaysAuthorizationTool\AbbRelaysAuthorizationTool.csproj") `
     -c $Configuration `
     -r $Runtime `
     --self-contained true `
@@ -174,7 +174,7 @@ $wixCommand = Get-Command wix -ErrorAction SilentlyContinue
 if ($null -eq $wixCommand) {
     Write-Warning "WiX Toolset CLI was not found. Self-contained publish is complete; install WiX and rerun this script to generate MSI."
     Write-Host "App publish directory: $appPublish"
-    Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'REX615AuthorizationTool.exe')"
+    Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
     return
 }
 
@@ -210,4 +210,4 @@ Copy-Item -LiteralPath $msiPath -Destination $latestMsiPath -Force
 
 Write-Host "MSI: $msiPath"
 Write-Host "MSI latest copy: $latestMsiPath"
-Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'REX615AuthorizationTool.exe')"
+Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
