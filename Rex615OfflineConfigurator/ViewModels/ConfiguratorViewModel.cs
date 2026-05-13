@@ -453,11 +453,12 @@ public sealed class ConfiguratorViewModel : ObservableObject
         }
 
         var recommended = AppRecommendations.Select(app => app.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        foreach (var option in appGroup.Options.Where(option => recommended.Contains(option.Id)))
+        foreach (var option in appGroup.Options)
         {
-            option.SetSelectedSilently(true);
+            option.SetSelectedSilently(recommended.Contains(option.Id));
         }
 
+        appGroup.RefreshSelectedSummary();
         Recalculate();
     }
 
