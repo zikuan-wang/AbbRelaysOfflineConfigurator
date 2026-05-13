@@ -229,7 +229,7 @@
                             ToolTip="REX615 选型">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="TuneVariant" Width="18" Height="18" />
-                            <TextBlock Text="选型" Margin="6,0,0,0" />
+                            <TextBlock Text="REX615 选型" Margin="6,0,0,0" />
                         </StackPanel>
                     </Button>
                     <Button Click="CnLegacySelectionPageButton_OnClick"
