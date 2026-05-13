@@ -128,7 +128,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         RefreshSummary();
         RefreshIoSummary();
         RefreshOrderingCode();
-        RefreshValidationMessages();
+        RefreshValidationMessagesWithTargets();
     }
 
     private void LoadDevice(CnLegacyDeviceViewModel? device)
@@ -275,6 +275,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 option.SetAvailability(result.IsValid);
                 option.SetError(option.IsSelected && !result.IsValid);
             }
+
+            group.RefreshValidationState();
         }
     }
 
@@ -307,6 +309,147 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
         HasErrors = ValidationMessages.Count > 0;
         Status = HasErrors ? "订货号需要调整" : "离线规则校验通过";
+    }
+
+    private void RefreshValidationMessagesWithTargets()
+    {
+        ValidationMessages.Clear();
+
+        foreach (var group in Groups)
+        {
+            if (group.Model.IsRequired && group.SelectedOption is null)
+            {
+                ValidationMessages.Add(new CnLegacyValidationMessageViewModel(
+                    $"{group.Name} 必须选择一项。",
+                    [new CnLegacyValidationTargetViewModel(group.Position, group.Name, null)]));
+                continue;
+            }
+
+            if (group.SelectedOption is null)
+            {
+                continue;
+            }
+
+            var result = EvaluateWithTargets(group.SelectedOption);
+            foreach (var issue in result.Issues)
+            {
+                ValidationMessages.Add(new CnLegacyValidationMessageViewModel(
+                    $"{group.Name} / {group.SelectedOption.Code}：{issue.Message}",
+                    issue.Targets));
+            }
+        }
+
+        HasErrors = ValidationMessages.Count > 0;
+        Status = HasErrors ? "订货号需要调整" : "离线规则校验通过";
+    }
+
+    private CnLegacyEvaluationResultWithTargets EvaluateWithTargets(CnLegacyOptionViewModel option)
+    {
+        var issues = new List<CnLegacyValidationIssue>();
+
+        foreach (var requirement in option.Model.RequiredSelections)
+        {
+            var targetGroup = Groups.FirstOrDefault(group =>
+                group.Position.Equals(requirement.Position, StringComparison.OrdinalIgnoreCase));
+            var selectedCode = targetGroup?.SelectedOption?.Code;
+
+            var matches = !string.IsNullOrWhiteSpace(selectedCode) &&
+                          requirement.Codes.Any(code => code.Equals(selectedCode, StringComparison.OrdinalIgnoreCase));
+            var isValid = requirement.Mode.Equals("NoneOf", StringComparison.OrdinalIgnoreCase)
+                ? !matches
+                : matches;
+
+            if (isValid)
+            {
+                continue;
+            }
+
+            var expected = string.Join("/", requirement.Codes);
+            var targetName = targetGroup?.Name ?? requirement.Position;
+            var targets = new List<CnLegacyValidationTargetViewModel>
+            {
+                new(option.Group.Position, option.Group.Name, option.Code)
+            };
+
+            if (targetGroup is not null)
+            {
+                if (requirement.Mode.Equals("NoneOf", StringComparison.OrdinalIgnoreCase))
+                {
+                    targets.Add(new CnLegacyValidationTargetViewModel(targetGroup.Position, targetGroup.Name, selectedCode));
+                }
+                else
+                {
+                    foreach (var code in requirement.Codes)
+                    {
+                        targets.Add(new CnLegacyValidationTargetViewModel(targetGroup.Position, targetGroup.Name, code));
+                    }
+                }
+            }
+
+            issues.Add(new CnLegacyValidationIssue(
+                requirement.Mode.Equals("NoneOf", StringComparison.OrdinalIgnoreCase)
+                    ? $"{requirement.Message}，当前 {targetName}={selectedCode ?? "未选"}。"
+                    : $"{requirement.Message}，{targetName} 需选择 {expected}，当前为 {selectedCode ?? "未选"}。",
+                DeduplicateTargets(targets)));
+        }
+
+        foreach (var exclusion in option.Model.ExcludedCombinedSelections)
+        {
+            var combined = string.Concat(exclusion.Positions.Select(position =>
+                Groups.FirstOrDefault(group => group.Position.Equals(position, StringComparison.OrdinalIgnoreCase))
+                    ?.SelectedOption
+                    ?.Code ?? ""));
+            if (!exclusion.Codes.Any(code => code.Equals(combined, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            var targets = exclusion.Positions
+                .Select(position => Groups.FirstOrDefault(group => group.Position.Equals(position, StringComparison.OrdinalIgnoreCase)))
+                .Where(group => group is not null)
+                .Select(group => new CnLegacyValidationTargetViewModel(
+                    group!.Position,
+                    group.Name,
+                    group.SelectedOption?.Code))
+                .ToList();
+            targets.Insert(0, new CnLegacyValidationTargetViewModel(option.Group.Position, option.Group.Name, option.Code));
+
+            issues.Add(new CnLegacyValidationIssue(
+                string.IsNullOrWhiteSpace(exclusion.Message)
+                    ? $"不能与组合 {combined} 同时选择。"
+                    : exclusion.Message,
+                DeduplicateTargets(targets)));
+        }
+
+        return new CnLegacyEvaluationResultWithTargets(issues.Count == 0, issues);
+    }
+
+    private static IReadOnlyList<CnLegacyValidationTargetViewModel> DeduplicateTargets(
+        IEnumerable<CnLegacyValidationTargetViewModel> targets)
+    {
+        return targets
+            .Where(target => !string.IsNullOrWhiteSpace(target.GroupPosition))
+            .GroupBy(target => $"{target.GroupPosition}|{target.OptionCode}", StringComparer.OrdinalIgnoreCase)
+            .Select(group => group.First())
+            .ToList();
+    }
+
+    public void JumpToMessage(CnLegacyValidationMessageViewModel message)
+    {
+        if (message.PrimaryTarget is not null)
+        {
+            JumpToTarget(message.PrimaryTarget);
+        }
+    }
+
+    public void JumpToTarget(CnLegacyValidationTargetViewModel target)
+    {
+        var group = Groups.FirstOrDefault(item =>
+            item.Position.Equals(target.GroupPosition, StringComparison.OrdinalIgnoreCase));
+        if (group is not null)
+        {
+            group.IsExpanded = true;
+        }
     }
 
     private CnLegacyEvaluationResult Evaluate(CnLegacyOptionViewModel option)
@@ -536,6 +679,7 @@ public sealed class CnLegacyGroupViewModel : ObservableObject
 {
     private CnLegacyOptionViewModel? _selectedOption;
     private bool _isExpanded = true;
+    private int _errorCount;
 
     public CnLegacyGroupViewModel(CnLegacyCodeGroup model, CnLegacySelectorViewModel owner)
     {
@@ -574,6 +718,24 @@ public sealed class CnLegacyGroupViewModel : ObservableObject
         get => _isExpanded;
         set => SetProperty(ref _isExpanded, value);
     }
+
+    public int ErrorCount
+    {
+        get => _errorCount;
+        private set
+        {
+            if (SetProperty(ref _errorCount, value))
+            {
+                OnPropertyChanged(nameof(HasError));
+                OnPropertyChanged(nameof(ErrorSummary));
+            }
+        }
+    }
+
+    public bool HasError => ErrorCount > 0;
+    public string ErrorSummary => $"需处理 {ErrorCount}";
+
+    internal void RefreshValidationState() => ErrorCount = Options.Count(option => option.HasError);
 
     public void Select(CnLegacyOptionViewModel option)
     {
@@ -695,9 +857,27 @@ public sealed class CnLegacySelectionSummaryItemViewModel(
     public string Description { get; } = description;
 }
 
-public sealed class CnLegacyValidationMessageViewModel(string message)
+public sealed class CnLegacyValidationTargetViewModel(string groupPosition, string groupName, string? optionCode)
 {
-    public string Message { get; } = message;
+    public string GroupPosition { get; } = groupPosition;
+    public string GroupName { get; } = groupName;
+    public string? OptionCode { get; } = optionCode;
+    public string Label => string.IsNullOrWhiteSpace(OptionCode) ? GroupName : $"{GroupName} / {OptionCode}";
 }
 
+public sealed class CnLegacyValidationMessageViewModel(
+    string message,
+    IEnumerable<CnLegacyValidationTargetViewModel>? targets = null)
+{
+    public string Message { get; } = message;
+    public IReadOnlyList<CnLegacyValidationTargetViewModel> Targets { get; } = targets?.ToList() ?? [];
+    public bool HasTargets => Targets.Count > 0;
+    public CnLegacyValidationTargetViewModel? PrimaryTarget => Targets.FirstOrDefault();
+}
+
+internal sealed record CnLegacyValidationIssue(
+    string Message,
+    IReadOnlyList<CnLegacyValidationTargetViewModel> Targets);
+
 internal sealed record CnLegacyEvaluationResult(bool IsValid, IReadOnlyList<string> Messages);
+internal sealed record CnLegacyEvaluationResultWithTargets(bool IsValid, IReadOnlyList<CnLegacyValidationIssue> Issues);

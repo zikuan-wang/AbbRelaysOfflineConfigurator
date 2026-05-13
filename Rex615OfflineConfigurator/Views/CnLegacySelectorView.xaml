@@ -32,6 +32,17 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
+        <Style x:Key="LegacyTargetChipButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="8,3" />
+            <Setter Property="Margin" Value="0,0,6,5" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
         <Style x:Key="LegacyOptionBorderStyle" TargetType="Border">
             <Setter Property="Padding" Value="8,6" />
             <Setter Property="Margin" Value="0,0,0,6" />
@@ -110,7 +121,9 @@
                     </WrapPanel>
                 </Grid>
 
-                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="SelectionScrollViewer"
+                              Grid.Row="2"
+                              VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding Groups}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -138,9 +151,23 @@
                                                                FontWeight="SemiBold" />
                                                 </Border>
                                                 <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding Name, Mode=OneWay}"
-                                                               FontWeight="SemiBold"
-                                                               Foreground="{DynamicResource TextBrush}" />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name, Mode=OneWay}"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{DynamicResource TextBrush}" />
+                                                        <Border Background="{DynamicResource DangerSoftBrush}"
+                                                                BorderBrush="{DynamicResource DangerBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="10"
+                                                                Padding="7,1"
+                                                                Margin="6,0,0,0"
+                                                                Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                            <TextBlock Text="{Binding ErrorSummary}"
+                                                                       FontSize="11"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="{DynamicResource DangerBrush}" />
+                                                        </Border>
+                                                    </StackPanel>
                                                     <TextBlock Text="{Binding SelectedSummary, Mode=OneWay}"
                                                                Foreground="{DynamicResource MutedBrush}"
                                                                FontSize="12"
@@ -365,15 +392,35 @@
                         <ItemsControl ItemsSource="{Binding ValidationMessages}" Margin="0,8,0,0">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="{DynamicResource DangerSoftBrush}"
+                                    <Border MouseLeftButtonUp="ValidationMessage_OnClick"
+                                            Background="{DynamicResource DangerSoftBrush}"
                                             BorderBrush="{DynamicResource DangerBrush}"
                                             BorderThickness="1"
                                             CornerRadius="7"
                                             Padding="8,6"
-                                            Margin="0,0,0,6">
-                                        <TextBlock Text="{Binding Message}"
-                                                   Foreground="{DynamicResource TextBrush}"
-                                                   TextWrapping="Wrap" />
+                                            Margin="0,0,0,6"
+                                            Cursor="Hand">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Message}"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       TextWrapping="Wrap" />
+                                            <ItemsControl ItemsSource="{Binding Targets}"
+                                                          Margin="0,8,0,0"
+                                                          Visibility="{Binding HasTargets, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Click="ValidationTarget_OnClick"
+                                                                Style="{StaticResource LegacyTargetChipButtonStyle}"
+                                                                Content="{Binding Label}" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
