@@ -1,0 +1,297 @@
+{
+  "formatVersion": 1,
+  "source": "REX615 Accessories and additional items.xlsx",
+  "categories": [
+    {
+      "name": "Arc sensors",
+      "nameZh": "弧光传感器",
+      "items": [
+        {
+          "product": "1MRS120534-1.5",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 1.5 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 1.5 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-10",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 10 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 10 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-15",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 15 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 15 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-20",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 20 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 20 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-25",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 25 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 25 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-3",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 3 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 3 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-30",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 30 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 30 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-40",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 40 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 40 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-5",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 5 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 5 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-50",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 50 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 50 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120534-7",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177432_400x400.jpg",
+          "description": "Pre-manufactured lens type arc-protection sensor with optical fiber and DNP-connector for RE_615, RE_620 and REA107, length 7 m",
+          "descriptionZh": "预制透镜式弧光保护传感器，带光纤和 DNP 接头，适用于 RE_615、RE_620 和 REA107，长度 7 m。",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "Mounting",
+      "nameZh": "安装附件",
+      "items": [
+        {
+          "product": "1MRS050694",
+          "image": "",
+          "description": "19\" mounting plate with cut out for one relay. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸安装板，带一个继电器开孔。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "1MRS050695",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177425_400x400.jpg",
+          "description": "19” rack mounting kit with cut-out for two relays. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸机架安装套件，带两个继电器开孔。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "1MRS050696",
+          "image": "https://cdn.productimages.abb.com/9PAA00000177480_400x400.jpg",
+          "description": "50mm raising frame for semi-flush mounting. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "半嵌入式安装用 50 mm 加高框。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "1MRS050697",
+          "image": "",
+          "description": "Wall (surface) mounting frame. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "壁挂（表面）安装框。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "1MRS050831",
+          "image": "",
+          "description": "Inclined (25 degrees) raising frame for semi-flush mounting. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "半嵌入式安装用倾斜加高框，倾角 25 度。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA021952A0003",
+          "image": "",
+          "description": "19\" rack mounting kit for one IED and one RTXP 18 test switch (the test switch is not included in the delivery). Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸机架安装套件，用于一个 IED 和一个 RTXP 18 试验开关（交付不含试验开关）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA022561A0003",
+          "image": "",
+          "description": "19\" rack mounting kit for one IED and one RTXP 24 test switch (the test switch is not included in the delivery). Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸机架安装套件，用于一个 IED 和一个 RTXP 24 试验开关（交付不含试验开关）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA022642P0001",
+          "image": "",
+          "description": "Mounting bracket for one IED with test switch RTXP in 4U Combiflex (RHGT 19\" variant C).Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "4U Combiflex 中用于一个带 RTXP 试验开关 IED 的安装支架（RHGT 19 英寸 C 型）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA022643P0001",
+          "image": "",
+          "description": "Mounting bracket for one IED in 4U Combiflex (RHGT 19\" variant C). Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "4U Combiflex 中用于一个 IED 的安装支架（RHGT 19 英寸 C 型）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027874A0001",
+          "image": "",
+          "description": "Mechanical installation kit for replacing a Strömberg SP_J40 series relay (cut-out on the left or the right of the installation plate) Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "用于替换 Strömberg SP_J40 系列继电器的机械安装套件（安装板左侧或右侧开孔）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027880A0001",
+          "image": "",
+          "description": "Mechanical installation kit for replacing a Strömberg SP_J40 series relay (cut-out on the left or the right of the installation plate) Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "用于替换 Strömberg SP_J40 系列继电器的机械安装套件（安装板左侧或右侧开孔）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027881A0001",
+          "image": "",
+          "description": "Mechanical installation kit for replacing a Stromberg SP_J6 series relay. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "用于替换 Strömberg SP_J6 系列继电器的机械安装套件。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027882A0001",
+          "image": "",
+          "description": "Mechanical installation kit for replacing three BBC S_ series relays. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "用于替换三台 BBC S_ 系列继电器的机械安装套件。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027885A0001",
+          "image": "",
+          "description": "Cover plate for SPACOM 300 series. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "SPACOM 300 系列盖板。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027894A0001",
+          "image": "",
+          "description": "19'' rack installation kit for replacing Stromberg SP_J3/J6 series relays (one cut-out). Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸机架安装套件，用于替换 Strömberg SP_J3/J6 系列继电器（一个开孔）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027897A0001",
+          "image": "",
+          "description": "19'' rack installation kit for replacing Stromberg SP_J3/J6 series relays (two cut-outs). Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "19 英寸机架安装套件，用于替换 Strömberg SP_J3/J6 系列继电器（两个开孔）。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA027998A0001",
+          "image": "",
+          "description": "Protection cover installation kit. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "防护盖安装套件。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA030573A0001",
+          "image": "",
+          "description": "Semi-flush mounting kit. REX615 wide, 620 series",
+          "descriptionZh": "半嵌入式安装套件。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA030894A0001",
+          "image": "",
+          "description": "Wall mounting kit. REX615 wide, 620 series",
+          "descriptionZh": "壁挂安装套件。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA030963A0001",
+          "image": "",
+          "description": "Protection cover kit. REX615 wide, 620 series",
+          "descriptionZh": "防护盖套件。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA031135A0001",
+          "image": "",
+          "description": "19\" mounting plate with cut out for one relay. REX615 wide, 620 series",
+          "descriptionZh": "19 英寸安装板，带一个继电器开孔。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA032818A0001",
+          "image": "",
+          "description": "19\"rack mounting kit for one IED and one RTXP24 test switch (the test switch is not included in the delivery). REX615 wide, 620 series",
+          "descriptionZh": "19 英寸机架安装套件，用于一个 IED 和一个 RTXP24 试验开关（交付不含试验开关）。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA032826A0001",
+          "image": "",
+          "description": "Mounting bracket for one IED in 4U Combiflex (RHGT 19\" variant C). REX615 wide, 620 series",
+          "descriptionZh": "4U Combiflex 中用于一个 IED 的安装支架（RHGT 19 英寸 C 型）。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA036978A0001",
+          "image": "",
+          "description": "Functional Earthing Flange for RTD modules NOTE! not possible to use in combination with \"Mounting bracket for one relay in 4U Combiflex (2RCA032826A0001)\". Products: REX615 standard/wide, 615 series and 620 series",
+          "descriptionZh": "RTD 模块用功能接地法兰。注意：不能与“4U Combiflex 中用于一个继电器的安装支架（2RCA032826A0001）”组合使用。适用于：REX615 标准型/宽机箱、615 系列和 620 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA037217A0001",
+          "image": "",
+          "description": "Relay cover. Products: REX615 standard, 615 series, 611 series",
+          "descriptionZh": "继电器防护盖。适用于：REX615 标准型、615 系列、611 系列。",
+          "add": ""
+        },
+        {
+          "product": "2RCA054775A0001",
+          "image": "",
+          "description": "Inclined (25 degrees) raising frame for semi-flush mounting. REX615 wide, 620 series",
+          "descriptionZh": "半嵌入式安装用倾斜加高框，倾角 25 度。适用于：REX615 宽机箱、620 系列。",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "Other",
+      "nameZh": "其他项目",
+      "items": [
+        {
+          "product": "2RCA053675P0001",
+          "image": "",
+          "description": "Open/Close button ANSI sticker",
+          "descriptionZh": "开/合闸按钮 ANSI 贴纸。",
+          "add": ""
+        },
+        {
+          "product": "REX615EXTW5",
+          "image": "",
+          "description": "5 years extended warranty for REX615. FI manufactured",
+          "descriptionZh": "REX615 5 年延长质保，适用于芬兰制造产品。",
+          "add": ""
+        }
+      ]
+    }
+  ]
+}

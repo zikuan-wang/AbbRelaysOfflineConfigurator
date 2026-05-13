@@ -45,11 +45,52 @@ public partial class MainWindow : Window
         NavigateToProtectedTab(2);
     }
 
-    private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+    private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
         if (!LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64).IsLicensed)
         {
-            Dispatcher.BeginInvoke(() => MainTabControl.SelectedIndex = 3, DispatcherPriority.Background);
+            _ = Dispatcher.BeginInvoke(() => MainTabControl.SelectedIndex = 3, DispatcherPriority.Background);
+        }
+
+        await Dispatcher.Yield(DispatcherPriority.Background);
+        await CheckForStartupUpdateAsync();
+    }
+
+    private async Task CheckForStartupUpdateAsync()
+    {
+        try
+        {
+            var result = await _updateCheckService.CheckLatestAsync();
+            if (!result.IsSuccess || !result.HasUpdate)
+            {
+                return;
+            }
+
+            _updateReleaseUrl = string.IsNullOrWhiteSpace(result.ReleaseUrl)
+                ? UpdateCheckService.ReleaseRepositoryUrl + "/releases"
+                : result.ReleaseUrl;
+            _updateDownloadUrl = result.DownloadUrl;
+            _updateDownloadAssetName = result.DownloadAssetName;
+            OpenUpdateReleaseButton.IsEnabled = true;
+            DownloadInstallUpdateButton.IsEnabled = !string.IsNullOrWhiteSpace(result.DownloadUrl);
+
+            var assetText = string.IsNullOrWhiteSpace(result.DownloadAssetName)
+                ? "可打开发布页面下载最新安装包。"
+                : $"可下载安装包：{result.DownloadAssetName}";
+            UpdateStatusTextBlock.Text =
+                $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}";
+
+            var message =
+                $"发现新版本 {result.LatestVersion}。\n当前版本 {result.CurrentVersion}。\n{assetText}\n\n是否打开更新页面？";
+            if (MessageBox.Show(this, message, "发现新版本", MessageBoxButton.YesNo, MessageBoxImage.Information) ==
+                MessageBoxResult.Yes)
+            {
+                MainTabControl.SelectedIndex = 3;
+            }
+        }
+        catch
+        {
+            // Startup update checks must stay silent unless an update is actually available.
         }
     }
 
@@ -158,6 +199,15 @@ public partial class MainWindow : Window
             ? viewModel.AppRecommendationVersion
             : "PCL1";
         var window = new AppFunctionCatalogWindow(version)
+        {
+            Owner = this
+        };
+        window.ShowDialog();
+    }
+
+    private void Rex615AccessoriesButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = new Rex615AccessoryCatalogWindow
         {
             Owner = this
         };

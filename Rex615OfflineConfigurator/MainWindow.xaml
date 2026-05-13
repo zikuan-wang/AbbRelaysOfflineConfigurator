@@ -574,6 +574,14 @@
                                         <TextBlock Text="复制代码" Margin="6,0,0,0" />
                                     </StackPanel>
                                 </Button>
+                                <Button Click="Rex615AccessoriesButton_OnClick"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Margin="0,0,8,8">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="FormatListChecks" Width="18" Height="18" />
+                                        <TextBlock Text="附件/额外项目" Margin="6,0,0,0" />
+                                    </StackPanel>
+                                </Button>
                             </WrapPanel>
                             <WrapPanel Margin="0,2,0,0">
                                 <Button Command="{Binding ExportWordCommand}"
