@@ -10,7 +10,7 @@ ABB REX615 离线选型工具，基于本地 XML/JSON 数据包实现组合代�
 
 ```powershell
 dotnet build .\REX615_Configurator.sln -c Release
-powershell -NoProfile -ExecutionPolicy Bypass -File .\Tools\Package.ps1 -ProductVersion 1.1.6
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Tools\Package.ps1 -ProductVersion 1.1.7
 ```
 
 ## Notes

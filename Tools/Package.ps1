@@ -1,14 +1,14 @@
 param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "1.1.6"
+    [string]$ProductVersion = "1.1.7"
 )
 
 $ErrorActionPreference = "Stop"
 
 $productVersionParts = $ProductVersion.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)
 if ($productVersionParts.Count -ne 3) {
-    throw "ProductVersion must use three segments, for example 1.1.6."
+    throw "ProductVersion must use three segments, for example 1.1.7."
 }
 
 $assemblyVersion = "$ProductVersion.0"
