@@ -24,6 +24,12 @@
             <Setter Property="Padding" Value="10,0" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
+        <Style x:Key="AccessoryComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFilledComboBox}">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="MinHeight" Value="38" />
+            <Setter Property="Padding" Value="10,0,4,0" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
         <Style x:Key="AccessoryCellTextStyle" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -51,6 +57,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="230" />
                     <ColumnDefinition Width="310" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -64,14 +71,21 @@
                                Foreground="#64748B"
                                Margin="0,3,0,0" />
                 </StackPanel>
-                <TextBox x:Name="SearchTextBox"
+                <ComboBox x:Name="CategoryFilterComboBox"
                          Grid.Column="1"
-                         Style="{StaticResource AccessoryTextBoxStyle}"
-                         materialDesign:HintAssist.Hint="搜索 / Search"
                          Margin="12,0,8,0"
                          VerticalAlignment="Center"
+                          Style="{StaticResource AccessoryComboBoxStyle}"
+                          materialDesign:HintAssist.Hint="分类筛选 / Category"
+                          SelectionChanged="CategoryFilterComboBox_OnSelectionChanged" />
+                <TextBox x:Name="SearchTextBox"
+                         Grid.Column="2"
+                         Style="{StaticResource AccessoryTextBoxStyle}"
+                         materialDesign:HintAssist.Hint="搜索 / Search"
+                         Margin="0,0,8,0"
+                         VerticalAlignment="Center"
                          TextChanged="SearchTextBox_OnTextChanged" />
-                <Button Grid.Column="2"
+                <Button Grid.Column="3"
                         Content="关闭 / Close"
                         Style="{StaticResource AccessoryButtonStyle}"
                         Margin="8,0,0,0"
