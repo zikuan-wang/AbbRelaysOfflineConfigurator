@@ -6,6 +6,7 @@ namespace AbbRelaysAuthorizationTool;
 internal static class AuthorizationKeyProvider
 {
     private const string PrivateKeyEnvironmentVariable = "ABB_RELAYS_AUTH_PRIVATE_KEY_BASE64";
+    private const string LegacyPrivateKeyEnvironmentVariable = "REX615_AUTH_PRIVATE_KEY_BASE64";
     private const string PrivateKeyFileName = "authorization-private-key.txt";
 
     public static string PrivateKeyXmlBase64 => LoadPrivateKey();
@@ -18,10 +19,13 @@ internal static class AuthorizationKeyProvider
             return embedded.Trim();
         }
 
-        var environmentValue = Environment.GetEnvironmentVariable(PrivateKeyEnvironmentVariable);
-        if (!string.IsNullOrWhiteSpace(environmentValue))
+        foreach (var environmentVariable in CandidateEnvironmentVariables())
         {
-            return environmentValue.Trim();
+            var environmentValue = Environment.GetEnvironmentVariable(environmentVariable);
+            if (!string.IsNullOrWhiteSpace(environmentValue))
+            {
+                return environmentValue.Trim();
+            }
         }
 
         foreach (var path in CandidateKeyPaths())
@@ -39,16 +43,33 @@ internal static class AuthorizationKeyProvider
         }
 
         throw new InvalidOperationException(
-            $"未配置授权签名私钥。请设置环境变量 {PrivateKeyEnvironmentVariable}，或在授权工具目录放置 {PrivateKeyFileName}。");
+            $"未配置授权签名私钥。请设置环境变量 {PrivateKeyEnvironmentVariable}，或在授权工具目录放置 {PrivateKeyFileName}。" +
+            $"兼容旧环境变量 {LegacyPrivateKeyEnvironmentVariable}。");
     }
 
     private static string? LoadEmbeddedPrivateKey()
     {
-        var providerType = typeof(AuthorizationKeyProvider).Assembly.GetType(
-            "AbbRelaysAuthorizationTool.AuthorizationPrivateKeyProvider",
-            throwOnError: false);
-        var field = providerType?.GetField("PrivateKeyXmlBase64", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-        return field?.GetValue(null) as string;
+        foreach (var typeName in new[]
+                 {
+                     "AbbRelaysAuthorizationTool.AuthorizationPrivateKeyProvider",
+                     "Rex615AuthorizationTool.AuthorizationPrivateKeyProvider"
+                 })
+        {
+            var providerType = typeof(AuthorizationKeyProvider).Assembly.GetType(typeName, throwOnError: false);
+            var field = providerType?.GetField("PrivateKeyXmlBase64", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            if (field?.GetValue(null) is string value && !string.IsNullOrWhiteSpace(value))
+            {
+                return value;
+            }
+        }
+
+        return null;
+    }
+
+    private static IEnumerable<string> CandidateEnvironmentVariables()
+    {
+        yield return PrivateKeyEnvironmentVariable;
+        yield return LegacyPrivateKeyEnvironmentVariable;
     }
 
     private static IEnumerable<string> CandidateKeyPaths()
@@ -59,6 +80,11 @@ internal static class AuthorizationKeyProvider
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "ZikuanWang",
             "ABB Relays Authorization Tool",
+            PrivateKeyFileName);
+        yield return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "ZikuanWang",
+            "REX615 Authorization Tool",
             PrivateKeyFileName);
     }
 }
