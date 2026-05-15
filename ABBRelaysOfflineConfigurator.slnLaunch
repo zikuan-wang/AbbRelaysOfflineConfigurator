@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "ABB Relays Offline Configurator",
+    "Projects": [
+      {
+        "Path": "AbbRelaysOfflineConfigurator\\AbbRelaysOfflineConfigurator.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

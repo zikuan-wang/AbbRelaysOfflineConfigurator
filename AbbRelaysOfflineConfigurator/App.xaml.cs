@@ -10,14 +10,20 @@ public partial class App : Application
         try
         {
             RuntimeSecurityGuard.EnsureClientRuntimeSafe();
+            base.OnStartup(e);
+
+            var window = new MainWindow();
+            MainWindow = window;
+            window.Show();
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "安全检查失败", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                ex.Message,
+                "启动失败",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
             Shutdown(1);
-            return;
         }
-
-        base.OnStartup(e);
     }
 }

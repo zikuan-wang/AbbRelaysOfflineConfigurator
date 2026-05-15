@@ -511,37 +511,6 @@
 
                 <Border Style="{StaticResource SscPanelStyle}">
                     <StackPanel>
-                        <TextBlock Text="当前选型摘要"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextBrush}" />
-                        <ItemsControl ItemsSource="{Binding SelectedSummaryItems}" Margin="0,8,0,0">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BorderBrush="{DynamicResource PanelBorderBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="7"
-                                            Padding="9,6"
-                                            Margin="0,0,0,6"
-                                            Background="{DynamicResource SurfaceBrush}">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Name}"
-                                                       Foreground="{DynamicResource MutedBrush}"
-                                                       FontSize="12" />
-                                            <TextBlock Text="{Binding Value}"
-                                                       Foreground="{DynamicResource TextBrush}"
-                                                       FontWeight="SemiBold"
-                                                       TextWrapping="Wrap" />
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
-
-                <Border Style="{StaticResource SscPanelStyle}">
-                    <StackPanel>
                         <TextBlock Text="校验消息"
                                    FontSize="16"
                                    FontWeight="SemiBold"
