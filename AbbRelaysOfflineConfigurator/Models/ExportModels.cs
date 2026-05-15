@@ -29,6 +29,7 @@ public sealed record ExportSnapshot(
     bool IsValid,
     IReadOnlyList<SelectedOptionSummary> Selections,
     IReadOnlyList<ExportIoSummary> IoSummary,
+    string SelectedAppSummary,
     IReadOnlyList<ExportAppFunctionSummary> AppFunctions,
     IReadOnlyList<ExportSlotSummary> Slots,
     IReadOnlyList<string> Messages,

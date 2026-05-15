@@ -147,6 +147,7 @@ public static class ExportService
         rows.Add(("I/O 摘要", snapshot.IoSummary.Count == 0
             ? "无"
             : string.Join("；", snapshot.IoSummary.Select(item => $"{item.Name}={item.Value}"))));
+        rows.Add(("当前已选择 APP 摘要", snapshot.SelectedAppSummary));
         rows.Add(("", ""));
         rows.Add(("选项组", "选项"));
         rows.AddRange(snapshot.Selections.Select(selection => (selection.GroupName, $"{selection.Id}: {selection.Description}")));
@@ -205,6 +206,9 @@ public static class ExportService
             snapshot.IoSummary.Count == 0
                 ? "无"
                 : string.Join("；", snapshot.IoSummary.Select(item => $"{item.Name}={item.Value}")),
+            "",
+            "当前已选择 APP 摘要：",
+            snapshot.SelectedAppSummary,
             "",
             "选型配置："
         };

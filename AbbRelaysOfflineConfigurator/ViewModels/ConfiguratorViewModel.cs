@@ -996,6 +996,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             IsCombinationValid,
             BuildSelectedSummaries().ToList(),
             IoSummaryItems.Select(item => new ExportIoSummary(item.Name, item.Value)).ToList(),
+            BuildSelectedAppSummaryText(),
             BuildSelectedAppFunctionSummaries(),
             Slots.Select(slot => new ExportSlotSummary(slot.SlotId, slot.Code, slot.Description)).ToList(),
             Messages.Select(message => message.Text).ToList(),
@@ -1010,15 +1011,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private IReadOnlyList<ExportAppFunctionSummary> BuildSelectedAppFunctionSummaries()
     {
-        var selectedApps = OptionGroups
-            .SelectMany(group => group.Options)
-            .Where(option => option.IsSelected && IsAppPackageId(option.Id))
-            .Select(option => option.Id)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(AppExportPriorityIndex)
-            .ThenBy(id => id, StringComparer.OrdinalIgnoreCase)
-            .ToList();
-
+        var selectedApps = SelectedAppPackageIds().ToList();
         if (selectedApps.Count == 0)
         {
             return [];
@@ -1037,6 +1030,41 @@ public sealed class ConfiguratorViewModel : ObservableObject
                     function.EnglishName)))
             .ToList();
     }
+
+    private string BuildSelectedAppSummaryText()
+    {
+        var selectedApps = SelectedAppPackageIds().ToList();
+        if (selectedApps.Count == 0)
+        {
+            return IsEnglish ? "None" : "无";
+        }
+
+        var functions = _appFunctionCatalogService.GetFunctions(CurrentVersion ?? "PCL1");
+        var summaries = selectedApps.Select(app =>
+        {
+            var functionTexts = functions
+                .Where(function => function.Apps.Contains(app, StringComparer.OrdinalIgnoreCase))
+                .Select(function => string.IsNullOrWhiteSpace(function.Ansi) ? function.Code : function.Ansi.Trim())
+                .Where(text => !string.IsNullOrWhiteSpace(text))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+            var text = functionTexts.Count == 0
+                ? IsEnglish ? "no catalog functions" : "无功能清单"
+                : string.Join(", ", functionTexts);
+            return $"{app} ({text})";
+        });
+
+        return string.Join(IsEnglish ? "; " : "；", summaries);
+    }
+
+    private IEnumerable<string> SelectedAppPackageIds() =>
+        OptionGroups
+            .SelectMany(group => group.Options)
+            .Where(option => option.IsSelected && IsAppPackageId(option.Id))
+            .Select(option => option.Id)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(AppExportPriorityIndex)
+            .ThenBy(id => id, StringComparer.OrdinalIgnoreCase);
 
     private int AppExportPriorityIndex(string app)
     {
@@ -1121,6 +1149,10 @@ public sealed class ConfiguratorViewModel : ObservableObject
         lines.Add(IoSummaryItems.Count == 0
             ? IsEnglish ? "None" : "无"
             : string.Join(IsEnglish ? "; " : "；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
+
+        lines.Add("");
+        lines.Add(IsEnglish ? "Selected APP summary:" : "当前已选择 APP 摘要：");
+        lines.Add(BuildSelectedAppSummaryText());
 
         lines.Add("");
         lines.Add(IsEnglish ? "Slot allocation:" : "槽位配置：");

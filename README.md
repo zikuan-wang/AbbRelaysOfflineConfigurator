@@ -10,7 +10,7 @@ ABB 继保离线选型工具，基于本地 XML/JSON 数据包实现组合代码
 
 ```powershell
 dotnet build .\ABBRelaysOfflineConfigurator.sln -c Release
-powershell -NoProfile -ExecutionPolicy Bypass -File .\Tools\Package.ps1 -ProductVersion 2.0.7
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Tools\Package.ps1 -ProductVersion 2.0.8
 ```
 
 ## Notes
