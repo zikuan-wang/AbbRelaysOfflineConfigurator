@@ -717,8 +717,20 @@ public partial class MainWindow : Window
         Rex640TabItem.Header = english ? "REX640 Configurator" : "REX640 选型";
 
         ApplyStaticLanguage(this, english);
+        SyncDisplayLanguageComboBoxContent();
         UpdateTopBarTitle();
         ApplyLicenseGate();
+    }
+
+    private void SyncDisplayLanguageComboBoxContent()
+    {
+        ChineseLanguageComboBoxItem.Content = "中文";
+        EnglishLanguageComboBoxItem.Content = "English";
+
+        if (DataContext is ConfiguratorViewModel viewModel)
+        {
+            SyncDisplayLanguageComboBox(viewModel.DisplayLanguage);
+        }
     }
 
     private void UpdateTopBarTitle()
@@ -806,7 +818,7 @@ public partial class MainWindow : Window
             {
                 case TextBlock textBlock
                     when BindingOperations.GetBindingExpression(textBlock, TextBlock.TextProperty) is null:
-                    textBlock.Text = TranslateStaticText(textBlock.Text, english);
+                    TranslateStaticTextBlock(textBlock, english);
                     break;
                 case HeaderedContentControl headeredContentControl
                     when BindingOperations.GetBindingExpression(headeredContentControl, HeaderedContentControl.HeaderProperty) is null &&
@@ -842,6 +854,16 @@ public partial class MainWindow : Window
                 HintAssist.SetHint(frameworkElement, TranslateStaticText(hint, english));
             }
         }
+    }
+
+    private static void TranslateStaticTextBlock(TextBlock textBlock, bool english)
+    {
+        if (textBlock.Inlines.Count > 0)
+        {
+            return;
+        }
+
+        textBlock.Text = TranslateStaticText(textBlock.Text, english);
     }
 
     private static IEnumerable<DependencyObject> EnumerateElements(

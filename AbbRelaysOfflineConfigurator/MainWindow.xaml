@@ -385,7 +385,7 @@
                             <materialDesign:PopupBox.ToggleContent>
                                 <materialDesign:PackIcon Kind="DotsVertical" Width="24" Height="24" Foreground="{DynamicResource AppBarForegroundBrush}" />
                             </materialDesign:PopupBox.ToggleContent>
-                            <StackPanel Width="340" Margin="16">
+                            <StackPanel Width="420" Margin="16">
                                 <TextBlock x:Name="SettingsTitleTextBlock"
                                            Text="界面设置"
                                            FontSize="16"
@@ -406,8 +406,8 @@
                                           materialDesign:HintAssist.Hint="Language"
                                           Margin="0,0,0,14"
                                           SelectionChanged="DisplayLanguageComboBox_OnSelectionChanged">
-                                    <ComboBoxItem Tag="zh-CN" Content="中文" />
-                                    <ComboBoxItem Tag="en-US" Content="English" />
+                                    <ComboBoxItem x:Name="ChineseLanguageComboBoxItem" Tag="zh-CN" Content="中文" />
+                                    <ComboBoxItem x:Name="EnglishLanguageComboBoxItem" Tag="en-US" Content="English" />
                                 </ComboBox>
                                 <TextBlock x:Name="ThemeColorLabelTextBlock"
                                            Text="主题颜色"
@@ -415,11 +415,11 @@
                                            FontWeight="SemiBold"
                                            Opacity="0.72"
                                            Margin="0,0,0,8" />
-                                <UniformGrid Columns="1">
+                                <UniformGrid Columns="2" Margin="-4,0,-4,0">
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#6ECC54"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#6ECC54" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeLimeGreenTextBlock" Text="莱姆绿" Margin="8,0,0,0" />
@@ -428,7 +428,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#D34947"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#D34947" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeTitianRedTextBlock" Text="提香红" Margin="8,0,0,0" />
@@ -437,7 +437,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#018B8D"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#018B8D" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeMarsGreenTextBlock" Text="马尔斯绿" Margin="8,0,0,0" />
@@ -446,7 +446,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#002FA7"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#002FA7" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeKleinBlueTextBlock" Text="克莱因蓝" Margin="8,0,0,0" />
@@ -455,7 +455,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#470125"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#470125" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeBurgundyTextBlock" Text="勃艮第" Margin="8,0,0,0" />
@@ -464,7 +464,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#F9D46C"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#F9D46C" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeSchonbrunnYellowTextBlock" Text="申布伦黄" Margin="8,0,0,0" />
@@ -473,7 +473,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#71E2D1"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#71E2D1" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeTiffanyBlueTextBlock" Text="蒂芙尼蓝" Margin="8,0,0,0" />
@@ -482,7 +482,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#C8161D"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#C8161D" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeChineseRedTextBlock" Text="中国红" Margin="8,0,0,0" />
@@ -491,7 +491,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#492D22"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#492D22" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeVanDyckBrownTextBlock" Text="凡戴克棕" Margin="8,0,0,0" />
@@ -500,7 +500,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#EB5C20"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0,0,0,8">
+                                            Margin="4,0,4,8">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#EB5C20" CornerRadius="7" />
                                             <TextBlock x:Name="ThemeHermesOrangeTextBlock" Text="爱马仕橙" Margin="8,0,0,0" />
@@ -509,7 +509,7 @@
                                     <Button Click="ThemeColorButton_OnClick"
                                             Tag="#0D3A69"
                                             Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Margin="0">
+                                            Margin="4,0,4,0">
                                         <StackPanel Orientation="Horizontal">
                                             <Border Width="14" Height="14" Background="#0D3A69" CornerRadius="7" />
                                             <TextBlock x:Name="ThemePrussianBlueTextBlock" Text="普鲁士蓝" Margin="8,0,0,0" />
