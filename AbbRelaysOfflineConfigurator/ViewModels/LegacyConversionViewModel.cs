@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
 using AbbRelaysOfflineConfigurator.Services;
@@ -13,6 +14,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
     private readonly OnlineValidationService _onlineValidationService;
     private string _inputCodes = "";
     private string _status = "请输入 615/620 系列订货号，每行一个。";
+    private string _displayLanguage = ConfiguratorViewModel.ChineseLanguage;
     private bool _useOnlineConversion;
     private bool _isBusy;
 
@@ -31,6 +33,39 @@ public sealed class LegacyConversionViewModel : ObservableObject
     public RelayCommand ConvertCommand { get; }
     public RelayCommand ClearCommand { get; }
     public RelayCommand ExportCommand { get; }
+    private bool IsEnglish => DisplayLanguage.Equals(ConfiguratorViewModel.EnglishLanguage, StringComparison.OrdinalIgnoreCase);
+
+    public string DisplayLanguage
+    {
+        get => _displayLanguage;
+        set
+        {
+            var normalized = string.Equals(value, ConfiguratorViewModel.EnglishLanguage, StringComparison.OrdinalIgnoreCase)
+                ? ConfiguratorViewModel.EnglishLanguage
+                : ConfiguratorViewModel.ChineseLanguage;
+            if (SetProperty(ref _displayLanguage, normalized))
+            {
+                Status = TranslateConversionMessage(Status);
+                foreach (var row in Results)
+                {
+                    row.Status = TranslateConversionMessage(row.Status);
+                    row.ConversionMode = TranslateConversionMessage(row.ConversionMode);
+                    if (row.DeviceType.Equals("自动识别", StringComparison.OrdinalIgnoreCase) ||
+                        row.DeviceType.Equals("Auto-detect", StringComparison.OrdinalIgnoreCase))
+                    {
+                        row.DeviceType = IsEnglish ? "Auto-detect" : "自动识别";
+                    }
+                }
+
+                if (Results.Count == 0 && string.IsNullOrWhiteSpace(InputCodes))
+                {
+                    Status = EmptyStatus();
+                }
+
+                OnPropertyChanged(nameof(ResultSummary));
+            }
+        }
+    }
 
     public string InputCodes
     {
@@ -79,7 +114,9 @@ public sealed class LegacyConversionViewModel : ObservableObject
     }
 
     public bool CanEdit => !IsBusy;
-    public string ResultSummary => Results.Count == 0 ? "暂无转换结果" : $"共 {Results.Count} 条结果";
+    public string ResultSummary => Results.Count == 0
+        ? IsEnglish ? "No conversion results" : "暂无转换结果"
+        : IsEnglish ? $"{Results.Count} result(s)" : $"共 {Results.Count} 条结果";
 
     private bool CanConvert() =>
         !IsBusy &&
@@ -90,13 +127,13 @@ public sealed class LegacyConversionViewModel : ObservableObject
         var codes = ParseInputCodes(InputCodes).ToList();
         if (codes.Count == 0)
         {
-            Status = "请输入至少一个 615/620 系列订货号。";
+            Status = IsEnglish ? "Enter at least one 615/620 series order code." : "请输入至少一个 615/620 系列订货号。";
             return;
         }
 
         IsBusy = true;
         Results.Clear();
-        Status = $"正在转换 {codes.Count} 条订货号...";
+        Status = IsEnglish ? $"Converting {codes.Count} order code(s)..." : $"正在转换 {codes.Count} 条订货号...";
 
         try
         {
@@ -104,7 +141,11 @@ public sealed class LegacyConversionViewModel : ObservableObject
             {
                 foreach (var code in codes)
                 {
-                    var row = CreateRow(code, "自动识别", "在线转换");
+                    var row = CreateRow(
+                        code,
+                        IsEnglish ? "Auto-detect" : "自动识别",
+                        IsEnglish ? "Online conversion" : "在线转换",
+                        IsEnglish);
                     Results.Add(row);
                     await ConvertOnlineAsync(row);
                 }
@@ -114,11 +155,15 @@ public sealed class LegacyConversionViewModel : ObservableObject
                 var offlineResults = await _offlineConversionService.ConvertOfflineBatchAsync(codes);
                 foreach (var offlineResult in offlineResults)
                 {
-                    var row = CreateRow(offlineResult.SourceOrderingCode, offlineResult.DeviceType, "离线转换");
+                    var row = CreateRow(
+                        offlineResult.SourceOrderingCode,
+                        offlineResult.DeviceType,
+                        IsEnglish ? "Offline conversion" : "离线转换",
+                        IsEnglish);
                     row.CompositionCode = offlineResult.CompositionCode ?? "";
                     if (!offlineResult.IsSuccess || string.IsNullOrWhiteSpace(offlineResult.CompositionCode))
                     {
-                        row.Status = offlineResult.Message;
+                        row.Status = TranslateConversionMessage(offlineResult.Message);
                         row.IsSuccess = false;
                         Results.Add(row);
                         continue;
@@ -130,11 +175,13 @@ public sealed class LegacyConversionViewModel : ObservableObject
             }
 
             var successCount = Results.Count(row => row.IsSuccess);
-            Status = $"转换完成：成功 {successCount} 条，失败 {Results.Count - successCount} 条。";
+            Status = IsEnglish
+                ? $"Conversion completed: {successCount} succeeded, {Results.Count - successCount} failed."
+                : $"转换完成：成功 {successCount} 条，失败 {Results.Count - successCount} 条。";
         }
         catch (Exception ex)
         {
-            Status = $"转换失败：{ex.Message}";
+            Status = IsEnglish ? $"Conversion failed: {ex.Message}" : $"转换失败：{ex.Message}";
         }
         finally
         {
@@ -150,7 +197,9 @@ public sealed class LegacyConversionViewModel : ObservableObject
             row.CompositionCode = result.CompositionCode ?? "";
             if (!result.IsValid || string.IsNullOrWhiteSpace(result.CompositionCode))
             {
-                row.Status = string.IsNullOrWhiteSpace(result.Message) ? "在线转换未返回 REX615 组合代码。" : result.Message;
+                row.Status = string.IsNullOrWhiteSpace(result.Message)
+                    ? IsEnglish ? "Online conversion did not return a REX615 combination code." : "在线转换未返回 REX615 组合代码。"
+                    : TranslateConversionMessage(result.Message);
                 row.IsSuccess = false;
                 return;
             }
@@ -159,7 +208,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            row.Status = $"在线转换失败：{ex.Message}";
+            row.Status = IsEnglish ? $"Online conversion failed: {ex.Message}" : $"在线转换失败：{ex.Message}";
             row.IsSuccess = false;
         }
     }
@@ -177,23 +226,27 @@ public sealed class LegacyConversionViewModel : ObservableObject
             row.RexOrderingNumber = validation.OrderingNumber ?? "";
             row.IsSuccess = validation.IsValid && !string.IsNullOrWhiteSpace(validation.OrderingNumber);
             row.Status = row.IsSuccess
-                ? "转换并在线校验通过。"
-                : "REX615 组合代码在线校验未通过。";
+                ? IsEnglish ? "Conversion and online check passed." : "转换并在线校验通过。"
+                : IsEnglish ? "REX615 combination code did not pass online validation." : "REX615 组合代码在线校验未通过。";
         }
         catch (Exception ex)
         {
-            row.Status = $"REX615 在线校验失败：{ex.Message}";
+            row.Status = IsEnglish ? $"REX615 online check failed: {ex.Message}" : $"REX615 在线校验失败：{ex.Message}";
             row.IsSuccess = false;
         }
     }
 
-    private static LegacyConversionRowViewModel CreateRow(string sourceOrderingCode, string deviceType, string conversionMode) =>
+    private static LegacyConversionRowViewModel CreateRow(
+        string sourceOrderingCode,
+        string deviceType,
+        string conversionMode,
+        bool isEnglish) =>
         new()
         {
             SourceOrderingCode = sourceOrderingCode,
             DeviceType = deviceType,
             ConversionMode = conversionMode,
-            Status = "等待处理..."
+            Status = isEnglish ? "Waiting..." : "等待处理..."
         };
 
     private static bool ShouldUseOnlineComposition(string currentCompositionCode, string? onlineCompositionCode)
@@ -213,14 +266,18 @@ public sealed class LegacyConversionViewModel : ObservableObject
     {
         if (Results.Count == 0)
         {
-            MessageBox.Show("没有可导出的转换结果。", "REX615", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(
+                IsEnglish ? "There are no conversion results to export." : "没有可导出的转换结果。",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
             return;
         }
 
         var dialog = new SaveFileDialog
         {
             FileName = $"615_620_to_REX615_{DateTime.Now:yyyyMMdd_HHmm}.xlsx",
-            Filter = "Excel 清单 (*.xlsx)|*.xlsx"
+            Filter = IsEnglish ? "Excel workbook (*.xlsx)|*.xlsx" : "Excel 清单 (*.xlsx)|*.xlsx"
         };
 
         if (dialog.ShowDialog() != true)
@@ -231,11 +288,17 @@ public sealed class LegacyConversionViewModel : ObservableObject
         try
         {
             LegacyConversionExportService.ExportExcel(Results, dialog.FileName);
-            Status = $"清单已导出：{Path.GetFileName(dialog.FileName)}";
+            Status = IsEnglish
+                ? $"List exported: {Path.GetFileName(dialog.FileName)}"
+                : $"清单已导出：{Path.GetFileName(dialog.FileName)}";
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"导出失败：{ex.Message}", "REX615", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                IsEnglish ? $"Export failed: {ex.Message}" : $"导出失败：{ex.Message}",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
     }
 
@@ -243,7 +306,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
     {
         InputCodes = "";
         Results.Clear();
-        Status = "请输入 615/620 系列订货号，每行一个。";
+        Status = EmptyStatus();
     }
 
     private void ResultsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -258,4 +321,74 @@ public sealed class LegacyConversionViewModel : ObservableObject
             .Select(code => code.Trim())
             .Where(code => !string.IsNullOrWhiteSpace(code))
             .Distinct(StringComparer.OrdinalIgnoreCase);
+
+    private string EmptyStatus() => IsEnglish
+        ? "Enter 615/620 series order codes, one per line."
+        : "请输入 615/620 系列订货号，每行一个。";
+
+    private string TranslateConversionMessage(string message)
+    {
+        var localized = OnlineValidationService.LocalizeMessage(message, IsEnglish);
+        if (!IsEnglish)
+        {
+            return localized switch
+            {
+                "Waiting..." => "等待处理...",
+                "Offline conversion" => "离线转换",
+                "Online conversion" => "在线转换",
+                "Auto-detect" => "自动识别",
+                _ when localized.StartsWith("Conversion completed:", StringComparison.OrdinalIgnoreCase) => localized
+                    .Replace("Conversion completed:", "转换完成：", StringComparison.Ordinal)
+                    .Replace("succeeded", "成功", StringComparison.Ordinal)
+                    .Replace("failed", "失败", StringComparison.Ordinal),
+                _ => localized
+            };
+        }
+
+        var completedMatch = Regex.Match(localized, @"^转换完成：成功 (?<success>\d+) 条，失败 (?<failed>\d+) 条。$");
+        if (completedMatch.Success)
+        {
+            return $"Conversion completed: {completedMatch.Groups["success"].Value} succeeded, {completedMatch.Groups["failed"].Value} failed.";
+        }
+
+        var convertingMatch = Regex.Match(localized, @"^正在转换 (?<count>\d+) 条订货号\.\.\.$");
+        if (convertingMatch.Success)
+        {
+            return $"Converting {convertingMatch.Groups["count"].Value} order code(s)...";
+        }
+
+        return localized switch
+        {
+            "等待处理..." => "Waiting...",
+            "离线转换" => "Offline conversion",
+            "在线转换" => "Online conversion",
+            "自动识别" => "Auto-detect",
+            "未找到本地 615/620 转换规则包。" => "Local 615/620 conversion rule package was not found.",
+            "615/620 订货号为空。" => "615/620 order code is empty.",
+            "无法识别装置类型，未生成 REX615 组合代码。" => "Device type cannot be identified, and no REX615 combination code was generated.",
+            _ when localized.StartsWith("转换失败：", StringComparison.OrdinalIgnoreCase) =>
+                "Conversion failed: " + localized["转换失败：".Length..],
+            _ when localized.StartsWith("清单已导出：", StringComparison.OrdinalIgnoreCase) =>
+                "List exported: " + localized["清单已导出：".Length..],
+            _ when localized.StartsWith("离线转换失败：", StringComparison.OrdinalIgnoreCase) =>
+                "Offline conversion failed: " + localized["离线转换失败：".Length..],
+            _ when localized.Contains("离线转换通过", StringComparison.OrdinalIgnoreCase) =>
+                localized
+                    .Replace("根据订货号型号自动识别为", "Detected by order-code model as", StringComparison.Ordinal)
+                    .Replace("按规则评分自动识别为", "Detected by rule scoring as", StringComparison.Ordinal)
+                    .Replace("，离线转换通过。", "; offline conversion passed.", StringComparison.Ordinal),
+            _ when localized.Contains("但未生成 REX615 组合代码", StringComparison.OrdinalIgnoreCase) =>
+                localized
+                    .Replace("根据订货号型号自动识别为", "Detected by order-code model as", StringComparison.Ordinal)
+                    .Replace("按规则评分自动识别为", "Detected by rule scoring as", StringComparison.Ordinal)
+                    .Replace("，但未生成 REX615 组合代码。", "; no REX615 combination code was generated.", StringComparison.Ordinal),
+            _ when localized.Contains("但规则返回异常结果：", StringComparison.OrdinalIgnoreCase) =>
+                localized
+                    .Replace("根据订货号型号自动识别为", "Detected by order-code model as", StringComparison.Ordinal)
+                    .Replace("按规则评分自动识别为", "Detected by rule scoring as", StringComparison.Ordinal)
+                    .Replace("，但规则返回异常结果：", "; rule returned an abnormal result: ", StringComparison.Ordinal)
+                    .Replace("自动识别为", "Detected as ", StringComparison.Ordinal),
+            _ => localized
+        };
+    }
 }

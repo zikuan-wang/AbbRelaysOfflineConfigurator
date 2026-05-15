@@ -4,10 +4,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="ABB 继保离线选型授权工具"
-        Width="720"
-        Height="560"
+        Width="980"
+        Height="760"
         MinWidth="640"
-        MinHeight="480"
+        MinHeight="620"
         Icon="Assets/abb-relays-auth.ico"
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI, Microsoft YaHei UI"
@@ -79,7 +79,10 @@
             </StackPanel>
         </StackPanel>
 
-        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+        <Border Style="{StaticResource CardStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.05*" />
@@ -192,5 +195,71 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <Border Style="{StaticResource CardStyle}"
+                Margin="0,14,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="已授权设备记录"
+                                   FontSize="17"
+                                   FontWeight="SemiBold"
+                                   Foreground="#101828" />
+                        <TextBlock x:Name="RecordFilePathTextBlock"
+                                   Text="导出激活文件后会自动记录机器信息。"
+                                   Foreground="#64748B"
+                                   TextWrapping="Wrap"
+                                   Margin="0,4,0,0" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                        <Button Content="刷新"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="RefreshRecordsButton_OnClick" />
+                        <Button Content="打开记录目录"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Margin="0"
+                                Click="OpenRecordFolderButton_OnClick" />
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid x:Name="AuthorizationRecordsDataGrid"
+                          Grid.Row="2"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          MinHeight="180"
+                          MaxHeight="280"
+                          Background="White"
+                          BorderBrush="#D8E0EA"
+                          BorderThickness="1"
+                          GridLinesVisibility="Horizontal">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="机器名称" Binding="{Binding MachineName}" Width="130" />
+                        <DataGridTextColumn Header="授权对象" Binding="{Binding LicensedTo}" Width="150" />
+                        <DataGridTextColumn Header="用户" Binding="{Binding UserName}" Width="150" />
+                        <DataGridTextColumn Header="机器指纹" Binding="{Binding MachineIdShort}" Width="150" />
+                        <DataGridTextColumn Header="签发时间" Binding="{Binding IssuedAtText}" Width="135" />
+                        <DataGridTextColumn Header="有效期" Binding="{Binding ExpireText}" Width="90" />
+                        <DataGridTextColumn Header="次数" Binding="{Binding IssueCount}" Width="60" />
+                        <DataGridTextColumn Header="激活文件" Binding="{Binding ActivationFilePath}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

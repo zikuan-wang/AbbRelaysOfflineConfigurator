@@ -42,6 +42,7 @@ public sealed class ProductRuleSet
 public sealed class OptionGroup
 {
     public string Name { get; init; } = "";
+    public string EnglishName { get; init; } = "";
     public string? Location { get; init; }
     public bool IsMandatory { get; init; }
     public bool IsMultiple { get; init; }
@@ -68,6 +69,8 @@ public sealed class RuleOption
     public string GroupName { get; init; } = "";
     public string Description { get; init; } = "";
     public string ShortDescription { get; init; } = "";
+    public string EnglishDescription { get; init; } = "";
+    public string EnglishShortDescription { get; init; } = "";
     public string? Validity { get; init; }
     public string? ModuleType { get; init; }
     public int ModuleCount { get; init; }

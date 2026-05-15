@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbbRelaysLicensing", "AbbRelaysLicensing\AbbRelaysLicensing.csproj", "{803E7F50-354B-42B4-A275-1343D27EE09A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbbRelaysOfflineConfigurator", "AbbRelaysOfflineConfigurator\AbbRelaysOfflineConfigurator.csproj", "{B792D08F-414F-463B-82C4-BEFAB4E94C7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbbRelaysLicensing", "AbbRelaysLicensing\AbbRelaysLicensing.csproj", "{803E7F50-354B-42B4-A275-1343D27EE09A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbbRelaysAuthorizationTool", "AbbRelaysAuthorizationTool\AbbRelaysAuthorizationTool.csproj", "{1AD85024-C04E-46D8-A730-C74469C78FA2}"
 EndProject

@@ -88,7 +88,12 @@ public sealed class LegacyConversionRowViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"复制失败：{ex.Message}", "REX615", MessageBoxButton.OK, MessageBoxImage.Warning);
+            var isEnglish = Application.Current?.MainWindow?.DataContext is ConfiguratorViewModel { IsEnglish: true };
+            MessageBox.Show(
+                isEnglish ? $"Copy failed: {ex.Message}" : $"复制失败：{ex.Message}",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
         }
     }
 }

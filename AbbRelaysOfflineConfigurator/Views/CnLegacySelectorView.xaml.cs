@@ -83,4 +83,43 @@ public partial class CnLegacySelectorView : UserControl
 
         return null;
     }
+
+    private void FunctionSuggestion_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is CnLegacySelectorViewModel viewModel &&
+            sender is FrameworkElement { DataContext: CnLegacyFunctionSuggestionViewModel suggestion })
+        {
+            viewModel.AddRequestedFunction(suggestion.Function);
+        }
+    }
+
+    private void RequestedFunctionRemove_OnClick(object sender, RoutedEventArgs e)
+    {
+        e.Handled = true;
+        if (DataContext is CnLegacySelectorViewModel viewModel &&
+            sender is FrameworkElement { DataContext: CnLegacyRequestedFunctionViewModel function })
+        {
+            viewModel.RemoveRequestedFunction(function);
+        }
+    }
+
+    private void StandardConfigurationRecommendationApply_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is CnLegacySelectorViewModel viewModel &&
+            sender is FrameworkElement { DataContext: CnLegacyStandardConfigurationRecommendationViewModel recommendation })
+        {
+            viewModel.ApplyStandardConfigurationRecommendation(recommendation);
+        }
+    }
+
+    private void FunctionCatalogButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var owner = Window.GetWindow(this);
+        var selectedDeviceId = (DataContext as CnLegacySelectorViewModel)?.SelectedDevice?.Id;
+        var window = new CnLegacyFunctionCatalogWindow(selectedDeviceId)
+        {
+            Owner = owner
+        };
+        window.ShowDialog();
+    }
 }

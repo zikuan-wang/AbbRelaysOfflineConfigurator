@@ -13,12 +13,12 @@
         FontSize="13"
         Background="#F3F6FA">
     <Window.Resources>
-        <Style x:Key="DialogButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+        <Style x:Key="DialogButtonStyle" TargetType="Button" BasedOn="{StaticResource AppDialogOutlinedButtonStyle}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinWidth" Value="96" />
             <Setter Property="Margin" Value="0,0,10,0" />
         </Style>
-        <Style x:Key="DialogPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Style x:Key="DialogPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource AppDialogPrimaryButtonStyle}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinWidth" Value="96" />
             <Setter Property="Margin" Value="0,0,10,0" />

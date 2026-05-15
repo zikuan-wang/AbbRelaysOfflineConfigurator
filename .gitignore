@@ -18,6 +18,7 @@ Generated/
 *.zip
 
 # Source reference documents and CAD files are not committed.
+manual/
 *.pdf
 *.dwg
 *.xlsm

@@ -11,6 +11,9 @@ namespace AbbRelaysOfflineConfigurator.ViewModels;
 
 public sealed class ConfiguratorViewModel : ObservableObject
 {
+    public const string ChineseLanguage = "zh-CN";
+    public const string EnglishLanguage = "en-US";
+
     private readonly ProductRuleSet _rules;
     private readonly SelectionValidator _validator;
     private readonly OnlineValidationService _onlineValidationService = new();
@@ -24,6 +27,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
     private string _functionSearchText = "";
     private string _appRecommendationVersion = "PCL1";
     private string _appRecommendationSummary = "PCL1：输入 ANSI code、IEC 61850 功能码、中文或英文功能名称后添加。";
+    private string _displayLanguage = ChineseLanguage;
     private bool _useFullDescription;
     private bool _isCombinationValid;
     private bool _isOnlineValidationBusy;
@@ -47,9 +51,13 @@ public sealed class ConfiguratorViewModel : ObservableObject
         FunctionSuggestions = [];
         RequestedFunctions = [];
         AppRecommendations = [];
+        Home = new HomeViewModel();
         CnLegacySelection = new CnLegacySelectorViewModel();
         LegacyConversion = new LegacyConversionViewModel(_onlineValidationService);
         Rio600Selection = new Rio600SelectionViewModel();
+        Ssc600Selection = new Ssc600SelectionViewModel();
+        Rex600Selection = new Rex600SelectionViewModel();
+        Rex640Selection = new Rex640SelectionViewModel();
         CopyCodeCommand = new RelayCommand(CopyCode, () => !string.IsNullOrWhiteSpace(FullCode));
         CopyOrderingNumberCommand = new RelayCommand(CopyOrderingNumber, () => HasOnlineOrderingNumber);
         ResetCommand = new RelayCommand(Reset);
@@ -80,9 +88,13 @@ public sealed class ConfiguratorViewModel : ObservableObject
     public ObservableCollection<RequestedFunctionViewModel> RequestedFunctions { get; }
     public ObservableCollection<AppRecommendationViewModel> AppRecommendations { get; }
     public IReadOnlyList<string> AppRecommendationVersions { get; } = ["PCL1", "PCL2"];
+    public HomeViewModel Home { get; }
     public CnLegacySelectorViewModel CnLegacySelection { get; }
     public LegacyConversionViewModel LegacyConversion { get; }
     public Rio600SelectionViewModel Rio600Selection { get; }
+    public Ssc600SelectionViewModel Ssc600Selection { get; }
+    public Rex600SelectionViewModel Rex600Selection { get; }
+    public Rex640SelectionViewModel Rex640Selection { get; }
     public RelayCommand CopyCodeCommand { get; }
     public RelayCommand CopyOrderingNumberCommand { get; }
     public RelayCommand ResetCommand { get; }
@@ -101,6 +113,37 @@ public sealed class ConfiguratorViewModel : ObservableObject
     public string DataSource => _rules.SlotConstraintSourceSummary;
 
     internal bool AllowsMultiple(OptionGroup group) => group.AllowsMultiple(CurrentVersion);
+    public bool IsEnglish => DisplayLanguage.Equals(EnglishLanguage, StringComparison.OrdinalIgnoreCase);
+
+    public string DisplayLanguage
+    {
+        get => _displayLanguage;
+        set
+        {
+            var normalized = string.Equals(value, EnglishLanguage, StringComparison.OrdinalIgnoreCase)
+                ? EnglishLanguage
+                : ChineseLanguage;
+            if (SetProperty(ref _displayLanguage, normalized))
+            {
+                OnPropertyChanged(nameof(IsEnglish));
+                foreach (var group in MainGroups.Concat(OptionGroups))
+                {
+                    group.RefreshDisplayMode();
+                }
+
+                Home.DisplayLanguage = normalized;
+                Rio600Selection.DisplayLanguage = normalized;
+                CnLegacySelection.DisplayLanguage = normalized;
+                LegacyConversion.DisplayLanguage = normalized;
+                Ssc600Selection.DisplayLanguage = normalized;
+                Rex600Selection.DisplayLanguage = normalized;
+                Rex640Selection.DisplayLanguage = normalized;
+                Recalculate();
+                OnlineStatus = OnlineValidationService.LocalizeMessage(OnlineStatus, IsEnglish);
+                RefreshFunctionDisplay();
+            }
+        }
+    }
 
     private string? CurrentVersion => MainGroups.Concat(OptionGroups)
         .FirstOrDefault(group => group.Name.Equals("版本", StringComparison.OrdinalIgnoreCase))
@@ -279,16 +322,18 @@ public sealed class ConfiguratorViewModel : ObservableObject
     public void Recalculate()
     {
         var selected = SelectedOptions().ToList();
-        var validation = _validator.Validate(selected, UseFullDescription);
+        var validation = _validator.Validate(selected, UseFullDescription, IsEnglish);
 
         MainCode = BuildMainCode();
         OptionCode = BuildOptionCode(selected, validation);
         FullCode = string.IsNullOrWhiteSpace(OptionCode) ? MainCode : $"{MainCode}+{OptionCode}";
         IsCombinationValid = validation.IsValid;
-        Status = validation.IsValid ? "组合代码有效" : "组合代码需要调整";
+        Status = validation.IsValid
+            ? IsEnglish ? "Combination code valid" : "组合代码有效"
+            : IsEnglish ? "Combination code needs adjustment" : "组合代码需要调整";
 
         Replace(Messages, validation.IsValid
-            ? [new ValidationMessageViewModel("离线校验通过", [], isSuccess: true)]
+            ? [new ValidationMessageViewModel(IsEnglish ? "Offline validation passed" : "离线校验通过", [], isSuccess: true)]
             : validation.Messages.Select(message => CreateValidationMessage(message, selected)));
         Replace(Slots, validation.SlotAssignments.Select(assignment => new SlotViewModel(assignment)));
         Replace(IoSummaryItems, BuildIoSummary(selected));
@@ -342,7 +387,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
                 continue;
             }
 
-            unresolved.Add(candidates.Count == 0 ? $"{token}（无候选）" : $"{token}（{candidates.Count} 个候选）");
+            unresolved.Add(IsEnglish
+                ? candidates.Count == 0 ? $"{token} (no candidates)" : $"{token} ({candidates.Count} candidates)"
+                : candidates.Count == 0 ? $"{token}（无候选）" : $"{token}（{candidates.Count} 个候选）");
             candidateFunctions.AddRange(candidates);
         }
 
@@ -350,11 +397,13 @@ public sealed class ConfiguratorViewModel : ObservableObject
         {
             Replace(FunctionSuggestions, candidateFunctions
                 .DistinctBy(function => function.Code, StringComparer.OrdinalIgnoreCase)
-                .Select(function => new FunctionSuggestionViewModel(function)));
+                .Select(function => new FunctionSuggestionViewModel(function, this)));
             FunctionSearchText = "";
             RefreshRecommendations();
             var prefix = RequestedFunctions.Count > 0 ? AppRecommendationSummary + "；" : "";
-            AppRecommendationSummary = $"{prefix}以下输入未能唯一匹配，请从候选中选择：{string.Join("，", unresolved)}";
+            AppRecommendationSummary = IsEnglish
+                ? $"{prefix}Some inputs were not unique, select from candidates: {string.Join(", ", unresolved)}"
+                : $"{prefix}以下输入未能唯一匹配，请从候选中选择：{string.Join("，", unresolved)}";
             RefreshFunctionStateProperties();
             OnPropertyChanged(nameof(HasFunctionSuggestions));
             return;
@@ -386,7 +435,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return;
         }
 
-        RequestedFunctions.Add(new RequestedFunctionViewModel(function));
+        RequestedFunctions.Add(new RequestedFunctionViewModel(function, this));
     }
 
     private void ClearFunctionRecommendation()
@@ -405,7 +454,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         Replace(FunctionSuggestions, _appFunctionCatalogService
             .Search(AppRecommendationVersion, token, 20)
             .Where(function => RequestedFunctions.All(selected => !selected.Code.Equals(function.Code, StringComparison.OrdinalIgnoreCase)))
-            .Select(function => new FunctionSuggestionViewModel(function)));
+            .Select(function => new FunctionSuggestionViewModel(function, this)));
         OnPropertyChanged(nameof(HasFunctionSuggestions));
     }
 
@@ -420,26 +469,34 @@ public sealed class ConfiguratorViewModel : ObservableObject
         }
 
         var result = _appFunctionCatalogService.Recommend(AppRecommendationVersion, RequestedFunctions.Select(function => function.Code).ToList());
-        Replace(AppRecommendations, result.Apps.Select(app => new AppRecommendationViewModel(app.Id, app.CoveredFunctions)));
+        Replace(AppRecommendations, result.Apps.Select(app => new AppRecommendationViewModel(app.Id, app.CoveredFunctions, this)));
 
         var details = new List<string>();
         if (result.Apps.Count > 0)
         {
-            details.Add($"{AppRecommendationVersion} 推荐 {result.Apps.Count} 个包：{string.Join(" + ", result.Apps.Select(app => app.Id))}");
+            details.Add(IsEnglish
+                ? $"{AppRecommendationVersion}: recommended package(s): {string.Join(" + ", result.Apps.Select(app => app.Id))}"
+                : $"{AppRecommendationVersion} 推荐 {result.Apps.Count} 个包：{string.Join(" + ", result.Apps.Select(app => app.Id))}");
         }
         else
         {
-            details.Add($"{AppRecommendationVersion} 所选功能均为基础功能，无需额外 APP。");
+            details.Add(IsEnglish
+                ? $"{AppRecommendationVersion}: selected functions are base functionality; no additional APP is required."
+                : $"{AppRecommendationVersion} 所选功能均为基础功能，无需额外 APP。");
         }
 
         if (result.BaseFunctions.Count > 0)
         {
-            details.Add($"基础功能：{string.Join(", ", result.BaseFunctions.Select(function => function.Code))}");
+            details.Add(IsEnglish
+                ? $"Base functionality: {string.Join(", ", result.BaseFunctions.Select(function => function.Code))}"
+                : $"基础功能：{string.Join(", ", result.BaseFunctions.Select(function => function.Code))}");
         }
 
         if (result.UnresolvedFunctions.Count > 0)
         {
-            details.Add($"未匹配：{string.Join(", ", result.UnresolvedFunctions.Select(function => function.Code))}");
+            details.Add(IsEnglish
+                ? $"Unmatched: {string.Join(", ", result.UnresolvedFunctions.Select(function => function.Code))}"
+                : $"未匹配：{string.Join(", ", result.UnresolvedFunctions.Select(function => function.Code))}");
         }
 
         AppRecommendationSummary = string.Join("；", details);
@@ -479,7 +536,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
                 .FirstOrDefault(item => item.Code.Equals(code, StringComparison.OrdinalIgnoreCase));
             if (function is not null)
             {
-                RequestedFunctions.Add(new RequestedFunctionViewModel(function));
+                RequestedFunctions.Add(new RequestedFunctionViewModel(function, this));
             }
         }
 
@@ -494,8 +551,29 @@ public sealed class ConfiguratorViewModel : ObservableObject
         ApplyRecommendedAppsCommand.RaiseCanExecuteChanged();
     }
 
-    private string DefaultAppRecommendationSummary() =>
-        $"{AppRecommendationVersion}：输入 ANSI code、IEC 61850 功能码、中文或英文功能名称后添加。";
+    private void RefreshFunctionDisplay()
+    {
+        foreach (var suggestion in FunctionSuggestions)
+        {
+            suggestion.RefreshLanguage();
+        }
+
+        foreach (var function in RequestedFunctions)
+        {
+            function.RefreshLanguage();
+        }
+
+        foreach (var recommendation in AppRecommendations)
+        {
+            recommendation.RefreshLanguage();
+        }
+
+        RefreshFunctionStateProperties();
+    }
+
+    private string DefaultAppRecommendationSummary() => IsEnglish
+        ? $"{AppRecommendationVersion}: enter ANSI code, IEC 61850 function code, Chinese name or English name, then add it."
+        : $"{AppRecommendationVersion}：输入 ANSI code、IEC 61850 功能码、中文或英文功能名称后添加。";
 
     private IEnumerable<RuleOption> SelectedOptions() =>
         MainGroups.Concat(OptionGroups).SelectMany(group => group.SelectedOptions);
@@ -591,7 +669,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         OnlineOrderingNumber = "";
         IsOnlineValidationSuccess = false;
         IsOnlineValidationError = false;
-        OnlineStatus = "在线校验中...";
+        OnlineStatus = IsEnglish ? "Checking online..." : "在线校验中...";
 
         try
         {
@@ -604,14 +682,16 @@ public sealed class ConfiguratorViewModel : ObservableObject
             OnlineOrderingNumber = result.OrderingNumber ?? "";
             IsOnlineValidationSuccess = result.IsValid;
             IsOnlineValidationError = !result.IsValid;
-            OnlineStatus = result.IsValid ? result.Message.TrimEnd('。') : "组合代码错误";
+            OnlineStatus = result.IsValid
+                ? OnlineValidationService.LocalizeMessage(result.Message.TrimEnd('。'), IsEnglish)
+                : OnlineValidationService.LocalizeMessage(result.Message, IsEnglish);
         }
         catch (Exception ex)
         {
             OnlineOrderingNumber = "";
             IsOnlineValidationSuccess = false;
             IsOnlineValidationError = true;
-            OnlineStatus = $"在线校验失败：{ex.Message}";
+            OnlineStatus = IsEnglish ? $"Online check failed: {ex.Message}" : $"在线校验失败：{ex.Message}";
         }
         finally
         {
@@ -627,9 +707,11 @@ public sealed class ConfiguratorViewModel : ObservableObject
         }
 
         var window = new CombinationCodeImportWindow(
-            "导入订货号",
-            "输入订货号，系统会按当前 PCL 版本在线反查组合代码。例如：REX615_11MV5。",
-            "反查",
+            IsEnglish ? "Import ordering number" : "导入订货号",
+            IsEnglish
+                ? "Enter an ordering number. The tool will reverse-look up the combination code with the current PCL version. Example: REX615_11MV5."
+                : "输入订货号，系统会按当前 PCL 版本在线反查组合代码。例如：REX615_11MV5。",
+            IsEnglish ? "Lookup" : "反查",
             "REX615_11MV5")
         {
             Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(window => window.IsActive)
@@ -643,7 +725,11 @@ public sealed class ConfiguratorViewModel : ObservableObject
         var orderingNumber = window.CombinationCode.Trim();
         if (string.IsNullOrWhiteSpace(orderingNumber))
         {
-            MessageBox.Show("订货号为空。", "REX615", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(
+                IsEnglish ? "Ordering number is empty." : "订货号为空。",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
             return;
         }
 
@@ -651,7 +737,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         IsOnlineValidationSuccess = false;
         IsOnlineValidationError = false;
         OnlineOrderingNumber = "";
-        OnlineStatus = "订货号反查中...";
+        OnlineStatus = IsEnglish ? "Reverse lookup in progress..." : "订货号反查中...";
         var requestedOrderingNumber = EnsureOrderingNumberCurrentVersion(orderingNumber);
 
         try
@@ -662,7 +748,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
                 IsOnlineValidationSuccess = false;
                 IsOnlineValidationError = true;
                 OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
-                OnlineStatus = string.IsNullOrWhiteSpace(result.Message) ? "订货号反查失败" : result.Message.TrimEnd('。');
+                OnlineStatus = string.IsNullOrWhiteSpace(result.Message)
+                    ? IsEnglish ? "Reverse lookup failed" : "订货号反查失败"
+                    : OnlineValidationService.LocalizeMessage(result.Message.TrimEnd('。'), IsEnglish);
                 return;
             }
 
@@ -670,14 +758,14 @@ public sealed class ConfiguratorViewModel : ObservableObject
             OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
             IsOnlineValidationSuccess = true;
             IsOnlineValidationError = false;
-            OnlineStatus = "订货号反查通过";
+            OnlineStatus = IsEnglish ? "Reverse lookup passed" : "订货号反查通过";
         }
         catch (Exception ex)
         {
             IsOnlineValidationSuccess = false;
             IsOnlineValidationError = true;
             OnlineOrderingNumber = requestedOrderingNumber;
-            OnlineStatus = $"订货号反查失败：{ex.Message}";
+            OnlineStatus = IsEnglish ? $"Order number reverse lookup failed: {ex.Message}" : $"订货号反查失败：{ex.Message}";
         }
         finally
         {
@@ -708,7 +796,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         OnlineOrderingNumber = "";
         IsOnlineValidationSuccess = false;
         IsOnlineValidationError = false;
-        OnlineStatus = "未校验";
+        OnlineStatus = IsEnglish ? "Not checked" : "未校验";
     }
 
     private void ImportCode()
@@ -729,7 +817,11 @@ public sealed class ConfiguratorViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"导入失败：{ex.Message}", "REX615", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(
+                IsEnglish ? $"Import failed: {ex.Message}" : $"导入失败：{ex.Message}",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
         }
     }
 
@@ -738,7 +830,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         var code = rawCode.Trim();
         if (string.IsNullOrWhiteSpace(code))
         {
-            throw new InvalidOperationException("组合代码为空。");
+            throw new InvalidOperationException(IsEnglish ? "Combination code is empty." : "组合代码为空。");
         }
 
         foreach (var group in MainGroups.Concat(OptionGroups))
@@ -768,7 +860,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
             if (option is null)
             {
-                throw new InvalidOperationException($"主代码无法匹配 {group.Name}。");
+                throw new InvalidOperationException(IsEnglish
+                    ? $"Main code cannot match {GroupDisplayName(group.Name)}."
+                    : $"主代码无法匹配 {group.Name}。");
             }
 
             option.SetSelectedSilently(true);
@@ -777,7 +871,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
         if (position != mainPart.Length)
         {
-            throw new InvalidOperationException($"主代码存在未识别内容：{mainPart[position..]}。");
+            throw new InvalidOperationException(IsEnglish
+                ? $"Main code contains unrecognized content: {mainPart[position..]}."
+                : $"主代码存在未识别内容：{mainPart[position..]}。");
         }
     }
 
@@ -814,7 +910,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
             if (option is null)
             {
-                throw new InvalidOperationException($"无法识别选项代码：{module.Key} x {module.Value}。");
+                throw new InvalidOperationException(IsEnglish
+                    ? $"Unrecognized option code: {module.Key} x {module.Value}."
+                    : $"无法识别选项代码：{module.Key} x {module.Value}。");
             }
 
             option.SetSelectedSilently(true);
@@ -825,7 +923,11 @@ public sealed class ConfiguratorViewModel : ObservableObject
     {
         if (!CanExport())
         {
-            MessageBox.Show("请先完成在线校验，并确认组合代码正确后再导出。", "REX615", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(
+                IsEnglish ? "Run online validation and confirm the combination code is correct before exporting." : "请先完成在线校验，并确认组合代码正确后再导出。",
+                "REX615",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
             return;
         }
 
@@ -841,9 +943,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
             FileName = $"{SanitizeFileName(FullCode)}.{extension}",
             Filter = format switch
             {
-                "Word" => "Word 文档 (*.docx)|*.docx",
-                "Excel" => "Excel 工作簿 (*.xlsx)|*.xlsx",
-                _ => "PDF 文件 (*.pdf)|*.pdf"
+                "Word" => IsEnglish ? "Word document (*.docx)|*.docx" : "Word 文档 (*.docx)|*.docx",
+                "Excel" => IsEnglish ? "Excel workbook (*.xlsx)|*.xlsx" : "Excel 工作簿 (*.xlsx)|*.xlsx",
+                _ => IsEnglish ? "PDF file (*.pdf)|*.pdf" : "PDF 文件 (*.pdf)|*.pdf"
             }
         };
 
@@ -868,11 +970,11 @@ public sealed class ConfiguratorViewModel : ObservableObject
                     break;
             }
 
-            MessageBox.Show("导出完成。", "REX615", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(IsEnglish ? "Export completed." : "导出完成。", "REX615", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"导出失败：{ex.Message}", "REX615", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(IsEnglish ? $"Export failed: {ex.Message}" : $"导出失败：{ex.Message}", "REX615", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -904,7 +1006,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             .OrderBy(group => group.Group.IsMainCode ? group.Group.SortOrder : group.Group.SortOrder + 1000)
             .SelectMany(group => group.Options
                 .Where(option => option.IsSelected)
-                .Select(option => new SelectedOptionSummary(group.Name, option.Id, option.DisplayDescription)));
+                .Select(option => new SelectedOptionSummary(group.DisplayName, option.Id, option.DisplayDescription)));
 
     private IReadOnlyList<ExportAppFunctionSummary> BuildSelectedAppFunctionSummaries()
     {
@@ -948,18 +1050,18 @@ public sealed class ConfiguratorViewModel : ObservableObject
     private static bool IsAppPackageId(string id) =>
         Regex.IsMatch(id, @"^(APP\d+|ADD\d+)$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
-    private static IEnumerable<IoSummaryItemViewModel> BuildIoSummary(IEnumerable<RuleOption> selectedOptions)
+    private IEnumerable<IoSummaryItemViewModel> BuildIoSummary(IEnumerable<RuleOption> selectedOptions)
     {
         var selected = selectedOptions.ToList();
         var communication = selected.FirstOrDefault(option => option.GroupName.Equals("通讯模块", StringComparison.OrdinalIgnoreCase));
         if (communication is not null)
         {
-            var description = string.IsNullOrWhiteSpace(communication.ShortDescription)
-                ? communication.Description
-                : communication.ShortDescription;
+            var description = IsEnglish
+                ? FirstNonEmpty(communication.EnglishShortDescription, communication.ShortDescription, communication.EnglishDescription, communication.Description)
+                : FirstNonEmpty(communication.ShortDescription, communication.Description);
             if (!string.IsNullOrWhiteSpace(description))
             {
-                yield return new IoSummaryItemViewModel("通讯模块", description);
+                yield return new IoSummaryItemViewModel(IsEnglish ? "Communication module" : "通讯模块", description);
             }
         }
 
@@ -996,36 +1098,38 @@ public sealed class ConfiguratorViewModel : ObservableObject
         var selected = BuildSelectedSummaries().ToList();
         var lines = new List<string>
         {
-            "ABB REX615 保护和控制继电器装置描述",
-            $"组合代码：{FullCode}",
-            $"状态：{Status}",
+            IsEnglish ? "ABB REX615 protection and control relay device description" : "ABB REX615 保护和控制继电器装置描述",
+            IsEnglish ? $"Combination code: {FullCode}" : $"组合代码：{FullCode}",
+            IsEnglish ? $"Status: {Status}" : $"状态：{Status}",
             ""
         };
 
         if (HasOnlineOrderingNumber)
         {
-            lines.Insert(2, $"订货号：{OnlineOrderingNumber}");
+            lines.Insert(2, IsEnglish ? $"Ordering number: {OnlineOrderingNumber}" : $"订货号：{OnlineOrderingNumber}");
         }
 
         foreach (var group in selected.GroupBy(selection => selection.GroupName))
         {
-            lines.Add($"{group.Key}：{string.Join("；", group.Select(selection => $"{selection.Id}({selection.Description})"))}");
+            lines.Add(IsEnglish
+                ? $"{group.Key}: {string.Join("; ", group.Select(selection => $"{selection.Id} ({selection.Description})"))}"
+                : $"{group.Key}：{string.Join("；", group.Select(selection => $"{selection.Id}({selection.Description})"))}");
         }
 
         lines.Add("");
-        lines.Add("I/O 摘要：");
+        lines.Add(IsEnglish ? "I/O summary:" : "I/O 摘要：");
         lines.Add(IoSummaryItems.Count == 0
-            ? "无"
-            : string.Join("；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
+            ? IsEnglish ? "None" : "无"
+            : string.Join(IsEnglish ? "; " : "；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
 
         lines.Add("");
-        lines.Add("槽位配置：");
+        lines.Add(IsEnglish ? "Slot allocation:" : "槽位配置：");
         lines.AddRange(Slots.Select(slot => $"{slot.SlotId} {slot.Code} - {slot.Description}"));
 
         if (Messages.Count > 0)
         {
             lines.Add("");
-            lines.Add("校验提示：");
+            lines.Add(IsEnglish ? "Validation messages:" : "校验提示：");
             lines.AddRange(Messages.Select(message => message.Text));
         }
 
@@ -1176,7 +1280,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
             @"^(?<group>.+?)\s*/\s*(?<option>.+?)\s+不满足条件：(?<condition>.+)$");
         if (invalidOptionMatch.Success)
         {
-            return $"{FormatOptionLabel(invalidOptionMatch.Groups["group"].Value, invalidOptionMatch.Groups["option"].Value)} 当前不能选择，原因：{FormatConditionText(invalidOptionMatch.Groups["condition"].Value)}。";
+            return IsEnglish
+                ? $"{FormatOptionLabel(invalidOptionMatch.Groups["group"].Value, invalidOptionMatch.Groups["option"].Value)} cannot be selected now. Reason: {FormatConditionText(invalidOptionMatch.Groups["condition"].Value)}."
+                : $"{FormatOptionLabel(invalidOptionMatch.Groups["group"].Value, invalidOptionMatch.Groups["option"].Value)} 当前不能选择，原因：{FormatConditionText(invalidOptionMatch.Groups["condition"].Value)}。";
         }
 
         var requiredOptionMatch = Regex.Match(
@@ -1184,7 +1290,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
             @"^(?<group>.+?)\s*/\s*(?<option>.+?)\s+要求选择：(?<condition>.+)$");
         if (requiredOptionMatch.Success)
         {
-            return $"{FormatOptionLabel(requiredOptionMatch.Groups["group"].Value, requiredOptionMatch.Groups["option"].Value)} 还需要满足：{FormatConditionText(requiredOptionMatch.Groups["condition"].Value)}。";
+            return IsEnglish
+                ? $"{FormatOptionLabel(requiredOptionMatch.Groups["group"].Value, requiredOptionMatch.Groups["option"].Value)} also requires: {FormatConditionText(requiredOptionMatch.Groups["condition"].Value)}."
+                : $"{FormatOptionLabel(requiredOptionMatch.Groups["group"].Value, requiredOptionMatch.Groups["option"].Value)} 还需要满足：{FormatConditionText(requiredOptionMatch.Groups["condition"].Value)}。";
         }
 
         var unsuitableMatch = Regex.Match(
@@ -1194,25 +1302,33 @@ public sealed class ConfiguratorViewModel : ObservableObject
         {
             var optionId = unsuitableMatch.Groups["option"].Value.Trim();
             var housingId = unsuitableMatch.Groups["housing"].Value.Trim();
-            return $"{FormatOptionLabel(FindGroupNameForOption(optionId), optionId)} 不能安装在 {FormatOptionLabel("机箱", housingId)}。";
+            return IsEnglish
+                ? $"{FormatOptionLabel(FindGroupNameForOption(optionId), optionId)} cannot be installed in {FormatOptionLabel("机箱", housingId)}."
+                : $"{FormatOptionLabel(FindGroupNameForOption(optionId), optionId)} 不能安装在 {FormatOptionLabel("机箱", housingId)}。";
         }
 
         var cannotFitMatch = Regex.Match(text, @"无法装入\s*(?<housing>[^\s]+)\s*机箱槽位");
         if (cannotFitMatch.Success)
         {
-            return $"当前已选模块无法全部安装到 {FormatOptionLabel("机箱", cannotFitMatch.Groups["housing"].Value)} 的槽位中，请调整机箱或减少/更换模块。";
+            return IsEnglish
+                ? $"The selected modules cannot all fit in {FormatOptionLabel("机箱", cannotFitMatch.Groups["housing"].Value)}. Change the housing or reduce/replace modules."
+                : $"当前已选模块无法全部安装到 {FormatOptionLabel("机箱", cannotFitMatch.Groups["housing"].Value)} 的槽位中，请调整机箱或减少/更换模块。";
         }
 
         var analogRequirementMatch = Regex.Match(text, @"^(?<housing>[^\s]+)\s*机箱要求在\s*(?<slots>[^\s]+)\s*至少安装一个模拟量模块。");
         if (analogRequirementMatch.Success)
         {
-            return $"{FormatOptionLabel("机箱", analogRequirementMatch.Groups["housing"].Value)} 要求 {analogRequirementMatch.Groups["slots"].Value} 槽位中至少安装 1 个模拟量模块。";
+            return IsEnglish
+                ? $"{FormatOptionLabel("机箱", analogRequirementMatch.Groups["housing"].Value)} requires at least one analog module in slot(s) {analogRequirementMatch.Groups["slots"].Value}."
+                : $"{FormatOptionLabel("机箱", analogRequirementMatch.Groups["housing"].Value)} 要求 {analogRequirementMatch.Groups["slots"].Value} 槽位中至少安装 1 个模拟量模块。";
         }
 
         var slotRequirementMatch = Regex.Match(text, @"^(?<housing>[^\s]+)\s*机箱要求\s*(?<slot>[^\s]+)\s*安装：(?<modules>.+)。?");
         if (slotRequirementMatch.Success)
         {
-            return $"{FormatOptionLabel("机箱", slotRequirementMatch.Groups["housing"].Value)} 的 {slotRequirementMatch.Groups["slot"].Value} 槽位需要安装以下模块之一：{FormatModuleList(slotRequirementMatch.Groups["modules"].Value)}。";
+            return IsEnglish
+                ? $"{FormatOptionLabel("机箱", slotRequirementMatch.Groups["housing"].Value)} requires one of these modules in slot {slotRequirementMatch.Groups["slot"].Value}: {FormatModuleList(slotRequirementMatch.Groups["modules"].Value)}."
+                : $"{FormatOptionLabel("机箱", slotRequirementMatch.Groups["housing"].Value)} 的 {slotRequirementMatch.Groups["slot"].Value} 槽位需要安装以下模块之一：{FormatModuleList(slotRequirementMatch.Groups["modules"].Value)}。";
         }
 
         return text;
@@ -1225,7 +1341,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             .Select(FormatCondition)
             .Where(part => !string.IsNullOrWhiteSpace(part));
 
-        return string.Join("；", parts);
+        return string.Join(IsEnglish ? "; " : "；", parts);
     }
 
     private string FormatCondition(string condition)
@@ -1256,19 +1372,23 @@ public sealed class ConfiguratorViewModel : ObservableObject
         var clauses = new List<string>();
         if (positives.Length > 0)
         {
-            clauses.Add($"需要选择 {groupName}：{FormatOptionList(groupName, positives)}");
+            clauses.Add(IsEnglish
+                ? $"Select {GroupDisplayName(groupName)}: {FormatOptionList(groupName, positives)}"
+                : $"需要选择 {groupName}：{FormatOptionList(groupName, positives)}");
         }
 
         if (negatives.Length > 0)
         {
-            clauses.Add($"不能同时选择 {groupName}：{FormatOptionList(groupName, negatives)}");
+            clauses.Add(IsEnglish
+                ? $"Do not select {GroupDisplayName(groupName)} at the same time: {FormatOptionList(groupName, negatives)}"
+                : $"不能同时选择 {groupName}：{FormatOptionList(groupName, negatives)}");
         }
 
-        return string.Join("；", clauses);
+        return string.Join(IsEnglish ? "; " : "；", clauses);
     }
 
     private string FormatOptionList(string groupName, IEnumerable<string> optionIds) =>
-        string.Join("、", optionIds.Select(optionId => FormatOptionLabel(groupName, optionId)));
+        string.Join(IsEnglish ? ", " : "、", optionIds.Select(optionId => FormatOptionLabel(groupName, optionId)));
 
     private string FormatModuleList(string modules)
     {
@@ -1282,10 +1402,12 @@ public sealed class ConfiguratorViewModel : ObservableObject
                 continue;
             }
 
-            labels.Add($"{module}（{string.Join(" / ", moduleOptions.Select(option => option.Id))}）");
+            labels.Add(IsEnglish
+                ? $"{module} ({string.Join(" / ", moduleOptions.Select(option => option.Id))})"
+                : $"{module}（{string.Join(" / ", moduleOptions.Select(option => option.Id))}）");
         }
 
-        return labels.Count == 0 ? modules.Trim().TrimEnd('。') : string.Join("、", labels);
+        return labels.Count == 0 ? modules.Trim().TrimEnd('。') : string.Join(IsEnglish ? ", " : "、", labels);
     }
 
     private string FormatOptionLabel(string? groupName, string optionId)
@@ -1301,13 +1423,13 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return normalizedOptionId;
         }
 
-        var description = string.IsNullOrWhiteSpace(option.ShortDescription)
-            ? option.Description
-            : option.ShortDescription;
+        var description = IsEnglish
+            ? FirstNonEmpty(option.EnglishShortDescription, option.ShortDescription, option.EnglishDescription, option.Description)
+            : FirstNonEmpty(option.ShortDescription, option.Description);
 
         return string.IsNullOrWhiteSpace(description)
             ? option.Id
-            : $"{option.Id}（{description}）";
+            : IsEnglish ? $"{option.Id} ({description})" : $"{option.Id}（{description}）";
     }
 
     private void AddConditionTargets(ICollection<ValidationMessageTargetViewModel> targets, string conditionText)
@@ -1365,7 +1487,19 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
         targets.Add(new ValidationMessageTargetViewModel(
             normalizedGroupName,
-            string.IsNullOrWhiteSpace(optionId) ? null : optionId));
+            string.IsNullOrWhiteSpace(optionId) ? null : optionId,
+            GroupDisplayName(normalizedGroupName)));
+    }
+
+    private string GroupDisplayName(string groupName)
+    {
+        var group = FindGroup(groupName);
+        if (group is null)
+        {
+            return groupName;
+        }
+
+        return IsEnglish && !string.IsNullOrWhiteSpace(group.EnglishName) ? group.EnglishName : group.Name;
     }
 
     private string? FindGroupNameForOption(string optionId) =>
@@ -1402,6 +1536,9 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
         return value.Trim().TrimStart('!').Trim().TrimEnd('。', '，', ',', ';', '；');
     }
+
+    private static string FirstNonEmpty(params string?[] values) =>
+        values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "";
 
     private bool IsOptionAvailable(
         RuleOption option,

@@ -45,6 +45,66 @@ public sealed class OnlineValidationService
         return ParseResponse(responseBody, combinationCode);
     }
 
+    public static string LocalizeMessage(string message, bool english)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            return "";
+        }
+
+        var value = message.Trim();
+        if (!english)
+        {
+            return value switch
+            {
+                "Not checked" => "未校验",
+                "Checking online..." => "在线校验中...",
+                "Online check passed" => "在线校验通过",
+                "Combination code is invalid." => "组合代码错误",
+                "Order code is invalid, or no ordering number was returned." => "订货号错误，或未返回订货号。",
+                "Combination code is invalid, or no ordering number was returned." => "组合代码错误，或未返回订货号。",
+                "Reverse lookup in progress..." => "订货号反查中...",
+                "Reverse lookup passed" => "订货号反查通过",
+                "Reverse lookup failed" => "订货号反查失败",
+                "Online conversion passed." => "在线转换通过。",
+                "Online conversion returned no content." => "在线转换未返回内容。",
+                "Online conversion did not return a REX615 combination code." => "在线转换未返回 REX615 组合代码。",
+                "Online check returned no product information." => "在线校验未返回产品信息。",
+                _ when value.StartsWith("Online check failed:", StringComparison.OrdinalIgnoreCase) =>
+                    "在线校验失败：" + value["Online check failed:".Length..].Trim(),
+                _ when value.StartsWith("Order number reverse lookup failed:", StringComparison.OrdinalIgnoreCase) =>
+                    "订货号反查失败：" + value["Order number reverse lookup failed:".Length..].Trim(),
+                _ when value.StartsWith("Online conversion failed:", StringComparison.OrdinalIgnoreCase) =>
+                    "在线转换失败：" + value["Online conversion failed:".Length..].Trim(),
+                _ => value
+            };
+        }
+
+        return value switch
+        {
+            "未校验" => "Not checked",
+            "在线校验中..." => "Checking online...",
+            "在线校验通过。" or "在线校验通过" => "Online check passed",
+            "组合代码错误" => "Combination code is invalid.",
+            "订货号错误，或未返回订货号。" => "Order code is invalid, or no ordering number was returned.",
+            "组合代码错误，或未返回订货号。" => "Combination code is invalid, or no ordering number was returned.",
+            "订货号反查中..." => "Reverse lookup in progress...",
+            "订货号反查通过" => "Reverse lookup passed",
+            "订货号反查失败" => "Reverse lookup failed",
+            "在线转换通过。" => "Online conversion passed.",
+            "在线转换未返回内容。" => "Online conversion returned no content.",
+            "在线转换未返回 REX615 组合代码。" => "Online conversion did not return a REX615 combination code.",
+            "在线校验未返回产品信息。" => "Online check returned no product information.",
+            _ when value.StartsWith("在线校验失败：", StringComparison.OrdinalIgnoreCase) =>
+                "Online check failed: " + value["在线校验失败：".Length..].Trim(),
+            _ when value.StartsWith("订货号反查失败：", StringComparison.OrdinalIgnoreCase) =>
+                "Order number reverse lookup failed: " + value["订货号反查失败：".Length..].Trim(),
+            _ when value.StartsWith("在线转换失败：", StringComparison.OrdinalIgnoreCase) =>
+                "Online conversion failed: " + value["在线转换失败：".Length..].Trim(),
+            _ => value
+        };
+    }
+
     public async Task<LegacyOnlineConversionResult> ConvertLegacyCodeAsync(
         string orderingCode,
         CancellationToken cancellationToken = default)
@@ -176,14 +236,13 @@ public sealed class OnlineValidationService
     private static string NormalizeOrderingNumber(string orderingNumber, string version)
     {
         var value = orderingNumber.Trim();
-        if (value.EndsWith("_PCL1", StringComparison.OrdinalIgnoreCase) ||
-            value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase))
+        if (HasPclSuffix(value))
         {
             return value;
         }
 
         var normalizedVersion = string.IsNullOrWhiteSpace(version) ? "PCL1" : version.Trim().ToUpperInvariant();
-        if (normalizedVersion is not "PCL1" and not "PCL2")
+        if (!IsKnownPclVersion(normalizedVersion))
         {
             normalizedVersion = "PCL1";
         }
@@ -199,24 +258,35 @@ public sealed class OnlineValidationService
         }
 
         var value = orderingNumber.Trim();
-        if (value.EndsWith("_PCL1", StringComparison.OrdinalIgnoreCase) ||
-            value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase))
+        if (HasPclSuffix(value))
         {
             return value;
         }
 
         var version = InferPclVersion(versionSource);
-        return $"{value}_{version}";
+        return string.IsNullOrWhiteSpace(version) ? value : $"{value}_{version}";
     }
 
-    private static string InferPclVersion(string? versionSource)
+    private static string? InferPclVersion(string? versionSource)
     {
         var source = versionSource ?? "";
-        if (source.Contains("PCL2", StringComparison.OrdinalIgnoreCase))
+        foreach (var version in new[] { "PCL6", "PCL5", "PCL2", "PCL1" })
         {
-            return "PCL2";
+            if (source.Contains(version, StringComparison.OrdinalIgnoreCase))
+            {
+                return version;
+            }
         }
 
-        return "PCL1";
+        return null;
     }
+
+    private static bool HasPclSuffix(string value) =>
+        value.EndsWith("_PCL1", StringComparison.OrdinalIgnoreCase) ||
+        value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase) ||
+        value.EndsWith("_PCL5", StringComparison.OrdinalIgnoreCase) ||
+        value.EndsWith("_PCL6", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsKnownPclVersion(string value) =>
+        value is "PCL1" or "PCL2" or "PCL5" or "PCL6";
 }

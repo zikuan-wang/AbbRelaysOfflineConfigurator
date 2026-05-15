@@ -13,6 +13,7 @@
         MinWidth="1120"
         MinHeight="740"
         Icon="Assets/abb-relays.ico"
+        Style="{StaticResource MaterialDesignWindow}"
         Background="{DynamicResource WindowBackgroundBrush}"
         FontFamily="Segoe UI, Microsoft YaHei UI"
         FontSize="13">
@@ -31,15 +32,20 @@
         <SolidColorBrush x:Key="SlotHeaderBrush" Color="#E8EDF3" />
         <SolidColorBrush x:Key="IoChipBackgroundBrush" Color="#FFFFFF" />
         <SolidColorBrush x:Key="ChipBorderBrush" Color="#D8E0EA" />
-        <SolidColorBrush x:Key="AccentBrush" Color="#1D4ED8" />
-        <SolidColorBrush x:Key="AccentSoftBrush" Color="#EAF2FF" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#018B8D" />
+        <SolidColorBrush x:Key="AccentSoftBrush" Color="#E6F4F4" />
+        <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="#018B8D" />
+        <SolidColorBrush x:Key="AppBarSearchBackgroundBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="AppBarForegroundBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="NavigationTextBrush" Color="#111827" />
+        <SolidColorBrush x:Key="NavigationIconBrush" Color="#475569" />
         <SolidColorBrush x:Key="TextBrush" Color="#101828" />
         <SolidColorBrush x:Key="MutedBrush" Color="#64748B" />
         <SolidColorBrush x:Key="PanelBorderBrush" Color="#D8E0EA" />
-        <SolidColorBrush x:Key="DangerBrush" Color="#B42318" />
-        <SolidColorBrush x:Key="DangerSoftBrush" Color="#FEF2F2" />
-        <SolidColorBrush x:Key="SuccessBrush" Color="#047857" />
-        <SolidColorBrush x:Key="SuccessSoftBrush" Color="#ECFDF5" />
+        <SolidColorBrush x:Key="DangerBrush" Color="#D34947" />
+        <SolidColorBrush x:Key="DangerSoftBrush" Color="#FDEEEE" />
+        <SolidColorBrush x:Key="SuccessBrush" Color="#6ECC54" />
+        <SolidColorBrush x:Key="SuccessSoftBrush" Color="#F1FBEE" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <Style x:Key="PanelBorderStyle" TargetType="Border">
@@ -137,9 +143,19 @@
             <Setter Property="Padding" Value="10,5" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="MinHeight" Value="30" />
-            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
-            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
         </Style>
 
         <Style x:Key="TargetChipButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
@@ -164,6 +180,52 @@
             <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
 
+        <Style x:Key="AppBarIconButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource AppBarForegroundBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="AppBarTextButtonStyle" TargetType="Button" BasedOn="{StaticResource AppBarIconButtonStyle}">
+            <Setter Property="MinWidth" Value="72" />
+            <Setter Property="Padding" Value="10,6" />
+        </Style>
+
+        <Style x:Key="NavigationMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="12,9" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style x:Key="DrawerNavigationButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Height" Value="48" />
+            <Setter Property="MinHeight" Value="48" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="Margin" Value="4,1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource NavigationTextBrush}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style x:Key="DrawerNavigationTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource NavigationTextBrush}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="LineHeight" Value="20" />
+        </Style>
+
         <Style x:Key="ToolbarComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFilledComboBox}">
             <Setter Property="Width" Value="88" />
             <Setter Property="Height" Value="32" />
@@ -186,95 +248,682 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <materialDesign:DrawerHost x:Name="RootDrawerHost">
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel Width="328" Background="{DynamicResource CardBackgroundBrush}">
+                <materialDesign:ColorZone DockPanel.Dock="Top"
+                                          Mode="PrimaryMid"
+                                          Background="{DynamicResource AppBarBackgroundBrush}"
+                                          Foreground="{DynamicResource AppBarForegroundBrush}"
+                                          Padding="22,20">
+                    <StackPanel>
+                        <TextBlock x:Name="DrawerTitleTextBlock"
+                                   Text="ABB 继保离线选型工具"
+                                   FontSize="17"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock x:Name="DrawerSubtitleTextBlock"
+                                   Text="页面导航"
+                                   FontSize="12"
+                                   Opacity="0.78"
+                                   Margin="0,6,0,0"
+                                   Visibility="Collapsed" />
+                    </StackPanel>
+                </materialDesign:ColorZone>
 
-        <Border Grid.Row="0"
-                Background="{DynamicResource HeaderBackgroundBrush}"
-                BorderBrush="{DynamicResource HeaderBorderBrush}"
-                BorderThickness="0,0,0,1">
-            <Grid Margin="18,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Border Width="6"
-                        Background="{StaticResource AccentBrush}"
-                        Margin="0,0,14,0" />
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="ABB 继保离线选型工具"
-                               Foreground="{StaticResource TextBrush}"
-                               FontSize="20"
-                               FontWeight="SemiBold" />
-                    <TextBlock Text="组合代码生成 / 互斥校验 / 槽位分配"
-                               Foreground="{StaticResource MutedBrush}"
-                               FontSize="12"
-                               Margin="0,2,0,0" />
-                </StackPanel>
-                <StackPanel Grid.Column="2"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <CheckBox IsChecked="{Binding UseFullDescription, Mode=TwoWay}"
-                              VerticalAlignment="Center"
-                              Margin="0,0,12,0"
-                              FontSize="13"
-                              Foreground="{DynamicResource TextBrush}"
-                              Content="显示完整描述" />
-                    <Button Click="ConfiguratorPageButton_OnClick"
-                            Style="{StaticResource HeaderNavButtonStyle}"
-                            ToolTip="REX615 选型">
+                <StackPanel Margin="8,12">
+                    <Button Click="HomePageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="TuneVariant" Width="18" Height="18" />
-                            <TextBlock Text="REX615 选型" Margin="6,0,0,0" />
+                            <materialDesign:PackIcon Kind="HomeOutline" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavHomeTextBlock" Text="首页" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Click="ConfiguratorPageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="TuneVariant" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavRex615TextBlock" Text="REX615 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Click="Rex640SelectionPageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Memory" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavRex640TextBlock" Text="REX640 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
                         </StackPanel>
                     </Button>
                     <Button Click="Rio600SelectionPageButton_OnClick"
-                            Style="{StaticResource HeaderNavButtonStyle}"
-                            ToolTip="RIO600 选型">
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewModuleOutline" Width="18" Height="18" />
-                            <TextBlock Text="RIO600 选型" Margin="6,0,0,0" />
+                            <materialDesign:PackIcon Kind="ViewModuleOutline" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavRio600TextBlock" Text="RIO600 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
                         </StackPanel>
                     </Button>
-                    <Button Click="CnLegacySelectionPageButton_OnClick"
-                            Style="{StaticResource HeaderNavButtonStyle}"
-                            ToolTip="615/620 CN 装置选型">
+                    <Button Click="Ssc600SelectionPageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FormatListChecks" Width="18" Height="18" />
-                            <TextBlock Text="615/620 CN 选型" Margin="6,0,0,0" />
+                            <materialDesign:PackIcon Kind="ServerNetwork" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavSsc600TextBlock" Text="SSC600 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Click="Rex600SelectionPageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Memory" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavRex600TextBlock" Text="REX600 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
+                        </StackPanel>
+                    </Button>
+                    <Separator Margin="0,10" />
+                    <Button Click="CnLegacySelectionPageButton_OnClick"
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListChecks" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavCnLegacyTextBlock" Text="615/620 CN 选型" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
                         </StackPanel>
                     </Button>
                     <Button Click="LegacyConversionPageButton_OnClick"
-                            Style="{StaticResource HeaderNavButtonStyle}"
-                            ToolTip="615/620 转换">
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="SwapHorizontal" Width="18" Height="18" />
-                            <TextBlock Text="615/620 转换" Margin="6,0,0,0" />
+                            <materialDesign:PackIcon Kind="SwapHorizontal" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavLegacyConversionTextBlock" Text="615/620 转换" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
                         </StackPanel>
                     </Button>
+                    <Separator Margin="0,10" />
                     <Button Click="AboutLicensePageButton_OnClick"
-                            Style="{StaticResource HeaderNavButtonStyle}"
-                            ToolTip="授权管理与关于本工具">
+                            Style="{StaticResource DrawerNavigationButtonStyle}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="KeyVariant" Width="18" Height="18" />
-                            <TextBlock Text="授权/关于" Margin="6,0,0,0" />
+                            <materialDesign:PackIcon Kind="KeyVariant" Width="22" Height="22" Foreground="{DynamicResource NavigationIconBrush}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="NavAboutTextBlock" Text="授权 / 关于 / 更新" Style="{StaticResource DrawerNavigationTextStyle}" Margin="16,0,0,0" />
                         </StackPanel>
                     </Button>
                 </StackPanel>
-            </Grid>
-        </Border>
+            </DockPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+
+        <DockPanel LastChildFill="True">
+            <materialDesign:ColorZone DockPanel.Dock="Top"
+                                      Mode="PrimaryMid"
+                                      Background="{DynamicResource AppBarBackgroundBrush}"
+                                      Foreground="{DynamicResource AppBarForegroundBrush}"
+                                      Padding="12,0"
+                                      Height="64"
+                                      materialDesign:ElevationAssist.Elevation="Dp4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Click="NavigationMenuButton_OnClick"
+                            Style="{StaticResource MaterialDesignToolButton}"
+                            Foreground="{DynamicResource AppBarForegroundBrush}"
+                            x:Name="NavigationMenuButton"
+                            ToolTip="页面导航"
+                            VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Menu" Width="26" Height="26" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                    </Button>
+
+                    <TextBlock x:Name="TopBarTitleTextBlock"
+                               Grid.Column="1"
+                               Text="ABB 继保离线选型工具"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               Foreground="{DynamicResource AppBarForegroundBrush}"
+                               VerticalAlignment="Center"
+                               Margin="16,0,28,0" />
+
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"
+                                                 Foreground="{DynamicResource AppBarForegroundBrush}"
+                                                 x:Name="SettingsPopupBox"
+                                                 ToolTip="设置">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PackIcon Kind="DotsVertical" Width="24" Height="24" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                            </materialDesign:PopupBox.ToggleContent>
+                            <StackPanel Width="340" Margin="16">
+                                <TextBlock x:Name="SettingsTitleTextBlock"
+                                           Text="界面设置"
+                                           FontSize="16"
+                                           FontWeight="Medium" />
+                                <CheckBox x:Name="UseFullDescriptionCheckBox"
+                                          IsChecked="{Binding UseFullDescription, Mode=TwoWay}"
+                                          Content="显示完整描述"
+                                          Margin="0,14,0,12" />
+                                <TextBlock x:Name="DisplayLanguageLabelTextBlock"
+                                           Text="显示语言"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Opacity="0.72"
+                                           Margin="0,0,0,8" />
+                                <ComboBox x:Name="DisplayLanguageComboBox"
+                                          SelectedValuePath="Tag"
+                                          Style="{StaticResource MaterialDesignFilledComboBox}"
+                                          materialDesign:HintAssist.Hint="Language"
+                                          Margin="0,0,0,14"
+                                          SelectionChanged="DisplayLanguageComboBox_OnSelectionChanged">
+                                    <ComboBoxItem Tag="zh-CN" Content="中文" />
+                                    <ComboBoxItem Tag="en-US" Content="English" />
+                                </ComboBox>
+                                <TextBlock x:Name="ThemeColorLabelTextBlock"
+                                           Text="主题颜色"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Opacity="0.72"
+                                           Margin="0,0,0,8" />
+                                <UniformGrid Columns="1">
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#6ECC54"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#6ECC54" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeLimeGreenTextBlock" Text="莱姆绿" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#D34947"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#D34947" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeTitianRedTextBlock" Text="提香红" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#018B8D"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#018B8D" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeMarsGreenTextBlock" Text="马尔斯绿" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#002FA7"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#002FA7" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeKleinBlueTextBlock" Text="克莱因蓝" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#470125"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#470125" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeBurgundyTextBlock" Text="勃艮第" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#F9D46C"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#F9D46C" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeSchonbrunnYellowTextBlock" Text="申布伦黄" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#71E2D1"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#71E2D1" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeTiffanyBlueTextBlock" Text="蒂芙尼蓝" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#C8161D"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#C8161D" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeChineseRedTextBlock" Text="中国红" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#492D22"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#492D22" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeVanDyckBrownTextBlock" Text="凡戴克棕" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#EB5C20"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#EB5C20" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemeHermesOrangeTextBlock" Text="爱马仕橙" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="ThemeColorButton_OnClick"
+                                            Tag="#0D3A69"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                                            Margin="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="14" Height="14" Background="#0D3A69" CornerRadius="7" />
+                                            <TextBlock x:Name="ThemePrussianBlueTextBlock" Text="普鲁士蓝" Margin="8,0,0,0" />
+                                        </StackPanel>
+                                    </Button>
+                                </UniformGrid>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:ColorZone>
+
+            <materialDesign:ColorZone DockPanel.Dock="Bottom"
+                                      Mode="PrimaryDark"
+                                      Background="{DynamicResource AppBarBackgroundBrush}"
+                                      Foreground="{DynamicResource AppBarForegroundBrush}"
+                                      Height="30">
+                <StatusBar Background="Transparent" Foreground="{DynamicResource AppBarForegroundBrush}">
+                    <StatusBarItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CheckCircleOutline" Width="16" Height="16" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                            <TextBlock x:Name="StatusReadyTextBlock" Text="就绪" Margin="6,0,18,0" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                        </StackPanel>
+                    </StatusBarItem>
+                    <Separator />
+                    <StatusBarItem>
+                        <TextBlock x:Name="StatusSummaryTextBlock" Text="本地离线选型 / 在线校验 / 授权管理" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                    </StatusBarItem>
+                    <StatusBarItem HorizontalAlignment="Right">
+                        <TextBlock x:Name="StatusVersionTextBlock" Foreground="{DynamicResource AppBarForegroundBrush}" />
+                    </StatusBarItem>
+                </StatusBar>
+            </materialDesign:ColorZone>
 
         <TabControl x:Name="MainTabControl"
-                    Grid.Row="1"
                     Margin="10"
                     Background="Transparent"
                     BorderThickness="0"
                     SelectedIndex="0"
+                    SelectionChanged="MainTabControl_OnSelectionChanged"
                     Style="{StaticResource ContentOnlyTabControlStyle}">
+            <TabItem x:Name="HomeTabItem" Header="ABB 继保离线选型工具">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="14" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Background="{DynamicResource CardBackgroundBrush}"
+                                BorderBrush="{DynamicResource PanelBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="14"
+                                Padding="22">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="360" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <Border Background="{DynamicResource AccentSoftBrush}"
+                                            CornerRadius="16"
+                                            Padding="12,7"
+                                            HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="ShieldCheckOutline"
+                                                                     Width="18"
+                                                                     Height="18"
+                                                                     Foreground="{DynamicResource AccentBrush}" />
+                                            <TextBlock Text="ABB Relays"
+                                                       Margin="7,0,0,0"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrush}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <TextBlock Text="{Binding Home.HeroTitle}"
+                                               FontSize="28"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextBrush}"
+                                               Margin="0,16,0,0" />
+                                    <TextBlock Text="{Binding Home.HeroSubtitle}"
+                                               FontSize="14"
+                                               LineHeight="22"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource MutedBrush}"
+                                               Margin="0,8,28,0" />
+                                </StackPanel>
+
+                                <Border Grid.Column="2"
+                                        x:Name="HomeLicenseStatusBorder"
+                                        Background="{DynamicResource SuccessSoftBrush}"
+                                        BorderBrush="{DynamicResource SuccessBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="12"
+                                        Padding="16">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="KeyVariant"
+                                                                     Width="22"
+                                                                     Height="22"
+                                                                     Foreground="{DynamicResource AccentBrush}" />
+                                            <TextBlock Text="{Binding Home.LicenseTitle}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       Margin="8,0,0,0" />
+                                        </StackPanel>
+                                        <TextBlock x:Name="HomeLicenseStatusTextBlock"
+                                                   FontSize="18"
+                                                   FontWeight="SemiBold"
+                                                   Margin="0,12,0,0"
+                                                   Foreground="{DynamicResource SuccessBrush}" />
+                                        <TextBlock x:Name="HomeLicenseDetailTextBlock"
+                                                   Margin="0,8,0,0"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="20"
+                                                   Foreground="{DynamicResource MutedBrush}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.45*" />
+                                <ColumnDefinition Width="14" />
+                                <ColumnDefinition Width="0.95*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource PanelBorderStyle}"
+                                    Padding="18"
+                                    CornerRadius="14">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Home.ProductRecommendationTitle}"
+                                                       FontSize="20"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource TextBrush}" />
+                                            <TextBlock Text="{Binding Home.ProductRecommendationDescription}"
+                                                       TextWrapping="Wrap"
+                                                       LineHeight="21"
+                                                       Foreground="{DynamicResource MutedBrush}"
+                                                       Margin="0,5,20,0" />
+                                        </StackPanel>
+                                        <Border Grid.Column="1"
+                                                Background="{DynamicResource AccentSoftBrush}"
+                                                CornerRadius="12"
+                                                Padding="10"
+                                                VerticalAlignment="Top">
+                                            <materialDesign:PackIcon Kind="AutoFix"
+                                                                     Width="24"
+                                                                     Height="24"
+                                                                     Foreground="{DynamicResource AccentBrush}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Grid Margin="0,16,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Home.FunctionSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 materialDesign:HintAssist.Hint="{Binding Home.FunctionInputHint}"
+                                                 MinHeight="42"
+                                                 Padding="10,7"
+                                                 BorderBrush="{DynamicResource ControlBorderBrush}"
+                                                 Background="{DynamicResource FieldBackgroundBrush}"
+                                                 Foreground="{DynamicResource TextBrush}" />
+                                        <Button Grid.Column="1"
+                                                Command="{Binding Home.AddFunctionInputCommand}"
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                MinHeight="42"
+                                                Margin="10,0,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Plus" Width="18" Height="18" />
+                                                <TextBlock Text="{Binding Home.AddText}" Margin="6,0,0,0" />
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding Home.FunctionSuggestions}"
+                                                  Margin="0,10,0,0"
+                                                  Visibility="{Binding Home.HasFunctionSuggestions, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Click="HomeFunctionSuggestion_OnClick"
+                                                        Style="{StaticResource SecondaryButtonStyle}"
+                                                        MaxWidth="340"
+                                                        Margin="0,0,8,8">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding DisplayText}"
+                                                                   FontWeight="SemiBold"
+                                                                   TextWrapping="Wrap" />
+                                                        <TextBlock Text="{Binding ProductText}"
+                                                                   FontSize="11"
+                                                                   Foreground="{DynamicResource MutedBrush}" />
+                                                    </StackPanel>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border Background="{DynamicResource SurfaceBrush}"
+                                            BorderBrush="{DynamicResource PanelBorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            Padding="12"
+                                            Margin="0,4,0,0"
+                                            Visibility="{Binding Home.HasRequestedFunctions, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Home.SelectedFunctionsTitle}"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource TextBrush}" />
+                                                <Button Grid.Column="1"
+                                                        Command="{Binding Home.ClearFunctionRecommendationCommand}"
+                                                        Style="{StaticResource SecondaryButtonStyle}"
+                                                        MinHeight="28"
+                                                        Padding="8,3"
+                                                        Margin="8,0,0,0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon Kind="BackspaceOutline" Width="16" Height="16" />
+                                                        <TextBlock Text="{Binding Home.ClearText}" Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+                                            <ItemsControl ItemsSource="{Binding Home.RequestedFunctions}" Margin="0,10,0,0">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="{DynamicResource CardBackgroundBrush}"
+                                                                BorderBrush="{DynamicResource ChipBorderBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="12"
+                                                                Padding="10,6"
+                                                                Margin="0,0,8,8">
+                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                <TextBlock Text="{Binding CodeWithAnsi}"
+                                                                           FontWeight="SemiBold"
+                                                                           Foreground="{DynamicResource TextBrush}" />
+                                                                <TextBlock Text="{Binding DisplayName}"
+                                                                           Margin="8,0,0,0"
+                                                                           Foreground="{DynamicResource MutedBrush}" />
+                                                                <Button Click="HomeRequestedFunctionRemove_OnClick"
+                                                                        Background="Transparent"
+                                                                        BorderThickness="0"
+                                                                        Padding="4"
+                                                                        Margin="6,0,0,0">
+                                                                    <materialDesign:PackIcon Kind="Close" Width="14" Height="14" />
+                                                                </Button>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <TextBlock Text="{Binding Home.RecommendationSummary}"
+                                               TextWrapping="Wrap"
+                                               LineHeight="21"
+                                               Foreground="{DynamicResource MutedBrush}"
+                                               Margin="0,12,0,0" />
+
+                                    <TextBlock Text="{Binding Home.RecommendationResultTitle}"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextBrush}"
+                                               Margin="0,16,0,8"
+                                               Visibility="{Binding Home.HasProductRecommendations, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                    <ItemsControl ItemsSource="{Binding Home.ProductRecommendations}"
+                                                  Visibility="{Binding Home.HasProductRecommendations, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{DynamicResource CardBackgroundBrush}"
+                                                        BorderBrush="{DynamicResource PanelBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="12"
+                                                        Padding="14"
+                                                        Margin="0,0,0,10">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding ProductName}"
+                                                                       FontSize="17"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="{DynamicResource AccentBrush}" />
+                                                            <TextBlock Text="{Binding Description}"
+                                                                       TextWrapping="Wrap"
+                                                                       Foreground="{DynamicResource TextBrush}"
+                                                                       Margin="0,4,0,0" />
+                                                            <TextBlock Text="{Binding CoverageText}"
+                                                                       TextWrapping="Wrap"
+                                                                       Foreground="{DynamicResource MutedBrush}"
+                                                                       Margin="0,6,0,0" />
+                                                            <TextBlock Text="{Binding ConfigurationText}"
+                                                                       TextWrapping="Wrap"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="{DynamicResource TextBrush}"
+                                                                       Margin="0,6,0,0" />
+                                                        </StackPanel>
+                                                        <Button Grid.Column="1"
+                                                                Click="HomeProductRecommendation_OnClick"
+                                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                                MinHeight="36"
+                                                                Margin="14,0,0,0"
+                                                                VerticalAlignment="Top">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <materialDesign:PackIcon Kind="ArrowRight" Width="18" Height="18" />
+                                                                <TextBlock Text="{Binding ActionText}" Margin="6,0,0,0" />
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+
+                            <StackPanel Grid.Column="2">
+                                <Border Style="{StaticResource PanelBorderStyle}"
+                                        Padding="18"
+                                        CornerRadius="14">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="40"
+                                                    Height="40"
+                                                    Background="{DynamicResource AccentSoftBrush}"
+                                                    CornerRadius="10"
+                                                    Margin="0,0,12,0">
+                                                <materialDesign:PackIcon Kind="InformationOutline"
+                                                                         Width="22"
+                                                                         Height="22"
+                                                                         Foreground="{DynamicResource AccentBrush}"
+                                                                         HorizontalAlignment="Center"
+                                                                         VerticalAlignment="Center" />
+                                            </Border>
+                                            <TextBlock Text="{Binding Home.SoftwareIntroTitle}"
+                                                       FontSize="18"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Home.SoftwareIntroText}"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="22"
+                                                   Foreground="{DynamicResource TextBrush}"
+                                                   Margin="0,14,0,0" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource PanelBorderStyle}"
+                                        Padding="18"
+                                        CornerRadius="14">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Home.CoverageTitle}"
+                                                   FontSize="16"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="{Binding Home.CoverageText}"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="22"
+                                                   Foreground="{DynamicResource MutedBrush}"
+                                                   Margin="0,8,0,0" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource PanelBorderStyle}"
+                                        Padding="18"
+                                        CornerRadius="14">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Home.LocalDataTitle}"
+                                                   FontSize="16"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="{Binding Home.LocalDataText}"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="22"
+                                                   Foreground="{DynamicResource MutedBrush}"
+                                                   Margin="0,8,0,0" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
             <TabItem x:Name="ConfiguratorTabItem" Header="REX615 选型">
         <Grid Margin="0">
             <Grid.ColumnDefinitions>
@@ -348,7 +997,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Name}"
+                                                        <TextBlock Text="{Binding DisplayName}"
                                                                    FontSize="15"
                                                                    FontWeight="SemiBold"
                                                                    Foreground="{StaticResource TextBrush}" />
@@ -419,7 +1068,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Name}"
+                                                        <TextBlock Text="{Binding DisplayName}"
                                                                    FontSize="15"
                                                                    FontWeight="SemiBold"
                                                                    Foreground="{StaticResource TextBrush}" />
@@ -551,7 +1200,7 @@
                                     </StackPanel>
                                 </Button>
                                 <Button Command="{Binding ResetCommand}"
-                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Style="{StaticResource DangerButtonStyle}"
                                         Margin="0,0,8,8">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Restore" Width="18" Height="18" />
@@ -662,7 +1311,7 @@
                                                Visibility="{Binding HasOnlineOrderingNumber, Converter={StaticResource BoolToVisibilityConverter}}" />
                                     <TextBlock Text="{Binding OnlineOrderingNumber}"
                                                FontWeight="SemiBold"
-                                               Foreground="{StaticResource AccentBrush}"
+                                               Foreground="{DynamicResource AccentBrush}"
                                                Margin="0,0,8,0"
                                                Visibility="{Binding HasOnlineOrderingNumber, Converter={StaticResource BoolToVisibilityConverter}}" />
                                     <Button Command="{Binding CopyOrderingNumberCommand}"
@@ -798,10 +1447,10 @@
                                                 <TextBlock Text="{Binding CodeWithAnsi}"
                                                            FontWeight="SemiBold"
                                                            Foreground="{DynamicResource TextBrush}" />
-                                                <TextBlock Text="{Binding ChineseName}"
+                                                <TextBlock Text="{Binding DisplayName}"
                                                            Margin="8,0,0,0"
                                                            Foreground="{DynamicResource MutedBrush}" />
-                                                <TextBlock Text="{Binding EnglishName}"
+                                                <TextBlock Text="{Binding SecondaryName}"
                                                            Margin="8,0,0,0"
                                                            MaxWidth="260"
                                                            TextWrapping="Wrap"
@@ -1075,6 +1724,9 @@
             </ScrollViewer>
         </Grid>
             </TabItem>
+            <TabItem x:Name="Ssc600TabItem" Header="SSC600 选型">
+                <views:Ssc600SelectorView DataContext="{Binding Ssc600Selection}" />
+            </TabItem>
             <TabItem x:Name="Rio600TabItem" Header="RIO600 选型">
                 <views:Rio600SelectorView DataContext="{Binding Rio600Selection}" />
             </TabItem>
@@ -1203,7 +1855,7 @@
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextBrush}"
                                            Margin="0,20,0,8" />
-                                <TextBlock Text="本工具基于本地数据包进行 ABB 继保产品离线选型、互斥校验、槽位分配、I/O 摘要统计、组合代码生成、615/620 CN 选型、旧订货号转换、RIO600 选型，以及在线校验订货号。"
+                                <TextBlock Text="本工具基于本地数据包进行 ABB 继保产品离线选型、互斥校验、槽位分配、I/O 摘要统计、组合代码生成、SSC600/SSC600 SW 订货码生成、615/620 CN 选型、旧订货号转换、RIO600/REX640 选型，以及在线校验订货号。"
                                            TextWrapping="Wrap"
                                            LineHeight="22"
                                            Foreground="{DynamicResource TextBrush}" />
@@ -1267,7 +1919,7 @@
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextBrush}"
                                            Margin="0,18,0,8" />
-                                <TextBlock Text="版权属于 zikuan wang。ABB、REX615、RIO600 及相关产品名称归其权利人所有。本工具仅在本地实现选型辅助和组合代码生成，不复制 ABB 官方在线配置器页面或受版权保护的表现形式。"
+                                <TextBlock Text="版权属于 zikuan wang。ABB、REX615、REX640、SSC600、RIO600 及相关产品名称归其权利人所有。本工具仅在本地实现选型辅助和组合代码生成，不复制 ABB 官方在线配置器页面或受版权保护的表现形式。"
                                            TextWrapping="Wrap"
                                            LineHeight="22"
                                            Foreground="{DynamicResource TextBrush}" />
@@ -1286,6 +1938,13 @@
                     </Grid>
                 </ScrollViewer>
             </TabItem>
+            <TabItem x:Name="Rex600TabItem" Header="REX600 选型">
+                <views:Rex600SelectorView DataContext="{Binding Rex600Selection}" />
+            </TabItem>
+            <TabItem x:Name="Rex640TabItem" Header="REX640 选型">
+                <views:Rex640SelectorView DataContext="{Binding Rex640Selection}" />
+            </TabItem>
         </TabControl>
-    </Grid>
+        </DockPanel>
+    </materialDesign:DrawerHost>
 </Window>

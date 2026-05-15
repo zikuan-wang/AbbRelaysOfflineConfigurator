@@ -32,6 +32,15 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
+        <Style x:Key="LegacySelectorDangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+        </Style>
+
         <Style x:Key="LegacyTargetChipButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Padding" Value="8,3" />
             <Setter Property="Margin" Value="0,0,6,5" />
@@ -275,20 +284,20 @@
                                     <TextBlock Text="导入" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
+                            <Button Command="{Binding ResetCommand}"
+                                    Style="{StaticResource LegacySelectorDangerButtonStyle}"
+                                    Margin="0,0,8,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Restart" Width="18" Height="18" />
+                                    <TextBlock Text="重置" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
                             <Button Command="{Binding ShowDeviceDescriptionCommand}"
                                     Style="{StaticResource LegacySelectorButtonStyle}"
                                     Margin="0,0,8,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" />
                                     <TextBlock Text="装置描述" Margin="6,0,0,0" />
-                                </StackPanel>
-                            </Button>
-                            <Button Command="{Binding PushToConversionCommand}"
-                                    Style="{StaticResource LegacySelectorButtonStyle}"
-                                    Margin="0,0,8,8">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="ArrowRightBoldBoxOutline" Width="18" Height="18" />
-                                    <TextBlock Text="推送到转换" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
                             <Button Command="{Binding CopyOrderingCodeCommand}"
@@ -299,12 +308,12 @@
                                     <TextBlock Text="复制订货号" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
-                            <Button Command="{Binding ResetCommand}"
+                            <Button Command="{Binding PushToConversionCommand}"
                                     Style="{StaticResource LegacySelectorButtonStyle}"
                                     Margin="0,0,8,8">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Restart" Width="18" Height="18" />
-                                    <TextBlock Text="重置" Margin="6,0,0,0" />
+                                    <materialDesign:PackIcon Kind="ArrowRightBoldBoxOutline" Width="18" Height="18" />
+                                    <TextBlock Text="推送到转换" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
                         </WrapPanel>
@@ -379,6 +388,210 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource LegacySelectorPanelStyle}"
+                        Margin="0,0,0,8">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="标准配置推荐"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextBrush}" />
+                                <TextBlock Text="{Binding FunctionRecommendationScope}"
+                                           Foreground="{DynamicResource MutedBrush}"
+                                           FontSize="12"
+                                           Margin="0,2,0,0" />
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource LegacySelectorButtonStyle}"
+                                    Margin="8,0,0,0"
+                                    Click="FunctionCatalogButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="TableSearch" Width="18" Height="18" />
+                                    <TextBlock Text="保护功能清单" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="8" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding FunctionSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     materialDesign:HintAssist.Hint="ABB Code / ANSI Code / 保护功能"
+                                     MinHeight="38"
+                                     Padding="8,2" />
+                            <Button Grid.Column="2"
+                                    Command="{Binding AddFunctionSearchInputCommand}"
+                                    Style="{StaticResource LegacySelectorPrimaryButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Plus" Width="18" Height="18" />
+                                    <TextBlock Text="加入" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="3"
+                                    Command="{Binding ClearFunctionRecommendationCommand}"
+                                    Style="{StaticResource LegacySelectorButtonStyle}"
+                                    Margin="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CloseCircleOutline" Width="18" Height="18" />
+                                    <TextBlock Text="清空" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                        <ItemsControl ItemsSource="{Binding FunctionSuggestions}"
+                                      Margin="0,8,0,0"
+                                      Visibility="{Binding HasFunctionSuggestions, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="FunctionSuggestion_OnClick"
+                                            Style="{StaticResource LegacyTargetChipButtonStyle}"
+                                            ToolTip="{Binding Name}">
+                                        <TextBlock Text="{Binding DisplayText}"
+                                                   MaxWidth="280"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding RequestedFunctions}"
+                                      Margin="0,8,0,0"
+                                      Visibility="{Binding HasRequestedFunctions, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{DynamicResource AccentSoftBrush}"
+                                            BorderBrush="{DynamicResource AccentBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="14"
+                                            Padding="9,5"
+                                            Margin="0,0,8,8">
+                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding DisplayText}"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       MaxWidth="300"
+                                                       TextWrapping="Wrap" />
+                                            <Button Click="RequestedFunctionRemove_OnClick"
+                                                    Style="{StaticResource MaterialDesignToolButton}"
+                                                    Width="22"
+                                                    Height="22"
+                                                    Padding="0"
+                                                    Margin="5,0,0,0">
+                                                <materialDesign:PackIcon Kind="Close" Width="14" Height="14" />
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="{Binding FunctionRecommendationStatus}"
+                                   Foreground="{DynamicResource MutedBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,2,0,8" />
+
+                        <ItemsControl ItemsSource="{Binding StandardConfigurationRecommendations}"
+                                      Visibility="{Binding HasStandardConfigurationRecommendations, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="{DynamicResource PanelBorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="8"
+                                            Background="{DynamicResource SurfaceBrush}"
+                                            Padding="10"
+                                            Margin="0,0,0,8">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Foreground="{DynamicResource TextBrush}"
+                                                               TextWrapping="Wrap">
+                                                        <Run Text="{Binding ConfigCode, Mode=OneWay}" FontWeight="Bold" />
+                                                        <Run Text="：" />
+                                                        <Run Text="{Binding ConfigDescription, Mode=OneWay}" />
+                                                    </TextBlock>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                Margin="0,5,0,0">
+                                                        <materialDesign:PackIcon Width="17"
+                                                                                 Height="17"
+                                                                                 VerticalAlignment="Center">
+                                                            <materialDesign:PackIcon.Style>
+                                                                <Style TargetType="materialDesign:PackIcon">
+                                                                    <Setter Property="Kind" Value="CheckCircleOutline" />
+                                                                    <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding HasMissing}" Value="True">
+                                                                            <Setter Property="Kind" Value="AlertCircleOutline" />
+                                                                            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </materialDesign:PackIcon.Style>
+                                                        </materialDesign:PackIcon>
+                                                        <TextBlock Text="{Binding MatchStatus}"
+                                                                   Foreground="{DynamicResource MutedBrush}"
+                                                                   Margin="5,0,0,0" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <Button Grid.Column="1"
+                                                        Content="{Binding ApplyHint}"
+                                                        IsEnabled="{Binding CanApply}"
+                                                        Click="StandardConfigurationRecommendationApply_OnClick"
+                                                        Style="{StaticResource LegacySelectorButtonStyle}"
+                                                        Margin="8,0,0,0" />
+                                            </Grid>
+
+                                                <TextBlock Text="{Binding CoveredText}"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,8,0,0" />
+                                                <TextBlock Text="{Binding MissingText}"
+                                                       Foreground="{DynamicResource DangerBrush}"
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,4,0,0">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding HasMissing}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </Border>
 

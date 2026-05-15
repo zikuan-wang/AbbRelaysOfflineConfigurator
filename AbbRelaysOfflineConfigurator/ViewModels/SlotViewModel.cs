@@ -1,5 +1,6 @@
 ﻿using AbbRelaysOfflineConfigurator.Models;
 using AbbRelaysOfflineConfigurator.Services;
+using System.Windows;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
@@ -15,7 +16,9 @@ public sealed class SlotViewModel(SlotAssignment assignment)
     public bool IsFixed { get; } = assignment.IsFixed;
     public int CodeOrder { get; } = assignment.CodeOrder;
     public bool HasTerminalDiagram => TerminalDiagramService.HasDiagram(Code);
-    public string TerminalDiagramToolTip => HasTerminalDiagram ? "查看接线图" : "未配置接线图";
+    public string TerminalDiagramToolTip => Application.Current?.MainWindow?.DataContext is ConfiguratorViewModel { IsEnglish: true }
+        ? HasTerminalDiagram ? "View terminal diagram" : "No terminal diagram configured"
+        : HasTerminalDiagram ? "查看接线图" : "未配置接线图";
     public bool CanJump => IsAssigned &&
         !string.IsNullOrWhiteSpace(TargetGroupName) &&
         !string.IsNullOrWhiteSpace(TargetOptionId);

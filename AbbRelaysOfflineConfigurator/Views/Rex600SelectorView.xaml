@@ -1,0 +1,440 @@
+<UserControl x:Class="AbbRelaysOfflineConfigurator.Views.Rex600SelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             FontFamily="Segoe UI, Microsoft YaHei UI"
+             FontSize="13">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Style x:Key="Rex600PanelStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
+        <Style x:Key="Rex600OptionBorderStyle" TargetType="Border">
+            <Setter Property="Padding" Value="8,5" />
+            <Setter Property="Margin" Value="0,0,8,6" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding HasError}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsAvailable}" Value="False" />
+                        <Condition Binding="{Binding IsSelected}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Opacity" Value="0.38" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Rex600ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        </Style>
+        <Style x:Key="Rex600PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style x:Key="Rex600DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.52*" />
+            <ColumnDefinition Width="18" />
+            <ColumnDefinition Width="1.18*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource Rex600PanelStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="{Binding PageTitle}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextBrush}" />
+                        <TextBlock Text="{Binding SourceSummary}"
+                                   Foreground="{DynamicResource MutedBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap"
+                                   Margin="0,2,0,0" />
+                    </StackPanel>
+                    <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
+                        <Button Command="{Binding ExpandAllCommand}"
+                                Style="{StaticResource Rex600ButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="UnfoldMoreHorizontal" Width="18" Height="18" />
+                                <TextBlock Text="{Binding ExpandAllText}" Margin="6,0,0,0" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding CollapseAllCommand}"
+                                Style="{StaticResource Rex600ButtonStyle}"
+                                Margin="0,0,0,8">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="UnfoldLessHorizontal" Width="18" Height="18" />
+                                <TextBlock Text="{Binding CollapseAllText}" Margin="6,0,0,0" />
+                            </StackPanel>
+                        </Button>
+                    </WrapPanel>
+                </Grid>
+
+                <ScrollViewer x:Name="SelectionScrollViewer"
+                              Grid.Row="2"
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Groups}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource Rex600PanelStyle}" Padding="0">
+                                    <Expander IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                                              HorizontalContentAlignment="Stretch">
+                                        <Expander.Header>
+                                            <Grid Margin="10,6">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="210" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding DisplayName}"
+                                                                   FontSize="15"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{DynamicResource TextBrush}" />
+                                                        <Border Background="{DynamicResource DangerSoftBrush}"
+                                                                BorderBrush="{DynamicResource DangerBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="10"
+                                                                Padding="7,1"
+                                                                Margin="6,0,0,0"
+                                                                Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                            <TextBlock Text="{Binding ErrorSummary}"
+                                                                       FontSize="11"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="{DynamicResource DangerBrush}" />
+                                                        </Border>
+                                                    </StackPanel>
+                                                    <TextBlock Text="{Binding SelectionMode}"
+                                                               Foreground="{DynamicResource MutedBrush}"
+                                                               FontSize="11" />
+                                                </StackPanel>
+                                                <Border Grid.Column="1"
+                                                        Background="{DynamicResource SurfaceBrush}"
+                                                        BorderBrush="{DynamicResource PanelBorderBrush}"
+                                                        BorderThickness="1"
+                                                        CornerRadius="6"
+                                                        Padding="8,4">
+                                                    <TextBlock Text="{Binding SelectedSummary}"
+                                                               Foreground="{DynamicResource TextBrush}"
+                                                               FontWeight="SemiBold"
+                                                               TextWrapping="Wrap" />
+                                                </Border>
+                                            </Grid>
+                                        </Expander.Header>
+
+                                        <ItemsControl ItemsSource="{Binding Options}" Margin="10,2,10,10">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Width="330" Style="{StaticResource Rex600OptionBorderStyle}">
+                                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                  IsEnabled="{Binding CanToggle}"
+                                                                  VerticalContentAlignment="Center"
+                                                                  Foreground="{DynamicResource TextBrush}">
+                                                            <TextBlock TextWrapping="Wrap">
+                                                                <Run Text="{Binding Id, Mode=OneWay}" FontWeight="SemiBold" />
+                                                                <Run Text=": " />
+                                                                <Run Text="{Binding Description, Mode=OneWay}" />
+                                                            </TextBlock>
+                                                        </CheckBox>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Expander>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Border Style="{StaticResource Rex600PanelStyle}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding OrderCodeTitle}"
+                                       FontSize="17"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextBrush}" />
+                            <Border Grid.Column="1"
+                                    Padding="10,4"
+                                    CornerRadius="8">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+                                        <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                                        <Setter Property="BorderThickness" Value="1" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsValid}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock Text="{Binding Status}"
+                                           FontSize="16"
+                                           FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsValid}" Value="True">
+                                                    <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
+                        <TextBox Text="{Binding OrderCode, Mode=OneWay}"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 TextWrapping="Wrap"
+                                 Height="76"
+                                 Margin="0,8,0,0"
+                                 FontSize="18"
+                                 FontWeight="SemiBold"
+                                 IsReadOnly="True"
+                                 BorderBrush="{DynamicResource ControlBorderBrush}"
+                                 Background="{DynamicResource FieldBackgroundBrush}"
+                                 Foreground="{DynamicResource TextBrush}"
+                                 Padding="10" />
+                        <WrapPanel Margin="0,8,0,0">
+                            <Button Command="{Binding ImportOrderCodeCommand}" Style="{StaticResource Rex600ButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Import" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ImportOrderCodeText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ResetCommand}" Style="{StaticResource Rex600DangerButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Restore" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ResetText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding OnlineValidateCommand}" Style="{StaticResource Rex600PrimaryButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CloudCheckOutline" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding OnlineValidateText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ShowDeviceDescriptionCommand}" Style="{StaticResource Rex600ButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding DeviceDescriptionText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding CopyOrderCodeCommand}" Style="{StaticResource Rex600ButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ContentCopy" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding CopyOrderCodeText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Click="FunctionCatalogButton_OnClick" Style="{StaticResource Rex600ButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="TableSearch" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding FunctionCatalogText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
+                        <Border CornerRadius="8"
+                                Padding="10"
+                                Margin="0,2,0,0">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+                                    <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsOnlineValidationSuccess}" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsOnlineValidationError}" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel>
+                                <TextBlock Text="{Binding OnlineStatusTitle}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource MutedBrush}" />
+                                <TextBlock Text="{Binding OnlineStatus}"
+                                           Margin="0,3,0,0"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextBrush}" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Rex600PanelStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding IoSummaryTitle}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextBrush}" />
+                        <Border Background="{DynamicResource SurfaceBrush}"
+                                BorderBrush="{DynamicResource PanelBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="10"
+                                Margin="0,8,0,0">
+                            <ItemsControl ItemsSource="{Binding IoSummaryItems}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{DynamicResource IoChipBackgroundBrush}"
+                                                BorderBrush="{DynamicResource ChipBorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="14"
+                                                Padding="12,6"
+                                                Margin="0,0,8,8">
+                                            <StackPanel Orientation="Horizontal"
+                                                        VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}"
+                                                           Foreground="{DynamicResource MutedBrush}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Margin="0,0,8,0" />
+                                                <TextBlock Text="{Binding Value}"
+                                                           Foreground="{DynamicResource TextBrush}"
+                                                           FontSize="14"
+                                                           FontWeight="SemiBold"
+                                                           MaxWidth="300"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Rex600PanelStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding ValidationMessagesTitle}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextBrush}" />
+                        <ItemsControl ItemsSource="{Binding Messages}" Margin="0,8,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border MouseLeftButtonUp="ValidationMessage_OnClick"
+                                            CornerRadius="7"
+                                            Padding="9,6"
+                                            Margin="0,0,0,6">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+                                                <Setter Property="BorderThickness" Value="1" />
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSuccess}" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource SuccessSoftBrush}" />
+                                                        <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
+                                                        <Setter Property="Cursor" Value="Arrow" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Text}"
+                                                       TextWrapping="Wrap"
+                                                       Foreground="{DynamicResource TextBrush}"
+                                                       FontWeight="SemiBold" />
+                                            <ItemsControl ItemsSource="{Binding Targets}"
+                                                          Margin="0,8,0,0"
+                                                          Visibility="{Binding HasTargets, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Click="ValidationTarget_OnClick"
+                                                                Style="{StaticResource Rex600ButtonStyle}"
+                                                                Content="{Binding Label}" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

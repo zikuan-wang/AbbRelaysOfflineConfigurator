@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using AbbRelaysOfflineConfigurator.Services;
+using Microsoft.Win32;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
@@ -13,6 +14,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
     private string _status = "";
     private string _configurationSummary = "";
     private string _assemblyWidthText = "";
+    private string _displayLanguage = ConfiguratorViewModel.ChineseLanguage;
     private int _configuredChannels;
     private int _configuredPoints;
     private bool _isValid;
@@ -21,15 +23,16 @@ public sealed class Rio600SelectionViewModel : ObservableObject
     {
         Rows =
         [
-            new Rio600CompositionRowViewModel(this, "Power supply 1", "PowerSupply1", "PowerSupply1HW", "PowerSupply1SW", false, true),
-            new Rio600CompositionRowViewModel(this, "Power supply 2", "PowerSupply2", "PowerSupply2HW", "PowerSupply2SW", false, false),
-            new Rio600CompositionRowViewModel(this, "Communication module", "CommunicationModule", "CommunicationModuleHW", "CommunicationModuleSW", false, true)
+            new Rio600CompositionRowViewModel(this, "电源 1", "Power supply 1", "PowerSupply1", "PowerSupply1HW", "PowerSupply1SW", false, true),
+            new Rio600CompositionRowViewModel(this, "电源 2", "Power supply 2", "PowerSupply2", "PowerSupply2HW", "PowerSupply2SW", false, false),
+            new Rio600CompositionRowViewModel(this, "通信模块", "Communication module", "CommunicationModule", "CommunicationModuleHW", "CommunicationModuleSW", false, true)
         ];
 
         for (var position = 1; position <= 10; position++)
         {
             Rows.Add(new Rio600CompositionRowViewModel(
                 this,
+                $"位置 {position}",
                 $"Position {position}",
                 $"Postion{position}",
                 $"Postion{position}HW",
@@ -40,20 +43,46 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
         IoSummaryItems = [];
         SelectedModules = [];
+        OrderListItems = [];
         Messages = [];
         ResetCommand = new RelayCommand(Reset);
-        CopyOrderCodeCommand = new RelayCommand(CopyOrderCode, () => !string.IsNullOrWhiteSpace(OrderCode));
+        CopyOrderCodeCommand = new RelayCommand(CopyOrderList, () => OrderListItems.Count > 0);
+        ExportExcelCommand = new RelayCommand(ExportExcel, () => OrderListItems.Count > 0);
+        ShowDeviceDescriptionCommand = new RelayCommand(ShowDeviceDescription, () => OrderListItems.Count > 0);
         Reset();
     }
 
     public ObservableCollection<Rio600CompositionRowViewModel> Rows { get; }
     public ObservableCollection<Rio600IoSummaryItemViewModel> IoSummaryItems { get; }
     public ObservableCollection<Rio600SelectedModuleViewModel> SelectedModules { get; }
+    public ObservableCollection<Rio600OrderListItemViewModel> OrderListItems { get; }
     public ObservableCollection<string> Messages { get; }
     public RelayCommand ResetCommand { get; }
     public RelayCommand CopyOrderCodeCommand { get; }
+    public RelayCommand ExportExcelCommand { get; }
+    public RelayCommand ShowDeviceDescriptionCommand { get; }
     public string SourceFile => Path.GetFileName(_rules.SourcePath);
-    public string CoverImagePath => Path.Combine(AppContext.BaseDirectory, "Data", "Rio600Diagrams", "RIO600_cover_product.png");
+    internal bool IsEnglish => DisplayLanguage.Equals(ConfiguratorViewModel.EnglishLanguage, StringComparison.OrdinalIgnoreCase);
+
+    public string DisplayLanguage
+    {
+        get => _displayLanguage;
+        set
+        {
+            var normalized = string.Equals(value, ConfiguratorViewModel.EnglishLanguage, StringComparison.OrdinalIgnoreCase)
+                ? ConfiguratorViewModel.EnglishLanguage
+                : ConfiguratorViewModel.ChineseLanguage;
+            if (SetProperty(ref _displayLanguage, normalized))
+            {
+                foreach (var row in Rows)
+                {
+                    row.RefreshLanguage();
+                }
+
+                RefreshSelections(null);
+            }
+        }
+    }
 
     public string OrderCode
     {
@@ -62,7 +91,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
         {
             if (SetProperty(ref _orderCode, value))
             {
-                CopyOrderCodeCommand.RaiseCanExecuteChanged();
+                // RIO600 uses this internally for rule validation only; ordering is by module order numbers.
             }
         }
     }
@@ -142,7 +171,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
                 {
                     row.IsModuleEnabled = !row.IsFixedModule;
                     row.IsHardwareEnabled = row.SelectedModuleValue != "-";
-                    row.IsVersionEnabled = row.Label.Equals("Communication module", StringComparison.OrdinalIgnoreCase);
+                    row.IsVersionEnabled = row.IsCommunicationModule;
                 }
 
                 var moduleOptions = BuildModuleOptions(row, version, configuration, previousPositionConfigured);
@@ -184,7 +213,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
     {
         if (row.IsPosition && !previousPositionConfigured)
         {
-            return [Rio600SelectionOptionViewModel.NotConfigured()];
+            return [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
         }
 
         var options = _rules.Digit(row.ModuleGroup).Options
@@ -192,34 +221,34 @@ public sealed class Rio600SelectionViewModel : ObservableObject
             .Where(option => !row.IsPosition ||
                 option.Value == "-" ||
                 configuration?.Modules.ContainsKey(option.Value) == true)
-            .Select(Rio600SelectionOptionViewModel.FromRule)
+            .Select(option => Rio600SelectionOptionViewModel.FromRule(option, IsEnglish))
             .ToList();
 
-        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured()];
+        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
     }
 
     private IReadOnlyList<Rio600SelectionOptionViewModel> BuildHardwareOptions(Rio600CompositionRowViewModel row, string version)
     {
         if (row.SelectedModuleValue == "-")
         {
-            return [Rio600SelectionOptionViewModel.NotConfigured()];
+            return [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
         }
 
         var allowedHardwareValues = AllowedHardwareValues(row, version).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var options = _rules.Digit(row.HardwareGroup).Options
             .Where(option => option.SupportsVersion(version))
             .Where(option => allowedHardwareValues.Count == 0 || allowedHardwareValues.Contains(option.Value))
-            .Select(Rio600SelectionOptionViewModel.FromRule)
+            .Select(option => Rio600SelectionOptionViewModel.FromRule(option, IsEnglish))
             .ToList();
 
-        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured()];
+        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
     }
 
     private IReadOnlyList<Rio600SelectionOptionViewModel> BuildSoftwareOptions(Rio600CompositionRowViewModel row)
     {
         if (row.SelectedModuleValue == "-")
         {
-            return [Rio600SelectionOptionViewModel.NotConfigured()];
+            return [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
         }
 
         if (row.IsPosition)
@@ -227,24 +256,24 @@ public sealed class Rio600SelectionViewModel : ObservableObject
             var rule = PositionRule(row, CurrentVersion(), row.SelectedHardwareValue);
             if (rule is null)
             {
-                return [Rio600SelectionOptionViewModel.NotConfigured()];
+                return [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
             }
 
             var softwareOption = _rules.Digit(row.SoftwareGroup).Options
                 .FirstOrDefault(option => option.Value.Equals(rule.SoftwareChar, StringComparison.OrdinalIgnoreCase));
             return [softwareOption is null
                 ? new Rio600SelectionOptionViewModel(rule.SoftwareChar, rule.SoftwareChar, rule.SoftwareChar)
-                : Rio600SelectionOptionViewModel.FromRule(softwareOption)];
+                : Rio600SelectionOptionViewModel.FromRule(softwareOption, IsEnglish)];
         }
 
         var options = _rules.Digit(row.SoftwareGroup).Options
-            .Where(option => !row.Label.Equals("Communication module", StringComparison.OrdinalIgnoreCase) ||
+            .Where(option => !row.IsCommunicationModule ||
                 row.SelectedHardwareValue != "B" ||
                 string.Compare(option.Value, "E", StringComparison.OrdinalIgnoreCase) >= 0)
-            .Select(Rio600SelectionOptionViewModel.FromRule)
+            .Select(option => Rio600SelectionOptionViewModel.FromRule(option, IsEnglish))
             .ToList();
 
-        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured()];
+        return options.Count > 0 ? options : [Rio600SelectionOptionViewModel.NotConfigured(IsEnglish)];
     }
 
     private IEnumerable<string> AllowedHardwareValues(Rio600CompositionRowViewModel row, string version)
@@ -314,14 +343,14 @@ public sealed class Rio600SelectionViewModel : ObservableObject
     }
 
     private string CurrentVersion() =>
-        Rows.FirstOrDefault(row => row.Label.Equals("Communication module", StringComparison.OrdinalIgnoreCase))
+        Rows.FirstOrDefault(row => row.IsCommunicationModule)
             ?.SelectedSoftwareValue is { Length: > 0 } version && version != "-"
             ? version
             : "G";
 
     private string CurrentCommunicationCode()
     {
-        var row = Rows.FirstOrDefault(item => item.Label.Equals("Communication module", StringComparison.OrdinalIgnoreCase));
+        var row = Rows.FirstOrDefault(item => item.IsCommunicationModule);
         return row is null ? "LAG" : row.SelectedModuleValue + row.SelectedHardwareValue + row.SelectedSoftwareValue;
     }
 
@@ -338,7 +367,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
         OrderCode = new string(chars);
 
         var configuration = _rules.FindConfiguration(CurrentCommunicationCode());
-        var psm2Configured = Rows.First(row => row.Label == "Power supply 2").SelectedModuleValue != "-";
+        var psm2Configured = Rows.First(row => row.ModuleGroup == "PowerSupply2").SelectedModuleValue != "-";
         var totals = CalculateTotals(configuration);
         ConfiguredChannels = totals.TotalChannels;
         ConfiguredPoints = totals.TotalPoints;
@@ -349,24 +378,32 @@ public sealed class Rio600SelectionViewModel : ObservableObject
         Messages.Clear();
         if (configuration is null)
         {
-            Messages.Add("当前通讯模块组合没有匹配到 RIO600 配置。");
+            Messages.Add(IsEnglish ? "The current communication module combination does not match a RIO600 configuration." : "当前通讯模块组合没有匹配到 RIO600 配置。");
         }
 
         if (channelLimit > 0 && totals.TotalChannels > channelLimit)
         {
-            Messages.Add($"当前通道数 {totals.TotalChannels} 超过限制 {channelLimit}；如需扩展，请配置 Power supply 2 或减少 IO 模块。");
+            Messages.Add(IsEnglish
+                ? $"The current channel count {totals.TotalChannels} exceeds the limit {channelLimit}. Configure power supply 2 or reduce I/O modules."
+                : $"当前通道数 {totals.TotalChannels} 超过限制 {channelLimit}；如需扩展，请配置电源 2 或减少 I/O 模块。");
         }
 
         if (pointLimit > 0 && totals.TotalPoints > pointLimit)
         {
-            Messages.Add($"当前 points 数 {totals.TotalPoints} 超过限制 {pointLimit}；如需扩展，请配置 Power supply 2 或减少 IO 模块。");
+            Messages.Add(IsEnglish
+                ? $"The current point count {totals.TotalPoints} exceeds the limit {pointLimit}. Configure power supply 2 or reduce I/O modules."
+                : $"当前点数 {totals.TotalPoints} 超过限制 {pointLimit}；如需扩展，请配置电源 2 或减少 I/O 模块。");
         }
 
         IsValid = Messages.Count == 0;
-        Status = IsValid ? "RIO600 组合有效" : "RIO600 组合需要调整";
+        Status = IsValid
+            ? IsEnglish ? "RIO600 combination valid" : "RIO600 组合有效"
+            : IsEnglish ? "RIO600 combination needs adjustment" : "RIO600 组合需要调整";
         ConfigurationSummary = configuration is null
-            ? "未匹配配置"
-            : $"通讯组合 {configuration.CommunicationCode}，通道 {totals.TotalChannels}/{channelLimit}，Points {totals.TotalPoints}/{(pointLimit == 0 ? "-" : pointLimit)}";
+            ? IsEnglish ? "No matching configuration" : "未匹配配置"
+            : IsEnglish
+                ? $"Communication {configuration.CommunicationCode}, channels {totals.TotalChannels}/{channelLimit}, points {totals.TotalPoints}/{(pointLimit == 0 ? "-" : pointLimit)}"
+                : $"通信组合 {configuration.CommunicationCode}，通道 {totals.TotalChannels}/{channelLimit}，点数 {totals.TotalPoints}/{(pointLimit == 0 ? "-" : pointLimit)}";
 
         RefreshIoSummary(totals, channelLimit, pointLimit);
         RefreshSelectedModules();
@@ -409,15 +446,17 @@ public sealed class Rio600SelectionViewModel : ObservableObject
     private void RefreshIoSummary(Rio600Totals totals, int channelLimit, int pointLimit)
     {
         IoSummaryItems.Clear();
-        AddSummary("通道数 / Channels", $"{totals.TotalChannels}/{(channelLimit == 0 ? "-" : channelLimit)}");
+        AddSummary(IsEnglish ? "Channels" : "通道数", $"{totals.TotalChannels}/{(channelLimit == 0 ? "-" : channelLimit)}");
         if (pointLimit > 0 || totals.TotalPoints > 0)
         {
-            AddSummary("Points", $"{totals.TotalPoints}/{(pointLimit == 0 ? "-" : pointLimit)}");
+            AddSummary(IsEnglish ? "Points" : "点数", $"{totals.TotalPoints}/{(pointLimit == 0 ? "-" : pointLimit)}");
         }
 
         foreach (var module in totals.Modules.OrderBy(item => item.Key, StringComparer.OrdinalIgnoreCase))
         {
-            AddSummary(module.Key, $"{module.Value.Count} 块 / {module.Value.Channels} ch");
+            AddSummary(module.Key, IsEnglish
+                ? $"{module.Value.Count} pcs / {module.Value.Channels} channels"
+                : $"{module.Value.Count} 块 / {module.Value.Channels} 通道");
         }
     }
 
@@ -455,17 +494,41 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
         var moduleWidth = SelectedModules.Sum(module => module.WidthMillimeters);
         var totalWidth = moduleWidth + 17.0;
-        AssemblyWidthText = $"组件宽度约 {totalWidth:g} mm（含两端 8.5 mm 端夹）";
+        AssemblyWidthText = IsEnglish
+            ? $"Assembly width approx. {totalWidth:g} mm (including two 8.5 mm end stops)"
+            : $"组件宽度约 {totalWidth:g} mm（含两端 8.5 mm 端夹）";
+        RefreshOrderList();
+        CopyOrderCodeCommand.RaiseCanExecuteChanged();
+        ExportExcelCommand.RaiseCanExecuteChanged();
+        ShowDeviceDescriptionCommand.RaiseCanExecuteChanged();
+    }
+
+    private void RefreshOrderList()
+    {
+        OrderListItems.Clear();
+        foreach (var group in SelectedModules
+                     .Where(module => !string.IsNullOrWhiteSpace(module.OrderNumber))
+                     .GroupBy(module => module.OrderNumber, StringComparer.OrdinalIgnoreCase)
+                     .OrderBy(group => group.First().ModuleCode, StringComparer.OrdinalIgnoreCase))
+        {
+            var first = group.First();
+            OrderListItems.Add(new Rio600OrderListItemViewModel(
+                first.ModuleCode,
+                first.Description,
+                first.OrderNumber,
+                group.Count(),
+                string.Join(", ", group.Select(module => module.SlotName))));
+        }
     }
 
     private static string ResolveDetailKey(Rio600CompositionRowViewModel row)
     {
-        if (row.Label.StartsWith("Power supply", StringComparison.OrdinalIgnoreCase))
+        if (row.ModuleGroup.StartsWith("PowerSupply", StringComparison.OrdinalIgnoreCase))
         {
             return row.SelectedHardwareValue.Equals("B", StringComparison.OrdinalIgnoreCase) ? "PSML" : "PSMH";
         }
 
-        if (row.Label.Equals("Communication module", StringComparison.OrdinalIgnoreCase))
+        if (row.IsCommunicationModule)
         {
             return row.SelectedHardwareValue.Equals("B", StringComparison.OrdinalIgnoreCase) ? "LECMFO" : "LECMIR";
         }
@@ -483,12 +546,97 @@ public sealed class Rio600SelectionViewModel : ObservableObject
         };
     }
 
-    private void CopyOrderCode()
+    private void CopyOrderList()
     {
-        if (!string.IsNullOrWhiteSpace(OrderCode))
+        if (OrderListItems.Count == 0)
         {
-            Clipboard.SetText(OrderCode);
+            return;
         }
+
+        Clipboard.SetText(string.Join(Environment.NewLine, OrderListItems.Select(item =>
+            $"{item.ModuleCode}\t{item.Description}\t{item.OrderNumber}\t{item.Quantity}")));
+    }
+
+    private void ExportExcel()
+    {
+        if (OrderListItems.Count == 0)
+        {
+            return;
+        }
+
+        var dialog = new SaveFileDialog
+        {
+            Title = IsEnglish ? "Export RIO600 module order list" : "导出 RIO600 模块订货清单",
+            FileName = $"RIO600_order_list_{DateTime.Now:yyyyMMdd_HHmm}.xlsx",
+            Filter = IsEnglish ? "Excel workbook (*.xlsx)|*.xlsx" : "Excel 工作簿 (*.xlsx)|*.xlsx"
+        };
+
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        try
+        {
+            Rio600OrderListExportService.ExportExcel(OrderListItems, dialog.FileName);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                IsEnglish ? $"Failed to export RIO600 module order list: {ex.Message}" : $"导出 RIO600 模块订货清单失败：{ex.Message}",
+                IsEnglish ? "RIO600 Configurator" : "RIO600 选型",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+    }
+
+    private void ShowDeviceDescription()
+    {
+        var window = new DeviceDescriptionWindow(BuildDeviceDescription())
+        {
+            Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(window => window.IsActive)
+        };
+        window.ShowDialog();
+    }
+
+    private string BuildDeviceDescription()
+    {
+        var lines = new List<string>
+        {
+            IsEnglish ? "RIO600 device description" : "RIO600 装置描述",
+            $"{(IsEnglish ? "Status" : "状态")}：{Status}",
+            $"{(IsEnglish ? "Configuration" : "配置")}：{ConfigurationSummary}",
+            $"{(IsEnglish ? "Assembly width" : "装配宽度")}：{AssemblyWidthText}",
+            ""
+        };
+
+        lines.Add(IsEnglish ? "Module order list:" : "模块订货清单：");
+        lines.AddRange(OrderListItems.Select(item =>
+            IsEnglish
+                ? $"{item.ModuleCode} - {item.Description}, order number {item.OrderNumber}, quantity {item.Quantity}"
+                : $"{item.ModuleCode} - {item.Description}，订货号 {item.OrderNumber}，数量 {item.Quantity}"));
+
+        lines.Add("");
+        lines.Add(IsEnglish ? "Module list:" : "模块清单：");
+        lines.AddRange(SelectedModules.Select(module =>
+            IsEnglish
+                ? $"{module.SlotName}: {module.ModuleCode} - {module.Description}, order number {module.OrderNumber}"
+                : $"{module.SlotName}: {module.ModuleCode} - {module.Description}，订货号 {module.OrderNumber}"));
+
+        lines.Add("");
+        lines.Add(IsEnglish ? "I/O summary:" : "I/O 摘要：");
+        lines.Add(IoSummaryItems.Count == 0
+            ? IsEnglish ? "None" : "无"
+            : string.Join(IsEnglish ? "; " : "；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
+
+        if (Messages.Count > 0)
+        {
+            lines.Add("");
+            lines.Add(IsEnglish ? "Validation messages:" : "校验提示：");
+            lines.AddRange(Messages);
+        }
+
+        return string.Join(Environment.NewLine, lines);
     }
 }
 
@@ -505,6 +653,7 @@ public sealed class Rio600CompositionRowViewModel : ObservableObject
     public Rio600CompositionRowViewModel(
         Rio600SelectionViewModel owner,
         string label,
+        string labelEnglish,
         string moduleGroup,
         string hardwareGroup,
         string softwareGroup,
@@ -512,7 +661,8 @@ public sealed class Rio600CompositionRowViewModel : ObservableObject
         bool isFixedModule)
     {
         _owner = owner;
-        Label = label;
+        LabelChinese = label;
+        LabelEnglish = labelEnglish;
         ModuleGroup = moduleGroup;
         HardwareGroup = hardwareGroup;
         SoftwareGroup = softwareGroup;
@@ -523,19 +673,28 @@ public sealed class Rio600CompositionRowViewModel : ObservableObject
         SoftwareOptions = [];
     }
 
-    public string Label { get; }
+    public string Label => _owner.IsEnglish ? LabelEnglish : LabelChinese;
+    private string LabelChinese { get; }
+    private string LabelEnglish { get; }
     public string ModuleGroup { get; }
     public string HardwareGroup { get; }
     public string SoftwareGroup { get; }
     public bool IsPosition { get; }
     public bool IsFixedModule { get; }
+    public bool IsCommunicationModule => ModuleGroup.Equals("CommunicationModule", StringComparison.OrdinalIgnoreCase);
     public ObservableCollection<Rio600SelectionOptionViewModel> ModuleOptions { get; }
     public ObservableCollection<Rio600SelectionOptionViewModel> HardwareOptions { get; }
     public ObservableCollection<Rio600SelectionOptionViewModel> SoftwareOptions { get; }
     public string SelectedModuleValue => SelectedModuleOption?.Value ?? "-";
     public string SelectedHardwareValue => SelectedHardwareOption?.Value ?? "-";
     public string SelectedSoftwareValue => SelectedSoftwareOption?.Value ?? "-";
-    public string SelectedModuleName => SelectedModuleOption?.Name ?? "Not configured";
+    public string SelectedModuleName => SelectedModuleOption?.Name ?? (_owner.IsEnglish ? "Not configured" : "未配置");
+
+    internal void RefreshLanguage()
+    {
+        OnPropertyChanged(nameof(Label));
+        OnPropertyChanged(nameof(SelectedModuleName));
+    }
 
     public Rio600SelectionOptionViewModel? SelectedModuleOption
     {
@@ -635,11 +794,34 @@ public sealed record Rio600SelectionOptionViewModel(string Value, string Name, s
 {
     public string DisplayName => string.IsNullOrWhiteSpace(Name) ? Value : Name;
 
-    public static Rio600SelectionOptionViewModel FromRule(Rio600Option option) =>
-        new(option.Value, option.Name, option.Description);
+    public static Rio600SelectionOptionViewModel FromRule(Rio600Option option, bool isEnglish) =>
+        new(option.Value, TranslateName(option.Name, isEnglish), option.Description);
 
-    public static Rio600SelectionOptionViewModel NotConfigured() =>
-        new("-", "Not configured", "Not configured");
+    public static Rio600SelectionOptionViewModel NotConfigured(bool isEnglish) =>
+        new("-", isEnglish ? "Not configured" : "未配置", isEnglish ? "Not configured" : "未配置");
+
+    private static string TranslateName(string name, bool isEnglish)
+    {
+        if (isEnglish)
+        {
+            return name;
+        }
+
+        return name switch
+        {
+            "Not configured" => "未配置",
+            "Not applicable" => "不适用",
+            "High voltage" => "高电压",
+            "Low Voltage" => "低电压",
+            "Electrical" => "电口",
+            "Optical" => "光口",
+            "Contact" => "触点",
+            "RTD/mA in" => "RTD/mA 输入",
+            "mA out" => "mA 输出",
+            "Sensor input" => "传感器输入",
+            _ => name
+        };
+    }
 }
 
 public sealed record Rio600IoSummaryItemViewModel(string Name, string Value);
@@ -656,6 +838,16 @@ public sealed record Rio600SelectedModuleViewModel(
     public double VisualWidth => Math.Max(58, WidthMillimeters * 2.2);
     public string WidthText => $"{WidthMillimeters:g} mm";
     public string DisplayTitle => $"{SlotName}: {ModuleCode}";
+}
+
+public sealed record Rio600OrderListItemViewModel(
+    string ModuleCode,
+    string Description,
+    string OrderNumber,
+    int Quantity,
+    string Slots)
+{
+    public string QuantityText => $"x {Quantity}";
 }
 
 internal sealed class Rio600Totals

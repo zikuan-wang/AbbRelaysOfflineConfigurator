@@ -56,24 +56,67 @@ public static class TerminalDiagramService
         ["SIM5"] = ["REX615_SIM5.png"],
     };
 
+    private static readonly Dictionary<string, string[]> Rex640DiagramFiles = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["AIM1"] = ["REX640_AIM1901.png", "REX640_AIM1901_open_delta.png"],
+        ["AIM2"] = ["REX640_AIM1902.png", "REX640_AIM1902_open_delta.png"],
+        ["AIM3"] = ["REX640_AIM1903.png"],
+        ["SIM1"] = ["REX640_SIM1901_phase_to_earth.png", "REX640_SIM1901_phase_to_phase.png"],
+        ["SIM2"] = ["REX640_SIM1902_phase_to_earth.png", "REX640_SIM1902_phase_to_phase.png"],
+        ["SIM3"] = ["REX640_SIM1903.png"],
+        ["BIO1"] = ["REX640_BIO1901_1903.png"],
+        ["BIO3"] = ["REX640_BIO1901_1903.png"],
+        ["BIO2"] = ["REX640_BIO1902_1904.png"],
+        ["BIO4"] = ["REX640_BIO1902_1904.png"],
+        ["BIM1"] = ["REX640_BIM1901_1903.png"],
+        ["BIM3"] = ["REX640_BIM1901_1903.png"],
+        ["PSM1"] = ["REX640_PSM190x.png"],
+        ["PSM2"] = ["REX640_PSM190x.png"],
+        ["PSM3"] = ["REX640_PSM190x.png"],
+        ["RTD1"] = ["REX640_RTD1901.png"],
+        ["RTD2"] = ["REX640_RTD1902.png"],
+    };
+
     public static IReadOnlyList<TerminalDiagram> GetDiagrams(string code)
     {
+        return GetDiagrams(DiagramFiles, "REX615", code);
+    }
+
+    public static IReadOnlyList<TerminalDiagram> GetDiagrams(string productKey, string code)
+    {
+        return productKey.Equals("REX640", StringComparison.OrdinalIgnoreCase)
+            ? GetDiagrams(Rex640DiagramFiles, "REX640", code)
+            : GetDiagrams(code);
+    }
+
+    private static IReadOnlyList<TerminalDiagram> GetDiagrams(
+        IReadOnlyDictionary<string, string[]> diagramFiles,
+        string productKey,
+        string code)
+    {
         if (string.IsNullOrWhiteSpace(code) ||
-            !DiagramFiles.TryGetValue(code.Trim(), out var fileNames))
+            !diagramFiles.TryGetValue(code.Trim(), out var fileNames))
         {
             return [];
         }
 
         return fileNames
-            .Select(fileName => new TerminalDiagram(BuildTitle(code, fileName), ResolveDiagramPath(fileName)))
+            .Select(fileName => new TerminalDiagram(BuildTitle(productKey, code, fileName), ResolveDiagramPath(fileName)))
             .Where(diagram => File.Exists(diagram.ImagePath))
             .ToList();
     }
 
     public static bool HasDiagram(string code) => GetDiagrams(code).Count > 0;
 
-    private static string BuildTitle(string code, string fileName)
+    public static bool HasDiagram(string productKey, string code) => GetDiagrams(productKey, code).Count > 0;
+
+    private static string BuildTitle(string productKey, string code, string fileName)
     {
+        if (productKey.Equals("REX640", StringComparison.OrdinalIgnoreCase))
+        {
+            return BuildRex640Title(code, fileName);
+        }
+
         if (fileName.StartsWith("REX615_X000_", StringComparison.OrdinalIgnoreCase))
         {
             return $"{code} X000 通讯模块图";
@@ -88,6 +131,26 @@ public static class TerminalDiagramService
             fileName.Contains("low-impedance", StringComparison.OrdinalIgnoreCase))
         {
             return $"{code} 低阻接地差动";
+        }
+
+        return $"{code} 接线图";
+    }
+
+    private static string BuildRex640Title(string code, string fileName)
+    {
+        if (fileName.Contains("open_delta", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"{code} 两相电压接线";
+        }
+
+        if (fileName.Contains("phase_to_earth", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"{code} 相对地电压接线";
+        }
+
+        if (fileName.Contains("phase_to_phase", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"{code} 相间电压接线";
         }
 
         return $"{code} 接线图";

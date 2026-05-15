@@ -19,11 +19,17 @@ public sealed class GroupViewModel : ObservableObject
 
     public OptionGroup Group { get; }
     public string Name => Group.Name;
-    public string SelectionMode => $"{(Group.IsMandatory ? "必选" : "可选")} · {(AllowsMultiple ? "多选" : "单选")}";
+    public string DisplayName => UseEnglishDescription && !string.IsNullOrWhiteSpace(Group.EnglishName)
+        ? Group.EnglishName
+        : Group.Name;
+    public string SelectionMode => UseEnglishDescription
+        ? $"{(Group.IsMandatory ? "Required" : "Optional")} · {(AllowsMultiple ? "Multiple select" : "Single select")}"
+        : $"{(Group.IsMandatory ? "必选" : "可选")} · {(AllowsMultiple ? "多选" : "单选")}";
     public bool IsMandatory => Group.IsMandatory;
     public bool IsMultiple => Group.IsMultiple;
     public bool AllowsMultiple => _owner.AllowsMultiple(Group);
     internal bool UseFullDescription => _owner.UseFullDescription;
+    internal bool UseEnglishDescription => _owner.IsEnglish;
     public ObservableCollection<OptionViewModel> Options { get; }
     public IEnumerable<RuleOption> SelectedOptions => Options.Where(option => option.IsSelected).Select(option => option.Option);
     public string SelectedSummary
@@ -33,7 +39,9 @@ public sealed class GroupViewModel : ObservableObject
             var selected = Options.Where(option => option.IsSelected).Select(option => option.SummaryText).ToList();
             if (selected.Count == 0)
             {
-                return IsMandatory ? "未选择" : "可选";
+                return UseEnglishDescription
+                    ? IsMandatory ? "Not selected" : "Optional"
+                    : IsMandatory ? "未选择" : "可选";
             }
 
             return string.Join("; ", selected);
@@ -60,7 +68,7 @@ public sealed class GroupViewModel : ObservableObject
     }
 
     public bool HasError => ErrorCount > 0;
-    public string ErrorSummary => $"需处理 {ErrorCount}";
+    public string ErrorSummary => _owner.IsEnglish ? $"{ErrorCount} issue(s)" : $"需处理 {ErrorCount}";
 
     internal void HandleSelectionChanged(OptionViewModel changed)
     {
@@ -93,6 +101,9 @@ public sealed class GroupViewModel : ObservableObject
             option.RefreshDisplay();
         }
 
+        OnPropertyChanged(nameof(DisplayName));
+        OnPropertyChanged(nameof(SelectionMode));
+        OnPropertyChanged(nameof(ErrorSummary));
         RefreshSelectedSummary();
     }
 

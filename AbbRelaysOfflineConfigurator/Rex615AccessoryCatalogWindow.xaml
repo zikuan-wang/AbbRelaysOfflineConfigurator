@@ -12,7 +12,7 @@
         FontFamily="Segoe UI, Microsoft YaHei UI"
         Background="#F3F6FA">
     <Window.Resources>
-        <Style x:Key="AccessoryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+        <Style x:Key="AccessoryButtonStyle" TargetType="Button" BasedOn="{StaticResource AppDialogOutlinedButtonStyle}">
             <Setter Property="Height" Value="38" />
             <Setter Property="MinWidth" Value="84" />
             <Setter Property="Padding" Value="6,0" />

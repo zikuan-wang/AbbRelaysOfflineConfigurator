@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using Microsoft.Win32;
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         ExpiresDatePicker.SelectedDate = DateTime.Today.AddYears(1);
+        RefreshAuthorizationRecords();
     }
 
     private void ImportRequestButton_OnClick(object sender, RoutedEventArgs e)
@@ -68,12 +70,20 @@ public partial class MainWindow : Window
             DateTimeOffset? expiresAt = PermanentCheckBox.IsChecked == true || ExpiresDatePicker.SelectedDate is null
                 ? null
                 : new DateTimeOffset(ExpiresDatePicker.SelectedDate.Value.Date.AddDays(1).AddTicks(-1));
+            var issuedAt = DateTimeOffset.Now;
             var activationText = LicenseService.CreateActivationFileText(
                 _request,
                 LicensedToTextBox.Text,
                 expiresAt,
                 AuthorizationKeyProvider.PrivateKeyXmlBase64);
             File.WriteAllText(dialog.FileName, activationText, Encoding.UTF8);
+            AuthorizationRecordStore.SaveIssuedActivation(
+                _request,
+                LicensedToTextBox.Text,
+                issuedAt,
+                expiresAt,
+                dialog.FileName);
+            RefreshAuthorizationRecords();
             MessageBox.Show(this, "激活文件已导出。", "授权工具", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
@@ -91,4 +101,24 @@ public partial class MainWindow : Window
     }
 
     private void CloseButton_OnClick(object sender, RoutedEventArgs e) => Close();
+
+    private void RefreshRecordsButton_OnClick(object sender, RoutedEventArgs e) => RefreshAuthorizationRecords();
+
+    private void OpenRecordFolderButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var directory = Path.GetDirectoryName(AuthorizationRecordStore.RecordsPath);
+        if (string.IsNullOrWhiteSpace(directory))
+        {
+            return;
+        }
+
+        Directory.CreateDirectory(directory);
+        Process.Start(new ProcessStartInfo(directory) { UseShellExecute = true });
+    }
+
+    private void RefreshAuthorizationRecords()
+    {
+        AuthorizationRecordsDataGrid.ItemsSource = AuthorizationRecordStore.Load();
+        RecordFilePathTextBlock.Text = $"记录文件：{AuthorizationRecordStore.RecordsPath}";
+    }
 }

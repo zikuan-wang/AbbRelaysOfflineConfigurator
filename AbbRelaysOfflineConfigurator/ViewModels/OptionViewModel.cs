@@ -11,12 +11,14 @@ public sealed class OptionViewModel(RuleOption option, GroupViewModel group) : O
     public RuleOption Option { get; } = option;
     public GroupViewModel Group { get; } = group;
     public string Id => Option.Id;
-    public string DisplayDescription => Group.UseFullDescription
-        ? Fallback(Option.Description, Option.ShortDescription)
-        : Fallback(Option.ShortDescription, Option.Description);
+    public string DisplayDescription => Group.UseEnglishDescription
+        ? EnglishDisplayDescription()
+        : ChineseDisplayDescription();
     public string SummaryText => $"{Id}: {DisplayDescription}";
     public string Description => DisplayDescription;
-    public string Detail => Option.Description;
+    public string Detail => Group.UseEnglishDescription
+        ? Fallback(Option.EnglishDescription, Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
+        : Option.Description;
 
     public bool IsSelected
     {
@@ -79,11 +81,18 @@ public sealed class OptionViewModel(RuleOption option, GroupViewModel group) : O
     {
         OnPropertyChanged(nameof(DisplayDescription));
         OnPropertyChanged(nameof(Description));
+        OnPropertyChanged(nameof(Detail));
         OnPropertyChanged(nameof(SummaryText));
     }
 
-    private static string Fallback(string? primary, string? fallback) =>
-        !string.IsNullOrWhiteSpace(primary)
-            ? primary
-            : fallback ?? "";
+    private string ChineseDisplayDescription() => Group.UseFullDescription
+        ? Fallback(Option.Description, Option.ShortDescription)
+        : Fallback(Option.ShortDescription, Option.Description);
+
+    private string EnglishDisplayDescription() => Group.UseFullDescription
+        ? Fallback(Option.EnglishDescription, Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
+        : Fallback(Option.EnglishShortDescription, Option.ShortDescription, Option.EnglishDescription, Option.Description);
+
+    private static string Fallback(params string?[] values) =>
+        values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "";
 }

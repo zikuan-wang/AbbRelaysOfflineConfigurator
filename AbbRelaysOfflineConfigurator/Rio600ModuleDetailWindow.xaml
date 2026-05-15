@@ -14,7 +14,7 @@
         Background="#F3F6FA">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <Style x:Key="DialogButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+        <Style x:Key="DialogButtonStyle" TargetType="Button" BasedOn="{StaticResource AppDialogOutlinedButtonStyle}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinWidth" Value="90" />
             <Setter Property="Margin" Value="0,0,10,0" />

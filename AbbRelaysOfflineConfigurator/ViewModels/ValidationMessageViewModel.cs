@@ -1,10 +1,11 @@
 ﻿namespace AbbRelaysOfflineConfigurator.ViewModels;
 
-public sealed class ValidationMessageTargetViewModel(string groupName, string? optionId)
+public sealed class ValidationMessageTargetViewModel(string groupName, string? optionId, string? displayGroupName = null)
 {
     public string GroupName { get; } = groupName;
     public string? OptionId { get; } = optionId;
-    public string Label => string.IsNullOrWhiteSpace(OptionId) ? GroupName : $"{GroupName} / {OptionId}";
+    public string DisplayGroupName { get; } = string.IsNullOrWhiteSpace(displayGroupName) ? groupName : displayGroupName;
+    public string Label => string.IsNullOrWhiteSpace(OptionId) ? DisplayGroupName : $"{DisplayGroupName} / {OptionId}";
 }
 
 public sealed class ValidationMessageViewModel(string text, IEnumerable<ValidationMessageTargetViewModel> targets, bool isSuccess = false)

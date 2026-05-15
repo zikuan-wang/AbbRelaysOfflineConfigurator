@@ -33,6 +33,15 @@ public partial class Rio600SelectorView : UserControl
         }
     }
 
+    private void FunctionCatalogButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = new Rio600FunctionCatalogWindow
+        {
+            Owner = Window.GetWindow(this)
+        };
+        window.ShowDialog();
+    }
+
     private void OpenModuleDetail(string detailKey)
     {
         var detail = Rio600ModuleCatalogService.GetDetail(detailKey);

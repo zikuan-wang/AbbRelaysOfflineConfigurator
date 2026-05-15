@@ -52,10 +52,13 @@ public static class LicenseService
         var request = JsonSerializer.Deserialize<LicenseRequest>(bytes, JsonOptions)
             ?? throw new InvalidOperationException("授权申请文件内容为空。");
         if (!request.ProductId.Equals(ProductId, StringComparison.OrdinalIgnoreCase) ||
-            !request.FileType.Equals(RequestFileType, StringComparison.OrdinalIgnoreCase))
+            !request.FileType.Equals(RequestFileType, StringComparison.OrdinalIgnoreCase) ||
+            request.Version != EnvelopeVersion)
         {
             throw new InvalidOperationException("授权申请文件不适用于本工具。");
         }
+
+        ValidateRequest(request);
 
         return request;
     }
@@ -130,7 +133,8 @@ public static class LicenseService
         var activation = JsonSerializer.Deserialize<SignedLicenseActivation>(bytes, JsonOptions)
             ?? throw new InvalidOperationException("激活文件内容为空。");
         if (!activation.Payload.ProductId.Equals(ProductId, StringComparison.OrdinalIgnoreCase) ||
-            !activation.Payload.FileType.Equals(ActivationFileType, StringComparison.OrdinalIgnoreCase))
+            !activation.Payload.FileType.Equals(ActivationFileType, StringComparison.OrdinalIgnoreCase) ||
+            activation.Payload.Version != EnvelopeVersion)
         {
             throw new InvalidOperationException("激活文件不适用于本工具。");
         }
@@ -144,6 +148,7 @@ public static class LicenseService
             throw new InvalidOperationException("激活文件签名校验失败。");
         }
 
+        ValidateActivationPayload(activation.Payload);
         return activation;
     }
 
@@ -167,7 +172,7 @@ public static class LicenseService
         var cipherText = new byte[plaintext.Length];
         var tag = new byte[TagSize];
         using var aes = new AesGcm(AesKey, TagSize);
-        aes.Encrypt(nonce, plaintext, cipherText, tag);
+        aes.Encrypt(nonce, plaintext, cipherText, tag, BuildEnvelopeAad(format, EnvelopeVersion));
 
         var envelope = new EncryptedLicenseEnvelope(
             format,
@@ -193,8 +198,58 @@ public static class LicenseService
         var tag = Convert.FromBase64String(envelope.Tag);
         var plaintext = new byte[cipherText.Length];
         using var aes = new AesGcm(AesKey, TagSize);
-        aes.Decrypt(nonce, cipherText, tag, plaintext);
+        try
+        {
+            aes.Decrypt(nonce, cipherText, tag, plaintext, BuildEnvelopeAad(envelope.Format, envelope.Version));
+        }
+        catch (CryptographicException)
+        {
+            // Backward compatibility for activation/request files produced before AAD binding was added.
+            plaintext = new byte[cipherText.Length];
+            aes.Decrypt(nonce, cipherText, tag, plaintext);
+        }
+
         return plaintext;
+    }
+
+    private static byte[] BuildEnvelopeAad(string format, int version) =>
+        Encoding.UTF8.GetBytes($"{ProductId}|{format}|{version}");
+
+    private static void ValidateRequest(LicenseRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.RequestId) ||
+            string.IsNullOrWhiteSpace(request.MachineId) ||
+            string.IsNullOrWhiteSpace(request.MachineName) ||
+            string.IsNullOrWhiteSpace(request.UserName))
+        {
+            throw new InvalidOperationException("授权申请文件缺少必要信息。");
+        }
+
+        if (request.CreatedAt > DateTimeOffset.Now.AddMinutes(10))
+        {
+            throw new InvalidOperationException("授权申请文件创建时间异常。");
+        }
+    }
+
+    private static void ValidateActivationPayload(LicenseActivationPayload payload)
+    {
+        if (string.IsNullOrWhiteSpace(payload.RequestId) ||
+            string.IsNullOrWhiteSpace(payload.MachineId) ||
+            string.IsNullOrWhiteSpace(payload.MachineName) ||
+            string.IsNullOrWhiteSpace(payload.LicensedTo))
+        {
+            throw new InvalidOperationException("激活文件缺少必要授权信息。");
+        }
+
+        if (payload.IssuedAt > DateTimeOffset.Now.AddMinutes(10))
+        {
+            throw new InvalidOperationException("激活文件签发时间异常。");
+        }
+
+        if (payload.ExpiresAt is { } expiresAt && expiresAt <= payload.IssuedAt)
+        {
+            throw new InvalidOperationException("激活文件有效期异常。");
+        }
     }
 
     private static string DecodeXmlKey(string xmlBase64) =>

@@ -28,6 +28,14 @@
             <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         </Style>
+        <Style x:Key="RioDangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+        </Style>
         <Style x:Key="RioSlotCardStyle" TargetType="Border">
             <Setter Property="Height" Value="174" />
             <Setter Property="MinWidth" Value="92" />
@@ -58,7 +66,6 @@
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <TextBlock Text="选型规则"
@@ -66,19 +73,6 @@
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextBrush}" />
                     </StackPanel>
-                    <Border Grid.Column="1"
-                            Width="128"
-                            Height="76"
-                            Background="White"
-                            BorderBrush="{DynamicResource PanelBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="6"
-                            Padding="4">
-                        <Image Source="{Binding CoverImagePath}"
-                               Stretch="Uniform"
-                               SnapsToDevicePixels="True"
-                               RenderOptions.BitmapScalingMode="HighQuality" />
-                    </Border>
                 </Grid>
 
                 <Border Grid.Row="2"
@@ -103,9 +97,9 @@
                                     <ColumnDefinition Width="190" />
                                     <ColumnDefinition Width="190" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="1" Text="Module type" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                <TextBlock Grid.Column="2" Text="Hardware type" FontWeight="SemiBold" HorizontalAlignment="Center" />
-                                <TextBlock Grid.Column="3" Text="Module version" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="模块类型" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Text="硬件类型" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="3" Text="模块版本" FontWeight="SemiBold" HorizontalAlignment="Center" />
                             </Grid>
                         </Border>
 
@@ -167,29 +161,124 @@
             <StackPanel>
                 <Border Style="{StaticResource RioPanelStyle}" Margin="0,0,0,8">
                     <StackPanel>
-                        <TextBlock Text="RIO600 订货码"
+                        <TextBlock Text="RIO600 模块订货清单"
                                    FontSize="16"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextBrush}" />
-                        <TextBox Text="{Binding OrderCode, Mode=OneWay}"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 TextWrapping="Wrap"
-                                 IsReadOnly="True"
-                                 FontSize="15"
-                                 FontWeight="SemiBold"
-                                 Margin="0,8,0,0"
-                                 Padding="10" />
+                        <TextBlock Text="RIO600 不使用整机订货码，按下列模块订货号和数量订货。"
+                                   Foreground="{DynamicResource MutedBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,4,0,0" />
+                        <Border BorderBrush="{DynamicResource PanelBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"
+                                ClipToBounds="True">
+                            <StackPanel>
+                                <Border Background="{DynamicResource SurfaceBrush}"
+                                        BorderBrush="{DynamicResource PanelBorderBrush}"
+                                        BorderThickness="0,0,0,1"
+                                        Padding="8,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="62" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="136" />
+                                            <ColumnDefinition Width="46" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="模块" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Grid.Column="1" Text="描述" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Grid.Column="2" Text="订货号" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Grid.Column="3" Text="数量" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                                <ItemsControl ItemsSource="{Binding OrderListItems}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="{DynamicResource PanelBorderBrush}"
+                                                    BorderThickness="0,0,0,1"
+                                                    Padding="8,7">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="62" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="136" />
+                                                        <ColumnDefinition Width="46" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding ModuleCode}"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextBrush}"
+                                                               VerticalAlignment="Center"
+                                                               TextWrapping="Wrap" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{Binding Description}"
+                                                               Foreground="{DynamicResource TextBrush}"
+                                                               VerticalAlignment="Center"
+                                                               TextWrapping="Wrap"
+                                                               Margin="6,0" />
+                                                    <DockPanel Grid.Column="2"
+                                                               LastChildFill="True"
+                                                               VerticalAlignment="Center">
+                                                        <Button DockPanel.Dock="Right"
+                                                                Tag="{Binding OrderNumber}"
+                                                                Click="CopyModuleOrderNumberButton_OnClick"
+                                                                Width="28"
+                                                                Height="26"
+                                                                Padding="0"
+                                                                ToolTip="复制订货号"
+                                                                Style="{StaticResource MaterialDesignIconButton}">
+                                                            <materialDesign:PackIcon Kind="ContentCopy"
+                                                                                     Width="15"
+                                                                                     Height="15" />
+                                                        </Button>
+                                                        <TextBlock Text="{Binding OrderNumber}"
+                                                                   Foreground="{DynamicResource AccentBrush}"
+                                                                   FontWeight="SemiBold"
+                                                                   VerticalAlignment="Center"
+                                                                   TextWrapping="Wrap" />
+                                                    </DockPanel>
+                                                    <TextBlock Grid.Column="3"
+                                                               Text="{Binding QuantityText}"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextBrush}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
                         <WrapPanel Margin="0,8,0,0">
-                            <Button Command="{Binding CopyOrderCodeCommand}" Style="{StaticResource RioButtonStyle}">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="ContentCopy" Width="18" Height="18" />
-                                    <TextBlock Text="复制订货码" Margin="6,0,0,0" />
-                                </StackPanel>
-                            </Button>
-                            <Button Command="{Binding ResetCommand}" Style="{StaticResource RioButtonStyle}">
+                            <Button Command="{Binding ResetCommand}" Style="{StaticResource RioDangerButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Restore" Width="18" Height="18" />
                                     <TextBlock Text="重置" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ShowDeviceDescriptionCommand}" Style="{StaticResource RioButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" />
+                                    <TextBlock Text="装置描述" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding CopyOrderCodeCommand}" Style="{StaticResource RioButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ContentCopy" Width="18" Height="18" />
+                                    <TextBlock Text="复制订货清单" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ExportExcelCommand}" Style="{StaticResource RioButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FileExcelBox" Width="18" Height="18" />
+                                    <TextBlock Text="导出 Excel" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Click="FunctionCatalogButton_OnClick" Style="{StaticResource RioButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="TableSearch" Width="18" Height="18" />
+                                    <TextBlock Text="功能清单" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
                         </WrapPanel>

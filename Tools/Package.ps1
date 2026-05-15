@@ -1,14 +1,14 @@
 ﻿param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "1.3.2"
+    [string]$ProductVersion = "2.0.3"
 )
 
 $ErrorActionPreference = "Stop"
 
 $productVersionParts = $ProductVersion.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)
 if ($productVersionParts.Count -ne 3) {
-    throw "ProductVersion must use three segments, for example 1.3.2."
+    throw "ProductVersion must use three segments, for example 2.0.3."
 }
 
 $assemblyVersion = "$ProductVersion.0"
@@ -24,6 +24,7 @@ $appIconPath = Join-Path $root "AbbRelaysOfflineConfigurator\Assets\abb-relays.i
 $userDeclarationTextPath = Join-Path $root "Tools\Installer\UserDeclaration.txt"
 $userDeclarationRtfPath = Join-Path $installerWork "UserDeclaration.rtf"
 
+Remove-Item -LiteralPath $appPublish, $authPublish, $installerWork -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $outputRoot, $appPublish, $authPublish, $installerWork | Out-Null
 
 dotnet publish (Join-Path $root "AbbRelaysOfflineConfigurator\AbbRelaysOfflineConfigurator.csproj") `
@@ -211,3 +212,4 @@ Copy-Item -LiteralPath $msiPath -Destination $latestMsiPath -Force
 Write-Host "MSI: $msiPath"
 Write-Host "MSI latest copy: $latestMsiPath"
 Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
+

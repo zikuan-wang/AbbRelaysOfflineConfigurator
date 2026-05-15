@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+  <OrderCodeVersions>
+    <!-- Order code version, IED version, Application Designs -->
+    <Version Id="1G" IED_version="1.0" Conpack_version="1.0"/>
+    <Version Id="2G" IED_version="1.1" Conpack_version="1.1"/>
+    <Version Id="3G" IED_version="1.2" Conpack_version="1.2"/>
+    <Version Id="4G" IED_version="1.3" Conpack_version="1.3"/>
+    <Version Id="5G" IED_version="1.4" Conpack_version="1.4"/>
+    <Version Id="6G" IED_version="1.5" Conpack_version="1.5"/>
+  </OrderCodeVersions>
+  <Default OrderCode="SBACANANCAA1ANN16G"/>
+  <OrderCodes>
+    <Digit Location="1" Group="Mountings">
+      <!-- Basic product -->
+      <Option Id="S" Version="*" OptionCode="" Description="Mountings_S"/>
+      <Option Id="V" Version="5G, 6G" OptionCode="" Description="Mountings_V"/>
+    </Digit>
+    <Digit Location="2" Group="Standards">
+      <!-- Standard -->
+      <Option Id="B" Version="*" OptionCode="" Description="Standards_B"/>
+    </Digit>
+    <Digit Location="3" Group="MainApps">
+      <!-- Main AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="MainApps_A"/>
+      <Option Id="B" Version="6G" OptionCode="" Description="MainApps_B"/>
+    </Digit>
+    <Digit Location="4" Group="FunctionalApps">
+      <!-- Cable/Line AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="CL_AppPack_5_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="CL_AppPack_10_B"/>
+      <Option Id="C" Version="*" OptionCode="" Description="CL_AppPack_15_C"/>
+      <Option Id="D" Version="*" OptionCode="" Description="CL_AppPack_20_D"/>
+      <Option Id="E" Version="4G, 5G, 6G" OptionCode="" Description="CL_AppPack_30_E"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="5" Group="Aios">
+      <!-- Advanced Cable/Line AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="ACL_AppPack_5_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="ACL_AppPack_10_B"/>
+      <Option Id="C" Version="*" OptionCode="" Description="ACL_AppPack_15_C"/>
+      <Option Id="D" Version="*" OptionCode="" Description="ACL_AppPack_20_D"/>
+      <Option Id="E" Version="4G, 5G, 6G" OptionCode="" Description="ACL_AppPack_30_E"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="6" Group="Bios">
+      <!-- Spare / Additional Application Package -->
+      <Option Id="A" Version="5G, 6G" OptionCode="" Description="SCP_AppPack"/>
+      <Option Id="B" Version="6G" OptionCode="" Description="LDF_AppPack"/>
+      <Option Id="C" Version="6G" OptionCode="" Description="SCP_LDF_AppPack"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="7" Group="CommSerials">
+      <!-- Transformer AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="T_AppPack_2_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="T_AppPack_4_B"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="8" Group="CommEthernets">
+      <!-- Motor AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="M_AppPack_5_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="M_AppPack_10_B"/>
+      <Option Id="C" Version="*" OptionCode="" Description="M_AppPack_15_C"/>
+      <Option Id="D" Version="*" OptionCode="" Description="M_AppPack_20_D"/>
+      <Option Id="E" Version="4G, 5G, 6G" OptionCode="" Description="M_AppPack_30_E"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="9" Group="CommProtocols">
+      <!-- IEC 61850-9-2LE Process Bus Connectivity -->
+      <Option Id="1" Version="6G" OptionCode="" Description="PB_Connectibity_5"/>
+      <Option Id="A" Version="*" OptionCode="" Description="PB_Connectibity_10"/>
+      <Option Id="B" Version="*" OptionCode="" Description="PB_Connectibity_15"/>
+      <Option Id="C" Version="*" OptionCode="" Description="PB_Connectibity_20"/>
+      <Option Id="D" Version="4G, 5G, 6G" OptionCode="" Description="PB_Connectibity_30"/>
+    </Digit>
+    <Digit Location="10" Group="Languages">
+      <!-- Option 1: Communication -->
+      <Option Id="A" Version="*" OptionCode="" Description="Ethernet_TX"/>
+      <Option Id="B" Version="*" OptionCode="" Description="Ethernet_FX"/>
+      <Option Id="N" Version="5G, 6G" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="11" Group="FrontPanels">
+      <!-- Communication Protocol -->
+      <Option Id="A" Version="*" OptionCode="" Description="Protocol_IEC_61850"/>
+      <Option Id="B" Version="3G, 4G, 5G, 6G" OptionCode="" Description="Protocol_IEC_61850_and_IEC_104"/>
+      <Option Id="C" Version="6G" OptionCode="" Description="Protocol_IEC_61850_and_DNP"/>
+    </Digit>
+    <Digit Location="12" Group="Options_1">
+      <!-- Language -->
+      <Option Id="1" Version="*" OptionCode="" Description="Languages_1"/>
+    </Digit>
+    <Digit Location="13" Group="Options_2">
+      <!-- User Interface -->
+      <Option Id="A" Version="*" OptionCode="" Description="UI_Web_HMI"/>
+    </Digit>
+    <Digit Location="14" Group="PowerSupplies">
+      <!-- Option 1: Special bay-level AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="Special_bay_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="Special_bay_B"/>
+      <Option Id="C" Version="*" OptionCode="" Description="Special_bay_C"/>
+      <Option Id="D" Version="*" OptionCode="" Description="Special_bay_D"/>
+      <Option Id="E" Version="*" OptionCode="" Description="Special_bay_E"/>
+      <Option Id="F" Version="*" OptionCode="" Description="Special_bay_F"/>
+      <Option Id="G" Version="*" OptionCode="" Description="Special_bay_G"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="15" Group="Reserved">
+      <!-- Option 2: Special multi-bay AppPack -->
+      <Option Id="A" Version="*" OptionCode="" Description="Special_multi_bay_A"/>
+      <Option Id="B" Version="*" OptionCode="" Description="Special_multi_bay_B"/>
+      <Option Id="C" Version="*" OptionCode="" Description="Special_multi_bay_C"/>
+      <Option Id="D" Version="2G, 3G, 4G, 5G, 6G" OptionCode="" Description="Special_multi_bay_D"/>
+      <Option Id="E" Version="2G, 3G, 4G, 5G, 6G" OptionCode="" Description="Special_multi_bay_E"/>
+      <Option Id="F" Version="2G, 3G, 4G, 5G, 6G" OptionCode="" Description="Special_multi_bay_F"/>
+      <Option Id="G" Version="2G, 3G, 4G, 5G, 6G" OptionCode="" Description="Special_multi_bay_G"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="16" Group="Reserved2">
+      <!-- Power Supply -->
+      <Option Id="1" Version="*" OptionCode="" Description="PowerSupplies_A"/>
+      <Option Id="2" Version="*" OptionCode="" Description="PowerSupplies_B"/>
+      <Option Id="N" Version="5G, 6G" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="17+18" Group="Versions">
+      <!-- Product Version -->
+      <Option Id="1G" Version="*" OptionCode="" Description="Versions_1G"/>
+      <Option Id="2G" Version="*" OptionCode="" Description="Versions_2G"/>
+      <Option Id="3G" Version="*" OptionCode="" Description="Versions_3G"/>
+      <Option Id="4G" Version="*" OptionCode="" Description="Versions_4G"/>
+      <Option Id="5G" Version="*" OptionCode="" Description="Versions_5G"/>
+      <Option Id="6G" Version="*" OptionCode="" Description="Versions_6G"/>
+    </Digit>
+  </OrderCodes>
+  <ValidOrderCodes>
+    <!-- Basic product + Option 1: Communication + Power Supply -->
+    <FunctionalApplication>
+      <Rule        Version="5G, 6G">VNN</Rule>
+      <RulePattern Version="5G, 6G">^S[A|B][1|2]$</RulePattern>
+      <RulePattern Version="1G, 2G, 3G, 4G">^S[A|B][1|2]$</RulePattern>
+    </FunctionalApplication>
+    <Communication/>
+    <!-- Cable/Line AppPack + Advanced Cable/Line AppPack + Motor AppPack + IEC 61850-9-2LE Process Bus Connectivity -->
+    <Software>
+      <RulePattern Version="*">^[A|B|N]{3}A$</RulePattern>
+      <RulePattern Version="*">^[A|B|C|N]{3}B$</RulePattern>
+      <RulePattern Version="*">^[A|B|C|D|N]{3}C$</RulePattern>
+      <RulePattern Version="4G, 5G, 6G">^[A|B|C|D|E|N]{3}D$</RulePattern>
+      <RulePattern Version="6G">^[A|N]{3}1$</RulePattern>
+    </Software>
+    <HMI/>
+  </ValidOrderCodes>
+  <Configurations>
+    <Configuration Name="FE09" Version="1G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="1G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+       <Configuration Name="FE09" Version="2G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="2G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="3G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="3G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="4G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="4G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="5G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="5G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="SW09" Version="5G" File="sw09_complete_ed1.xml" ModulesFile="sw09_products.xml" LayoutFile="sw09_layout.xml" AdditionalSldFile="sw09_asld.xml" EventConfigurationFile="sw09_hmi_ed1.xml">
+      <OrderCode Name="VB################"/>
+    </Configuration>
+    <Configuration Name="SW09" Version="5G" Edition="ED2" File="sw09_complete.xml" ModulesFile="sw09_products.xml" LayoutFile="sw09_layout.xml" AdditionalSldFile="sw09_asld.xml" EventConfigurationFile="sw09_hmi.xml">
+      <OrderCode Name="VB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="6G" File="fe09_complete_ed1.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi_ed1.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="FE09" Version="6G" Edition="ED2" File="fe09_complete.xml" ModulesFile="fe09_products.xml" LayoutFile="fe09_layout.xml" AdditionalSldFile="fe09_asld.xml" EventConfigurationFile="fe09_hmi.xml">
+      <OrderCode Name="SB################"/>
+    </Configuration>
+    <Configuration Name="SW09" Version="6G" File="sw09_complete_ed1.xml" ModulesFile="sw09_products.xml" LayoutFile="sw09_layout.xml" AdditionalSldFile="sw09_asld.xml" EventConfigurationFile="sw09_hmi_ed1.xml">
+      <OrderCode Name="VB################"/>
+    </Configuration>
+    <Configuration Name="SW09" Version="6G" Edition="ED2" File="sw09_complete.xml" ModulesFile="sw09_products.xml" LayoutFile="sw09_layout.xml" AdditionalSldFile="sw09_asld.xml" EventConfigurationFile="sw09_hmi.xml">
+      <OrderCode Name="VB################"/>
+    </Configuration>
+  </Configurations>
+</ProductTypeCode>

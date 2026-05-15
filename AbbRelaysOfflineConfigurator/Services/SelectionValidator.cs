@@ -4,7 +4,10 @@ namespace AbbRelaysOfflineConfigurator.Services;
 
 public sealed class SelectionValidator(ProductRuleSet rules)
 {
-    public ValidationResult Validate(IReadOnlyCollection<RuleOption> selectedOptions, bool useFullDescription = false)
+    public ValidationResult Validate(
+        IReadOnlyCollection<RuleOption> selectedOptions,
+        bool useFullDescription = false,
+        bool useEnglishDescription = false)
     {
         var messages = new List<string>();
         var selectedByGroup = BuildSelectedByGroup(selectedOptions);
@@ -15,7 +18,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         ValidateValidityExpressions(selectedOptions, selectedByGroup, messages);
         ValidateRequiredExpressions(selectedOptions, selectedByGroup, messages);
 
-        var assignments = ValidateSlotConstraints(selectedOptions, selectedByGroup, messages, useFullDescription);
+        var assignments = ValidateSlotConstraints(selectedOptions, selectedByGroup, messages, useFullDescription, useEnglishDescription);
 
         return new ValidationResult(messages.Count == 0, messages, assignments);
     }
@@ -134,23 +137,24 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         IReadOnlyCollection<RuleOption> selectedOptions,
         IReadOnlyDictionary<string, HashSet<string>> selectedByGroup,
         ICollection<string> messages,
-        bool useFullDescription)
+        bool useFullDescription,
+        bool useEnglishDescription)
     {
         var slotConstraints = ResolveSlotConstraints(selectedByGroup, messages);
         if (!selectedByGroup.TryGetValue("机箱", out var housingSet) || housingSet.Count != 1)
         {
             messages.Add("无法校验槽位：必须先选择一个机箱。");
-            return BuildFixedAssignments(selectedByGroup, useFullDescription);
+            return BuildFixedAssignments(selectedByGroup, useFullDescription, useEnglishDescription);
         }
 
         var housingId = housingSet.First();
         if (!slotConstraints.Housings.TryGetValue(housingId, out var housing))
         {
             messages.Add($"未找到机箱 {housingId} 的槽位约束。");
-            return BuildFixedAssignments(selectedByGroup, useFullDescription);
+            return BuildFixedAssignments(selectedByGroup, useFullDescription, useEnglishDescription);
         }
 
-        var units = BuildModuleUnits(selectedOptions, useFullDescription);
+        var units = BuildModuleUnits(selectedOptions, useFullDescription, useEnglishDescription);
         var assignments = new Dictionary<string, List<ModuleUnit>>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var unit in units)
@@ -169,15 +173,15 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         if (!TryAssign(orderedUnits, housing, assignments, index: 0))
         {
             messages.Add($"当前模块组合无法装入 {housingId} 机箱槽位。");
-            return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription);
+            return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription, useEnglishDescription);
         }
 
         if (!ValidateRequirements(housing, assignments, messages))
         {
-            return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription);
+            return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription, useEnglishDescription);
         }
 
-        return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription);
+        return BuildSlotAssignments(selectedByGroup, housing, assignments, useFullDescription, useEnglishDescription);
     }
 
     private SlotConstraintSet ResolveSlotConstraints(
@@ -206,7 +210,10 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             : null;
     }
 
-    private List<ModuleUnit> BuildModuleUnits(IEnumerable<RuleOption> selectedOptions, bool useFullDescription)
+    private List<ModuleUnit> BuildModuleUnits(
+        IEnumerable<RuleOption> selectedOptions,
+        bool useFullDescription,
+        bool useEnglishDescription)
     {
         var units = new List<ModuleUnit>();
         foreach (var option in selectedOptions)
@@ -223,16 +230,16 @@ public sealed class SelectionValidator(ProductRuleSet rules)
                     option.GroupName,
                     option.Id,
                     index,
-                    DisplaySlotDescription(option, useFullDescription)));
+                    DisplaySlotDescription(option, useFullDescription, useEnglishDescription)));
             }
         }
 
         return units;
     }
 
-    private string DisplaySlotDescription(RuleOption option, bool useFullDescription)
+    private string DisplaySlotDescription(RuleOption option, bool useFullDescription, bool useEnglishDescription)
     {
-        return DisplayDescription(FindSingleModuleOption(option) ?? option, useFullDescription);
+        return DisplayDescription(FindSingleModuleOption(option) ?? option, useFullDescription, useEnglishDescription);
     }
 
     private RuleOption? FindSingleModuleOption(RuleOption option)
@@ -254,9 +261,10 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         IReadOnlyDictionary<string, HashSet<string>> selectedByGroup,
         HousingConstraint housing,
         IReadOnlyDictionary<string, List<ModuleUnit>> assignments,
-        bool useFullDescription)
+        bool useFullDescription,
+        bool useEnglishDescription)
     {
-        var slots = BuildFixedAssignments(selectedByGroup, useFullDescription).ToList();
+        var slots = BuildFixedAssignments(selectedByGroup, useFullDescription, useEnglishDescription).ToList();
 
         foreach (var slot in housing.Slots)
         {
@@ -296,12 +304,13 @@ public sealed class SelectionValidator(ProductRuleSet rules)
 
     private IReadOnlyList<SlotAssignment> BuildFixedAssignments(
         IReadOnlyDictionary<string, HashSet<string>> selectedByGroup,
-        bool useFullDescription)
+        bool useFullDescription,
+        bool useEnglishDescription)
     {
         return
         [
-            BuildFixedAssignment("X000", "通讯模块", "COM: 未选择"),
-            BuildFixedAssignment("X100", "电源模块", "PSM: 未选择")
+            BuildFixedAssignment("X000", "通讯模块", useEnglishDescription ? "COM: not selected" : "COM: 未选择"),
+            BuildFixedAssignment("X100", "电源模块", useEnglishDescription ? "PSM: not selected" : "PSM: 未选择")
         ];
 
         SlotAssignment BuildFixedAssignment(string slotId, string groupName, string emptyDescription)
@@ -312,7 +321,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
                 option?.Id ?? "N/A",
                 option is null
                     ? emptyDescription
-                    : DisplayDescription(option, useFullDescription),
+                    : DisplayDescription(option, useFullDescription, useEnglishDescription),
                 option?.GroupName,
                 option?.Id,
                 IsFixed: true,
@@ -334,16 +343,23 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         return selected.Select(id => rules.OptionsById.GetValueOrDefault(id)).FirstOrDefault(option => option is not null);
     }
 
-    private static string DisplayDescription(RuleOption option, bool useFullDescription)
+    private static string DisplayDescription(RuleOption option, bool useFullDescription, bool useEnglishDescription)
     {
+        if (useEnglishDescription)
+        {
+            return useFullDescription
+                ? FirstNonEmpty(option.EnglishDescription, option.EnglishShortDescription, option.ShortDescription, option.Description)
+                : FirstNonEmpty(option.EnglishShortDescription, option.ShortDescription, option.EnglishDescription, option.Description);
+        }
+
         return useFullDescription
             ? FirstNonEmpty(option.Description, option.ShortDescription)
             : FirstNonEmpty(option.ShortDescription, option.Description);
     }
 
-    private static string FirstNonEmpty(string primary, string fallback)
+    private static string FirstNonEmpty(params string?[] values)
     {
-        return string.IsNullOrWhiteSpace(primary) ? fallback : primary;
+        return values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "";
     }
 
     private static bool TryAssign(

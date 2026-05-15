@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+  <OrderCodeVersions>
+    <!-- Order code version, IED version, Application Designs -->
+    <Version Id="1G" IED_version="1.0" Conpack_version="1.0"/>
+  </OrderCodeVersions>
+  <Default OrderCode="MGABAANNNAA1ANNA1G"/>
+  <OrderCodes>
+    <Digit Location="1" Group="Mountings">
+      <!-- Basic product -->
+      <Option Id="M" Version="*" OptionCode="" Description="Mountings_M"/>
+    </Digit>
+    <Digit Location="2" Group="Standards">
+      <!-- Standard -->
+      <Option Id="G" Version="*" OptionCode="" Description="Standards_G"/>
+    </Digit>
+    <Digit Location="3" Group="MainApps">
+      <!-- Main application package -->
+      <Option Id="A" Version="*" OptionCode="" Description="MainApps_A"/>
+    </Digit>
+    <Digit Location="4" Group="FunctionalApps">
+      <!-- Function application -->
+      <Option Id="A" Version="*" OptionCode="" Description="MU_w_AIM"/>
+      <Option Id="B" Version="*" OptionCode="" Description="MU_w_AIM_BIO"/>
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="5" Group="Aios">
+      <!-- Analogue inputs -->
+      <Option Id="A" Version="*" OptionCode="" Description="AIM_1"/>
+    </Digit>
+    <Digit Location="6" Group="Bios">
+      <!-- Binary inputs/outputs -->
+      <Option Id="A" Version="*" OptionCode="" Description="BIO_1"/>
+    </Digit>
+    <Digit Location="7" Group="CommSerials">
+      <!-- Spare -->
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="8" Group="CommEthernets">
+      <!-- Spare -->
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="9" Group="CommProtocols">
+      <!-- Spare -->
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="10" Group="Languages">
+      <!-- Option 1: Communication -->
+      <Option Id="A" Version="*" OptionCode="" Description="Ethernet_TX"/>
+    </Digit>
+    <Digit Location="11" Group="FrontPanels">
+      <!-- Communication Protocol -->
+      <Option Id="A" Version="*" OptionCode="" Description="Protocol_IEC_61850"/>
+    </Digit>
+    <Digit Location="12" Group="Options_1">
+      <!-- Language -->
+      <Option Id="1" Version="*" OptionCode="" Description="Languages_1"/>
+    </Digit>
+    <Digit Location="13" Group="Options_2">
+      <!-- User Interface -->
+      <Option Id="A" Version="*" OptionCode="" Description="UI_Web_HMI"/>
+    </Digit>
+    <Digit Location="14" Group="PowerSupplies">
+      <!-- Spare -->
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="15" Group="Reserved">
+      <!-- Spare -->
+      <Option Id="N" Version="*" OptionCode="" Description="None_desc"/>
+    </Digit>
+    <Digit Location="16" Group="Reserved2">
+      <!-- Power Supply -->
+      <Option Id="A" Version="*" OptionCode="" Description="PowerSupplies_D"/>
+    </Digit>
+    <Digit Location="17+18" Group="Versions">
+      <!-- Product Version -->
+      <Option Id="1G" Version="*" OptionCode="" Description="Versions_1G"/>
+    </Digit>
+  </OrderCodes>
+  <ValidOrderCodes/>
+  <Configurations>
+    <Configuration Name="MU01" Version="1G" File="mu01_complete_ed1.xml" ModulesFile="mu01_products.xml" LayoutFile="mu01_layout.xml" AdditionalSldFile="mu01_asld.xml" EventConfigurationFile="mu01_hmi_ed1.xml">
+      <OrderCode Name="MG################"/>
+    </Configuration>
+    <Configuration Name="MU01" Version="1G" Edition="ED2" File="mu01_complete.xml" ModulesFile="mu01_products.xml" LayoutFile="mu01_layout.xml" AdditionalSldFile="mu01_asld.xml" EventConfigurationFile="mu01_hmi.xml">
+      <OrderCode Name="MG################"/>
+    </Configuration>
+  </Configurations>
+</ProductTypeCode>
