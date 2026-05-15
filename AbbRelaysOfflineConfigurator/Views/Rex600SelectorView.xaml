@@ -40,28 +40,40 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="Rex600ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
-            <Setter Property="MinHeight" Value="30" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
             <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
         <Style x:Key="Rex600PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
-            <Setter Property="MinHeight" Value="30" />
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
         <Style x:Key="Rex600DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
-            <Setter Property="MinHeight" Value="30" />
             <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
             <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
 

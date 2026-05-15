@@ -16,29 +16,48 @@
         </Style>
 
         <Style x:Key="LegacySelectorButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="MinHeight" Value="32" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
             <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="LegacySelectorPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="MinHeight" Value="32" />
             <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="LegacySelectorDangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="MinHeight" Value="32" />
             <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
             <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="LegacySelectorComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="8,0,4,0" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="LegacyTargetChipButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
@@ -188,16 +207,15 @@
                                         <ItemsControl ItemsSource="{Binding Options}" Margin="10,0,10,10">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Border Style="{StaticResource LegacyOptionBorderStyle}">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="*" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <RadioButton IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                                                         VerticalAlignment="Top"
-                                                                         Margin="0,2,8,0" />
-                                                            <StackPanel Grid.Column="1">
+                                                    <Border Style="{StaticResource LegacyOptionBorderStyle}"
+                                                            Cursor="Hand"
+                                                            MouseLeftButtonUp="LegacyOptionRow_OnMouseLeftButtonUp">
+                                                        <RadioButton IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                                     HorizontalContentAlignment="Stretch"
+                                                                     VerticalContentAlignment="Top"
+                                                                     Foreground="{DynamicResource TextBrush}">
+                                                            <RadioButton.Content>
+                                                                <StackPanel>
                                                                 <TextBlock Foreground="{DynamicResource TextBrush}"
                                                                            TextWrapping="Wrap">
                                                                     <Run Text="{Binding Code, Mode=OneWay}" FontWeight="Bold" />
@@ -209,8 +227,9 @@
                                                                            FontSize="12"
                                                                            TextWrapping="Wrap"
                                                                            Margin="0,2,0,0" />
-                                                            </StackPanel>
-                                                        </Grid>
+                                                                </StackPanel>
+                                                            </RadioButton.Content>
+                                                        </RadioButton>
                                                     </Border>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
@@ -245,13 +264,13 @@
                                       ItemsSource="{Binding Series}"
                                       SelectedItem="{Binding SelectedSeries, Mode=TwoWay}"
                                       DisplayMemberPath="Name"
-                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      Style="{StaticResource LegacySelectorComboBoxStyle}"
                                       materialDesign:HintAssist.Hint="产品系列" />
                             <ComboBox Grid.Column="2"
                                       ItemsSource="{Binding Devices}"
                                       SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                                       DisplayMemberPath="Name"
-                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      Style="{StaticResource LegacySelectorComboBoxStyle}"
                                       materialDesign:HintAssist.Hint="装置类型" />
                         </Grid>
 
@@ -431,8 +450,10 @@
                                      Text="{Binding FunctionSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                      materialDesign:HintAssist.Hint="ABB Code / ANSI Code / 保护功能"
-                                     MinHeight="38"
-                                     Padding="8,2" />
+                                     Height="36"
+                                     MinHeight="36"
+                                     Padding="8,0"
+                                     VerticalContentAlignment="Center" />
                             <Button Grid.Column="2"
                                     Command="{Binding AddFunctionSearchInputCommand}"
                                     Style="{StaticResource LegacySelectorPrimaryButtonStyle}">

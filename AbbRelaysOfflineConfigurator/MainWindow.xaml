@@ -130,32 +130,44 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="MinHeight" Value="30" />
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="MinHeight" Value="30" />
             <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Background" Value="{DynamicResource DangerSoftBrush}" />
             <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style x:Key="TargetChipButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
@@ -176,7 +188,7 @@
         </Style>
 
         <Style x:Key="HeaderNavButtonStyle" TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
-            <Setter Property="Padding" Value="9,5" />
+            <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
 
@@ -228,8 +240,8 @@
 
         <Style x:Key="ToolbarComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFilledComboBox}">
             <Setter Property="Width" Value="88" />
-            <Setter Property="Height" Value="32" />
-            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
             <Setter Property="Padding" Value="8,0,4,0" />
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
             <Setter Property="FontSize" Value="12" />
@@ -1382,8 +1394,10 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Text="{Binding FunctionSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                         MinHeight="32"
-                                         Padding="8,6"
+                                         Height="36"
+                                         MinHeight="36"
+                                         Padding="8,0"
+                                         VerticalContentAlignment="Center"
                                          BorderBrush="{DynamicResource ControlBorderBrush}"
                                          Background="{DynamicResource FieldBackgroundBrush}"
                                          Foreground="{DynamicResource TextBrush}" />

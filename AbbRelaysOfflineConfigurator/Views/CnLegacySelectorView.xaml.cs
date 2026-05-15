@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Media;
 using AbbRelaysOfflineConfigurator.ViewModels;
@@ -25,6 +26,14 @@ public partial class CnLegacySelectorView : UserControl
         if (message.PrimaryTarget is not null)
         {
             Dispatcher.BeginInvoke(() => BringValidationTargetIntoView(message.PrimaryTarget), DispatcherPriority.Background);
+        }
+    }
+
+    private void LegacyOptionRow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (sender is FrameworkElement { DataContext: CnLegacyOptionViewModel option })
+        {
+            option.IsSelected = true;
         }
     }
 
