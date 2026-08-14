@@ -1,19 +1,42 @@
-﻿param(
+param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$ProductVersion = "2.0.8"
+    [string]$ProductVersion = "",
+    [switch]$BuildAuthorizationTool
 )
 
 $ErrorActionPreference = "Stop"
 
+$root = Split-Path -Parent $PSScriptRoot
+
+function Get-ProjectVersionFromProps([string]$rootPath) {
+    $propsPath = Join-Path $rootPath "Directory.Build.props"
+    if (-not (Test-Path -LiteralPath $propsPath)) {
+        throw "Directory.Build.props was not found."
+    }
+
+    [xml]$props = Get-Content -LiteralPath $propsPath -Raw
+    $version = $props.Project.PropertyGroup.AbbRelaysProductVersion |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        Select-Object -First 1
+    if ([string]::IsNullOrWhiteSpace($version)) {
+        throw "Directory.Build.props does not define AbbRelaysProductVersion."
+    }
+
+    return $version.Trim()
+}
+
+if ([string]::IsNullOrWhiteSpace($ProductVersion)) {
+    $ProductVersion = Get-ProjectVersionFromProps $root
+}
+
 $productVersionParts = $ProductVersion.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)
 if ($productVersionParts.Count -ne 3) {
-    throw "ProductVersion must use three segments, for example 2.0.8."
+    throw "ProductVersion must use three segments, for example 2.2.6."
 }
 
 $assemblyVersion = "$ProductVersion.0"
 
-$root = Split-Path -Parent $PSScriptRoot
 $outputRoot = Join-Path $root "Generated\Package"
 $appPublish = Join-Path $outputRoot "App"
 $authPublish = Join-Path $outputRoot "AuthorizationTool"
@@ -24,8 +47,15 @@ $appIconPath = Join-Path $root "AbbRelaysOfflineConfigurator\Assets\abb-relays.i
 $userDeclarationTextPath = Join-Path $root "Tools\Installer\UserDeclaration.txt"
 $userDeclarationRtfPath = Join-Path $installerWork "UserDeclaration.rtf"
 
-Remove-Item -LiteralPath $appPublish, $authPublish, $installerWork -Recurse -Force -ErrorAction SilentlyContinue
-New-Item -ItemType Directory -Force -Path $outputRoot, $appPublish, $authPublish, $installerWork | Out-Null
+Remove-Item -LiteralPath $appPublish, $installerWork -Recurse -Force -ErrorAction SilentlyContinue
+if ($BuildAuthorizationTool) {
+    Remove-Item -LiteralPath $authPublish -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+New-Item -ItemType Directory -Force -Path $outputRoot, $appPublish, $installerWork | Out-Null
+if ($BuildAuthorizationTool) {
+    New-Item -ItemType Directory -Force -Path $authPublish | Out-Null
+}
 
 dotnet publish (Join-Path $root "AbbRelaysOfflineConfigurator\AbbRelaysOfflineConfigurator.csproj") `
     -c $Configuration `
@@ -40,19 +70,21 @@ dotnet publish (Join-Path $root "AbbRelaysOfflineConfigurator\AbbRelaysOfflineCo
     /p:DebugType=None `
     /p:DebugSymbols=false
 
-dotnet publish (Join-Path $root "AbbRelaysAuthorizationTool\AbbRelaysAuthorizationTool.csproj") `
-    -c $Configuration `
-    -r $Runtime `
-    --self-contained true `
-    -o $authPublish `
-    /p:Version=$ProductVersion `
-    /p:AssemblyVersion=$assemblyVersion `
-    /p:FileVersion=$assemblyVersion `
-    /p:InformationalVersion=$ProductVersion `
-    /p:PublishSingleFile=true `
-    /p:IncludeNativeLibrariesForSelfExtract=true `
-    /p:DebugType=None `
-    /p:DebugSymbols=false
+if ($BuildAuthorizationTool) {
+    dotnet publish (Join-Path $root "AbbRelaysAuthorizationTool\AbbRelaysAuthorizationTool.csproj") `
+        -c $Configuration `
+        -r $Runtime `
+        --self-contained true `
+        -o $authPublish `
+        /p:Version=$ProductVersion `
+        /p:AssemblyVersion=$assemblyVersion `
+        /p:FileVersion=$assemblyVersion `
+        /p:InformationalVersion=$ProductVersion `
+        /p:PublishSingleFile=true `
+        /p:IncludeNativeLibrariesForSelfExtract=true `
+        /p:DebugType=None `
+        /p:DebugSymbols=false
+}
 
 $componentGroupPath = Join-Path $installerWork "AppFiles.wxs"
 $componentRows = New-Object System.Collections.Generic.List[string]
@@ -175,7 +207,12 @@ $wixCommand = Get-Command wix -ErrorAction SilentlyContinue
 if ($null -eq $wixCommand) {
     Write-Warning "WiX Toolset CLI was not found. Self-contained publish is complete; install WiX and rerun this script to generate MSI."
     Write-Host "App publish directory: $appPublish"
-    Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
+    if ($BuildAuthorizationTool) {
+        Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
+    }
+    else {
+        Write-Host "Authorization tool build skipped. Existing files under $authPublish were preserved."
+    }
     return
 }
 
@@ -207,9 +244,34 @@ if (-not (Test-Path -LiteralPath $msiPath)) {
     throw "WiX completed but MSI was not produced: $msiPath"
 }
 
+$msiValidationTarget = Join-Path $installerWork "MsiValidation"
+$msiValidationLog = Join-Path $installerWork "MsiValidation.log"
+Remove-Item -LiteralPath $msiValidationTarget -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path $msiValidationTarget | Out-Null
+$msiValidationArgs = @(
+    "/a",
+    "`"$msiPath`"",
+    "TARGETDIR=`"$msiValidationTarget`"",
+    "/qn",
+    "/l*v",
+    "`"$msiValidationLog`""
+)
+$msiValidation = Start-Process -FilePath "msiexec.exe" -ArgumentList $msiValidationArgs -Wait -PassThru -WindowStyle Hidden
+if ($msiValidation.ExitCode -ne 0) {
+    throw "MSI validation failed with exit code $($msiValidation.ExitCode). See log: $msiValidationLog"
+}
+Remove-Item -LiteralPath $msiValidationTarget -Recurse -Force -ErrorAction SilentlyContinue
+
 Copy-Item -LiteralPath $msiPath -Destination $latestMsiPath -Force
+$msiHash = (Get-FileHash -LiteralPath $msiPath -Algorithm SHA256).Hash
 
 Write-Host "MSI: $msiPath"
 Write-Host "MSI latest copy: $latestMsiPath"
-Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
-
+Write-Host "MSI validation: administrative extraction succeeded."
+Write-Host "MSI SHA256: $msiHash"
+if ($BuildAuthorizationTool) {
+    Write-Host "Authorization tool EXE: $(Join-Path $authPublish 'ABBRelaysAuthorizationTool.exe')"
+}
+else {
+    Write-Host "Authorization tool build skipped. Existing files under $authPublish were preserved."
+}

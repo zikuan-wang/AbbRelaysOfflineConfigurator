@@ -374,7 +374,10 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         }
 
         var unit = units[index];
-        foreach (var slot in housing.Slots.Where(slot => slot.Modules.Contains(unit.ModuleType)))
+        // ABB CodeOrder is independent from the preferred physical slot priority.
+        foreach (var slot in housing.Slots
+                     .Where(slot => slot.Modules.Contains(unit.ModuleType))
+                     .OrderBy(slot => slot.AssignmentPriority))
         {
             if (!assignments.TryGetValue(slot.Id, out var used))
             {

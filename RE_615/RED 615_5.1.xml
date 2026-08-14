@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+  <OrderCodeVersions>
+     <!-- Order code version, IED version, Application Designs -->
+     <Version Id="XC" IED_version="2.0" Conpack_version="2.0"/>
+     <Version Id="XD" IED_version="3.0" Conpack_version="3.0"/>
+     <Version Id="1E" IED_version="4.1" Conpack_version="4.1"/>
+     <Version Id="1G" IED_version="5.1" Conpack_version="5.1"/>
+  </OrderCodeVersions>
+  <Default OrderCode="HCDCACADABB2AAN11G"/>
+  <OrderCodes>
+     <Digit Location="1" Group="Mountings">
+         <!-- Product Series, Size, Plug-in -->
+         <Option Id="H" Version="*" OptionCode="" Description="Mountings_H"/>
+         <Option Id="1" Version="1G" OptionCode="" Description="Mountings_1"/>
+     </Digit>
+     <Digit Location="2" Group="Standards">
+         <!-- Standard -->
+         <Option Id="C" Version="*" OptionCode="" Description="Standards_C"/>
+     </Digit>
+     <Digit Location="3" Group="MainApps">
+         <!-- Main Application -->
+         <Option Id="D" Version="*" OptionCode="" Description="MainApps_D"/>
+     </Digit>
+     <Digit Location="4" Group="FunctionalApps">
+         <!-- Functional Application -->
+         <Option Id="A" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_A"/>
+         <Option Id="B" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_B"/>
+         <Option Id="C" Version="*" OptionCode="" Description="FunctionalApps_C"/>
+         <Option Id="D" Version="1G" OptionCode="" Description="FunctionalApps_D"/>
+         <Option Id="L" Version="1E" OptionCode="" Description="FunctionalApps_L"/>
+     </Digit>
+     <Digit Location="5+6" Group="Aios">
+         <!-- Analog Inputs/Outputs -->
+         <Option Id="AA" Version="XC,XD,1E" OptionCode="" Description="Aios_AA"/>
+         <Option Id="AB" Version="XC,XD,1E" OptionCode="" Description="Aios_AB"/>
+         <Option Id="AC" Version="*" OptionCode="" Description="Aios_AC"/>
+         <Option Id="AE" Version="1G" OptionCode="" Description="Aios_AE"/>
+         <Option Id="AF" Version="1G" OptionCode="" Description="Aios_AF"/>
+         <Option Id="FE" Version="1G" OptionCode="" Description="Aios_FE"/>
+         <Option Id="FF" Version="1G" OptionCode="" Description="Aios_FF"/>
+     </Digit>
+     <Digit Location="7+8" Group="Bios">
+         <!-- Binary I/O -->
+         <Option Id="AA" Version="XD,1E" OptionCode="" Description="Bios_AA"/>
+         <Option Id="AB" Version="XD,1E" OptionCode="" Description="Bios_AB"/>
+         <Option Id="AC" Version="XC,XD,1E" OptionCode="" Description="Bios_AC"/>
+         <Option Id="AD" Version="*" OptionCode="" Description="Bios_AD"/>
+         <Option Id="AE" Version="XC,XD,1E" OptionCode="" Description="Bios_AE"/>
+         <Option Id="AF" Version="*" OptionCode="" Description="Bios_AF"/>
+         <Option Id="AG" Version="1G" OptionCode="" Description="Bios_AG"/>
+     </Digit>
+     <Digit Location="9" Group="CommSerials">
+         <!-- Substation communication (Serial) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommSerials_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommSerials_B"/>
+         <Option Id="N" Version="*" OptionCode="" Description="CommSerials_N"/>
+     </Digit>
+     <Digit Location="10" Group="CommEthernets">
+         <!-- Protection and substation communication (Ethernet) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommEthernets_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommEthernets_B"/>
+         <Option Id="G" Version="*" OptionCode="" Description="CommEthernets_G"/>
+         <Option Id="H" Version="*" OptionCode="" Description="CommEthernets_H"/>
+         <Option Id="J" Version="*" OptionCode="" Description="CommEthernets_J"/>
+         <Option Id="K" Version="*" OptionCode="" Description="CommEthernets_K"/>
+         <Option Id="L" Version="1G" OptionCode="" Description="CommEthernets_L"/>
+         <Option Id="M" Version="1G" OptionCode="" Description="CommEthernets_M"/>
+         <Option Id="P" Version="1G" OptionCode="" Description="CommEthernets_P"/>
+         <Option Id="Q" Version="1G" OptionCode="" Description="CommEthernets_Q"/>
+     </Digit>
+     <Digit Location="11" Group="CommProtocols">
+         <!-- Communication (Protocol) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommProtocols_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommProtocols_B"/>
+         <Option Id="C" Version="*" OptionCode="" Description="CommProtocols_C"/>
+         <Option Id="D" Version="*" OptionCode="" Description="CommProtocols_D"/>
+         <Option Id="G" Version="1E,1G" OptionCode="" Description="CommProtocols_G"/>
+     </Digit>
+     <Digit Location="12" Group="Languages">
+         <!-- Language -->
+         <Option Id="2" Version="*" OptionCode="" Description="Languages_2"/>
+		 <Option Id="Z" Version="1G" OptionCode="" Description="Languages_Z"/>
+     </Digit>
+     <Digit Location="13" Group="FrontPanels">
+         <!-- Front Panel -->
+         <Option Id="A" Version="*" OptionCode="" Description="FrontPanels_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="FrontPanels_B"/>
+         <Option Id="C" Version="XD,1E,1G" OptionCode="" Description="FrontPanels_C"/>
+         <Option Id="D" Version="XD,1E,1G" OptionCode="" Description="FrontPanels_D"/>
+     </Digit>
+     <Digit Location="14" Group="Options_1">
+         <!-- Option 1 -->
+         <Option Id="A" Version="*" OptionCode="" Description="Options_1_A"/>
+         <Option Id="D" Version="1G" OptionCode="" Description="Options_1_D"/>
+         <Option Id="E" Version="1G" OptionCode="" Description="Options_1_E"/>
+         <Option Id="H" Version="1G" OptionCode="" Description="Options_1_H"/>
+         <Option Id="L" Version="1G" OptionCode="" Description="Options_1_L"/>
+         <Option Id="M" Version="1G" OptionCode="" Description="Options_1_M"/>
+         <Option Id="N" Version="*" OptionCode="" Description="Options_1_N"/>
+     </Digit>
+     <Digit Location="15" Group="Options_2">
+         <!-- Option 2 -->
+         <Option Id="A" Version="XD,1E,1G" OptionCode="" Description="Options_2_A"/>
+         <Option Id="B" Version="XD,1E,1G" OptionCode="" Description="Options_2_B"/>
+         <Option Id="C" Version="1G" OptionCode="" Description="Options_2_C"/>
+         <Option Id="D" Version="1E,1G" OptionCode="" Description="Options_2_D"/>
+         <Option Id="E" Version="1E,1G" OptionCode="" Description="Options_2_E"/>
+         <Option Id="N" Version="*" OptionCode="" Description="Options_2_N"/>
+     </Digit>
+     <Digit Location="16" Group="PowerSupplies">
+         <!-- Power Supply -->
+         <Option Id="1" Version="*" OptionCode="" Description="PowerSupplies_1"/>
+         <Option Id="2" Version="*" OptionCode="" Description="PowerSupplies_2"/>
+     </Digit>
+     <Digit Location="17+18" Group="Versions">
+         <!-- Version -->
+         <Option Id="XC" Version="*" Edition="ED1" OptionCode="" Description="Versions_XC"/>
+         <Option Id="XD" Version="*" Edition="ED1" OptionCode="" Description="Versions_XD"/>
+         <Option Id="1E" Version="*" Edition="ED1" OptionCode="" Description="Versions_1E"/>
+         <Option Id="1G" Version="*" OptionCode="" Description="Versions_1G"/>
+     </Digit>
+  </OrderCodes>
+  <ValidOrderCodes>
+     <FunctionalApplication>
+         <!-- XYYZZVW - X=Functional app. YY=AIO, ZZ=BIO, V=Option_1, W=Option_2 -->
+         <Rule nr="1" Version="1E,XD">AACABNN</Rule>
+         <Rule nr="2" Version="1E,XD,XC">AACADNN</Rule>
+         <Rule nr="3" Version="1E,XD,XC">AACAFNN</Rule>
+         <Rule nr="4" Version="1E,XD">BAAAAAA</Rule>
+         <Rule nr="5" Version="1E,XD">BAAAAAB</Rule>
+         <Rule nr="6" Version="1E">BAAAAAD</Rule>
+         <Rule nr="7" Version="1E,XD">BAAAANA</Rule>
+         <Rule nr="8" Version="1E,XD">BAAAANB</Rule>
+         <Rule nr="9" Version="1E">BAAAAND</Rule>
+         <Rule nr="10" Version="1E,XD">BAAACAA</Rule>
+         <Rule nr="11" Version="1E,XD">BAAACAB</Rule>
+         <Rule nr="12" Version="1E">BAAACAD</Rule>
+         <Rule nr="13" Version="XC">BAAACAN</Rule>
+         <Rule nr="14" Version="1E,XD">BAAACNA</Rule>
+         <Rule nr="15" Version="1E,XD">BAAACNB</Rule>
+         <Rule nr="16" Version="1E">BAAACND</Rule>
+         <Rule nr="17" Version="XC">BAAACNN</Rule>
+         <Rule nr="18" Version="1E,XD">BAAAEAA</Rule>
+         <Rule nr="19" Version="1E,XD">BAAAEAB</Rule>
+         <Rule nr="20" Version="1E">BAAAEAD</Rule>
+         <Rule nr="21" Version="XC">BAAAEAN</Rule>
+         <Rule nr="22" Version="1E,XD">BAAAENA</Rule>
+         <Rule nr="23" Version="1E,XD">BAAAENB</Rule>
+         <Rule nr="24" Version="1E">BAAAEND</Rule>
+         <Rule nr="25" Version="XC">BAAAENN</Rule>
+         <Rule nr="26" Version="1E,XD">BABAAAA</Rule>
+         <Rule nr="27" Version="1E,XD">BABAAAB</Rule>
+         <Rule nr="28" Version="1E">BABAAAD</Rule>
+         <Rule nr="29" Version="1E,XD">BABAANA</Rule>
+         <Rule nr="30" Version="1E,XD">BABAANB</Rule>
+         <Rule nr="31" Version="1E">BABAAND</Rule>
+         <Rule nr="32" Version="1E,XD">BABACAA</Rule>
+         <Rule nr="33" Version="1E,XD">BABACAB</Rule>
+         <Rule nr="34" Version="1E">BABACAD</Rule>
+         <Rule nr="35" Version="XC">BABACAN</Rule>
+         <Rule nr="36" Version="1E,XD">BABACNA</Rule>
+         <Rule nr="37" Version="1E,XD">BABACNB</Rule>
+         <Rule nr="38" Version="1E">BABACND</Rule>
+         <Rule nr="39" Version="XC">BABACNN</Rule>
+         <Rule nr="40" Version="1E,XD">BABAEAA</Rule>
+         <Rule nr="41" Version="1E,XD">BABAEAB</Rule>
+         <Rule nr="42" Version="1E">BABAEAD</Rule>
+         <Rule nr="43" Version="XC">BABAEAN</Rule>
+         <Rule nr="44" Version="1E,XD">BABAENA</Rule>
+         <Rule nr="45" Version="1E,XD">BABAENB</Rule>
+         <Rule nr="46" Version="1E">BABAEND</Rule>
+         <Rule nr="47" Version="XC">BABAENN</Rule>
+         <Rule nr="48" Version="1E">CACABAE</Rule>
+         <Rule nr="49" Version="1E,XD">CACABAN</Rule>
+         <Rule nr="50" Version="1E">CACABNE</Rule>
+         <Rule nr="51" Version="1E,XD">CACABNN</Rule>
+         <Rule nr="52" Version="1E,1G">CACAFAE</Rule>
+         <Rule nr="53" Version="*">CACAFAN</Rule>
+         <Rule nr="54" Version="1E,1G">CACAFNE</Rule>
+         <Rule nr="55" Version="*">CACAFNN</Rule>
+         <Rule nr="56" Version="1E,1G">CACADAE</Rule>
+         <Rule nr="57" Version="*">CACADAN</Rule>
+         <Rule nr="58" Version="1E,1G">CACADNE</Rule>
+         <Rule nr="59" Version="*">CACADNN</Rule>
+         <Rule nr="60" Version="1G">DAEAG#A</Rule>
+         <Rule nr="61" Version="1G">DAEAG#B</Rule>
+         <Rule nr="62" Version="1G">DAEAG#C</Rule>
+         <Rule nr="63" Version="1G">DAEAG#D</Rule>
+         <Rule nr="64" Version="1G">DAFAG#A</Rule>
+         <Rule nr="65" Version="1G">DAFAG#B</Rule>
+         <Rule nr="66" Version="1G">DAFAG#C</Rule>
+         <Rule nr="67" Version="1G">DAFAG#D</Rule>
+         <Rule nr="68" Version="1G">DFEAD#A</Rule>
+         <Rule nr="69" Version="1G">DFEAD#B</Rule>
+         <Rule nr="70" Version="1G">DFEAD#C</Rule>
+         <Rule nr="71" Version="1G">DFEAD#D</Rule>
+         <Rule nr="72" Version="1G">DFFAD#A</Rule>
+         <Rule nr="73" Version="1G">DFFAD#B</Rule>
+         <Rule nr="74" Version="1G">DFFAD#C</Rule>
+         <Rule nr="75" Version="1G">DFFAD#D</Rule>
+         <Rule nr="76" Version="1E">LACABNN</Rule>
+         <Rule nr="77" Version="1E">LACADNN</Rule>
+         <Rule nr="78" Version="1E">LACAFNN</Rule>
+     </FunctionalApplication>
+     <Communication>
+         <!-- MXYZ - M=Mounting, X=Comm.serial, Y=Comm.ethernet, Z=Comm.protocol -->
+         <Rule nr="1" Version="*">#AAB</Rule>
+         <Rule nr="2" Version="*">#AAD</Rule>
+         <Rule nr="3" Version="*">#ABB</Rule>
+         <Rule nr="4" Version="*">#ABD</Rule>
+         <Rule nr="5" Version="*">#AGA</Rule>
+         <Rule nr="6" Version="*">#AGB</Rule>
+         <Rule nr="7" Version="*">#AGC</Rule>
+         <Rule nr="8" Version="*">#AGD</Rule>
+         <Rule nr="9" Version="1E,1G">#AGG</Rule>
+         <Rule nr="10" Version="*">#AHA</Rule>
+         <Rule nr="11" Version="*">#AHB</Rule>
+         <Rule nr="12" Version="*">#AHC</Rule>
+         <Rule nr="13" Version="*">#AHD</Rule>
+         <Rule nr="14" Version="1E,1G">#AHG</Rule>
+         <Rule nr="15" Version="*">#AJA</Rule>
+         <Rule nr="16" Version="*">#AJB</Rule>
+         <Rule nr="17" Version="*">#AJC</Rule>
+         <Rule nr="18" Version="*">#AJD</Rule>
+         <Rule nr="19" Version="1E,1G">#AJG</Rule>
+         <Rule nr="20" Version="*">#AKA</Rule>
+         <Rule nr="21" Version="*">#AKB</Rule>
+         <Rule nr="22" Version="*">#AKC</Rule>
+         <Rule nr="23" Version="*">#AKD</Rule>
+         <Rule nr="24" Version="1E,1G">#AKG</Rule>
+         <Rule nr="25" Version="*">#BAB</Rule>
+         <Rule nr="26" Version="*">#BAD</Rule>
+         <Rule nr="27" Version="*">#BBB</Rule>
+         <Rule nr="28" Version="*">#BBD</Rule>
+         <Rule nr="29" Version="*">#BGA</Rule>
+         <Rule nr="30" Version="*">#BGB</Rule>
+         <Rule nr="31" Version="*">#BGC</Rule>
+         <Rule nr="32" Version="*">#BGD</Rule>
+         <Rule nr="33" Version="1E,1G">#BGG</Rule>
+         <Rule nr="34" Version="*">#BHA</Rule>
+         <Rule nr="35" Version="*">#BHB</Rule>
+         <Rule nr="36" Version="*">#BHC</Rule>
+         <Rule nr="37" Version="*">#BHD</Rule>
+         <Rule nr="38" Version="1E,1G">#BHG</Rule>
+         <Rule nr="39" Version="*">#BJA</Rule>
+         <Rule nr="40" Version="*">#BJB</Rule>
+         <Rule nr="41" Version="*">#BJC</Rule>
+         <Rule nr="42" Version="*">#BJD</Rule>
+         <Rule nr="43" Version="1E,1G">#BJG</Rule>
+         <Rule nr="44" Version="*">#BKA</Rule>
+         <Rule nr="45" Version="*">#BKB</Rule>
+         <Rule nr="46" Version="*">#BKC</Rule>
+         <Rule nr="47" Version="*">#BKD</Rule>
+         <Rule nr="48" Version="1E,1G">#BKG</Rule>
+         <Rule nr="49" Version="*">#NAA</Rule>
+         <Rule nr="50" Version="*">#NBA</Rule>
+         <Rule nr="51" Version="*">#NGA</Rule>
+         <Rule nr="52" Version="*">#NGB</Rule>
+         <Rule nr="53" Version="*">#NGC</Rule>
+         <Rule nr="54" Version="*">#NHA</Rule>
+         <Rule nr="55" Version="*">#NHB</Rule>
+         <Rule nr="56" Version="*">#NHC</Rule>
+         <Rule nr="57" Version="*">#NJA</Rule>
+         <Rule nr="58" Version="*">#NJB</Rule>
+         <Rule nr="59" Version="*">#NJC</Rule>
+         <Rule nr="60" Version="*">#NKA</Rule>
+         <Rule nr="61" Version="*">#NKB</Rule>
+         <Rule nr="62" Version="*">#NKC</Rule>
+         <Rule nr="63" Version="1G">#NLA</Rule>
+         <Rule nr="64" Version="1G">#NLB</Rule>
+         <Rule nr="65" Version="1G">#NLC</Rule>
+         <Rule nr="66" Version="1G">#NMA</Rule>
+         <Rule nr="67" Version="1G">#NMB</Rule>
+         <Rule nr="68" Version="1G">#NMC</Rule>
+         <Rule nr="69" Version="1G">#NPA</Rule>
+         <Rule nr="70" Version="1G">#NPB</Rule>
+         <Rule nr="71" Version="1G">#NPC</Rule>
+         <Rule nr="72" Version="1G">#NQA</Rule>
+         <Rule nr="73" Version="1G">#NQB</Rule>
+         <Rule nr="74" Version="1G">#NQC</Rule>
+     </Communication>
+     <Software>
+         <!-- FXYZ - F=Functional Application, X=Comm.serial, Y=Comm.ethernet, Z=Option_1 -->
+         <Rule nr="1" Version="1G">DAA#</Rule>
+         <Rule nr="2" Version="1G">DAB#</Rule>
+         <Rule nr="3" Version="1G">DAG#</Rule>
+         <Rule nr="4" Version="1G">DAH#</Rule>
+         <Rule nr="5" Version="1G">DAJ#</Rule>
+         <Rule nr="6" Version="1G">DAK#</Rule>
+         <Rule nr="7" Version="1G">DBA#</Rule>
+         <Rule nr="8" Version="1G">DBB#</Rule>
+         <Rule nr="9" Version="1G">DBG#</Rule>
+         <Rule nr="10" Version="1G">DBH#</Rule>
+         <Rule nr="11" Version="1G">DBJ#</Rule>
+         <Rule nr="12" Version="1G">DBK#</Rule>
+         <Rule nr="13" Version="1G">DNA#</Rule>
+         <Rule nr="14" Version="1G">DNB#</Rule>
+         <Rule nr="15" Version="1G">DNG#</Rule>
+         <Rule nr="16" Version="1G">DNH#</Rule>
+         <Rule nr="17" Version="1G">DNJ#</Rule>
+         <Rule nr="18" Version="1G">DNK#</Rule>
+         <Rule nr="19" Version="1G">DNL#</Rule>
+         <Rule nr="20" Version="1G">DNM#</Rule>
+         <Rule nr="21" Version="1G">DNP#</Rule>
+         <Rule nr="22" Version="1G">DNQ#</Rule>
+         <Rule nr="23" Version="1G">CAAA</Rule>
+         <Rule nr="24" Version="1G">CABA</Rule>
+         <Rule nr="25" Version="1G">CAGA</Rule>
+         <Rule nr="26" Version="1G">CAHA</Rule>
+         <Rule nr="27" Version="1G">CAJA</Rule>
+         <Rule nr="28" Version="1G">CAKA</Rule>
+         <Rule nr="29" Version="1G">CBAA</Rule>
+         <Rule nr="30" Version="1G">CBBA</Rule>
+         <Rule nr="31" Version="1G">CBGA</Rule>
+         <Rule nr="32" Version="1G">CBHA</Rule>
+         <Rule nr="33" Version="1G">CBJA</Rule>
+         <Rule nr="34" Version="1G">CBKA</Rule>
+         <Rule nr="35" Version="1G">CNAA</Rule>
+         <Rule nr="36" Version="1G">CNBA</Rule>
+         <Rule nr="37" Version="1G">CNGA</Rule>
+         <Rule nr="38" Version="1G">CNHA</Rule>
+         <Rule nr="39" Version="1G">CNJA</Rule>
+         <Rule nr="40" Version="1G">CNKA</Rule>
+         <Rule nr="41" Version="1G">CNLA</Rule>
+         <Rule nr="42" Version="1G">CNMA</Rule>
+         <Rule nr="43" Version="1G">CAAN</Rule>
+         <Rule nr="44" Version="1G">CABN</Rule>
+         <Rule nr="45" Version="1G">CAGN</Rule>
+         <Rule nr="46" Version="1G">CAHN</Rule>
+         <Rule nr="47" Version="1G">CAJN</Rule>
+         <Rule nr="48" Version="1G">CAKN</Rule>
+         <Rule nr="49" Version="1G">CBAN</Rule>
+         <Rule nr="50" Version="1G">CBBN</Rule>
+         <Rule nr="51" Version="1G">CBGN</Rule>
+         <Rule nr="52" Version="1G">CBHN</Rule>
+         <Rule nr="53" Version="1G">CBJN</Rule>
+         <Rule nr="54" Version="1G">CBKN</Rule>
+         <Rule nr="55" Version="1G">CNAN</Rule>
+         <Rule nr="56" Version="1G">CNBN</Rule>
+         <Rule nr="57" Version="1G">CNGN</Rule>
+         <Rule nr="58" Version="1G">CNHN</Rule>
+         <Rule nr="59" Version="1G">CNJN</Rule>
+         <Rule nr="60" Version="1G">CNKN</Rule>
+         <Rule nr="61" Version="1G">CNLN</Rule>
+         <Rule nr="62" Version="1G">CNMN</Rule>
+         <Rule nr="63" Version="XC,XD,1E">#AA#</Rule>
+         <Rule nr="64" Version="XC,XD,1E">#AB#</Rule>
+         <Rule nr="65" Version="XC,XD,1E">#AG#</Rule>
+         <Rule nr="66" Version="XC,XD,1E">#AH#</Rule>
+         <Rule nr="67" Version="XC,XD,1E">#AJ#</Rule>
+         <Rule nr="68" Version="XC,XD,1E">#AK#</Rule>
+         <Rule nr="69" Version="XC,XD,1E">#BA#</Rule>
+         <Rule nr="70" Version="XC,XD,1E">#BB#</Rule>
+         <Rule nr="71" Version="XC,XD,1E">#BG#</Rule>
+         <Rule nr="72" Version="XC,XD,1E">#BH#</Rule>
+         <Rule nr="73" Version="XC,XD,1E">#BJ#</Rule>
+         <Rule nr="74" Version="XC,XD,1E">#BK#</Rule>
+         <Rule nr="75" Version="XC,XD,1E">#NA#</Rule>
+         <Rule nr="76" Version="XC,XD,1E">#NB#</Rule>
+         <Rule nr="77" Version="XC,XD,1E">#NG#</Rule>
+         <Rule nr="78" Version="XC,XD,1E">#NH#</Rule>
+         <Rule nr="79" Version="XC,XD,1E">#NJ#</Rule>
+         <Rule nr="80" Version="XC,XD,1E">#NK#</Rule>
+     </Software>
+     <Language>
+         <!-- XY- X=Standard, Y=Language -->
+         <Rule nr="1" Version="1G">C2</Rule>
+		 <Rule nr="2" Version="1G">CZ</Rule>
+     </Language>
+	 <HMI>
+         <!--PL - P=Front Panel, L=Language -->
+		 <Rule nr = "1" Version = "*">A2</Rule>
+		 <Rule nr = "2" Version = "*">B2</Rule>
+         <Rule nr = "3" Version = "XD,1E,1G">#2</Rule>
+         <Rule nr = "4" Version = "1G">CZ</Rule>
+         <Rule nr = "5" Version = "1G">DZ</Rule>
+     </HMI>
+  </ValidOrderCodes>
+   <Configurations>
+      <Configuration Name="DC01" Version="XC,XD,1E" File="dc01_complete.xml" ModulesFile="dc01_products.xml" LayoutFile="dc01_layout.xml">
+         <!-- "Line Differential Protection (LDP)"-->
+         <OrderCode Name="#CDA##############"/>
+      </Configuration>
+      <Configuration Name="DC02" Version="XC,XD,1E" File="dc02_complete.xml" ModulesFile="dc02_products.xml" LayoutFile="dc02_layout.xml">
+         <!-- "LDP with directional EF"-->
+         <OrderCode Name="#CDB##############"/>
+      </Configuration>
+      <Configuration Name="DC03" Version="XC,XD,1E" File="dc03_complete.xml" ModulesFile="dc03_products.xml" LayoutFile="dc03_layout.xml">
+         <!-- "LDP with non-dir. EF"-->
+         <OrderCode Name="#CDC##############"/>
+      </Configuration>
+      <Configuration Name="DC03" Version="1G" File="dc03_complete_ed1.xml" ModulesFile="dc03_products.xml" LayoutFile="dc03_layout.xml" AdditionalSldFile="dc03_asld.xml" EventConfigurationFile="dc03_hmi_ed1.xml">
+         <!-- "Line differential protection with non-directional earth-fault protection, circuit-breaker condition monitoring and CT supervision function without residual current measurements"-->
+         <OrderCode Name="#CDC##############"/>
+      </Configuration>
+      <Configuration Name="DC03" Version="1G" Edition="ED2" File="dc03_complete.xml" ModulesFile="dc03_products.xml" LayoutFile="dc03_layout.xml" AdditionalSldFile="dc03_asld.xml" EventConfigurationFile="dc03_hmi.xml">
+         <!-- "Line differential protection with non-directional earth-fault protection, circuit-breaker condition monitoring and CT supervision function without residual current measurements"-->
+         <OrderCode Name="#CDC##############"/>
+      </Configuration>
+      <Configuration Name="DC04" Version="1G" File="dc04_complete_ed1.xml" ModulesFile="dc04_products.xml" LayoutFile="dc04_layout.xml" AdditionalSldFile="dc04_asld.xml" EventConfigurationFile="dc04_hmi_ed1.xml">
+         <!-- "Line differential protection with directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check, circuit-breaker condition monitoring (RTD option, optional power quality and fault locator) and CT supervision function without residual current measurements"-->
+         <OrderCode Name="#CDD##############"/>
+      </Configuration>
+      <Configuration Name="DC04" Version="1G" Edition="ED2" File="dc04_complete.xml" ModulesFile="dc04_products.xml" LayoutFile="dc04_layout.xml" AdditionalSldFile="dc04_asld.xml" EventConfigurationFile="dc04_hmi.xml">
+         <!-- "Line differential protection with directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check, circuit-breaker condition monitoring (RTD option, optional power quality and fault locator) and CT supervision function without residual current measurements"-->
+         <OrderCode Name="#CDD##############"/>
+      </Configuration>
+      <Configuration Name="DC53" Version="1E" File="dc53_complete.xml" ModulesFile="dc53_products.xml" LayoutFile="dc53_layout.xml">
+         <!-- "Independent Phase Timer OC"-->
+         <OrderCode Name="#CDL##############"/>
+      </Configuration>
+   </Configurations>
+</ProductTypeCode>

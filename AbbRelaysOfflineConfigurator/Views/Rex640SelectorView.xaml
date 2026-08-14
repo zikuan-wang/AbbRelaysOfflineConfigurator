@@ -42,6 +42,7 @@
         <Style x:Key="Rex640ButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
@@ -54,6 +55,7 @@
         <Style x:Key="Rex640SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
@@ -66,6 +68,7 @@
         <Style x:Key="Rex640PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -78,6 +81,7 @@
         <Style x:Key="Rex640DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
@@ -165,7 +169,19 @@
                                    TextWrapping="Wrap"
                                    Margin="0,2,0,0" />
                     </StackPanel>
-                    <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <WrapPanel Grid.Column="1"
+                               HorizontalAlignment="Right"
+                               Margin="12,0,0,0">
+                        <TextBlock Text="{Binding VersionText}"
+                                   Foreground="{DynamicResource MutedBrush}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,6,8" />
+                        <ComboBox Width="132"
+                                  ItemsSource="{Binding VersionOptions}"
+                                  SelectedItem="{Binding SelectedVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="DisplayName"
+                                  Style="{StaticResource Rex640ToolbarComboBoxStyle}"
+                                  Margin="0,0,12,8" />
                         <Button Command="{Binding ExpandAllCommand}"
                                 Style="{StaticResource Rex640ButtonStyle}">
                             <StackPanel Orientation="Horizontal">
@@ -329,35 +345,99 @@
                                  Background="{DynamicResource FieldBackgroundBrush}"
                                  Foreground="{DynamicResource TextBrush}"
                                  Padding="10" />
-                        <WrapPanel Margin="0,8,0,0">
-                            <Button Command="{Binding ImportOrderCodeCommand}" Style="{StaticResource Rex640ButtonStyle}">
+                        <WrapPanel Margin="0,8,0,-8"
+                                   ItemHeight="44">
+                            <Button Command="{Binding ImportOrderCodeCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Import" Width="18" Height="18" />
                                     <TextBlock Text="{Binding ImportOrderCodeText}" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
-                            <Button Command="{Binding ResetCommand}" Style="{StaticResource Rex640DangerButtonStyle}">
+                            <Button Command="{Binding ImportOrderingNumberCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FileImportOutline" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ImportOrderingNumberText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ResetCommand}"
+                                    Style="{StaticResource Rex640DangerButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Restore" Width="18" Height="18" />
                                     <TextBlock Text="{Binding ResetText}" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
-                            <Button Command="{Binding OnlineValidateCommand}" Style="{StaticResource Rex640PrimaryButtonStyle}">
+                            <Button Command="{Binding OnlineValidateCommand}"
+                                    Style="{StaticResource Rex640PrimaryButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="CloudCheckOutline" Width="18" Height="18" />
                                     <TextBlock Text="{Binding OnlineValidateText}" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
-                            <Button Command="{Binding ShowDeviceDescriptionCommand}" Style="{StaticResource Rex640ButtonStyle}">
+                            <Button Command="{Binding ShowDeviceDescriptionCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" />
                                     <TextBlock Text="{Binding DeviceDescriptionText}" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
-                            <Button Command="{Binding CopyOrderCodeCommand}" Style="{StaticResource Rex640ButtonStyle}">
+                            <Button Command="{Binding CopyOrderCodeCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ContentCopy" Width="18" Height="18" />
                                     <TextBlock Text="{Binding CopyOrderCodeText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Click="Rex640AccessoriesButton_OnClick"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,0,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FormatListChecks" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding AccessoriesText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,2,0,-8"
+                                   ItemHeight="44">
+                            <Button Command="{Binding ExportWordCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FileWordBox" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ExportWordText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ExportExcelCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,6,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FileExcelBox" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ExportExcelText}" Margin="6,0,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ExportPdfCommand}"
+                                    Style="{StaticResource Rex640ButtonStyle}"
+                                    Padding="8,0"
+                                    Margin="0,0,0,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FilePdfBox" Width="18" Height="18" />
+                                    <TextBlock Text="{Binding ExportPdfText}" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
                         </WrapPanel>

@@ -1,0 +1,1299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+  <OrderCodeVersions>
+     <!-- Order code version, IED version, Application Designs -->
+     <Version Id="XC" IED_version="2.0" Conpack_version="2.0"/>
+     <Version Id="XD" IED_version="3.0" Conpack_version="3.0"/>
+     <Version Id="1D" IED_version="3.1" Conpack_version="3.1"/>
+     <Version Id="1E" IED_version="4.1" Conpack_version="4.1"/>
+     <Version Id="1G" IED_version="5.1" Conpack_version="5.1"/>
+  </OrderCodeVersions>
+  <Default OrderCode="HCFCACABNBC2ACN11G"/>
+  <OrderCodes>
+     <Digit Location="1" Group="Mountings">
+         <!-- Product Series, Size, Plug-in -->
+         <Option Id="H" Version="*" OptionCode="" Description="Mountings_H"/>
+         <Option Id="1" Version="1G" OptionCode="" Description="Mountings_1"/>
+     </Digit>
+     <Digit Location="2" Group="Standards">
+         <!-- Standard -->
+         <Option Id="C" Version="*" OptionCode="" Description="Standards_C"/>
+     </Digit>
+     <Digit Location="3" Group="MainApps">
+         <!-- Main Application -->
+         <Option Id="F" Version="*" OptionCode="" Description="MainApps_F"/>
+     </Digit>
+     <Digit Location="4" Group="FunctionalApps">
+         <!-- Functional Application -->
+         <Option Id="A" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_A"/>
+         <Option Id="B" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_B"/>
+         <Option Id="C" Version="XC,XD,1E,1G" OptionCode="" Description="FunctionalApps_C"/>
+         <Option Id="D" Version="XC,XD,1E,1G" OptionCode="" Description="FunctionalApps_D"/>
+         <Option Id="E" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_E"/>
+         <Option Id="F" Version="XC,XD,1E" OptionCode="" Description="FunctionalApps_F"/>
+         <Option Id="G" Version="XD,1E" OptionCode="" Description="FunctionalApps_G"/>
+         <Option Id="J" Version="XC,XD,1E,1G" OptionCode="" Description="FunctionalApps_J"/>
+         <Option Id="K" Version="XD,1E" OptionCode="" Description="FunctionalApps_K"/>
+         <Option Id="L" Version="1D,1E" OptionCode="" Description="FunctionalApps_L"/>
+         <Option Id="M" Version="1D,1E" OptionCode="" Description="FunctionalApps_M"/>
+         <Option Id="N" Version="1G" OptionCode="" Description="FunctionalApps_N"/>
+         <Option Id="Z" Version="1G" OptionCode="" Description="FunctionalApps_Z"/>
+     </Digit>
+     <Digit Location="5+6" Group="Aios">
+         <!-- Analog Inputs/Outputs -->
+         <Option Id="AA" Version="XC,XD,1E" OptionCode="" Description="Aios_AA"/>
+         <Option Id="AB" Version="XC,XD,1E" OptionCode="" Description="Aios_AB"/>
+         <Option Id="AC" Version="*" OptionCode="" Description="Aios_AC"/>
+         <Option Id="AD" Version="*" OptionCode="" Description="Aios_AD"/>
+         <Option Id="BC" Version="XC,XD,1E" OptionCode="" Description="Aios_BC"/>
+         <Option Id="BD" Version="XC,XD,1E" OptionCode="" Description="Aios_BD"/>
+         <Option Id="DA" Version="XD,1E" OptionCode="" Description="Aios_DA"/>
+         <Option Id="FC" Version="1G" OptionCode="" Description="Aios_FC"/>
+         <Option Id="FD" Version="1G" OptionCode="" Description="Aios_FD"/>
+         <Option Id="AE" Version="*" OptionCode="" Description="Aios_AE"/>
+         <Option Id="AF" Version="*" OptionCode="" Description="Aios_AF"/>
+         <Option Id="FE" Version="1G" OptionCode="" Description="Aios_FE"/>
+         <Option Id="FF" Version="1G" OptionCode="" Description="Aios_FF"/>
+     </Digit>
+     <Digit Location="7+8" Group="Bios">
+         <!-- Binary I/O -->
+         <Option Id="AA" Version="XC,XD,1E" OptionCode="" Description="Bios_AA"/>
+         <Option Id="AB" Version="*" OptionCode="" Description="Bios_AB"/>
+         <Option Id="AC" Version="XC,XD,1E" OptionCode="" Description="Bios_AC"/>
+         <Option Id="AD" Version="XC,XD,1E,1G" OptionCode="" Description="Bios_AD"/>
+         <Option Id="AE" Version="XC,XD,1E" OptionCode="" Description="Bios_AE"/>
+         <Option Id="FE" Version="1G" OptionCode="" Description="Bios_FE"/>
+         <Option Id="AF" Version="XC,XD,1E,1G" OptionCode="" Description="Bios_AF"/>
+         <Option Id="FB" Version="1G" OptionCode="" Description="Bios_FB"/>
+         <Option Id="AG" Version="*" OptionCode="" Description="Bios_AG"/>
+         <Option Id="FC" Version="1G" OptionCode="" Description="Bios_FC"/>
+         <Option Id="AH" Version="XD,1E" OptionCode="" Description="Bios_AH"/>
+         <Option Id="AK" Version="XD,1E" OptionCode="" Description="Bios_AK"/>
+     </Digit>
+     <Digit Location="9" Group="CommSerials">
+         <!-- Substation communication (Serial) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommSerials_A"/>
+         <Option Id="B" Version="XC,XD,1E,1G" OptionCode="" Description="CommSerials_B"/>
+         <Option Id="C" Version="1G" OptionCode="" Description="CommSerials_C"/>
+         <Option Id="N" Version="*" OptionCode="" Description="CommSerials_N"/>
+     </Digit>
+     <Digit Location="10" Group="CommEthernets">
+         <!-- Protection and substation communication (Ethernet) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommEthernets_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommEthernets_B"/>
+         <Option Id="C" Version="XD,1D,1E,1G" OptionCode="" Description="CommEthernets_C"/>
+         <Option Id="D" Version="XD,1D,1E,1G" OptionCode="" Description="CommEthernets_D"/>
+         <Option Id="E" Version="1E,1G" OptionCode="" Description="CommEthernets_E"/>
+         <Option Id="F" Version="1G" OptionCode="" Description="CommEthernets_F"/>
+         <Option Id="G" Version="1G" OptionCode="" Description="CommEthernets_G"/>
+         <Option Id="H" Version="1G" OptionCode="" Description="CommEthernets_H"/>
+         <Option Id="N" Version="*" OptionCode="" Description="CommEthernets_N"/>
+     </Digit>
+     <Digit Location="11" Group="CommProtocols">
+         <!-- Communication (Protocol) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommProtocols_A"/>
+         <Option Id="B" Version="XC,XD,1E,1G" OptionCode="" Description="CommProtocols_B"/>
+         <Option Id="C" Version="XC,XD,1E,1G" OptionCode="" Description="CommProtocols_C"/>
+         <Option Id="D" Version="XC,XD,1E,1G" OptionCode="" Description="CommProtocols_D"/>
+         <Option Id="G" Version="1E,1G" OptionCode="" Description="CommProtocols_G"/>
+     </Digit>
+     <Digit Location="12" Group="Languages">
+         <!-- Language -->
+         <Option Id="2" Version="XC,XD,1E,1G" OptionCode="" Description="Languages_2"/>
+         <Option Id="1" Version="1D" OptionCode="" Description="Languages_1"/>
+		 <Option Id="Z" Version="1G" OptionCode="" Description="Languages_Z"/>
+     </Digit>
+     <Digit Location="13" Group="FrontPanels">
+         <!-- Front Panel -->
+         <Option Id="A" Version="XC,XD,1E,1G" OptionCode="" Description="FrontPanels_A"/>
+         <Option Id="B" Version="XC,XD,1E,1G" OptionCode="" Description="FrontPanels_B"/>
+         <Option Id="C" Version="XD,1D,1E,1G" OptionCode="" Description="FrontPanels_C"/>
+         <Option Id="D" Version="XD,1D,1E,1G" OptionCode="" Description="FrontPanels_D"/>
+     </Digit>
+     <Digit Location="14" Group="Options_1">
+         <!-- Option 1 -->
+         <Option Id="A" Version="XC,XD,1E,1G" OptionCode="" Description="Options_1_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="Options_1_B"/>
+         <Option Id="C" Version="XC,XD,1E,1G" OptionCode="" Description="Options_1_C"/>
+         <Option Id="D" Version="1E,1G" OptionCode="" Description="Options_1_D"/>
+         <Option Id="E" Version="1E,1G" OptionCode="" Description="Options_1_E"/>
+         <Option Id="F" Version="1E,1G" OptionCode="" Description="Options_1_F"/>
+         <Option Id="G" Version="1E,1G" OptionCode="" Description="Options_1_G"/>
+         <Option Id="H" Version="1G" OptionCode="" Description="Options_1_H"/>
+         <Option Id="J" Version="1G" OptionCode="" Description="Options_1_J"/>
+         <Option Id="K" Version="1G" OptionCode="" Description="Options_1_K"/>
+         <Option Id="L" Version="1G" OptionCode="" Description="Options_1_L"/>
+         <Option Id="M" Version="1G" OptionCode="" Description="Options_1_M"/>
+         <Option Id="P" Version="1G" OptionCode="" Description="Options_1_P"/>
+         <Option Id="Q" Version="1G" OptionCode="" Description="Options_1_Q"/>
+         <Option Id="N" Version="*" OptionCode="" Description="Options_1_N"/>
+     </Digit>
+     <Digit Location="15" Group="Options_2">
+         <!-- Option 2 -->
+         <Option Id="A" Version="XD,1E,1G" OptionCode="" Description="Options_2_A"/>
+         <Option Id="B" Version="XD,1E,1G" OptionCode="" Description="Options_2_B"/>
+         <Option Id="C" Version="1G" OptionCode="" Description="Options_2_C"/>
+         <Option Id="D" Version="1E,1G" OptionCode="" Description="Options_2_D"/>
+         <Option Id="E" Version="1E,1G" OptionCode="" Description="Options_2_E"/>
+         <Option Id="G" Version="1G" OptionCode="" Description="Options_2_G"/>
+         <Option Id="H" Version="1G" OptionCode="" Description="Options_2_H"/>
+         <Option Id="J" Version="1G" OptionCode="" Description="Options_2_J"/>
+         <Option Id="K" Version="1G" OptionCode="" Description="Options_2_K"/>
+         <Option Id="N" Version="*" OptionCode="" Description="Options_2_N"/>
+     </Digit>
+     <Digit Location="16" Group="PowerSupplies">
+         <!-- Power Supply -->
+         <Option Id="1" Version="*" OptionCode="" Description="PowerSupplies_1"/>
+         <Option Id="2" Version="*" OptionCode="" Description="PowerSupplies_2"/>
+     </Digit>
+     <Digit Location="17+18" Group="Versions">
+         <!-- Version -->
+         <Option Id="XC" Version="*" Edition="ED1" OptionCode="" Description="Versions_XC"/>
+         <Option Id="XD" Version="*" Edition="ED1" OptionCode="" Description="Versions_XD"/>
+         <Option Id="1D" Version="*" Edition="ED1" OptionCode="" Description="Versions_1D"/>
+         <Option Id="1E" Version="*" Edition="ED1" OptionCode="" Description="Versions_1E"/>
+         <Option Id="1G" Version="*" OptionCode="" Description="Versions_1G"/>
+     </Digit>
+  </OrderCodes>
+  <ValidOrderCodes>
+     <FunctionalApplication>
+         <!-- XYYZZVW - X=Functional app. YY=AIO, ZZ=BIO, V=Option_1, W=Option_2 -->
+         <Rule nr="1" Version="XD,1E">AAAAAAA</Rule>
+         <Rule nr="2" Version="XD,1E">AAAAAAB</Rule>
+         <Rule nr="3" Version="XD,1E">AAAAABA</Rule>
+         <Rule nr="4" Version="XD,1E">AAAAABB</Rule>
+         <Rule nr="5" Version="XD,1E">AAAAACA</Rule>
+         <Rule nr="6" Version="XD,1E">AAAAACB</Rule>
+         <Rule nr="7" Version="XD,1E">AAAAANA</Rule>
+         <Rule nr="8" Version="XD,1E">AAAAANB</Rule>
+         <Rule nr="9" Version="XD,1E">AABAAAA</Rule>
+         <Rule nr="10" Version="XD,1E">AABAAAB</Rule>
+         <Rule nr="11" Version="XD,1E">AABAABA</Rule>
+         <Rule nr="12" Version="XD,1E">AABAABB</Rule>
+         <Rule nr="13" Version="XD,1E">AABAACA</Rule>
+         <Rule nr="14" Version="XD,1E">AABAACB</Rule>
+         <Rule nr="15" Version="XD,1E">AABAANA</Rule>
+         <Rule nr="16" Version="XD,1E">AABAANB</Rule>
+         <Rule nr="17" Version="XD,1E">BAAACAA</Rule>
+         <Rule nr="18" Version="XD,1E">BAAACAB</Rule>
+         <Rule nr="19" Version="1E">BAAACAD</Rule>
+         <Rule nr="20" Version="XD,1E">BAAACBA</Rule>
+         <Rule nr="21" Version="XD,1E">BAAACBB</Rule>
+         <Rule nr="22" Version="1E">BAAACBD</Rule>
+         <Rule nr="23" Version="XD,1E">BAAACCA</Rule>
+         <Rule nr="24" Version="XD,1E">BAAACCB</Rule>
+         <Rule nr="25" Version="1E">BAAACCD</Rule>
+         <Rule nr="26" Version="XD,1E">BAAACNA</Rule>
+         <Rule nr="27" Version="XD,1E">BAAACNB</Rule>
+         <Rule nr="28" Version="1E">BAAACND</Rule>
+         <Rule nr="29" Version="XD,1E">BAAAEAA</Rule>
+         <Rule nr="30" Version="XD,1E">BAAAEAB</Rule>
+         <Rule nr="31" Version="1E">BAAAEAD</Rule>
+         <Rule nr="32" Version="XD,1E">BAAAEBA</Rule>
+         <Rule nr="33" Version="XD,1E">BAAAEBB</Rule>
+         <Rule nr="34" Version="1E">BAAAEBD</Rule>
+         <Rule nr="35" Version="XD,1E">BAAAECA</Rule>
+         <Rule nr="36" Version="XD,1E">BAAAECB</Rule>
+         <Rule nr="37" Version="1E">BAAAECD</Rule>
+         <Rule nr="38" Version="XD,1E">BAAAENA</Rule>
+         <Rule nr="39" Version="XD,1E">BAAAENB</Rule>
+         <Rule nr="40" Version="1E">BAAAEND</Rule>
+         <Rule nr="41" Version="XD,1E">BABACAA</Rule>
+         <Rule nr="42" Version="XD,1E">BABACAB</Rule>
+         <Rule nr="43" Version="1E">BABACAD</Rule>
+         <Rule nr="44" Version="XD,1E">BABACBA</Rule>
+         <Rule nr="45" Version="XD,1E">BABACBB</Rule>
+         <Rule nr="46" Version="1E">BABACBD</Rule>
+         <Rule nr="47" Version="XD,1E">BABACCA</Rule>
+         <Rule nr="48" Version="XD,1E">BABACCB</Rule>
+         <Rule nr="49" Version="1E">BABACCD</Rule>
+         <Rule nr="50" Version="XD,1E">BABACNA</Rule>
+         <Rule nr="51" Version="XD,1E">BABACNB</Rule>
+         <Rule nr="52" Version="1E">BABACND</Rule>
+         <Rule nr="53" Version="XD,1E">BABAEAA</Rule>
+         <Rule nr="54" Version="XD,1E">BABAEAB</Rule>
+         <Rule nr="55" Version="1E">BABAEAD</Rule>
+         <Rule nr="56" Version="XD,1E">BABAEBA</Rule>
+         <Rule nr="57" Version="XD,1E">BABAEBB</Rule>
+         <Rule nr="58" Version="1E">BABAEBD</Rule>
+         <Rule nr="59" Version="XD,1E">BABAECA</Rule>
+         <Rule nr="60" Version="XD,1E">BABAECB</Rule>
+         <Rule nr="61" Version="1E">BABAECD</Rule>
+         <Rule nr="62" Version="XD,1E">BABAENA</Rule>
+         <Rule nr="63" Version="XD,1E">BABAENB</Rule>
+         <Rule nr="64" Version="1E">BABAEND</Rule>
+         <Rule nr="65" Version="XD,1E,1G">CACABAN</Rule>
+         <Rule nr="66" Version="XD,1E,1G">CACABBN</Rule>
+         <Rule nr="67" Version="XD,1E,1G">CACABCN</Rule>
+         <Rule nr="68" Version="XD,1E,1G">CACABNN</Rule>
+         <Rule nr="69" Version="XD,1E,1G">CADABAN</Rule>
+         <Rule nr="70" Version="XD,1E,1G">CADABBN</Rule>
+         <Rule nr="71" Version="XD,1E,1G">CADABCN</Rule>
+         <Rule nr="72" Version="XD,1E,1G">CADABNN</Rule>
+         <Rule nr="73" Version="1E,1G">DACADAE</Rule>
+         <Rule nr="74" Version="1E,1G">DACADBE</Rule>
+         <Rule nr="75" Version="1E,1G">DACADCE</Rule>
+         <Rule nr="76" Version="1E,1G">DACADNE</Rule>
+         <Rule nr="77" Version="XD,1E,1G">DACADAN</Rule>
+         <Rule nr="78" Version="XD,1E,1G">DACADBN</Rule>
+         <Rule nr="79" Version="XD,1E,1G">DACADCN</Rule>
+         <Rule nr="80" Version="XD,1E,1G">DACADNN</Rule>
+         <Rule nr="81" Version="1G">DACFEAE</Rule>
+         <Rule nr="82" Version="1G">DACFEBE</Rule>
+         <Rule nr="83" Version="1G">DACFECE</Rule>
+         <Rule nr="84" Version="1G">DACFENE</Rule>
+         <Rule nr="85" Version="1G">DACFEAN</Rule>
+         <Rule nr="86" Version="1G">DACFEBN</Rule>
+         <Rule nr="87" Version="1G">DACFECN</Rule>
+         <Rule nr="88" Version="1G">DACFENN</Rule>
+         <Rule nr="89" Version="1E,1G">DACAFAE</Rule>
+         <Rule nr="90" Version="1E,1G">DACAFBE</Rule>
+         <Rule nr="91" Version="1E,1G">DACAFCE</Rule>
+         <Rule nr="92" Version="1E,1G">DACAFNE</Rule>
+         <Rule nr="93" Version="XD,1E,1G">DACAFAN</Rule>
+         <Rule nr="94" Version="XD,1E,1G">DACAFBN</Rule>
+         <Rule nr="95" Version="XD,1E,1G">DACAFCN</Rule>
+         <Rule nr="96" Version="XD,1E,1G">DACAFNN</Rule>
+         <Rule nr="97" Version="1G">DACFBAE</Rule>
+         <Rule nr="98" Version="1G">DACFBBE</Rule>
+         <Rule nr="99" Version="1G">DACFBCE</Rule>
+         <Rule nr="100" Version="1G">DACFBNE</Rule>
+         <Rule nr="101" Version="1G">DACFBAN</Rule>
+         <Rule nr="102" Version="1G">DACFBBN</Rule>
+         <Rule nr="103" Version="1G">DACFBCN</Rule>
+         <Rule nr="104" Version="1G">DACFBNN</Rule>
+         <Rule nr="105" Version="1E,1G">DADADAE</Rule>
+         <Rule nr="106" Version="1E,1G">DADADBE</Rule>
+         <Rule nr="107" Version="1E,1G">DADADCE</Rule>
+         <Rule nr="108" Version="1E,1G">DADADNE</Rule>
+         <Rule nr="109" Version="XD,1E,1G">DADADAN</Rule>
+         <Rule nr="110" Version="XD,1E,1G">DADADBN</Rule>
+         <Rule nr="111" Version="XD,1E,1G">DADADCN</Rule>
+         <Rule nr="112" Version="XD,1E,1G">DADADNN</Rule>
+         <Rule nr="113" Version="1G">DADFEAE</Rule>
+         <Rule nr="114" Version="1G">DADFEBE</Rule>
+         <Rule nr="115" Version="1G">DADFECE</Rule>
+         <Rule nr="116" Version="1G">DADFENE</Rule>
+         <Rule nr="117" Version="1G">DADFEAN</Rule>
+         <Rule nr="118" Version="1G">DADFEBN</Rule>
+         <Rule nr="119" Version="1G">DADFECN</Rule>
+         <Rule nr="120" Version="1G">DADFENN</Rule>
+         <Rule nr="121" Version="1E,1G">DADAFAE</Rule>
+         <Rule nr="122" Version="1E,1G">DADAFBE</Rule>
+         <Rule nr="123" Version="1E,1G">DADAFCE</Rule>
+         <Rule nr="124" Version="1E,1G">DADAFNE</Rule>
+         <Rule nr="125" Version="XD,1E,1G">DADAFAN</Rule>
+         <Rule nr="126" Version="XD,1E,1G">DADAFBN</Rule>
+         <Rule nr="127" Version="XD,1E,1G">DADAFCN</Rule>
+         <Rule nr="128" Version="XD,1E,1G">DADAFNN</Rule>
+         <Rule nr="129" Version="1G">DADFBAE</Rule>
+         <Rule nr="130" Version="1G">DADFBBE</Rule>
+         <Rule nr="131" Version="1G">DADFBCE</Rule>
+         <Rule nr="132" Version="1G">DADFBNE</Rule>
+         <Rule nr="133" Version="1G">DADFBAN</Rule>
+         <Rule nr="134" Version="1G">DADFBBN</Rule>
+         <Rule nr="135" Version="1G">DADFBCN</Rule>
+         <Rule nr="136" Version="1G">DADFBNN</Rule>
+         <Rule nr="137" Version="1G">DFCADAE</Rule>
+         <Rule nr="138" Version="1G">DFCADBE</Rule>
+         <Rule nr="139" Version="1G">DFCADCE</Rule>
+         <Rule nr="140" Version="1G">DFCADNE</Rule>
+         <Rule nr="141" Version="1G">DFCADAN</Rule>
+         <Rule nr="142" Version="1G">DFCADBN</Rule>
+         <Rule nr="143" Version="1G">DFCADCN</Rule>
+         <Rule nr="144" Version="1G">DFCADNN</Rule>
+         <Rule nr="145" Version="1G">DFCFEAE</Rule>
+         <Rule nr="146" Version="1G">DFCFEBE</Rule>
+         <Rule nr="147" Version="1G">DFCFECE</Rule>
+         <Rule nr="148" Version="1G">DFCFENE</Rule>
+         <Rule nr="149" Version="1G">DFCFEAN</Rule>
+         <Rule nr="150" Version="1G">DFCFEBN</Rule>
+         <Rule nr="151" Version="1G">DFCFECN</Rule>
+         <Rule nr="152" Version="1G">DFCFENN</Rule>
+         <Rule nr="153" Version="1G">DFDADAE</Rule>
+         <Rule nr="154" Version="1G">DFDADBE</Rule>
+         <Rule nr="155" Version="1G">DFDADCE</Rule>
+         <Rule nr="156" Version="1G">DFDADNE</Rule>
+         <Rule nr="157" Version="1G">DFDADAN</Rule>
+         <Rule nr="158" Version="1G">DFDADBN</Rule>
+         <Rule nr="159" Version="1G">DFDADCN</Rule>
+         <Rule nr="160" Version="1G">DFDADNN</Rule>
+         <Rule nr="161" Version="1G">DFDFEAE</Rule>
+         <Rule nr="162" Version="1G">DFDFEBE</Rule>
+         <Rule nr="163" Version="1G">DFDFECE</Rule>
+         <Rule nr="164" Version="1G">DFDFENE</Rule>
+         <Rule nr="165" Version="1G">DFDFEAN</Rule>
+         <Rule nr="166" Version="1G">DFDFEBN</Rule>
+         <Rule nr="167" Version="1G">DFDFECN</Rule>
+         <Rule nr="168" Version="1G">DFDFENN</Rule>
+         <Rule nr="169" Version="XD,1E">EAEAGAA</Rule>
+         <Rule nr="170" Version="XD,1E">EAEAGAB</Rule>
+         <Rule nr="171" Version="XD,1E">EAEAGBA</Rule>
+         <Rule nr="172" Version="XD,1E">EAEAGBB</Rule>
+         <Rule nr="173" Version="XD,1E">EAEAGCA</Rule>
+         <Rule nr="174" Version="XD,1E">EAEAGCB</Rule>
+         <Rule nr="175" Version="XD,1E">EAEAGNA</Rule>
+         <Rule nr="176" Version="XD,1E">EAEAGNB</Rule>
+         <Rule nr="177" Version="XD,1E">EAFAGAA</Rule>
+         <Rule nr="178" Version="XD,1E">EAFAGAB</Rule>
+         <Rule nr="179" Version="XD,1E">EAFAGBA</Rule>
+         <Rule nr="180" Version="XD,1E">EAFAGBB</Rule>
+         <Rule nr="181" Version="XD,1E">EAFAGCA</Rule>
+         <Rule nr="182" Version="XD,1E">EAFAGCB</Rule>
+         <Rule nr="183" Version="XD,1E">EAFAGNA</Rule>
+         <Rule nr="184" Version="XD,1E">EAFAGNB</Rule>
+         <Rule nr="185" Version="XD,1E">FAEAGAA</Rule>
+         <Rule nr="186" Version="XD,1E">FAEAGAB</Rule>
+         <Rule nr="187" Version="1E">FAEAGAD</Rule>
+         <Rule nr="188" Version="XD,1E">FAEAGBA</Rule>
+         <Rule nr="189" Version="XD,1E">FAEAGBB</Rule>
+         <Rule nr="190" Version="1E">FAEAGBD</Rule>
+         <Rule nr="191" Version="XD,1E">FAEAGCA</Rule>
+         <Rule nr="192" Version="XD,1E">FAEAGCB</Rule>
+         <Rule nr="193" Version="1E">FAEAGCD</Rule>
+         <Rule nr="194" Version="1E">FAEAGDA</Rule>
+         <Rule nr="195" Version="1E">FAEAGDB</Rule>
+         <Rule nr="196" Version="1E">FAEAGDD</Rule>
+         <Rule nr="197" Version="1E">FAEAGEA</Rule>
+         <Rule nr="198" Version="1E">FAEAGEB</Rule>
+         <Rule nr="199" Version="1E">FAEAGED</Rule>
+         <Rule nr="200" Version="1E">FAEAGFA</Rule>
+         <Rule nr="201" Version="1E">FAEAGFB</Rule>
+         <Rule nr="202" Version="1E">FAEAGFD</Rule>
+         <Rule nr="203" Version="1E">FAEAGGA</Rule>
+         <Rule nr="204" Version="1E">FAEAGGB</Rule>
+         <Rule nr="205" Version="1E">FAEAGGD</Rule>
+         <Rule nr="206" Version="XD,1E">FAEAGNA</Rule>
+         <Rule nr="207" Version="XD,1E">FAEAGNB</Rule>
+         <Rule nr="208" Version="1E">FAEAGND</Rule>
+         <Rule nr="209" Version="XD,1E">FAEAKAA</Rule>
+         <Rule nr="210" Version="XD,1E">FAEAKAB</Rule>
+         <Rule nr="211" Version="1E">FAEAKAD</Rule>
+         <Rule nr="212" Version="XD,1E">FAEAKBA</Rule>
+         <Rule nr="213" Version="XD,1E">FAEAKBB</Rule>
+         <Rule nr="214" Version="1E">FAEAKBD</Rule>
+         <Rule nr="215" Version="XD,1E">FAEAKCA</Rule>
+         <Rule nr="216" Version="XD,1E">FAEAKCB</Rule>
+         <Rule nr="217" Version="1E">FAEAKCD</Rule>
+         <Rule nr="218" Version="1E">FAEAKDA</Rule>
+         <Rule nr="219" Version="1E">FAEAKDB</Rule>
+         <Rule nr="220" Version="1E">FAEAKDD</Rule>
+         <Rule nr="221" Version="1E">FAEAKEA</Rule>
+         <Rule nr="222" Version="1E">FAEAKEB</Rule>
+         <Rule nr="223" Version="1E">FAEAKED</Rule>
+         <Rule nr="224" Version="1E">FAEAKFA</Rule>
+         <Rule nr="225" Version="1E">FAEAKFB</Rule>
+         <Rule nr="226" Version="1E">FAEAKFD</Rule>
+         <Rule nr="227" Version="1E">FAEAKGA</Rule>
+         <Rule nr="228" Version="1E">FAEAKGB</Rule>
+         <Rule nr="229" Version="1E">FAEAKGD</Rule>
+         <Rule nr="230" Version="XD,1E">FAEAKNA</Rule>
+         <Rule nr="231" Version="XD,1E">FAEAKNB</Rule>
+         <Rule nr="232" Version="1E">FAEAKND</Rule>
+         <Rule nr="233" Version="XD,1E">FAFAGAA</Rule>
+         <Rule nr="234" Version="XD,1E">FAFAGAB</Rule>
+         <Rule nr="235" Version="1E">FAFAGAD</Rule>
+         <Rule nr="236" Version="XD,1E">FAFAGBA</Rule>
+         <Rule nr="237" Version="XD,1E">FAFAGBB</Rule>
+         <Rule nr="238" Version="1E">FAFAGBD</Rule>
+         <Rule nr="239" Version="XD,1E">FAFAGCA</Rule>
+         <Rule nr="240" Version="XD,1E">FAFAGCB</Rule>
+         <Rule nr="241" Version="1E">FAFAGCD</Rule>
+         <Rule nr="242" Version="1E">FAFAGDA</Rule>
+         <Rule nr="243" Version="1E">FAFAGDB</Rule>
+         <Rule nr="244" Version="1E">FAFAGDD</Rule>
+         <Rule nr="245" Version="1E">FAFAGEA</Rule>
+         <Rule nr="246" Version="1E">FAFAGEB</Rule>
+         <Rule nr="247" Version="1E">FAFAGED</Rule>
+         <Rule nr="248" Version="1E">FAFAGFA</Rule>
+         <Rule nr="249" Version="1E">FAFAGFB</Rule>
+         <Rule nr="250" Version="1E">FAFAGFD</Rule>
+         <Rule nr="251" Version="1E">FAFAGGA</Rule>
+         <Rule nr="252" Version="1E">FAFAGGB</Rule>
+         <Rule nr="253" Version="1E">FAFAGGD</Rule>
+         <Rule nr="254" Version="XD,1E">FAFAGNA</Rule>
+         <Rule nr="255" Version="XD,1E">FAFAGNB</Rule>
+         <Rule nr="256" Version="1E">FAFAGND</Rule>
+         <Rule nr="257" Version="XD,1E">FAFAKAA</Rule>
+         <Rule nr="258" Version="XD,1E">FAFAKAB</Rule>
+         <Rule nr="259" Version="1E">FAFAKAD</Rule>
+         <Rule nr="260" Version="XD,1E">FAFAKBA</Rule>
+         <Rule nr="261" Version="XD,1E">FAFAKBB</Rule>
+         <Rule nr="262" Version="1E">FAFAKBD</Rule>
+         <Rule nr="263" Version="XD,1E">FAFAKCA</Rule>
+         <Rule nr="264" Version="XD,1E">FAFAKCB</Rule>
+         <Rule nr="265" Version="1E">FAFAKCD</Rule>
+         <Rule nr="266" Version="1E">FAFAKDA</Rule>
+         <Rule nr="267" Version="1E">FAFAKDB</Rule>
+         <Rule nr="268" Version="1E">FAFAKDD</Rule>
+         <Rule nr="269" Version="1E">FAFAKEA</Rule>
+         <Rule nr="270" Version="1E">FAFAKEB</Rule>
+         <Rule nr="271" Version="1E">FAFAKED</Rule>
+         <Rule nr="272" Version="1E">FAFAKFA</Rule>
+         <Rule nr="273" Version="1E">FAFAKFB</Rule>
+         <Rule nr="274" Version="1E">FAFAKFD</Rule>
+         <Rule nr="275" Version="1E">FAFAKGA</Rule>
+         <Rule nr="276" Version="1E">FAFAKGB</Rule>
+         <Rule nr="277" Version="1E">FAFAKGD</Rule>
+         <Rule nr="278" Version="XD,1E">FAFAKNA</Rule>
+         <Rule nr="279" Version="XD,1E">FAFAKNB</Rule>
+         <Rule nr="280" Version="1E">FAFAKND</Rule>
+         <Rule nr="281" Version="XD,1E">GDAAHAA</Rule>
+         <Rule nr="282" Version="XD,1E">GDAAHAB</Rule>
+         <Rule nr="283" Version="XD,1E">GDAAHBA</Rule>
+         <Rule nr="284" Version="XD,1E">GDAAHBB</Rule>
+         <Rule nr="285" Version="XD,1E">GDAAHCA</Rule>
+         <Rule nr="286" Version="XD,1E">GDAAHCB</Rule>
+         <Rule nr="287" Version="XD,1E">GDAAHNA</Rule>
+         <Rule nr="288" Version="XD,1E">GDAAHNB</Rule>
+         <Rule nr="289" Version="XD,1E">JBCADAA</Rule>
+         <Rule nr="290" Version="XD,1E">JBCADAB</Rule>
+         <Rule nr="291" Version="XD,1E">JBCADBA</Rule>
+         <Rule nr="292" Version="XD,1E">JBCADBB</Rule>
+         <Rule nr="293" Version="1E">JBCADBD</Rule>
+         <Rule nr="294" Version="XD,1E">JBCADCA</Rule>
+         <Rule nr="295" Version="XD,1E">JBCADCB</Rule>
+         <Rule nr="296" Version="1E">JBCADDA</Rule>
+         <Rule nr="297" Version="1E">JBCADDB</Rule>
+         <Rule nr="298" Version="1E">JBCADDD</Rule>
+         <Rule nr="299" Version="1E">JBCADEA</Rule>
+         <Rule nr="300" Version="1E">JBCADEB</Rule>
+         <Rule nr="301" Version="1E">JBCADED</Rule>
+         <Rule nr="302" Version="1E">JBCADFA</Rule>
+         <Rule nr="303" Version="1E">JBCADFB</Rule>
+         <Rule nr="304" Version="1E">JBCADFD</Rule>
+         <Rule nr="305" Version="1E">JBCADGA</Rule>
+         <Rule nr="306" Version="1E">JBCADGB</Rule>
+         <Rule nr="307" Version="1E">JBCADGD</Rule>
+         <Rule nr="308" Version="XD,1E">JBCADNA</Rule>
+         <Rule nr="309" Version="XD,1E">JBCADNB</Rule>
+         <Rule nr="310" Version="1E">JBCADND</Rule>
+         <Rule nr="311" Version="XD,1E">JBDADAA</Rule>
+         <Rule nr="312" Version="XD,1E">JBDADAB</Rule>
+         <Rule nr="313" Version="XD,1E">JBDADBA</Rule>
+         <Rule nr="314" Version="XD,1E">JBDADBB</Rule>
+         <Rule nr="315" Version="1E">JBDADBD</Rule>
+         <Rule nr="316" Version="XD,1E">JBDADCA</Rule>
+         <Rule nr="317" Version="XD,1E">JBDADCB</Rule>
+         <Rule nr="318" Version="1E">JBDADDA</Rule>
+         <Rule nr="319" Version="1E">JBDADDB</Rule>
+         <Rule nr="320" Version="1E">JBDADDD</Rule>
+         <Rule nr="321" Version="1E">JBDADEA</Rule>
+         <Rule nr="322" Version="1E">JBDADEB</Rule>
+         <Rule nr="323" Version="1E">JBDADED</Rule>
+         <Rule nr="324" Version="1E">JBDADFA</Rule>
+         <Rule nr="325" Version="1E">JBDADFB</Rule>
+         <Rule nr="326" Version="1E">JBDADFD</Rule>
+         <Rule nr="327" Version="1E">JBDADGA</Rule>
+         <Rule nr="328" Version="1E">JBDADGB</Rule>
+         <Rule nr="329" Version="1E">JBDADGD</Rule>
+         <Rule nr="330" Version="XD,1E">JBDADNA</Rule>
+         <Rule nr="331" Version="XD,1E">JBDADNB</Rule>
+         <Rule nr="332" Version="1E">JBDADND</Rule>
+         <Rule nr="333" Version="1G">JAEAGAA</Rule>
+         <Rule nr="334" Version="1G">JAEAGAB</Rule>
+         <Rule nr="335" Version="1G">JAEAGAC</Rule>
+         <Rule nr="336" Version="1G">JAEAGAD</Rule>
+         <Rule nr="337" Version="1G">JAEAGBA</Rule>
+         <Rule nr="338" Version="1G">JAEAGBB</Rule>
+         <Rule nr="339" Version="1G">JAEAGBC</Rule>
+         <Rule nr="340" Version="1G">JAEAGBD</Rule>
+         <Rule nr="341" Version="1G">JAEAGCA</Rule>
+         <Rule nr="342" Version="1G">JAEAGCB</Rule>
+         <Rule nr="343" Version="1G">JAEAGCC</Rule>
+         <Rule nr="344" Version="1G">JAEAGCD</Rule>
+         <Rule nr="345" Version="1G">JAEAGDA</Rule>
+         <Rule nr="346" Version="1G">JAEAGDB</Rule>
+         <Rule nr="347" Version="1G">JAEAGDC</Rule>
+         <Rule nr="348" Version="1G">JAEAGDD</Rule>
+         <Rule nr="349" Version="1G">JAEAGEA</Rule>
+         <Rule nr="350" Version="1G">JAEAGEB</Rule>
+         <Rule nr="351" Version="1G">JAEAGEC</Rule>
+         <Rule nr="352" Version="1G">JAEAGED</Rule>
+         <Rule nr="353" Version="1G">JAEAGFA</Rule>
+         <Rule nr="354" Version="1G">JAEAGFB</Rule>
+         <Rule nr="355" Version="1G">JAEAGFC</Rule>
+         <Rule nr="356" Version="1G">JAEAGFD</Rule>
+         <Rule nr="357" Version="1G">JAEAGGA</Rule>
+         <Rule nr="358" Version="1G">JAEAGGB</Rule>
+         <Rule nr="359" Version="1G">JAEAGGC</Rule>
+         <Rule nr="360" Version="1G">JAEAGGD</Rule>
+         <Rule nr="361" Version="1G">JAEAGNA</Rule>
+         <Rule nr="362" Version="1G">JAEAGNB</Rule>
+         <Rule nr="363" Version="1G">JAEAGNC</Rule>
+         <Rule nr="364" Version="1G">JAEAGND</Rule>
+         <Rule nr="365" Version="1G">JAEFCAA</Rule>
+         <Rule nr="366" Version="1G">JAEFCAB</Rule>
+         <Rule nr="367" Version="1G">JAEFCAC</Rule>
+         <Rule nr="368" Version="1G">JAEFCAD</Rule>
+         <Rule nr="369" Version="1G">JAEFCBA</Rule>
+         <Rule nr="370" Version="1G">JAEFCBB</Rule>
+         <Rule nr="371" Version="1G">JAEFCBC</Rule>
+         <Rule nr="372" Version="1G">JAEFCBD</Rule>
+         <Rule nr="373" Version="1G">JAEFCCA</Rule>
+         <Rule nr="374" Version="1G">JAEFCCB</Rule>
+         <Rule nr="375" Version="1G">JAEFCCC</Rule>
+         <Rule nr="376" Version="1G">JAEFCCD</Rule>
+         <Rule nr="377" Version="1G">JAEFCDA</Rule>
+         <Rule nr="378" Version="1G">JAEFCDB</Rule>
+         <Rule nr="379" Version="1G">JAEFCDC</Rule>
+         <Rule nr="380" Version="1G">JAEFCDD</Rule>
+         <Rule nr="381" Version="1G">JAEFCEA</Rule>
+         <Rule nr="382" Version="1G">JAEFCEB</Rule>
+         <Rule nr="383" Version="1G">JAEFCEC</Rule>
+         <Rule nr="384" Version="1G">JAEFCED</Rule>
+         <Rule nr="385" Version="1G">JAEFCFA</Rule>
+         <Rule nr="386" Version="1G">JAEFCFB</Rule>
+         <Rule nr="387" Version="1G">JAEFCFC</Rule>
+         <Rule nr="388" Version="1G">JAEFCFD</Rule>
+         <Rule nr="389" Version="1G">JAEFCGA</Rule>
+         <Rule nr="390" Version="1G">JAEFCGB</Rule>
+         <Rule nr="391" Version="1G">JAEFCGC</Rule>
+         <Rule nr="392" Version="1G">JAEFCGD</Rule>
+         <Rule nr="393" Version="1G">JAEFCNA</Rule>
+         <Rule nr="394" Version="1G">JAEFCNB</Rule>
+         <Rule nr="395" Version="1G">JAEFCNC</Rule>
+         <Rule nr="396" Version="1G">JAEFCND</Rule>
+         <Rule nr="397" Version="1G">JAFAGAA</Rule>
+         <Rule nr="398" Version="1G">JAFAGAB</Rule>
+         <Rule nr="399" Version="1G">JAFAGAC</Rule>
+         <Rule nr="400" Version="1G">JAFAGAD</Rule>
+         <Rule nr="401" Version="1G">JAFAGBA</Rule>
+         <Rule nr="402" Version="1G">JAFAGBB</Rule>
+         <Rule nr="403" Version="1G">JAFAGBC</Rule>
+         <Rule nr="404" Version="1G">JAFAGBD</Rule>
+         <Rule nr="405" Version="1G">JAFAGCA</Rule>
+         <Rule nr="406" Version="1G">JAFAGCB</Rule>
+         <Rule nr="407" Version="1G">JAFAGCC</Rule>
+         <Rule nr="408" Version="1G">JAFAGCD</Rule>
+         <Rule nr="409" Version="1G">JAFAGDA</Rule>
+         <Rule nr="410" Version="1G">JAFAGDB</Rule>
+         <Rule nr="411" Version="1G">JAFAGDC</Rule>
+         <Rule nr="412" Version="1G">JAFAGDD</Rule>
+         <Rule nr="413" Version="1G">JAFAGEA</Rule>
+         <Rule nr="414" Version="1G">JAFAGEB</Rule>
+         <Rule nr="415" Version="1G">JAFAGEC</Rule>
+         <Rule nr="416" Version="1G">JAFAGED</Rule>
+         <Rule nr="417" Version="1G">JAFAGFA</Rule>
+         <Rule nr="418" Version="1G">JAFAGFB</Rule>
+         <Rule nr="419" Version="1G">JAFAGFC</Rule>
+         <Rule nr="420" Version="1G">JAFAGFD</Rule>
+         <Rule nr="421" Version="1G">JAFAGGA</Rule>
+         <Rule nr="422" Version="1G">JAFAGGB</Rule>
+         <Rule nr="423" Version="1G">JAFAGGC</Rule>
+         <Rule nr="424" Version="1G">JAFAGGD</Rule>
+         <Rule nr="425" Version="1G">JAFAGNA</Rule>
+         <Rule nr="426" Version="1G">JAFAGNB</Rule>
+         <Rule nr="427" Version="1G">JAFAGNC</Rule>
+         <Rule nr="428" Version="1G">JAFAGND</Rule>
+         <Rule nr="429" Version="1G">JAFFCAA</Rule>
+         <Rule nr="430" Version="1G">JAFFCAB</Rule>
+         <Rule nr="431" Version="1G">JAFFCAC</Rule>
+         <Rule nr="432" Version="1G">JAFFCAD</Rule>
+         <Rule nr="433" Version="1G">JAFFCBA</Rule>
+         <Rule nr="434" Version="1G">JAFFCBB</Rule>
+         <Rule nr="435" Version="1G">JAFFCBC</Rule>
+         <Rule nr="436" Version="1G">JAFFCBD</Rule>
+         <Rule nr="437" Version="1G">JAFFCCA</Rule>
+         <Rule nr="438" Version="1G">JAFFCCB</Rule>
+         <Rule nr="439" Version="1G">JAFFCCC</Rule>
+         <Rule nr="440" Version="1G">JAFFCCD</Rule>
+         <Rule nr="441" Version="1G">JAFFCDA</Rule>
+         <Rule nr="442" Version="1G">JAFFCDB</Rule>
+         <Rule nr="443" Version="1G">JAFFCDC</Rule>
+         <Rule nr="444" Version="1G">JAFFCDD</Rule>
+         <Rule nr="445" Version="1G">JAFFCEA</Rule>
+         <Rule nr="446" Version="1G">JAFFCEB</Rule>
+         <Rule nr="447" Version="1G">JAFFCEC</Rule>
+         <Rule nr="448" Version="1G">JAFFCED</Rule>
+         <Rule nr="449" Version="1G">JAFFCFA</Rule>
+         <Rule nr="450" Version="1G">JAFFCFB</Rule>
+         <Rule nr="451" Version="1G">JAFFCFC</Rule>
+         <Rule nr="452" Version="1G">JAFFCFD</Rule>
+         <Rule nr="453" Version="1G">JAFFCGA</Rule>
+         <Rule nr="454" Version="1G">JAFFCGB</Rule>
+         <Rule nr="455" Version="1G">JAFFCGC</Rule>
+         <Rule nr="456" Version="1G">JAFFCGD</Rule>
+         <Rule nr="457" Version="1G">JAFFCNA</Rule>
+         <Rule nr="458" Version="1G">JAFFCNB</Rule>
+         <Rule nr="459" Version="1G">JAFFCNC</Rule>
+         <Rule nr="460" Version="1G">JAFFCND</Rule>
+         <Rule nr="461" Version="1G">JFEADAA</Rule>
+         <Rule nr="462" Version="1G">JFEADAB</Rule>
+         <Rule nr="463" Version="1G">JFEADAC</Rule>
+         <Rule nr="464" Version="1G">JFEADAD</Rule>
+         <Rule nr="465" Version="1G">JFEADBA</Rule>
+         <Rule nr="466" Version="1G">JFEADBB</Rule>
+         <Rule nr="467" Version="1G">JFEADBC</Rule>
+         <Rule nr="468" Version="1G">JFEADBD</Rule>
+         <Rule nr="469" Version="1G">JFEADCA</Rule>
+         <Rule nr="470" Version="1G">JFEADCB</Rule>
+         <Rule nr="471" Version="1G">JFEADCC</Rule>
+         <Rule nr="472" Version="1G">JFEADCD</Rule>
+         <Rule nr="473" Version="1G">JFEADDA</Rule>
+         <Rule nr="474" Version="1G">JFEADDB</Rule>
+         <Rule nr="475" Version="1G">JFEADDC</Rule>
+         <Rule nr="476" Version="1G">JFEADDD</Rule>
+         <Rule nr="477" Version="1G">JFEADEA</Rule>
+         <Rule nr="478" Version="1G">JFEADEB</Rule>
+         <Rule nr="479" Version="1G">JFEADEC</Rule>
+         <Rule nr="480" Version="1G">JFEADED</Rule>
+         <Rule nr="481" Version="1G">JFEADFA</Rule>
+         <Rule nr="482" Version="1G">JFEADFB</Rule>
+         <Rule nr="483" Version="1G">JFEADFC</Rule>
+         <Rule nr="484" Version="1G">JFEADFD</Rule>
+         <Rule nr="485" Version="1G">JFEADGA</Rule>
+         <Rule nr="486" Version="1G">JFEADGB</Rule>
+         <Rule nr="487" Version="1G">JFEADGC</Rule>
+         <Rule nr="488" Version="1G">JFEADGD</Rule>
+         <Rule nr="489" Version="1G">JFEADNA</Rule>
+         <Rule nr="490" Version="1G">JFEADNB</Rule>
+         <Rule nr="491" Version="1G">JFEADNC</Rule>
+         <Rule nr="492" Version="1G">JFEADND</Rule>
+         <Rule nr="493" Version="1G">JFEFEAA</Rule>
+         <Rule nr="494" Version="1G">JFEFEAB</Rule>
+         <Rule nr="495" Version="1G">JFEFEAC</Rule>
+         <Rule nr="496" Version="1G">JFEFEAD</Rule>
+         <Rule nr="497" Version="1G">JFEFEBA</Rule>
+         <Rule nr="498" Version="1G">JFEFEBB</Rule>
+         <Rule nr="499" Version="1G">JFEFEBC</Rule>
+         <Rule nr="500" Version="1G">JFEFEBD</Rule>
+         <Rule nr="501" Version="1G">JFEFECA</Rule>
+         <Rule nr="502" Version="1G">JFEFECB</Rule>
+         <Rule nr="503" Version="1G">JFEFECC</Rule>
+         <Rule nr="504" Version="1G">JFEFECD</Rule>
+         <Rule nr="505" Version="1G">JFEFEDA</Rule>
+         <Rule nr="506" Version="1G">JFEFEDB</Rule>
+         <Rule nr="507" Version="1G">JFEFEDC</Rule>
+         <Rule nr="508" Version="1G">JFEFEDD</Rule>
+         <Rule nr="509" Version="1G">JFEFEEA</Rule>
+         <Rule nr="510" Version="1G">JFEFEEB</Rule>
+         <Rule nr="511" Version="1G">JFEFEEC</Rule>
+         <Rule nr="512" Version="1G">JFEFEED</Rule>
+         <Rule nr="513" Version="1G">JFEFEFA</Rule>
+         <Rule nr="514" Version="1G">JFEFEFB</Rule>
+         <Rule nr="515" Version="1G">JFEFEFC</Rule>
+         <Rule nr="516" Version="1G">JFEFEFD</Rule>
+         <Rule nr="517" Version="1G">JFEFEGA</Rule>
+         <Rule nr="518" Version="1G">JFEFEGB</Rule>
+         <Rule nr="519" Version="1G">JFEFEGC</Rule>
+         <Rule nr="520" Version="1G">JFEFEGD</Rule>
+         <Rule nr="521" Version="1G">JFEFENA</Rule>
+         <Rule nr="522" Version="1G">JFEFENB</Rule>
+         <Rule nr="523" Version="1G">JFEFENC</Rule>
+         <Rule nr="524" Version="1G">JFEFEND</Rule>
+         <Rule nr="525" Version="1G">JFFADAA</Rule>
+         <Rule nr="526" Version="1G">JFFADAB</Rule>
+         <Rule nr="527" Version="1G">JFFADAC</Rule>
+         <Rule nr="528" Version="1G">JFFADAD</Rule>
+         <Rule nr="529" Version="1G">JFFADBA</Rule>
+         <Rule nr="530" Version="1G">JFFADBB</Rule>
+         <Rule nr="531" Version="1G">JFFADBC</Rule>
+         <Rule nr="532" Version="1G">JFFADBD</Rule>
+         <Rule nr="533" Version="1G">JFFADCA</Rule>
+         <Rule nr="534" Version="1G">JFFADCB</Rule>
+         <Rule nr="535" Version="1G">JFFADCC</Rule>
+         <Rule nr="536" Version="1G">JFFADCD</Rule>
+         <Rule nr="537" Version="1G">JFFADDA</Rule>
+         <Rule nr="538" Version="1G">JFFADDB</Rule>
+         <Rule nr="539" Version="1G">JFFADDC</Rule>
+         <Rule nr="540" Version="1G">JFFADDD</Rule>
+         <Rule nr="541" Version="1G">JFFADEA</Rule>
+         <Rule nr="542" Version="1G">JFFADEB</Rule>
+         <Rule nr="543" Version="1G">JFFADEC</Rule>
+         <Rule nr="544" Version="1G">JFFADED</Rule>
+         <Rule nr="545" Version="1G">JFFADFA</Rule>
+         <Rule nr="546" Version="1G">JFFADFB</Rule>
+         <Rule nr="547" Version="1G">JFFADFC</Rule>
+         <Rule nr="548" Version="1G">JFFADFD</Rule>
+         <Rule nr="549" Version="1G">JFFADGA</Rule>
+         <Rule nr="550" Version="1G">JFFADGB</Rule>
+         <Rule nr="551" Version="1G">JFFADGC</Rule>
+         <Rule nr="552" Version="1G">JFFADGD</Rule>
+         <Rule nr="553" Version="1G">JFFADNA</Rule>
+         <Rule nr="554" Version="1G">JFFADNB</Rule>
+         <Rule nr="555" Version="1G">JFFADNC</Rule>
+         <Rule nr="556" Version="1G">JFFADND</Rule>
+         <Rule nr="557" Version="1G">JFFFEAA</Rule>
+         <Rule nr="558" Version="1G">JFFFEAB</Rule>
+         <Rule nr="559" Version="1G">JFFFEAC</Rule>
+         <Rule nr="560" Version="1G">JFFFEAD</Rule>
+         <Rule nr="561" Version="1G">JFFFEBA</Rule>
+         <Rule nr="562" Version="1G">JFFFEBB</Rule>
+         <Rule nr="563" Version="1G">JFFFEBC</Rule>
+         <Rule nr="564" Version="1G">JFFFEBD</Rule>
+         <Rule nr="565" Version="1G">JFFFECA</Rule>
+         <Rule nr="566" Version="1G">JFFFECB</Rule>
+         <Rule nr="567" Version="1G">JFFFECC</Rule>
+         <Rule nr="568" Version="1G">JFFFECD</Rule>
+         <Rule nr="569" Version="1G">JFFFEDA</Rule>
+         <Rule nr="570" Version="1G">JFFFEDB</Rule>
+         <Rule nr="571" Version="1G">JFFFEDC</Rule>
+         <Rule nr="572" Version="1G">JFFFEDD</Rule>
+         <Rule nr="573" Version="1G">JFFFEEA</Rule>
+         <Rule nr="574" Version="1G">JFFFEEB</Rule>
+         <Rule nr="575" Version="1G">JFFFEEC</Rule>
+         <Rule nr="576" Version="1G">JFFFEED</Rule>
+         <Rule nr="577" Version="1G">JFFFEFA</Rule>
+         <Rule nr="578" Version="1G">JFFFEFB</Rule>
+         <Rule nr="579" Version="1G">JFFFEFC</Rule>
+         <Rule nr="580" Version="1G">JFFFEFD</Rule>
+         <Rule nr="581" Version="1G">JFFFEGA</Rule>
+         <Rule nr="582" Version="1G">JFFFEGB</Rule>
+         <Rule nr="583" Version="1G">JFFFEGC</Rule>
+         <Rule nr="584" Version="1G">JFFFEGD</Rule>
+         <Rule nr="585" Version="1G">JFFFENA</Rule>
+         <Rule nr="586" Version="1G">JFFFENB</Rule>
+         <Rule nr="587" Version="1G">JFFFENC</Rule>
+         <Rule nr="588" Version="1G">JFFFEND</Rule>
+         <Rule nr="589" Version="XD,1E">KAEADAA</Rule>
+         <Rule nr="590" Version="XD,1E">KAEADAB</Rule>
+         <Rule nr="591" Version="XD,1E">KAEADBA</Rule>
+         <Rule nr="592" Version="XD,1E">KAEADBB</Rule>
+         <Rule nr="593" Version="1E">KAEADBD</Rule>
+         <Rule nr="594" Version="XD,1E">KAEADCA</Rule>
+         <Rule nr="595" Version="XD,1E">KAEADCB</Rule>
+         <Rule nr="596" Version="1E">KAEADDA</Rule>
+         <Rule nr="597" Version="1E">KAEADDB</Rule>
+         <Rule nr="598" Version="1E">KAEADDD</Rule>
+         <Rule nr="599" Version="1E">KAEADEA</Rule>
+         <Rule nr="600" Version="1E">KAEADEB</Rule>
+         <Rule nr="601" Version="1E">KAEADED</Rule>
+         <Rule nr="602" Version="1E">KAEADFA</Rule>
+         <Rule nr="603" Version="1E">KAEADFB</Rule>
+         <Rule nr="604" Version="1E">KAEADFD</Rule>
+         <Rule nr="605" Version="1E">KAEADGA</Rule>
+         <Rule nr="606" Version="1E">KAEADGB</Rule>
+         <Rule nr="607" Version="1E">KAEADGD</Rule>
+         <Rule nr="608" Version="XD,1E">KAEADNA</Rule>
+         <Rule nr="609" Version="XD,1E">KAEADNB</Rule>
+         <Rule nr="610" Version="1E">KAEADND</Rule>
+         <Rule nr="611" Version="XD,1E">KAFADAA</Rule>
+         <Rule nr="612" Version="XD,1E">KAFADAB</Rule>
+         <Rule nr="613" Version="XD,1E">KAFADBA</Rule>
+         <Rule nr="614" Version="XD,1E">KAFADBB</Rule>
+         <Rule nr="615" Version="1E">KAFADBD</Rule>
+         <Rule nr="616" Version="XD,1E">KAFADCA</Rule>
+         <Rule nr="617" Version="XD,1E">KAFADCB</Rule>
+         <Rule nr="618" Version="1E">KAFADDA</Rule>
+         <Rule nr="619" Version="1E">KAFADDB</Rule>
+         <Rule nr="620" Version="1E">KAFADDD</Rule>
+         <Rule nr="621" Version="1E">KAFADEA</Rule>
+         <Rule nr="622" Version="1E">KAFADEB</Rule>
+         <Rule nr="623" Version="1E">KAFADED</Rule>
+         <Rule nr="624" Version="1E">KAFADFA</Rule>
+         <Rule nr="625" Version="1E">KAFADFB</Rule>
+         <Rule nr="626" Version="1E">KAFADFD</Rule>
+         <Rule nr="627" Version="1E">KAFADGA</Rule>
+         <Rule nr="628" Version="1E">KAFADGB</Rule>
+         <Rule nr="629" Version="1E">KAFADGD</Rule>
+         <Rule nr="630" Version="XD,1E">KAFADNA</Rule>
+         <Rule nr="631" Version="XD,1E">KAFADNB</Rule>
+         <Rule nr="632" Version="1E">KAFADND</Rule>
+         <Rule nr="633" Version="1D,1E">LACABBN</Rule>
+         <Rule nr="634" Version="1D,1E">LACABNN</Rule>
+         <Rule nr="635" Version="1D,1E">LADABBN</Rule>
+         <Rule nr="636" Version="1D,1E">LADABNN</Rule>
+         <Rule nr="637" Version="1E">LACADBN</Rule>
+         <Rule nr="638" Version="1E">LACADNN</Rule>
+         <Rule nr="639" Version="1E">LADADBN</Rule>
+         <Rule nr="640" Version="1E">LADADNN</Rule>
+         <Rule nr="641" Version="1E">MAEAGBA</Rule>
+         <Rule nr="642" Version="1E">MAEAGNA</Rule>
+         <Rule nr="643" Version="1E">MAFAGBA</Rule>
+         <Rule nr="644" Version="1E">MAFAGNA</Rule>
+         <Rule nr="645" Version="1D">MAEAGBN</Rule>
+         <Rule nr="646" Version="1D">MAEAGNN</Rule>
+         <Rule nr="647" Version="1D">MAFAGBN</Rule>
+         <Rule nr="648" Version="1D">MAFAGNN</Rule>
+         <Rule nr="649" Version="XC">AAAAA#N</Rule>
+         <Rule nr="650" Version="XC">AABAA#N</Rule>
+         <Rule nr="651" Version="XC">BAAAC#N</Rule>
+         <Rule nr="652" Version="XC">BAAAE#N</Rule>
+         <Rule nr="653" Version="XC">BABAC#N</Rule>
+         <Rule nr="654" Version="XC">BABAE#N</Rule>
+         <Rule nr="655" Version="XC">CACAB#N</Rule>
+         <Rule nr="656" Version="XC">CADAB#N</Rule>
+         <Rule nr="657" Version="XC">DACAD#N</Rule>
+         <Rule nr="658" Version="XC">DACAF#N</Rule>
+         <Rule nr="659" Version="XC">DADAD#N</Rule>
+         <Rule nr="660" Version="XC">DADAF#N</Rule>
+         <Rule nr="661" Version="XC">EAEAG#N</Rule>
+         <Rule nr="662" Version="XC">EAFAG#N</Rule>
+         <Rule nr="663" Version="XC">FAEAG#N</Rule>
+         <Rule nr="664" Version="XC">FAFAG#N</Rule>
+         <Rule nr="665" Version="XC">JBCAD#N</Rule>
+         <Rule nr="666" Version="XC">JBDAD#N</Rule>
+         <Rule nr="667" Version="1G">NAEAG#A</Rule>
+         <Rule nr="668" Version="1G">NAEAG#B</Rule>
+         <Rule nr="669" Version="1G">NAEAG#C</Rule>
+         <Rule nr="670" Version="1G">NAEAG#D</Rule>
+         <Rule nr="671" Version="1G">NAEAG#G</Rule>
+         <Rule nr="672" Version="1G">NAEAG#H</Rule>
+         <Rule nr="673" Version="1G">NAEAG#J</Rule>
+         <Rule nr="674" Version="1G">NAEAG#K</Rule>
+         <Rule nr="675" Version="1G">NAEFC#A</Rule>
+         <Rule nr="676" Version="1G">NAEFC#B</Rule>
+         <Rule nr="677" Version="1G">NAEFC#C</Rule>
+         <Rule nr="678" Version="1G">NAEFC#D</Rule>
+         <Rule nr="679" Version="1G">NAEFC#G</Rule>
+         <Rule nr="680" Version="1G">NAEFC#H</Rule>
+         <Rule nr="681" Version="1G">NAEFC#J</Rule>
+         <Rule nr="682" Version="1G">NAEFC#K</Rule>
+         <Rule nr="683" Version="1G">NAFAG#A</Rule>
+         <Rule nr="684" Version="1G">NAFAG#B</Rule>
+         <Rule nr="685" Version="1G">NAFAG#C</Rule>
+         <Rule nr="686" Version="1G">NAFAG#D</Rule>
+         <Rule nr="687" Version="1G">NAFAG#G</Rule>
+         <Rule nr="688" Version="1G">NAFAG#H</Rule>
+         <Rule nr="689" Version="1G">NAFAG#J</Rule>
+         <Rule nr="690" Version="1G">NAFAG#K</Rule>
+         <Rule nr="691" Version="1G">NAFFC#A</Rule>
+         <Rule nr="692" Version="1G">NAFFC#B</Rule>
+         <Rule nr="693" Version="1G">NAFFC#C</Rule>
+         <Rule nr="694" Version="1G">NAFFC#D</Rule>
+         <Rule nr="695" Version="1G">NAFFC#G</Rule>
+         <Rule nr="696" Version="1G">NAFFC#H</Rule>
+         <Rule nr="697" Version="1G">NAFFC#J</Rule>
+         <Rule nr="698" Version="1G">NAFFC#K</Rule>
+         <Rule nr="699" Version="1G">NFEAD#A</Rule>
+         <Rule nr="700" Version="1G">NFEAD#B</Rule>
+         <Rule nr="701" Version="1G">NFEAD#C</Rule>
+         <Rule nr="702" Version="1G">NFEAD#D</Rule>
+         <Rule nr="703" Version="1G">NFEAD#G</Rule>
+         <Rule nr="704" Version="1G">NFEAD#H</Rule>
+         <Rule nr="705" Version="1G">NFEAD#J</Rule>
+         <Rule nr="706" Version="1G">NFEAD#K</Rule>
+         <Rule nr="707" Version="1G">NFEFE#A</Rule>
+         <Rule nr="708" Version="1G">NFEFE#B</Rule>
+         <Rule nr="709" Version="1G">NFEFE#C</Rule>
+         <Rule nr="710" Version="1G">NFEFE#D</Rule>
+         <Rule nr="711" Version="1G">NFEFE#G</Rule>
+         <Rule nr="712" Version="1G">NFEFE#H</Rule>
+         <Rule nr="713" Version="1G">NFEFE#J</Rule>
+         <Rule nr="714" Version="1G">NFEFE#K</Rule>
+         <Rule nr="715" Version="1G">NFFAD#A</Rule>
+         <Rule nr="716" Version="1G">NFFAD#B</Rule>
+         <Rule nr="717" Version="1G">NFFAD#C</Rule>
+         <Rule nr="718" Version="1G">NFFAD#D</Rule>
+         <Rule nr="719" Version="1G">NFFAD#G</Rule>
+         <Rule nr="720" Version="1G">NFFAD#H</Rule>
+         <Rule nr="721" Version="1G">NFFAD#J</Rule>
+         <Rule nr="722" Version="1G">NFFAD#K</Rule>
+         <Rule nr="723" Version="1G">NFFFE#A</Rule>
+         <Rule nr="724" Version="1G">NFFFE#B</Rule>
+         <Rule nr="725" Version="1G">NFFFE#C</Rule>
+         <Rule nr="726" Version="1G">NFFFE#D</Rule>
+         <Rule nr="727" Version="1G">NFFFE#G</Rule>
+         <Rule nr="728" Version="1G">NFFFE#H</Rule>
+         <Rule nr="729" Version="1G">NFFFE#J</Rule>
+         <Rule nr="730" Version="1G">NFFFE#K</Rule>
+         <Rule nr="731" Version="1G">ZAEADAA</Rule>
+         <Rule nr="732" Version="1G">ZAEADAB</Rule>
+         <Rule nr="733" Version="1G">ZAEADAC</Rule>
+         <Rule nr="734" Version="1G">ZAEADAD</Rule>
+         <Rule nr="735" Version="1G">ZAEADBA</Rule>
+         <Rule nr="736" Version="1G">ZAEADBB</Rule>
+         <Rule nr="737" Version="1G">ZAEADBC</Rule>
+         <Rule nr="738" Version="1G">ZAEADBD</Rule>
+         <Rule nr="739" Version="1G">ZAEADCA</Rule>
+         <Rule nr="740" Version="1G">ZAEADCB</Rule>
+         <Rule nr="741" Version="1G">ZAEADCC</Rule>
+         <Rule nr="742" Version="1G">ZAEADCD</Rule>
+         <Rule nr="743" Version="1G">ZAEADDA</Rule>
+         <Rule nr="744" Version="1G">ZAEADDB</Rule>
+         <Rule nr="745" Version="1G">ZAEADDC</Rule>
+         <Rule nr="746" Version="1G">ZAEADDD</Rule>
+         <Rule nr="747" Version="1G">ZAEADEA</Rule>
+         <Rule nr="748" Version="1G">ZAEADEB</Rule>
+         <Rule nr="749" Version="1G">ZAEADEC</Rule>
+         <Rule nr="750" Version="1G">ZAEADED</Rule>
+         <Rule nr="751" Version="1G">ZAEADFA</Rule>
+         <Rule nr="752" Version="1G">ZAEADFB</Rule>
+         <Rule nr="753" Version="1G">ZAEADFC</Rule>
+         <Rule nr="754" Version="1G">ZAEADFD</Rule>
+         <Rule nr="755" Version="1G">ZAEADGA</Rule>
+         <Rule nr="756" Version="1G">ZAEADGB</Rule>
+         <Rule nr="757" Version="1G">ZAEADGC</Rule>
+         <Rule nr="758" Version="1G">ZAEADGD</Rule>
+         <Rule nr="759" Version="1G">ZAEADNA</Rule>
+         <Rule nr="760" Version="1G">ZAEADNB</Rule>
+         <Rule nr="761" Version="1G">ZAEADNC</Rule>
+         <Rule nr="762" Version="1G">ZAEADND</Rule>
+         <Rule nr="763" Version="1G">ZAFADAA</Rule>
+         <Rule nr="764" Version="1G">ZAFADAB</Rule>
+         <Rule nr="765" Version="1G">ZAFADAC</Rule>
+         <Rule nr="766" Version="1G">ZAFADAD</Rule>
+         <Rule nr="767" Version="1G">ZAFADBA</Rule>
+         <Rule nr="768" Version="1G">ZAFADBB</Rule>
+         <Rule nr="769" Version="1G">ZAFADBC</Rule>
+         <Rule nr="770" Version="1G">ZAFADBD</Rule>
+         <Rule nr="771" Version="1G">ZAFADCA</Rule>
+         <Rule nr="772" Version="1G">ZAFADCB</Rule>
+         <Rule nr="773" Version="1G">ZAFADCC</Rule>
+         <Rule nr="774" Version="1G">ZAFADCD</Rule>
+         <Rule nr="775" Version="1G">ZAFADDA</Rule>
+         <Rule nr="776" Version="1G">ZAFADDB</Rule>
+         <Rule nr="777" Version="1G">ZAFADDC</Rule>
+         <Rule nr="778" Version="1G">ZAFADDD</Rule>
+         <Rule nr="779" Version="1G">ZAFADEA</Rule>
+         <Rule nr="780" Version="1G">ZAFADEB</Rule>
+         <Rule nr="781" Version="1G">ZAFADEC</Rule>
+         <Rule nr="782" Version="1G">ZAFADED</Rule>
+         <Rule nr="783" Version="1G">ZAFADFA</Rule>
+         <Rule nr="784" Version="1G">ZAFADFB</Rule>
+         <Rule nr="785" Version="1G">ZAFADFC</Rule>
+         <Rule nr="786" Version="1G">ZAFADFD</Rule>
+         <Rule nr="787" Version="1G">ZAFADGA</Rule>
+         <Rule nr="788" Version="1G">ZAFADGB</Rule>
+         <Rule nr="789" Version="1G">ZAFADGC</Rule>
+         <Rule nr="790" Version="1G">ZAFADGD</Rule>
+         <Rule nr="791" Version="1G">ZAFADNA</Rule>
+         <Rule nr="792" Version="1G">ZAFADNB</Rule>
+         <Rule nr="793" Version="1G">ZAFADNC</Rule>
+         <Rule nr="794" Version="1G">ZAFADND</Rule>
+         <Rule nr="795" Version="1E">JBCADAD</Rule>
+         <Rule nr="796" Version="1E">JBCADCD</Rule>
+         <Rule nr="797" Version="1E">JBDADAD</Rule>
+         <Rule nr="798" Version="1E">JBDADCD</Rule>
+         <Rule nr="799" Version="1E">KAEADAD</Rule>
+         <Rule nr="800" Version="1E">KAEADCD</Rule>
+         <Rule nr="801" Version="1E">KAFADAD</Rule>
+         <Rule nr="802" Version="1E">KAFADCD</Rule>
+     </FunctionalApplication>
+     <Communication>
+         <!-- MXYZ - M=Mounting, X=Comm.serial, Y=Comm.ethernet, Z=Comm.protocol -->
+         <Rule nr="1" Version="XC,XD,1E,1G">#AAB</Rule>
+         <Rule nr="2" Version="XC,XD,1E,1G">#AAC</Rule>
+         <Rule nr="3" Version="XC,XD,1E,1G">#AAD</Rule>
+         <Rule nr="4" Version="1E,1G">#AAG</Rule>
+         <Rule nr="5" Version="XC,XD,1E,1G">#ABB</Rule>
+         <Rule nr="6" Version="XC,XD,1E,1G">#ABC</Rule>
+         <Rule nr="7" Version="XC,XD,1E,1G">#ABD</Rule>
+         <Rule nr="8" Version="1E,1G">#ABG</Rule>
+         <Rule nr="9" Version="XC,XD,1E,1G">#ANB</Rule>
+         <Rule nr="10" Version="XC,XD,1E,1G">#AND</Rule>
+         <Rule nr="11" Version="XC,XD,1E,1G">#BBB</Rule>
+         <Rule nr="12" Version="XC,XD,1E,1G">#BBC</Rule>
+         <Rule nr="13" Version="XC,XD,1E,1G">#BBD</Rule>
+         <Rule nr="14" Version="1E,1G">#BBG</Rule>
+         <Rule nr="15" Version="XD,1E,1G">#BCB</Rule>
+         <Rule nr="16" Version="XD,1E,1G">#BCC</Rule>
+         <Rule nr="17" Version="XD,1E,1G">#BCD</Rule>
+         <Rule nr="18" Version="1E,1G">#BCG</Rule>
+         <Rule nr="19" Version="XD,1E,1G">#BDB</Rule>
+         <Rule nr="20" Version="XD,1E,1G">#BDC</Rule>
+         <Rule nr="21" Version="XD,1E,1G">#BDD</Rule>
+         <Rule nr="22" Version="1E,1G">#BDG</Rule>
+         <Rule nr="23" Version="1E,1G">#BEB</Rule>
+         <Rule nr="24" Version="1E,1G">#BEC</Rule>
+         <Rule nr="25" Version="1E,1G">#BED</Rule>
+         <Rule nr="26" Version="1E,1G">#BEG</Rule>
+         <Rule nr="27" Version="1G">#BFB</Rule>
+         <Rule nr="28" Version="1G">#BFC</Rule>
+         <Rule nr="29" Version="1G">#BFD</Rule>
+         <Rule nr="30" Version="1G">#BFG</Rule>
+         <Rule nr="31" Version="1G">#BGB</Rule>
+         <Rule nr="32" Version="1G">#BGC</Rule>
+         <Rule nr="33" Version="1G">#BGD</Rule>
+         <Rule nr="34" Version="1G">#BGG</Rule>
+         <Rule nr="35" Version="1G">#BHB</Rule>
+         <Rule nr="36" Version="1G">#BHC</Rule>
+         <Rule nr="37" Version="1G">#BHD</Rule>
+         <Rule nr="38" Version="1G">#BHG</Rule>
+         <Rule nr="39" Version="XC,XD,1E,1G">#BNB</Rule>
+         <Rule nr="40" Version="XC,XD,1E,1G">#BND</Rule>
+         <Rule nr="41" Version="1G">#CBB</Rule>
+         <Rule nr="42" Version="1G">#CBC</Rule>
+         <Rule nr="43" Version="1G">#CBD</Rule>
+         <Rule nr="44" Version="1G">#CBG</Rule>
+         <Rule nr="45" Version="1G">#CNB</Rule>
+         <Rule nr="46" Version="1G">#CND</Rule>
+         <Rule nr="47" Version="*">#NAA</Rule>
+         <Rule nr="48" Version="XC,XD,1E,1G">#NAB</Rule>
+         <Rule nr="49" Version="XC,XD,1E,1G">#NAC</Rule>
+         <Rule nr="50" Version="*">#NBA</Rule>
+         <Rule nr="51" Version="XC,XD,1E,1G">#NBB</Rule>
+         <Rule nr="52" Version="XC,XD,1E,1G">#NBC</Rule>
+         <Rule nr="53" Version="XD,1D,1E,1G">#NCA</Rule>
+         <Rule nr="54" Version="XD,1E,1G">#NCB</Rule>
+         <Rule nr="55" Version="XD,1E,1G">#NCC</Rule>
+         <Rule nr="56" Version="XD,1D,1E,1G">#NDA</Rule>
+         <Rule nr="57" Version="XD,1E,1G">#NDB</Rule>
+         <Rule nr="58" Version="XD,1E,1G">#NDC</Rule>
+         <Rule nr="59" Version="1E,1G">#NEA</Rule>
+         <Rule nr="60" Version="1E,1G">#NEB</Rule>
+         <Rule nr="61" Version="1E,1G">#NEC</Rule>
+         <Rule nr="62" Version="1G">#NFA</Rule>
+         <Rule nr="63" Version="1G">#NFB</Rule>
+         <Rule nr="64" Version="1G">#NFC</Rule>
+         <Rule nr="65" Version="1G">#NGA</Rule>
+         <Rule nr="66" Version="1G">#NGB</Rule>
+         <Rule nr="67" Version="1G">#NGC</Rule>
+         <Rule nr="68" Version="1G">#NHA</Rule>
+         <Rule nr="69" Version="1G">#NHB</Rule>
+         <Rule nr="70" Version="1G">#NHC</Rule>
+         <Rule nr="71" Version="*">#NNA</Rule>
+         <Rule nr="72" Version="1D">#AAA</Rule>
+         <Rule nr="73" Version="1D">#ABA</Rule>
+         <Rule nr="74" Version="1D">#ANA</Rule>
+     </Communication>
+     <Software>
+         <!-- FXYZ - F=Functional Application, X=Comm.serial, Y=Comm.ethernet, Z=Option_1 -->
+         <Rule nr="1" Version="1G">#AA#</Rule>
+         <Rule nr="2" Version="XC,XD,1E">#AAA</Rule>
+         <Rule nr="3" Version="1E">#AAD</Rule>
+         <Rule nr="4" Version="1E">#AAE</Rule>
+         <Rule nr="5" Version="XC,XD,1D,1E">#AAN</Rule>
+         <Rule nr="6" Version="XC,XD,1D,1E">#AAB</Rule>
+         <Rule nr="7" Version="XC,XD,1E">#AAC</Rule>
+         <Rule nr="8" Version="1E">#AAF</Rule>
+         <Rule nr="9" Version="1E">#AAG</Rule>
+         <Rule nr="10" Version="1G">#AB#</Rule>
+         <Rule nr="11" Version="XC,XD,1E">#ABA</Rule>
+         <Rule nr="12" Version="1E">#ABD</Rule>
+         <Rule nr="13" Version="1E">#ABE</Rule>
+         <Rule nr="14" Version="XC,XD,1D,1E">#ABN</Rule>
+         <Rule nr="15" Version="XC,XD,1D,1E">#ABB</Rule>
+         <Rule nr="16" Version="XC,XD,1E">#ABC</Rule>
+         <Rule nr="17" Version="1E">#ABF</Rule>
+         <Rule nr="18" Version="1E">#ABG</Rule>
+         <Rule nr="19" Version="XC,XD,1E">#ANA</Rule>
+         <Rule nr="20" Version="1E">#AND</Rule>
+         <Rule nr="21" Version="1E">#ANE</Rule>
+         <Rule nr="22" Version="XC,XD,1D,1E">#ANN</Rule>
+         <Rule nr="23" Version="XC,XD,1D,1E">#ANB</Rule>
+         <Rule nr="24" Version="XC,XD,1E">#ANC</Rule>
+         <Rule nr="25" Version="1E">#ANF</Rule>
+         <Rule nr="26" Version="1E">#ANG</Rule>
+         <Rule nr="27" Version="1G">#AN#</Rule>
+         <Rule nr="28" Version="XC,XD,1E,1G">#BBA</Rule>
+         <Rule nr="29" Version="1E,1G">#BBD</Rule>
+         <Rule nr="30" Version="1E,1G">#BBE</Rule>
+         <Rule nr="31" Version="XC,XD,1E,1G">#BBN</Rule>
+         <Rule nr="32" Version="1G">#BBH</Rule>
+         <Rule nr="33" Version="1G">#BBL</Rule>
+         <Rule nr="34" Version="1G">#BBM</Rule>
+         <Rule nr="35" Version="1G">#BC#</Rule>
+         <Rule nr="36" Version="XD,1E">#BCB</Rule>
+         <Rule nr="37" Version="XD,1E">#BCC</Rule>
+         <Rule nr="38" Version="1E">#BCF</Rule>
+         <Rule nr="39" Version="1E">#BCG</Rule>
+         <Rule nr="40" Version="XD,1E">#BCA</Rule>
+         <Rule nr="41" Version="1E">#BCD</Rule>
+         <Rule nr="42" Version="1E">#BCE</Rule>
+         <Rule nr="43" Version="XD,1E">#BCN</Rule>
+         <Rule nr="44" Version="1G">#BD#</Rule>
+         <Rule nr="45" Version="XD,1E">#BDB</Rule>
+         <Rule nr="46" Version="XD,1E">#BDC</Rule>
+         <Rule nr="47" Version="1E">#BDF</Rule>
+         <Rule nr="48" Version="1E">#BDG</Rule>
+         <Rule nr="49" Version="XD,1E">#BDA</Rule>
+         <Rule nr="50" Version="1E">#BDD</Rule>
+         <Rule nr="51" Version="1E">#BDE</Rule>
+         <Rule nr="52" Version="XD,1E">#BDN</Rule>
+         <Rule nr="53" Version="1G">#BE#</Rule>
+         <Rule nr="54" Version="1E">#BEB</Rule>
+         <Rule nr="55" Version="1E">#BEC</Rule>
+         <Rule nr="56" Version="1E">#BEF</Rule>
+         <Rule nr="57" Version="1E">#BEG</Rule>
+         <Rule nr="58" Version="1E">#BEA</Rule>
+         <Rule nr="59" Version="1E">#BED</Rule>
+         <Rule nr="60" Version="1E">#BEE</Rule>
+         <Rule nr="61" Version="1E">#BEN</Rule>
+         <Rule nr="62" Version="1G">JBF#</Rule>
+         <Rule nr="63" Version="1G">NBF#</Rule>
+         <Rule nr="64" Version="1G">ZBF#</Rule>
+         <Rule nr="65" Version="1G">JBG#</Rule>
+         <Rule nr="66" Version="1G">NBG#</Rule>
+         <Rule nr="67" Version="1G">ZBG#</Rule>
+         <Rule nr="68" Version="1G">JBH#</Rule>
+         <Rule nr="69" Version="1G">NBH#</Rule>
+         <Rule nr="70" Version="1G">ZBH#</Rule>
+         <Rule nr="71" Version="XC,XD,1E,1G">#BNA</Rule>
+         <Rule nr="72" Version="1E,1G">#BND</Rule>
+         <Rule nr="73" Version="1E,1G">#BNE</Rule>
+         <Rule nr="74" Version="XC,XD,1E,1G">#BNN</Rule>
+         <Rule nr="75" Version="1G">#BNH</Rule>
+         <Rule nr="76" Version="1G">#BNL</Rule>
+         <Rule nr="77" Version="1G">#BNM</Rule>
+         <Rule nr="78" Version="1G">#CBA</Rule>
+         <Rule nr="79" Version="1G">#CBD</Rule>
+         <Rule nr="80" Version="1G">#CBE</Rule>
+         <Rule nr="81" Version="1G">#CBN</Rule>
+         <Rule nr="82" Version="1G">#CBH</Rule>
+         <Rule nr="83" Version="1G">#CBL</Rule>
+         <Rule nr="84" Version="1G">#CBM</Rule>
+         <Rule nr="85" Version="1G">#CNA</Rule>
+         <Rule nr="86" Version="1G">#CND</Rule>
+         <Rule nr="87" Version="1G">#CNE</Rule>
+         <Rule nr="88" Version="1G">#CNN</Rule>
+         <Rule nr="89" Version="1G">#CNH</Rule>
+         <Rule nr="90" Version="1G">#CNL</Rule>
+         <Rule nr="91" Version="1G">#CNM</Rule>
+         <Rule nr="92" Version="1G">#NA#</Rule>
+         <Rule nr="93" Version="1G">#NB#</Rule>
+         <Rule nr="94" Version="1G">#NC#</Rule>
+         <Rule nr="95" Version="1G">#ND#</Rule>
+         <Rule nr="96" Version="1G">#NE#</Rule>
+         <Rule nr="97" Version="1G">JNF#</Rule>
+         <Rule nr="98" Version="1G">NNF#</Rule>
+         <Rule nr="99" Version="1G">ZNF#</Rule>
+         <Rule nr="100" Version="1G">JNG#</Rule>
+         <Rule nr="101" Version="1G">NNG#</Rule>
+         <Rule nr="102" Version="1G">ZNG#</Rule>
+         <Rule nr="103" Version="1G">JNH#</Rule>
+         <Rule nr="104" Version="1G">NNH#</Rule>
+         <Rule nr="105" Version="1G">ZNH#</Rule>
+         <Rule nr="106" Version="XC,XD,1E,1G">#NNA</Rule>
+         <Rule nr="107" Version="1E,1G">#NND</Rule>
+         <Rule nr="108" Version="1E,1G">#NNE</Rule>
+         <Rule nr="109" Version="*">#NNN</Rule>
+         <Rule nr="110" Version="1G">#NNH</Rule>
+         <Rule nr="111" Version="1G">#NNL</Rule>
+         <Rule nr="112" Version="1G">#NNM</Rule>
+         <Rule nr="113" Version="XC,XD,1E">#NAA</Rule>
+         <Rule nr="114" Version="1E">#NAD</Rule>
+         <Rule nr="115" Version="1E">#NAE</Rule>
+         <Rule nr="116" Version="XC,XD,1D,1E">#NAN</Rule>
+         <Rule nr="117" Version="XC,XD,1D,1E">#NAB</Rule>
+         <Rule nr="118" Version="XC,XD,1E">#NAC</Rule>
+         <Rule nr="119" Version="1E">#NAF</Rule>
+         <Rule nr="120" Version="1E">#NAG</Rule>
+         <Rule nr="121" Version="XC,XD,1E">#NBA</Rule>
+         <Rule nr="122" Version="1E">#NBD</Rule>
+         <Rule nr="123" Version="1E">#NBE</Rule>
+         <Rule nr="124" Version="XC,XD,1D,1E">#NBN</Rule>
+         <Rule nr="125" Version="XC,XD,1D,1E">#NBB</Rule>
+         <Rule nr="126" Version="XC,XD,1E">#NBC</Rule>
+         <Rule nr="127" Version="1E">#NBF</Rule>
+         <Rule nr="128" Version="1E">#NBG</Rule>
+         <Rule nr="129" Version="XD,1E">#NCA</Rule>
+         <Rule nr="130" Version="1E">#NCD</Rule>
+         <Rule nr="131" Version="1E">#NCE</Rule>
+         <Rule nr="132" Version="XD,1D,1E">#NCN</Rule>
+         <Rule nr="133" Version="XD,1D,1E">#NCB</Rule>
+         <Rule nr="134" Version="XD,1E">#NCC</Rule>
+         <Rule nr="135" Version="1E">#NCF</Rule>
+         <Rule nr="136" Version="1E">#NCG</Rule>
+         <Rule nr="137" Version="XD,1E">#NDA</Rule>
+         <Rule nr="138" Version="1E">#NDD</Rule>
+         <Rule nr="139" Version="1E">#NDE</Rule>
+         <Rule nr="140" Version="XD,1D,1E">#NDN</Rule>
+         <Rule nr="141" Version="XD,1D,1E">#NDB</Rule>
+         <Rule nr="142" Version="XD,1D,1E">#NDC</Rule>
+         <Rule nr="143" Version="1E">#NDF</Rule>
+         <Rule nr="144" Version="1E">#NDG</Rule>
+         <Rule nr="145" Version="1E">#NEA</Rule>
+         <Rule nr="146" Version="1E">#NED</Rule>
+         <Rule nr="147" Version="1E">#NEE</Rule>
+         <Rule nr="148" Version="1E">#NEN</Rule>
+         <Rule nr="149" Version="1E">#NEB</Rule>
+         <Rule nr="150" Version="1E">#NEC</Rule>
+         <Rule nr="151" Version="1E">#NEF</Rule>
+         <Rule nr="152" Version="1E">#NEG</Rule>
+     </Software>
+     <Language>
+         <!-- XY- X=Standard, Y=Language -->
+         <Rule nr="1" Version="XC,XD,1E,1G">C2</Rule>
+         <Rule nr="2" Version="1D">C1</Rule>
+		 <Rule nr="3" Version="1G">CZ</Rule>
+     </Language>
+	 <HMI>
+         <!--PL - P=Front Panel, L=Language -->
+		 <Rule nr = "1" Version = "XC">A2</Rule>
+		 <Rule nr = "2" Version = "XC">B2</Rule>
+         <Rule nr = "3" Version = "XD,1E,1G">#2</Rule>
+		 <Rule nr = "4" Version = "1D">C1</Rule>
+         <Rule nr = "5" Version = "1D">D1</Rule>
+         <Rule nr = "6" Version = "1G">CZ</Rule>
+         <Rule nr = "7" Version = "1G">DZ</Rule>
+     </HMI>
+  </ValidOrderCodes>
+   <Configurations>
+      <Configuration Name="FC01" Version="XC,XD,1E" File="fc01_complete.xml" ModulesFile="fc01_products.xml" LayoutFile="fc01_layout.xml">
+         <!-- "Non-directional O/C and directional E/F"-->
+         <OrderCode Name="#CFA##############"/>
+      </Configuration>
+      <Configuration Name="FC02" Version="XC,XD,1E" File="fc02_complete.xml" ModulesFile="fc02_products.xml" LayoutFile="fc02_layout.xml">
+         <!-- "Non-directional O/C,  directional E/F and CB condition monitoring"-->
+         <OrderCode Name="#CFB##############"/>
+      </Configuration>
+      <Configuration Name="FC03" Version="XC,XD,1E" File="fc03_complete.xml" ModulesFile="fc03_products.xml" LayoutFile="fc03_layout.xml">
+         <!-- "Non-directional O/C and non-directional E/F"-->
+         <OrderCode Name="#CFC##############"/>
+      </Configuration>
+      <Configuration Name="FC03" Version="1G" File="fc03_complete_ed1.xml" ModulesFile="fc03_products.xml" LayoutFile="fc03_layout.xml" AdditionalSldFile="fc03_asld.xml" EventConfigurationFile="fc03_hmi_ed1.xml">
+         <!-- "Non-directional overcurrent and earth-fault protection"-->
+         <OrderCode Name="#CFC##############"/>
+      </Configuration>
+      <Configuration Name="FC03" Version="1G" Edition="ED2" File="fc03_complete.xml" ModulesFile="fc03_products.xml" LayoutFile="fc03_layout.xml" AdditionalSldFile="fc03_asld.xml" EventConfigurationFile="fc03_hmi.xml">
+         <!-- "Non-directional overcurrent and earth-fault protection"-->
+         <OrderCode Name="#CFC##############"/>
+      </Configuration>
+      <Configuration Name="FC04" Version="XC,XD,1E" File="fc04_complete.xml" ModulesFile="fc04_products.xml" LayoutFile="fc04_layout.xml">
+         <!-- "Non-directional O/C, non-directional E/F and CB condition monitoring"-->
+         <OrderCode Name="#CFD##############"/>
+      </Configuration>
+      <Configuration Name="FC04" Version="1G" File="fc04_complete_ed1.xml" ModulesFile="fc04_products.xml" LayoutFile="fc04_layout.xml" AdditionalSldFile="fc04_asld.xml" EventConfigurationFile="fc04_hmi_ed1.xml">
+         <!-- "Non-directional overcurrent and earth-fault protection and circuit-breaker condition monitoring (RTD option)"-->
+         <OrderCode Name="#CFD##############"/>
+      </Configuration>
+      <Configuration Name="FC04" Version="1G" Edition="ED2" File="fc04_complete.xml" ModulesFile="fc04_products.xml" LayoutFile="fc04_layout.xml" AdditionalSldFile="fc04_asld.xml" EventConfigurationFile="fc04_hmi.xml">
+         <!-- "Non-directional overcurrent and earth-fault protection and circuit-breaker condition monitoring (RTD option)"-->
+         <OrderCode Name="#CFD##############"/>
+      </Configuration>
+      <Configuration Name="FC05" Version="XC,XD,1E" File="fc05_complete.xml" ModulesFile="fc05_products.xml" LayoutFile="fc05_layout.xml">
+         <!-- "Non-directional O/C, directional E/F, voltage based measurements and CB condition monitoring"-->
+         <OrderCode Name="#CFE##############"/>
+      </Configuration>
+      <Configuration Name="FC06" Version="XC,XD,1E" File="fc06_complete.xml" ModulesFile="fc06_products.xml" LayoutFile="fc06_layout.xml">
+         <!-- "Directional O/C, directional E/F, voltage based protections & measurements and CB condition monitoring(optional power quality)"-->
+         <OrderCode Name="#CFF##############"/>
+      </Configuration>
+      <Configuration Name="FC07" Version="XD,1E" File="fc07_complete.xml" ModulesFile="fc07_products.xml" LayoutFile="fc07_layout.xml">
+         <!-- "Directional O/C, directional E/F, voltage based protections & measurements and CB condition monitoring (Sensor inputs)"-->
+         <OrderCode Name="#CFG##############"/>
+      </Configuration>
+      <Configuration Name="FC09" Version="1G" File="fc09_complete_ed1.xml" ModulesFile="fc09_products.xml" LayoutFile="fc09_layout.xml" AdditionalSldFile="fc09_asld.xml" EventConfigurationFile="fc09_hmi_ed1.xml">
+         <!-- "Directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check and circuit-breaker condition monitoring (optional power quality and RTD option)"-->
+         <OrderCode Name="#CFJ##############"/>
+      </Configuration>
+      <Configuration Name="FC09" Version="1G" Edition="ED2" File="fc09_complete.xml" ModulesFile="fc09_products.xml" LayoutFile="fc09_layout.xml" AdditionalSldFile="fc09_asld.xml" EventConfigurationFile="fc09_hmi.xml">
+         <!-- "Directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check and circuit-breaker condition monitoring (optional power quality and RTD option)"-->
+         <OrderCode Name="#CFJ##############"/>
+      </Configuration>
+      <Configuration Name="FC12" Version="1G" File="fc12_complete_ed1.xml" ModulesFile="fc12_products.xml" LayoutFile="fc12_layout.xml" AdditionalSldFile="fc12_asld.xml" EventConfigurationFile="fc12_hmi_ed1.xml">
+         <!-- "Directional and non-directional overcurrent and earth-fault protection with multifrequency neutral admittance, voltage, frequency and power based protection and measurements, high-impedance differential protection, synchro-check and circuit-breaker condition monitoring (optional power quality, fault locator and interconnection protection)"-->
+         <OrderCode Name="#CFN##############"/>
+      </Configuration>
+      <Configuration Name="FC12" Version="1G" Edition="ED2" File="fc12_complete.xml" ModulesFile="fc12_products.xml" LayoutFile="fc12_layout.xml" AdditionalSldFile="fc12_asld.xml" EventConfigurationFile="fc12_hmi.xml">
+         <!-- "Directional and non-directional overcurrent and earth-fault protection with multifrequency neutral admittance, voltage, frequency and power based protection and measurements, high-impedance differential protection, synchro-check and circuit-breaker condition monitoring (optional power quality, fault locator and interconnection protection)"-->
+         <OrderCode Name="#CFN##############"/>
+      </Configuration>
+      <Configuration Name="FC51" Version="XC,XD,1E" File="fc51_complete.xml" ModulesFile="fc51_products.xml" LayoutFile="fc51_layout.xml">
+         <!-- "Directional overcurrent and earth-fault protection with undervoltage and overvoltage and dedicated current measurement"-->
+         <OrderCode Name="#CFJ##############"/>
+      </Configuration>
+      <Configuration Name="FC52" Version="XD,1E" File="fc52_complete.xml" ModulesFile="fc52_products.xml" LayoutFile="fc52_layout.xml">
+         <!-- "Directional O/C, directional E/F, voltage based protections & measurements and CB condition monitoring(12BI, 10BO)(optional power quality)"-->
+         <OrderCode Name="#CFK##############"/>
+      </Configuration>
+      <Configuration Name="FC52" Version="1G" File="fc52_complete_ed1.xml" ModulesFile="fc52_products.xml" LayoutFile="fc52_layout.xml" AdditionalSldFile="fc52_asld.xml" EventConfigurationFile="fc52_hmi_ed1.xml">
+         <!-- "Directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check and circuit-breaker condition monitoring (optional power quality) with 12 BI"-->
+         <OrderCode Name="#CFZ##############"/>
+      </Configuration>
+      <Configuration Name="FC52" Version="1G" Edition="ED2" File="fc52_complete.xml" ModulesFile="fc52_products.xml" LayoutFile="fc52_layout.xml" AdditionalSldFile="fc52_asld.xml" EventConfigurationFile="fc52_hmi.xml">
+         <!-- "Directional overcurrent and earth-fault protection, voltage and frequency based protection and measurements, synchro-check and circuit-breaker condition monitoring (optional power quality) with 12 BI"-->
+         <OrderCode Name="#CFZ##############"/>
+      </Configuration>
+      <Configuration Name="FC53" Version="1D,1E" File="fc53_complete.xml" ModulesFile="fc53_products.xml" LayoutFile="fc53_layout.xml">
+         <!-- "Independent Phase Timer OC/EF"-->
+         <OrderCode Name="#CFL##############"/>
+      </Configuration>
+      <Configuration Name="FC54" Version="1D,1E" File="fc54_complete.xml" ModulesFile="fc54_products.xml" LayoutFile="fc54_layout.xml">
+         <!-- "Independent Phase Timer DOC/DEF"-->
+         <OrderCode Name="#CFM##############"/>
+      </Configuration>
+   </Configurations>
+</ProductTypeCode>

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.IO.Compression;
 using System.Text;
 using System.Xml;
@@ -54,10 +54,10 @@ public static class ExportService
             </Relationships>
             """);
         AddEntry(archive, "xl/workbook.xml",
-            """
+            $$"""
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-              <sheets><sheet name="REX615" sheetId="1" r:id="rId1"/></sheets>
+              <sheets><sheet name="{{Escape(WorksheetName(snapshot.ProductTitle))}}" sheetId="1" r:id="rId1"/></sheets>
             </workbook>
             """);
         AddEntry(archive, "xl/_rels/workbook.xml.rels",
@@ -75,7 +75,7 @@ public static class ExportService
         GlobalFontSettings.FontResolver ??= new WindowsFontResolver();
 
         var document = new PdfDocument();
-        document.Info.Title = "ABB REX615 配置";
+        document.Info.Title = snapshot.ProductTitle;
         var page = document.AddPage();
         page.Size = PdfSharp.PageSize.A4;
 
@@ -87,7 +87,7 @@ public static class ExportService
 
         try
         {
-            DrawLine(graphics, "ABB REX615 配置", titleFont, 40, ref y, page.Width.Point - 80);
+            DrawLine(graphics, snapshot.ProductTitle, titleFont, 40, ref y, page.Width.Point - 80);
             y += 8;
             foreach (var line in BuildTextLines(snapshot))
             {
@@ -240,6 +240,17 @@ public static class ExportService
 
     private static string FormatAnsi(string ansi) =>
         string.IsNullOrWhiteSpace(ansi) ? "" : $"ANSI {ansi} - ";
+
+    private static string WorksheetName(string productTitle)
+    {
+        var value = string.IsNullOrWhiteSpace(productTitle) ? "配置" : productTitle.Trim();
+        foreach (var invalidChar in new[] { ':', '\\', '/', '?', '*', '[', ']' })
+        {
+            value = value.Replace(invalidChar, '_');
+        }
+
+        return value.Length <= 31 ? value : value[..31];
+    }
 
     private static void DrawLine(XGraphics graphics, string text, XFont font, double x, ref double y, double width)
     {

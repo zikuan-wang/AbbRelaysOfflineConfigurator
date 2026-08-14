@@ -1,6 +1,6 @@
 [
   {
-    "Name": "ABB Relays Offline Configurator",
+    "Name": "Unofficial ABB Relays Offline Configurator",
     "Projects": [
       {
         "Path": "AbbRelaysOfflineConfigurator\\AbbRelaysOfflineConfigurator.csproj",

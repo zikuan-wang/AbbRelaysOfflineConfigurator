@@ -9,6 +9,8 @@ namespace AbbRelaysOfflineConfigurator.ViewModels;
 
 public sealed class CnLegacySelectorViewModel : ObservableObject
 {
+    private const string DefaultOrderingCode = "HCFCACABNBCZCCN11G";
+
     private readonly CnLegacyFunctionCatalogService _functionCatalog = new();
     private CnLegacySeriesViewModel? _selectedSeries;
     private CnLegacyDeviceViewModel? _selectedDevice;
@@ -44,6 +46,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         ClearFunctionRecommendationCommand = new RelayCommand(ClearFunctionRecommendation, () => RequestedFunctions.Count > 0);
 
         SelectedSeries = Series.FirstOrDefault();
+        ImportOrderingCodeValue(DefaultOrderingCode, showMessages: false);
     }
 
     public ObservableCollection<CnLegacySeriesViewModel> Series { get; }
@@ -453,6 +456,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         }
 
         var selectedDescriptions = Groups
+            .Where(IsIoCountSourceGroup)
             .Select(group => group.SelectedOption)
             .Where(option => option is not null)
             .Select(option => option!.DescriptionSource)
@@ -473,6 +477,10 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         group.Position.Equals("9", StringComparison.OrdinalIgnoreCase) ||
         group.Position.Equals("10", StringComparison.OrdinalIgnoreCase) ||
         group.Position.Equals("9-10", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsIoCountSourceGroup(CnLegacyGroupViewModel group) =>
+        group.Position.Equals("5-6", StringComparison.OrdinalIgnoreCase) ||
+        group.Position.Equals("7-8", StringComparison.OrdinalIgnoreCase);
 
     private string? BuildCommunicationSummaryPart(CnLegacyGroupViewModel group)
     {
@@ -521,9 +529,16 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         {
             foreach (var option in group.Options)
             {
-                var result = Evaluate(option);
-                option.SetAvailability(result.IsValid);
-                option.SetError(option.IsSelected && !result.IsValid);
+                // PDF-derived requirements control which page choices are
+                // currently compatible. The original XML pattern blocks are
+                // deliberately evaluated only as validation below.
+                var selectionResult = EvaluateSelectionRules(option);
+                option.SetAvailability(selectionResult.IsValid);
+
+                var validationResult = option.IsSelected
+                    ? EvaluateValidationWithTargets(option)
+                    : null;
+                option.SetError(validationResult is { IsValid: false });
             }
 
             group.RefreshValidationState();
@@ -545,13 +560,15 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
             if (group.SelectedOption is not null)
             {
-                var result = Evaluate(group.SelectedOption);
+                var result = EvaluateValidationWithTargets(group.SelectedOption);
                 if (!result.IsValid)
                 {
-                    foreach (var reason in result.Messages)
+                    foreach (var issue in result.Issues)
                     {
                         ValidationMessages.Add(new CnLegacyValidationMessageViewModel(
-                            IsEnglish ? $"{group.Name} / {group.SelectedOption.Code}: {reason}" : $"{group.Name} / {group.SelectedOption.Code}：{reason}"));
+                            IsEnglish
+                                ? $"{group.Name} / {group.SelectedOption.Code}: {issue.Message}"
+                                : $"{group.Name} / {group.SelectedOption.Code}：{issue.Message}"));
                     }
                 }
             }
@@ -582,7 +599,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 continue;
             }
 
-            var result = EvaluateWithTargets(group.SelectedOption);
+            var result = EvaluateValidationWithTargets(group.SelectedOption);
             foreach (var issue in result.Issues)
             {
                 ValidationMessages.Add(new CnLegacyValidationMessageViewModel(
@@ -597,15 +614,31 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
             : IsEnglish ? "Offline rule validation passed" : "离线规则校验通过";
     }
 
-    private CnLegacyEvaluationResultWithTargets EvaluateWithTargets(CnLegacyOptionViewModel option)
+    private CnLegacyEvaluationResultWithTargets EvaluateValidationWithTargets(CnLegacyOptionViewModel option)
     {
         var issues = new List<CnLegacyValidationIssue>();
+        var selectedCodes = SelectedCodesWith(option);
+        var version = CurrentVersionCode(option);
+
+        if (!option.Model.SupportsVersion(version))
+        {
+            issues.Add(new CnLegacyValidationIssue(
+                IsEnglish
+                    ? $"{option.Code} is not available for product version {version}."
+                    : $"{option.Code} 不适用于产品版本 {version}。",
+                [new CnLegacyValidationTargetViewModel(option.Group.Position, option.Group.Name, option.Code)]));
+        }
 
         foreach (var requirement in option.Model.RequiredSelections)
         {
+            if (!ShouldEvaluateRequirement(requirement))
+            {
+                continue;
+            }
+
             var targetGroup = Groups.FirstOrDefault(group =>
                 group.Position.Equals(requirement.Position, StringComparison.OrdinalIgnoreCase));
-            var selectedCode = targetGroup?.SelectedOption?.Code;
+            selectedCodes.TryGetValue(requirement.Position, out var selectedCode);
 
             var matches = !string.IsNullOrWhiteSpace(selectedCode) &&
                           requirement.Codes.Any(code => code.Equals(selectedCode, StringComparison.OrdinalIgnoreCase));
@@ -648,9 +681,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         foreach (var exclusion in option.Model.ExcludedCombinedSelections)
         {
             var combined = string.Concat(exclusion.Positions.Select(position =>
-                Groups.FirstOrDefault(group => group.Position.Equals(position, StringComparison.OrdinalIgnoreCase))
-                    ?.SelectedOption
-                    ?.Code ?? ""));
+                selectedCodes.TryGetValue(position, out var code) ? code : ""));
             if (!exclusion.Codes.Any(code => code.Equals(combined, StringComparison.OrdinalIgnoreCase)))
             {
                 continue;
@@ -662,7 +693,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 .Select(group => new CnLegacyValidationTargetViewModel(
                     group!.Position,
                     group.Name,
-                    group.SelectedOption?.Code))
+                    selectedCodes.TryGetValue(group.Position, out var code) ? code : group.SelectedOption?.Code))
                 .ToList();
             targets.Insert(0, new CnLegacyValidationTargetViewModel(option.Group.Position, option.Group.Name, option.Code));
 
@@ -671,7 +702,34 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 DeduplicateTargets(targets)));
         }
 
+        issues.AddRange(EvaluatePatternRulesWithTargets(option, selectedCodes, version));
+
         return new CnLegacyEvaluationResultWithTargets(issues.Count == 0, issues);
+    }
+
+    private IEnumerable<CnLegacyValidationIssue> EvaluatePatternRulesWithTargets(
+        CnLegacyOptionViewModel option,
+        IReadOnlyDictionary<string, string> selectedCodes,
+        string version)
+    {
+        foreach (var block in SelectedDevice?.Model.ValidationBlocks ?? [])
+        {
+            if (block.Positions.Count == 0 ||
+                !block.Positions[0].Equals(option.Group.Position, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var value = BuildBlockValue(block, selectedCodes);
+            if (string.IsNullOrWhiteSpace(value) || MatchesPatternBlock(block, value, version))
+            {
+                continue;
+            }
+
+            yield return new CnLegacyValidationIssue(
+                BuildPatternMessage(block, value, selectedCodes),
+                DeduplicateTargets(BuildPatternTargets(block, selectedCodes)));
+        }
     }
 
     private static IReadOnlyList<CnLegacyValidationTargetViewModel> DeduplicateTargets(
@@ -702,16 +760,27 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         }
     }
 
-    private CnLegacyEvaluationResult Evaluate(CnLegacyOptionViewModel option)
+    private CnLegacyEvaluationResult EvaluateSelectionRules(CnLegacyOptionViewModel option)
     {
         var messages = new List<string>();
+        var selectedCodes = SelectedCodesWith(option);
+        var version = CurrentVersionCode(option);
+
+        if (!option.Model.SupportsVersion(version))
+        {
+            messages.Add(IsEnglish
+                ? $"{option.Code} is not available for product version {version}."
+                : $"{option.Code} 不适用于产品版本 {version}。");
+        }
 
         foreach (var requirement in option.Model.RequiredSelections)
         {
-            var selectedCode = Groups.FirstOrDefault(group =>
-                    group.Position.Equals(requirement.Position, StringComparison.OrdinalIgnoreCase))
-                ?.SelectedOption
-                ?.Code;
+            if (!ShouldEvaluateRequirement(requirement))
+            {
+                continue;
+            }
+
+            selectedCodes.TryGetValue(requirement.Position, out var selectedCode);
 
             var matches = !string.IsNullOrWhiteSpace(selectedCode) &&
                           requirement.Codes.Any(code => code.Equals(selectedCode, StringComparison.OrdinalIgnoreCase));
@@ -732,9 +801,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         foreach (var exclusion in option.Model.ExcludedCombinedSelections)
         {
             var combined = string.Concat(exclusion.Positions.Select(position =>
-                Groups.FirstOrDefault(group => group.Position.Equals(position, StringComparison.OrdinalIgnoreCase))
-                    ?.SelectedOption
-                    ?.Code ?? ""));
+                selectedCodes.TryGetValue(position, out var code) ? code : ""));
             if (exclusion.Codes.Any(code => code.Equals(combined, StringComparison.OrdinalIgnoreCase)))
             {
                 messages.Add(BuildExclusionMessage(exclusion.Message, combined));
@@ -742,6 +809,108 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         }
 
         return new CnLegacyEvaluationResult(messages.Count == 0, messages);
+    }
+
+    private IReadOnlyDictionary<string, string> SelectedCodesWith(CnLegacyOptionViewModel option)
+    {
+        var selectedCodes = Groups
+            .Select(group => (group.Position, Code: group.SelectedOption?.Code ?? ""))
+            .Where(item => !string.IsNullOrWhiteSpace(item.Code))
+            .ToDictionary(item => item.Position, item => item.Code, StringComparer.OrdinalIgnoreCase);
+        selectedCodes[option.Group.Position] = option.Code;
+        return selectedCodes;
+    }
+
+    private string CurrentVersionCode(CnLegacyOptionViewModel? candidate = null)
+    {
+        if (candidate?.Group.Position.Equals("17-18", StringComparison.OrdinalIgnoreCase) == true)
+        {
+            return candidate.Code;
+        }
+
+        return Groups.FirstOrDefault(group => group.Position.Equals("17-18", StringComparison.OrdinalIgnoreCase))
+            ?.SelectedOption
+            ?.Code ?? "";
+    }
+
+    private static string BuildBlockValue(
+        CnLegacyValidationBlock block,
+        IReadOnlyDictionary<string, string> selectedCodes)
+    {
+        var parts = new List<string>();
+        foreach (var position in block.Positions)
+        {
+            if (!selectedCodes.TryGetValue(position, out var code) || string.IsNullOrWhiteSpace(code))
+            {
+                return "";
+            }
+
+            parts.Add(code);
+        }
+
+        return string.Concat(parts);
+    }
+
+    private static bool MatchesPatternBlock(CnLegacyValidationBlock block, string value, string version) =>
+        block.Rules.Any(rule => rule.SupportsVersion(version) && rule.Matches(value));
+
+    private string BuildPatternMessage(
+        CnLegacyValidationBlock block,
+        string value,
+        IReadOnlyDictionary<string, string> selectedCodes)
+    {
+        var displayName = string.IsNullOrWhiteSpace(block.DisplayName) ? block.Name : block.DisplayName;
+        var details = string.Join(
+            IsEnglish ? ", " : "，",
+            block.Positions.Select(position =>
+            {
+                var group = Groups.FirstOrDefault(item => item.Position.Equals(position, StringComparison.OrdinalIgnoreCase));
+                var name = group?.Name ?? position;
+                return $"{name}={selectedCodes.GetValueOrDefault(position, "")}";
+            }));
+
+        return IsEnglish
+            ? $"{displayName} combination does not match the XML ordering rules: {value} ({details})."
+            : $"{displayName}组合不满足 XML 订货规则：{value}（{details}）。";
+    }
+
+    private IEnumerable<CnLegacyValidationTargetViewModel> BuildPatternTargets(
+        CnLegacyValidationBlock block,
+        IReadOnlyDictionary<string, string> selectedCodes)
+    {
+        foreach (var position in block.Positions)
+        {
+            var group = Groups.FirstOrDefault(item => item.Position.Equals(position, StringComparison.OrdinalIgnoreCase));
+            if (group is null)
+            {
+                continue;
+            }
+
+            yield return new CnLegacyValidationTargetViewModel(
+                group.Position,
+                group.Name,
+                selectedCodes.TryGetValue(position, out var code) ? code : group.SelectedOption?.Code);
+        }
+    }
+
+    private bool ShouldEvaluateRequirement(CnLegacySelectionRequirement requirement)
+    {
+        return requirement.WhenSelections.Count == 0 ||
+               requirement.WhenSelections.All(SelectionConditionMatches);
+    }
+
+    private bool SelectionConditionMatches(CnLegacySelectionCondition condition)
+    {
+        var selectedCode = Groups.FirstOrDefault(group =>
+                group.Position.Equals(condition.Position, StringComparison.OrdinalIgnoreCase))
+            ?.SelectedOption
+            ?.Code;
+
+        var matches = !string.IsNullOrWhiteSpace(selectedCode) &&
+                      condition.Codes.Any(code => code.Equals(selectedCode, StringComparison.OrdinalIgnoreCase));
+        return condition.Mode.Equals("NoneOf", StringComparison.OrdinalIgnoreCase)
+            ? !matches
+            : matches;
     }
 
     private string BuildRequirementMessage(
@@ -782,8 +951,10 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
             return;
         }
 
-        Clipboard.SetText(OrderingCode);
-        Status = IsEnglish ? "Order code copied." : "订货号已复制。";
+        if (ClipboardService.TrySetText(OrderingCode, "615/620 CN", IsEnglish))
+        {
+            Status = IsEnglish ? "Order code copied." : "订货号已复制。";
+        }
     }
 
     private void ImportOrderingCode()
@@ -791,8 +962,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         var window = new CombinationCodeImportWindow(
             IsEnglish ? "Import 615/620 CN order code" : "导入 615/620 CN 订货号",
             IsEnglish
-                ? "Enter a complete 18-character 615 CN 5.0 FP1 or 620 CN 2.0 FP1 order code. The tool will detect the series and device type automatically."
-                : "请输入完整 18 位 615 CN 5.0 FP1 或 620 CN 2.0 FP1 订货号，软件会自动识别系列和装置类型。",
+                ? "Enter a complete 18-character 615 CN 5.1 or 620 CN 2.1 order code. The tool will detect the series and device type automatically."
+                : "请输入完整 18 位 615 CN 5.1 或 620 CN 2.1 订货号，软件会自动识别系列和装置类型。",
             IsEnglish ? "Import" : "导入",
             IsEnglish ? "Example: HCFCACABNBC2ACN11G or NBFNAANNABC2DNN11G" : "例如：HCFCACABNBC2ACN11G 或 NBFNAANNABC2DNN11G")
         {
@@ -807,27 +978,23 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         ImportOrderingCodeValue(window.CombinationCode);
     }
 
-    private void ImportOrderingCodeValue(string value)
+    private void ImportOrderingCodeValue(string value, bool showMessages = true)
     {
         var code = NormalizeOrderingCode(value);
         if (code.Length != 18)
         {
-            MessageBox.Show(
-                IsEnglish ? "The order code must contain 18 characters." : "订货号必须为 18 位代码。",
-                IsEnglish ? "615/620 CN Configurator" : "615/620 CN 选型",
-                MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            var message = IsEnglish ? "The order code must contain 18 characters." : "订货号必须为 18 位代码。";
+            ShowImportWarning(message, showMessages);
             return;
         }
 
         var series = DetectSeries(code);
         if (series is null)
         {
-            MessageBox.Show(
-                IsEnglish ? "The order code series cannot be identified. 615 usually starts with H or 1; 620 usually starts with N or 5." : "无法识别订货号系列。615 通常以 H 或 1 开头，620 通常以 N 或 5 开头。",
-                IsEnglish ? "615/620 CN Configurator" : "615/620 CN 选型",
-                MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            var message = IsEnglish
+                ? "The order code series cannot be identified. 615 usually starts with H or 1; 620 usually starts with N or 5."
+                : "无法识别订货号系列。615 通常以 H 或 1 开头，620 通常以 N 或 5 开头。";
+            ShowImportWarning(message, showMessages);
             return;
         }
 
@@ -839,13 +1006,10 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
         if (device is null)
         {
-            MessageBox.Show(
-                IsEnglish
-                    ? $"No device type for main application code {applicationCode} was found in the current data package."
-                    : $"当前数据包中没有找到主要应用代码 {applicationCode} 对应的装置类型。",
-                IsEnglish ? "615/620 CN Configurator" : "615/620 CN 选型",
-                MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            var message = IsEnglish
+                ? $"No device type for main application code {applicationCode} was found in the current data package."
+                : $"当前数据包中没有找到主要应用代码 {applicationCode} 对应的装置类型。";
+            ShowImportWarning(message, showMessages);
             return;
         }
 
@@ -874,13 +1038,28 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
                 : $"订货号已导入，但以下位号未匹配：{string.Join("；", notFound)}";
     }
 
+    private void ShowImportWarning(string message, bool showMessages)
+    {
+        Status = message;
+        if (!showMessages)
+        {
+            return;
+        }
+
+        MessageBox.Show(
+            message,
+            IsEnglish ? "615/620 CN Configurator" : "615/620 CN 选型",
+            MessageBoxButton.OK,
+            MessageBoxImage.Warning);
+    }
+
     private CnLegacySeriesViewModel? DetectSeries(string code)
     {
         var first = code[0];
         var targetId = first is 'H' or '1'
-            ? "615_CN_5_0_FP1"
+            ? "615_CN_5_1"
             : first is 'N' or '5'
-                ? "620_CN_2_0_FP1"
+                ? "620_CN_2_1"
                 : null;
 
         return targetId is null

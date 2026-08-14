@@ -553,8 +553,11 @@ public sealed class Rio600SelectionViewModel : ObservableObject
             return;
         }
 
-        Clipboard.SetText(string.Join(Environment.NewLine, OrderListItems.Select(item =>
-            $"{item.ModuleCode}\t{item.Description}\t{item.OrderNumber}\t{item.Quantity}")));
+        ClipboardService.TrySetText(
+            string.Join(Environment.NewLine, OrderListItems.Select(item =>
+                $"{item.ModuleCode}\t{item.Description}\t{item.OrderNumber}\t{item.Quantity}")),
+            "RIO600",
+            IsEnglish);
     }
 
     private void ExportExcel()

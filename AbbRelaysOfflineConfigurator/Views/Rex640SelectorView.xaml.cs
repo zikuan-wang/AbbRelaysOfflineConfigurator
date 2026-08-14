@@ -84,8 +84,17 @@ public partial class Rex640SelectorView : UserControl
     {
         var version = DataContext is Rex640SelectionViewModel viewModel
             ? viewModel.AppRecommendationVersion
-            : "PCL6";
+            : "PCL7";
         var window = new Rex640FunctionCatalogWindow(version)
+        {
+            Owner = Window.GetWindow(this)
+        };
+        window.ShowDialog();
+    }
+
+    private void Rex640AccessoriesButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = new Rex640AccessoryCatalogWindow
         {
             Owner = Window.GetWindow(this)
         };

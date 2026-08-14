@@ -18,6 +18,7 @@
         <Style x:Key="LegacySelectorButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
@@ -124,7 +125,7 @@
                                    FontSize="16"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextBrush}" />
-                        <TextBlock Text="615 CN 5.0FP1 / 620 CN 2.0FP1 订货号选项"
+                        <TextBlock Text="615 CN 5.1 / 620 CN 2.1 订货号选项"
                                    Foreground="{DynamicResource MutedBrush}"
                                    FontSize="12"
                                    Margin="0,2,0,0" />
@@ -135,7 +136,7 @@
                                 Style="{StaticResource LegacySelectorButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="UnfoldMoreHorizontal" Width="18" Height="18" />
-                                <TextBlock Text="全部展开" Margin="6,0,0,0" />
+                                <TextBlock Text="展开" Margin="6,0,0,0" />
                             </StackPanel>
                         </Button>
                         <Button Command="{Binding CollapseAllCommand}"
@@ -143,7 +144,7 @@
                                 Margin="0">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="UnfoldLessHorizontal" Width="18" Height="18" />
-                                <TextBlock Text="全部折叠" Margin="6,0,0,0" />
+                                <TextBlock Text="折叠" Margin="6,0,0,0" />
                             </StackPanel>
                         </Button>
                     </WrapPanel>
@@ -676,53 +677,6 @@
                     </StackPanel>
                 </Border>
 
-                <Border Style="{StaticResource LegacySelectorPanelStyle}">
-                    <StackPanel>
-                        <TextBlock Text="当前选择"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextBrush}" />
-                        <ScrollViewer MaxHeight="420"
-                                      Margin="0,8,0,0"
-                                      VerticalScrollBarVisibility="Auto">
-                            <ItemsControl ItemsSource="{Binding SummaryItems}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border BorderBrush="{DynamicResource PanelBorderBrush}"
-                                                BorderThickness="1"
-                                                CornerRadius="7"
-                                                Padding="8,6"
-                                                Margin="0,0,0,6"
-                                                Background="{DynamicResource SurfaceBrush}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="46" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Text="{Binding Position, Mode=OneWay}"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource AccentBrush}" />
-                                                <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding GroupName, Mode=OneWay}"
-                                                               FontWeight="SemiBold"
-                                                               Foreground="{DynamicResource TextBrush}"
-                                                               TextWrapping="Wrap" />
-                                                    <TextBlock Foreground="{DynamicResource TextBrush}"
-                                                               TextWrapping="Wrap"
-                                                               Margin="0,2,0,0">
-                                                        <Run Text="{Binding Code, Mode=OneWay}" FontWeight="Bold" />
-                                                        <Run Text="：" />
-                                                        <Run Text="{Binding Description, Mode=OneWay}" />
-                                                    </TextBlock>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </StackPanel>
-                </Border>
             </StackPanel>
         </ScrollViewer>
     </Grid>

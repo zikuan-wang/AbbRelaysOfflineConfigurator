@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<VarientList>
+	<CodeDigits>
+		<CodeDigit Digit="1" Title="Product series, size" TitleId="225370" /> 
+		<CodeDigit Digit="2" Title="Market type (Standard)" TitleId="225371" /> 
+		<CodeDigit Digit="3" Title="Main application" TitleId="225372" /> 
+		<CodeDigit Digit="4" Title="Functional application" TitleId="225373" /> 
+		<CodeDigit Digit="5,6" Title="Analog inputs/outputs" TitleId="225374" /> 
+		<CodeDigit Digit="7,8" Title="Binary inputs/outputs" TitleId="225375" /> 
+		<CodeDigit Digit="9" Title="Communication serial" TitleId="225376" /> 
+		<CodeDigit Digit="10" Title="Communication Ethernet" TitleId="225377" /> 
+		<CodeDigit Digit="11" Title="Communication protocol" TitleId="225378" /> 
+		<CodeDigit Digit="12" Title="Language" TitleId="225379" /> 
+		<CodeDigit Digit="13" Title="Front panel" TitleId="225380" /> 
+		<CodeDigit Digit="14" Title="Option 1" TitleId="225381" /> 
+		<CodeDigit Digit="15" Title="Option 2" TitleId="225382" /> 
+		<CodeDigit Digit="16" Title="Power supply" TitleId="225383" /> 
+		<CodeDigit Digit="17" Title="Vacant" TitleId="225384" /> 
+		<CodeDigit Digit="18" Title="Version" TitleId="225385" /> 
+	</CodeDigits>
+	<CodeDetails>
+		<CodeDetail BasicCode="" Digit="1" Code="S" Description="RE_630, 4U half 19 inch housing" DescriptionId="225386" /> 
+		<CodeDetail BasicCode="" Digit="1" Code="T" Description="RE_630, 6U half 19 inch housing" DescriptionId="225387" /> 
+		<CodeDetail BasicCode="" Digit="2" Code="B" Description="IEC" DescriptionId="225388" /> 
+		<CodeDetail BasicCode="" Digit="3" Code="T" Description="Transformer protection and control" DescriptionId="227868" /> 
+		<CodeDetail BasicCode="SBT" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="SBT" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="SBT" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="SBT" Digit="5,6" Code="AA" Description="7I + 3U (Io 1/5A)" DescriptionId="231017" /> 
+		<CodeDetail BasicCode="SBT" Digit="5,6" Code="AB" Description="8I + 2U (Io 1/5A)" DescriptionId="231018" /> 
+		<CodeDetail BasicCode="SBT" Digit="5,6" Code="AC" Description="8I + 2U (Io 0.1/0.5A)" DescriptionId="231019" /> 
+		<CodeDetail BasicCode="SBT" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="SBT" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="SBT" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="SBT" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="SBT" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="SBT" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="SBT" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="SBT" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="SBT" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 
+		<CodeDetail BasicCode="SBT" Digit="12" Code="Z" Description="IEC English, Chinese" DescriptionId="231015" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="A" Description="Integrated LHMI" DescriptionId="225410" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="SBT" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 
+		<CodeDetail BasicCode="SBT" Digit="14" Code="N" Description="No options" DescriptionId="225416" /> 
+		<CodeDetail BasicCode="SBT" Digit="14" Code="A" Description="Phase sequence voltage functions" DescriptionId="225423" /> 
+		<CodeDetail BasicCode="SBT" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="SBT" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="SBT" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="SBT" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 
+		<CodeDetail BasicCode="SBT" Digit="18" Code="A" Description="Version 1.0" DescriptionId="225429" /> 
+		<CodeDetail BasicCode="TBT" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="TBT" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="TBT" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="TBT" Digit="5,6" Code="AA" Description="7I + 3U (Io 1/5A)" DescriptionId="231017" /> 
+		<CodeDetail BasicCode="TBT" Digit="5,6" Code="AB" Description="8I + 2U (Io 1/5A)" DescriptionId="231018" /> 
+		<CodeDetail BasicCode="TBT" Digit="5,6" Code="AC" Description="8I + 2U (Io 0.1/0.5A)" DescriptionId="231019" /> 
+		<CodeDetail BasicCode="TBT" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="TBT" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="TBT" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="TBT" Digit="7,8" Code="AD" Description="41BI + 36BO" DescriptionId="225430" /> 
+		<CodeDetail BasicCode="TBT" Digit="7,8" Code="AE" Description="50BI + 45BO" DescriptionId="225431" /> 
+		<CodeDetail BasicCode="TBT" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="TBT" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="TBT" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="TBT" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="TBT" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="TBT" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 
+		<CodeDetail BasicCode="TBT" Digit="12" Code="Z" Description="IEC English, Chinese" DescriptionId="231015" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="TBT" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 
+		<CodeDetail BasicCode="TBT" Digit="14" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="TBT" Digit="14" Code="A" Description="Phase sequence voltage functions" DescriptionId="225423" /> 
+		<CodeDetail BasicCode="TBT" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="TBT" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="TBT" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="TBT" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 
+		<CodeDetail BasicCode="TBT" Digit="18" Code="A" Description="Version 1.0" DescriptionId="225429" /> 
+	</CodeDetails>
+	<CodeRules>
+		<CodeRule BasicCode="SBT" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AA" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AA" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="N" DependentDigit="7,8" PossibleCodes="AA,AB,AC" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="A" DependentDigit="7,8" PossibleCodes="AB,AC" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="B" DependentDigit="7,8" PossibleCodes="AB,AC" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="N" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD,AE" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="A" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" /> 
+		<CodeRule BasicCode="TBT" Digit="4" Code="B" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" /> 
+		<CodeRule BasicCode="SBT" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="SBT" Digit="4" Code="A" DependentDigit="13" PossibleCodes="A,B,C,D,E,F" />    
+		<CodeRule BasicCode="SBT" Digit="4" Code="B" DependentDigit="13" PossibleCodes="A,B,C,D,E,F" />    
+		<CodeRule BasicCode="TBT" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="TBT" Digit="4" Code="A" DependentDigit="13" PossibleCodes="B,C,D,E,F" />  
+		<CodeRule BasicCode="TBT" Digit="4" Code="B" DependentDigit="13" PossibleCodes="B,C,D,E,F" />  
+		<CodeRule BasicCode="SBT" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="SBT" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="TBT" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="TBT" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N" /> 
+	</CodeRules>
+	<MappedPlusCodes>
+		<MappedPlusCode OrderCodeMask="SBT?????????????XA" PlusCode="RET630EA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????????XA" PlusCode="RET630EB01A" />  
+         <MappedPlusCode OrderCodeMask="SBT?????????N???XA" PlusCode="No Display" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????A???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????B???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????C???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????D???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????E???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????????F???XA" PlusCode="DISA01A" /> 
+         <MappedPlusCode OrderCodeMask="TBT?????????N???XA" PlusCode="No Display" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????A???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????B???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????C???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????D???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????E???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????????F???XA" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?AA??????????XA" PlusCode="AIMA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?AA??????????XA" PlusCode="AIMA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?AB??????????XA" PlusCode="AIMA05A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?AB??????????XA" PlusCode="AIMA05A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?AC??????????XA" PlusCode="AIMA06A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?AC??????????XA" PlusCode="AIMA06A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????AB??????XA" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????AB??????XA" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????AA??????XA" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????AA??????XA" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????BB??????XA" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????BB??????XA" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBT?????BA??????XA" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBT?????BA??????XA" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBT???AB????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AB????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT???AC????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT???AC????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AC????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AC????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AD????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AD????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AD????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AE????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AE????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AE????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???AE????????XA" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT????????????AXA" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT????????????AXA" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT????????????BXA" PlusCode="PSMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBT????????????BXA" PlusCode="PSMA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBTN????????????XA" PlusCode="ACNA00A" /> 
+		<MappedPlusCode OrderCodeMask="TBTN????????????XA" PlusCode="ACNA00A" /> 
+		<MappedPlusCode OrderCodeMask="SBTA????????????XA" PlusCode="ACNA06A" /> 
+		<MappedPlusCode OrderCodeMask="TBTA????????????XA" PlusCode="ACNA06A" /> 
+		<MappedPlusCode OrderCodeMask="SBTB????????????XA" PlusCode="ACNA07A" /> 
+		<MappedPlusCode OrderCodeMask="TBTB????????????XA" PlusCode="ACNA07A" /> 
+		<MappedPlusCode OrderCodeMask="SBT??????????A??XA" PlusCode="SWAA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBT??????????A??XA" PlusCode="SWAA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBT???????B?????XA" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBT???????B?????XA" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBT????????Z????XA" PlusCode="LASA99A" /> 
+		<MappedPlusCode OrderCodeMask="TBT????????Z????XA" PlusCode="LASA99A" /> 
+	</MappedPlusCodes>
+	<Hardwares>
+		<Hardware Code="BIOA01A" Name="BIOA01A_9I_9O" /> 
+		<Hardware Code="PSMA01A" Name="PSMA01A_9O" /> 
+		<Hardware Code="PSMA02A" Name="PSMA02A_9O" /> 
+		<Hardware Code="COMA01A" Name="COMA01A_14I" /> 
+		<Hardware Code="COMA02A" Name="COMA02A_14I" /> 
+		<Hardware Code="COMA03A" Name="COMA03A_14I" /> 
+		<Hardware Code="COMA04A" Name="COMA04A_14I" /> 
+		<Hardware Code="AIMA04A" Name="AIMA04A_7I_3U" /> 
+		<Hardware Code="AIMA05A" Name="AIMA05A_8I_2U" /> 
+		<Hardware Code="AIMA06A" Name="AIMA06A_8I_2U" /> 
+		<Display Code="DISA01A" Name="DISA01A" /> 
+		<Display Code="No Display" Name="No Display" />
+	</Hardwares>
+	<Housings>
+		<Housing Code="RET630EA01A" Name="4U ½ 19 Inch" /> 
+		<Housing Code="RET630EB01A" Name="6U ½ 19 Inch" /> 
+	</Housings>
+	<OrderOptions>
+		<OrderCode Name="Sys.ProdInfo.1.Param.1.Value" />
+		<SW>
+			<Software Code="Default">
+				<Flag Name="Sys.FLAGS.1.PARAM.0.Value"/>
+			</Software>
+			<Software Code="SWAA01A">
+				<Flag Name="Sys.FLAGS.1.PARAM.1.Value"/>
+			</Software>
+			<Software Code="SWCA02A">
+				<Flag Name="Sys.FLAGS.1.PARAM.2.Value"/>
+			</Software>
+		</SW>
+		<HW>
+			<Hardware Code="BIOA01A">
+				<Fsel Name="HWCFG.CONNECTOR.2.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.3.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.6.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.7.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="PSMA01A">
+				<Fsel Name="HWCFG.CONNECTOR.5.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="PSMA02A">
+				<Fsel Name="HWCFG.CONNECTOR.5.FSEL.0.Value" Value="2"/>
+			</Hardware>
+			<Hardware Code="COMA01A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="COMA02A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="2"/>
+			</Hardware>
+			<Hardware Code="COMA03A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="3"/>
+			</Hardware>
+			<Hardware Code="COMA04A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="4"/>
+			</Hardware>
+			<Hardware Code="AIMA04A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="5"/>
+			</Hardware>
+			<Hardware Code="AIMA05A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="6"/>
+			</Hardware>
+			<Hardware Code="AIMA06A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="7"/>
+			</Hardware>
+			<Hardware Code="DISA01A">
+				<Fsel Name="HWCFG.CONNECTOR.8.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="No Display">
+				<Fsel Name="HWCFG.CONNECTOR.8.FSEL.0.Value" Value="0"/>
+			</Hardware>
+		</HW>
+		<Housing>
+			<Housing Code="RET630EA01A">
+				<Flag Name="Sys.TermId.1.PARAM.12.Value" Value="1"/>
+			</Housing>
+			<Housing Code="RET630EB01A">
+				<Flag Name="Sys.TermId.1.PARAM.12.Value" Value="2"/>
+			</Housing>
+		</Housing>
+	</OrderOptions>	
+</VarientList>

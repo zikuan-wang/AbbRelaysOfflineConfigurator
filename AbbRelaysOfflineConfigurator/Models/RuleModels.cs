@@ -77,6 +77,9 @@ public sealed class RuleOption
     public bool IsMainCode { get; init; }
     public bool IsDefault { get; init; }
     public Dictionary<string, string> Attributes { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+    public string Attribute(string name) =>
+        Attributes.TryGetValue(name, out var value) ? value : "";
 }
 
 public sealed class SlotConstraintSet
@@ -99,6 +102,7 @@ public sealed class SlotDefinition
     public string Id { get; init; } = "";
     public int Capacity { get; init; } = 1;
     public int CodeOrder { get; init; }
+    public int AssignmentPriority { get; init; } = int.MaxValue;
     public HashSet<string> Modules { get; } = new(StringComparer.OrdinalIgnoreCase);
 }
 

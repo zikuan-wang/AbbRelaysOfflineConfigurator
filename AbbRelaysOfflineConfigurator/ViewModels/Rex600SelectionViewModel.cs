@@ -26,6 +26,9 @@ public sealed class Rex600SelectionViewModel : ObservableObject
         Messages = [];
         SelectedSummaryItems = [];
         IoSummaryItems = [];
+        VersionOptions = _rules.Versions
+            .Select(version => new Rex600VersionOptionViewModel(version.Id, $"{version.Id} / IED {version.IedVersion}"))
+            .ToList();
 
         CopyOrderCodeCommand = new RelayCommand(CopyOrderCode, () => !string.IsNullOrWhiteSpace(OrderCode));
         CopyOrderingNumberCommand = new RelayCommand(CopyOrderingNumber, () => HasOnlineOrderingNumber);
@@ -45,6 +48,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
     public ObservableCollection<ValidationMessageViewModel> Messages { get; }
     public ObservableCollection<Rex600SelectedSummaryItemViewModel> SelectedSummaryItems { get; }
     public ObservableCollection<IoSummaryItemViewModel> IoSummaryItems { get; }
+    public IReadOnlyList<Rex600VersionOptionViewModel> VersionOptions { get; }
     public RelayCommand CopyOrderCodeCommand { get; }
     public RelayCommand CopyOrderingNumberCommand { get; }
     public RelayCommand OnlineValidateCommand { get; }
@@ -85,8 +89,31 @@ public sealed class Rex600SelectionViewModel : ObservableObject
         ? "The order code logic is based on REX600_1.0.xml. Select each position to generate the complete REX600 order code."
         : "订货码逻辑基于 REX600_1.0.xml。按位选择后实时生成完整 REX600 订货号。";
 
-    public string ExpandAllText => IsEnglish ? "Expand all" : "全部展开";
-    public string CollapseAllText => IsEnglish ? "Collapse all" : "全部折叠";
+    public string VersionText => IsEnglish ? "Product version" : "产品版本";
+    public Rex600VersionOptionViewModel? SelectedVersion
+    {
+        get
+        {
+            var current = CurrentVersion(SelectedByGroup());
+            return VersionOptions.FirstOrDefault(version => version.Id.Equals(current, StringComparison.OrdinalIgnoreCase));
+        }
+        set
+        {
+            if (value is null)
+            {
+                return;
+            }
+
+            var group = Groups.FirstOrDefault(group => group.Name.Equals("Versions", StringComparison.OrdinalIgnoreCase));
+            var option = group?.Options.FirstOrDefault(option => option.Id.Equals(value.Id, StringComparison.OrdinalIgnoreCase));
+            if (option is not null && !option.IsSelected)
+            {
+                option.IsSelected = true;
+            }
+        }
+    }
+    public string ExpandAllText => IsEnglish ? "Expand" : "展开";
+    public string CollapseAllText => IsEnglish ? "Collapse" : "折叠";
     public string OrderCodeTitle => IsEnglish ? "REX600 order code" : "REX600 订货号";
     public string ImportOrderCodeText => IsEnglish ? "Import order code" : "导入订货号";
     public string CopyOrderCodeText => IsEnglish ? "Copy order code" : "复制订货号";
@@ -212,6 +239,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
         Replace(SelectedSummaryItems, BuildSelectedSummary(selectedVersion));
         RefreshIoSummary(selectedByGroup);
         UpdateOptionStates(selectedVersion);
+        OnPropertyChanged(nameof(SelectedVersion));
     }
 
     private void RefreshIoSummary(IReadOnlyDictionary<string, Rex600OptionViewModel> selectedByGroup)
@@ -486,18 +514,12 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private void CopyOrderCode()
     {
-        if (!string.IsNullOrWhiteSpace(OrderCode))
-        {
-            Clipboard.SetText(OrderCode);
-        }
+        ClipboardService.TrySetText(OrderCode, "REX600", IsEnglish);
     }
 
     private void CopyOrderingNumber()
     {
-        if (!string.IsNullOrWhiteSpace(OnlineOrderingNumber))
-        {
-            Clipboard.SetText(OnlineOrderingNumber);
-        }
+        ClipboardService.TrySetText(OnlineOrderingNumber, "REX600", IsEnglish);
     }
 
     private async Task ValidateOnlineAsync()
@@ -640,6 +662,8 @@ public sealed class Rex600SelectionViewModel : ObservableObject
     {
         OnPropertyChanged(nameof(PageTitle));
         OnPropertyChanged(nameof(SourceSummary));
+        OnPropertyChanged(nameof(VersionText));
+        OnPropertyChanged(nameof(SelectedVersion));
         OnPropertyChanged(nameof(ExpandAllText));
         OnPropertyChanged(nameof(CollapseAllText));
         OnPropertyChanged(nameof(OrderCodeTitle));
@@ -817,5 +841,7 @@ public sealed class Rex600OptionViewModel(Rex600GroupViewModel group, Rex600Opti
         OnPropertyChanged(nameof(SummaryText));
     }
 }
+
+public sealed record Rex600VersionOptionViewModel(string Id, string DisplayName);
 
 public sealed record Rex600SelectedSummaryItemViewModel(string Name, string Value);

@@ -7,6 +7,7 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rex640AppFunctionCatalogService
 {
     private const string CatalogFileName = "Rex640AppFunctionCatalog.json";
+    private static readonly Lazy<Rex640AppFunctionCatalogDocument> SharedCatalog = new(LoadCatalog);
 
     public IReadOnlyList<string> AppPriority { get; } =
     [
@@ -15,10 +16,8 @@ public sealed class Rex640AppFunctionCatalogService
         "APP51", "APP52", "APP53"
     ];
 
-    private readonly Lazy<Rex640AppFunctionCatalogDocument> _catalog = new(LoadCatalog);
-
     public IReadOnlyList<Rex640FunctionEntry> GetFunctions(string pclVersion) =>
-        _catalog.Value.Functions
+        SharedCatalog.Value.Functions
             .Where(function => IsVersion(function.Pcl, pclVersion))
             .OrderBy(function => function.Category, StringComparer.OrdinalIgnoreCase)
             .ThenBy(function => PriorityIndex(function.Apps.FirstOrDefault() ?? "Base"))

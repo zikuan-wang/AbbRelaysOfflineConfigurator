@@ -6,9 +6,9 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rex600FunctionCatalogService
 {
     private const string CatalogFileName = "Rex600FunctionCatalog.json";
-    private readonly Lazy<Rex600FunctionCatalogDocument> _catalog = new(LoadCatalog);
+    private static readonly Lazy<Rex600FunctionCatalogDocument> SharedCatalog = new(LoadCatalog);
 
-    public IReadOnlyList<Rex600FunctionEntry> GetFunctions() => _catalog.Value.Functions;
+    public IReadOnlyList<Rex600FunctionEntry> GetFunctions() => SharedCatalog.Value.Functions;
 
     public IReadOnlyList<Rex600FunctionEntry> Search(string query)
     {

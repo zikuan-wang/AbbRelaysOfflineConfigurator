@@ -6,8 +6,11 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rex600RuleLoader
 {
     private const string RulesFileName = "REX600_1.0.xml";
+    private static readonly Lazy<Rex600RuleSet> SharedRules = new(LoadCore);
 
-    public Rex600RuleSet Load()
+    public Rex600RuleSet Load() => SharedRules.Value;
+
+    private static Rex600RuleSet LoadCore()
     {
         var path = ResolveRulesPath();
         var document = XDocument.Load(path);

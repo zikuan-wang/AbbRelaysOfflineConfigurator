@@ -28,7 +28,7 @@ public partial class Rio600SelectorView : UserControl
         if (sender is FrameworkElement { Tag: string orderNumber } &&
             !string.IsNullOrWhiteSpace(orderNumber))
         {
-            Clipboard.SetText(orderNumber);
+            ClipboardService.TrySetText(orderNumber, "RIO600");
             e.Handled = true;
         }
     }

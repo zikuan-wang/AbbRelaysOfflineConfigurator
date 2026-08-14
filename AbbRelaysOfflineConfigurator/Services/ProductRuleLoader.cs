@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Xml.Linq;
 using AbbRelaysOfflineConfigurator.Models;
 
@@ -6,7 +6,25 @@ namespace AbbRelaysOfflineConfigurator.Services;
 
 public sealed class ProductRuleLoader
 {
+    private static readonly object CacheLock = new();
+    private static readonly Dictionary<string, ProductRuleSet> RuleCache = new(StringComparer.OrdinalIgnoreCase);
+
     public ProductRuleSet Load(string path)
+    {
+        var cacheKey = System.IO.Path.GetFullPath(path);
+        lock (CacheLock)
+        {
+            if (!RuleCache.TryGetValue(cacheKey, out var rules))
+            {
+                rules = LoadCore(path);
+                RuleCache[cacheKey] = rules;
+            }
+
+            return rules;
+        }
+    }
+
+    private static ProductRuleSet LoadCore(string path)
     {
         var document = XDocument.Load(path, LoadOptions.PreserveWhitespace);
         var root = document.Root ?? throw new InvalidOperationException("REX615_ROL.xml 缺少根节点。");
@@ -111,7 +129,8 @@ public sealed class ProductRuleLoader
                     {
                         Id = Attr(slotElement, "Id"),
                         Capacity = IntAttr(slotElement, "Capacity", 1),
-                        CodeOrder = IntAttr(slotElement, "CodeOrder", housing.Slots.Count + 1)
+                        CodeOrder = IntAttr(slotElement, "CodeOrder", housing.Slots.Count + 1),
+                        AssignmentPriority = IntAttr(slotElement, "AssignmentPriority", int.MaxValue)
                     };
 
                     foreach (var module in SplitCsv(Attr(slotElement, "Modules")))
@@ -282,10 +301,12 @@ internal static class Rex615EnglishTextCatalog
         ["应用包:APP10"] = "APP10 - Power transformer protection package",
         ["应用包:APP11"] = "APP11 - Busbar protection package",
         ["应用包:APP12"] = "APP12 - On-load tap changer control package",
+        ["应用包:APP13"] = "APP13 - Line distance protection package",
         ["信号端子:SCT1"] = "SCT1 - Compression type signal connectors",
         ["信号端子:SCT2"] = "SCT2 - Ring-lug type signal connectors",
         ["版本:PCL1"] = "PCL1",
-        ["版本:PCL2"] = "PCL2"
+        ["版本:PCL2"] = "PCL2",
+        ["版本:PCL3"] = "PCL3"
     };
 
     public static string GroupName(string groupName) =>

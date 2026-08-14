@@ -270,7 +270,7 @@ public sealed class OnlineValidationService
     private static string? InferPclVersion(string? versionSource)
     {
         var source = versionSource ?? "";
-        foreach (var version in new[] { "PCL6", "PCL5", "PCL2", "PCL1" })
+        foreach (var version in new[] { "PCL7", "PCL6", "PCL5", "PCL3", "PCL2", "PCL1" })
         {
             if (source.Contains(version, StringComparison.OrdinalIgnoreCase))
             {
@@ -284,9 +284,11 @@ public sealed class OnlineValidationService
     private static bool HasPclSuffix(string value) =>
         value.EndsWith("_PCL1", StringComparison.OrdinalIgnoreCase) ||
         value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase) ||
+        value.EndsWith("_PCL3", StringComparison.OrdinalIgnoreCase) ||
         value.EndsWith("_PCL5", StringComparison.OrdinalIgnoreCase) ||
-        value.EndsWith("_PCL6", StringComparison.OrdinalIgnoreCase);
+        value.EndsWith("_PCL6", StringComparison.OrdinalIgnoreCase) ||
+        value.EndsWith("_PCL7", StringComparison.OrdinalIgnoreCase);
 
     private static bool IsKnownPclVersion(string value) =>
-        value is "PCL1" or "PCL2" or "PCL5" or "PCL6";
+        value is "PCL1" or "PCL2" or "PCL3" or "PCL5" or "PCL6" or "PCL7";
 }

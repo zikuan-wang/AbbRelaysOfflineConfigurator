@@ -1,0 +1,682 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<VarientList>
+	<CodeDigits>
+		<CodeDigit Digit="1" Title="Product series, size" TitleId="225370" /> 
+		<CodeDigit Digit="2" Title="Market type (Standard)" TitleId="225371" /> 
+		<CodeDigit Digit="3" Title="Main application" TitleId="225372" /> 
+		<CodeDigit Digit="4" Title="Functional application" TitleId="225373" /> 
+		<CodeDigit Digit="5,6" Title="Analog inputs/outputs" TitleId="225374" /> 
+		<CodeDigit Digit="7,8" Title="Binary inputs/outputs" TitleId="225375" /> 
+		<CodeDigit Digit="9" Title="Communication serial" TitleId="225376" /> 
+		<CodeDigit Digit="10" Title="Communication Ethernet" TitleId="225377" /> 
+		<CodeDigit Digit="11" Title="Communication protocol" TitleId="225378" /> 
+		<CodeDigit Digit="12" Title="Language" TitleId="225379" /> 
+		<CodeDigit Digit="13" Title="Front panel" TitleId="225380" /> 
+		<CodeDigit Digit="14" Title="Option 1" TitleId="225381" /> 
+		<CodeDigit Digit="15" Title="Option 2" TitleId="225382" /> 
+		<CodeDigit Digit="16" Title="Power supply" TitleId="225383" /> 
+		<CodeDigit Digit="17" Title="Vacant" TitleId="225384" /> 
+		<CodeDigit Digit="18" Title="Version" TitleId="225385" /> 
+	</CodeDigits>
+	<CodeDetails>
+		<CodeDetail BasicCode="" Digit="1" Code="S" Description="RE_630, 4U half 19 inch housing" DescriptionId="225386" /> 
+		<CodeDetail BasicCode="" Digit="1" Code="T" Description="RE_630, 6U half 19 inch housing" DescriptionId="225387" /> 
+		<CodeDetail BasicCode="" Digit="1" Code="U" Description="RE_630, 4U half 19 inch housing and connector set" DescriptionId="248556" /> 
+		<CodeDetail BasicCode="" Digit="1" Code="V" Description="RE_630, 6U half 19 inch housing and connector set" DescriptionId="248557" /> 
+		<CodeDetail BasicCode="" Digit="2" Code="B" Description="IEC" DescriptionId="225388" /> 
+		<CodeDetail BasicCode="" Digit="3" Code="F" Description="Feeder protection and control" DescriptionId="225389" /> 
+		<CodeDetail BasicCode="SBF" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="SBF" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="SBF" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="SBF" Digit="4" Code="C" Description="Pre-configuration C" DescriptionId="225393" /> 
+		<CodeDetail BasicCode="SBF" Digit="4" Code="D" Description="Pre-configuration D" DescriptionId="225394" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="AA" Description="4I + 5U (Io 1/5A)" DescriptionId="225395" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="AB" Description="5I + 4U (Io 0.1/0.5A)" DescriptionId="225396" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="AC" Description="4I + 5U (Io 0.1/0.5A)" DescriptionId="225397" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="BA" Description="4I + 5U (Io 1/5A) + 8mAin/RTD + 4mAout" DescriptionId="248541" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="BB" Description="5I + 4U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248542" /> 
+		<CodeDetail BasicCode="SBF" Digit="5,6" Code="BC" Description="4I + 5U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248540" /> 
+		<CodeDetail BasicCode="SBF" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="SBF" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="SBF" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="SBF" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="SBF" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="SBF" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="SBF" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="SBF" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="SBF" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 
+		<CodeDetail BasicCode="SBF" Digit="11" Code="C" Description="IEC 61850 and IEC 60870-103 protocols" DescriptionId="248553" /> 
+		<CodeDetail BasicCode="SBF" Digit="12" Code="Z" Description="All released languages" DescriptionId="250753" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="A" Description="Integrated LHMI" DescriptionId="225410" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="SBF" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="N" Description="No options" DescriptionId="225416" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="A" Description="Fault loc. + Synchro-check" DescriptionId="225417" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="B" Description="Fault loc. + Distance" DescriptionId="248551" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="C" Description="Fault loc. + Power Quality" DescriptionId="248552" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="D" Description="Synchro-check + Distance" DescriptionId="248561" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="E" Description="Synchro-check + Power Quality" DescriptionId="248562" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="F" Description="Distance + Power Quality" DescriptionId="248550" /> 
+		<CodeDetail BasicCode="SBF" Digit="14" Code="Z" Description="All options" DescriptionId="225421" /> 
+		<CodeDetail BasicCode="SBF" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="SBF" Digit="15" Code="A" Description="Fault locator" DescriptionId="225424" /> 
+		<CodeDetail BasicCode="SBF" Digit="15" Code="B" Description="Synchro-check" DescriptionId="225425" /> 
+		<CodeDetail BasicCode="SBF" Digit="15" Code="C" Description="Phase sequence voltage functions" DescriptionId="225423" />
+		<CodeDetail BasicCode="SBF" Digit="15" Code="D" Description="Distance protection" DescriptionId="229143" /> 
+		<CodeDetail BasicCode="SBF" Digit="15" Code="E" Description="Power quality" DescriptionId="248555" /> 
+		<CodeDetail BasicCode="SBF" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="SBF" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="SBF" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 
+		<CodeDetail BasicCode="SBF" Digit="18" Code="B" Description="Version 1.1" DescriptionId="248568" />
+		<CodeDetail BasicCode="TBF" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="TBF" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="TBF" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="TBF" Digit="4" Code="C" Description="Pre-configuration C" DescriptionId="225393" /> 
+		<CodeDetail BasicCode="TBF" Digit="4" Code="D" Description="Pre-configuration D" DescriptionId="225394" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="AA" Description="4I + 5U (Io 1/5A)" DescriptionId="225395" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="AB" Description="5I + 4U (Io 0.1/0.5A)" DescriptionId="225396" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="AC" Description="4I + 5U (Io 0.1/0.5A)" DescriptionId="225397" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="BA" Description="4I + 5U (Io 1/5A) + 8mAin/RTD + 4mAout" DescriptionId="248541" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="BB" Description="5I + 4U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248542" /> 
+		<CodeDetail BasicCode="TBF" Digit="5,6" Code="BC" Description="4I + 5U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248540" />
+		<CodeDetail BasicCode="TBF" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="TBF" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="TBF" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="TBF" Digit="7,8" Code="AD" Description="41BI + 36BO" DescriptionId="225430" /> 
+		<CodeDetail BasicCode="TBF" Digit="7,8" Code="AE" Description="50BI + 45BO" DescriptionId="225431" /> 
+		<CodeDetail BasicCode="TBF" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="TBF" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="TBF" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="TBF" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="TBF" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="TBF" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 	
+    	<CodeDetail BasicCode="TBF" Digit="11" Code="C" Description="IEC 61850 and IEC 60870-103 protocols" DescriptionId="248553" /> 
+		<CodeDetail BasicCode="TBF" Digit="12" Code="Z" Description="All released languages" DescriptionId="250753" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="TBF" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 	
+		<CodeDetail BasicCode="TBF" Digit="14" Code="N" Description="No options" DescriptionId="225416" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="A" Description="Fault loc. + Synchro-check" DescriptionId="225417" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="B" Description="Fault loc. + Distance" DescriptionId="248551" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="C" Description="Fault loc. + Power Quality" DescriptionId="248552" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="D" Description="Synchro-check + Distance" DescriptionId="248561" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="E" Description="Synchro-check + Power Quality" DescriptionId="248562" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="F" Description="Distance + Power Quality" DescriptionId="248550" /> 
+		<CodeDetail BasicCode="TBF" Digit="14" Code="Z" Description="All options" DescriptionId="225421" /> 
+		<CodeDetail BasicCode="TBF" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="TBF" Digit="15" Code="A" Description="Fault locator" DescriptionId="225424" /> 
+		<CodeDetail BasicCode="TBF" Digit="15" Code="B" Description="Synchro-check" DescriptionId="225425" /> 
+		<CodeDetail BasicCode="TBF" Digit="15" Code="C" Description="Phase sequence voltage functions" DescriptionId="225423" />
+		<CodeDetail BasicCode="TBF" Digit="15" Code="D" Description="Distance protection" DescriptionId="229143" /> 
+		<CodeDetail BasicCode="TBF" Digit="15" Code="E" Description="Power quality" DescriptionId="248555" /> 	
+		<CodeDetail BasicCode="TBF" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="TBF" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="TBF" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 	
+		<CodeDetail BasicCode="TBF" Digit="18" Code="B" Description="Version 1.1" DescriptionId="248568" /> 
+		<CodeDetail BasicCode="UBF" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="UBF" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="UBF" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="UBF" Digit="4" Code="C" Description="Pre-configuration C" DescriptionId="225393" /> 
+		<CodeDetail BasicCode="UBF" Digit="4" Code="D" Description="Pre-configuration D" DescriptionId="225394" /> 
+		<CodeDetail BasicCode="UBF" Digit="5,6" Code="AA" Description="4I + 5U (Io 1/5A)" DescriptionId="225395" /> 
+		<CodeDetail BasicCode="UBF" Digit="5,6" Code="AB" Description="5I + 4U (Io 0.1/0.5A)" DescriptionId="225396" /> 
+		<CodeDetail BasicCode="UBF" Digit="5,6" Code="AC" Description="4I + 5U (Io 0.1/0.5A)" DescriptionId="225397" /> 
+    	<CodeDetail BasicCode="UBF" Digit="5,6" Code="BA" Description="4I + 5U (Io 1/5A) + 8mAin/RTD + 4mAout" DescriptionId="248541" /> 
+		<CodeDetail BasicCode="UBF" Digit="5,6" Code="BB" Description="5I + 4U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248542" /> 
+		<CodeDetail BasicCode="UBF" Digit="5,6" Code="BC" Description="4I + 5U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248540" /> 
+		<CodeDetail BasicCode="UBF" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="UBF" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="UBF" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="UBF" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="UBF" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="UBF" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="UBF" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="UBF" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="UBF" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 
+    	<CodeDetail BasicCode="UBF" Digit="11" Code="C" Description="IEC 61850 and IEC 60870-103 protocols" DescriptionId="248553" /> 
+		<CodeDetail BasicCode="UBF" Digit="12" Code="Z" Description="All released languages" DescriptionId="250753" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="A" Description="Integrated LHMI" DescriptionId="225410" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="UBF" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="N" Description="No options" DescriptionId="225416" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="A" Description="Fault loc. + Synchro-check" DescriptionId="225417" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="B" Description="Fault loc. + Distance" DescriptionId="248551" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="C" Description="Fault loc. + Power Quality" DescriptionId="248552" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="D" Description="Synchro-check + Distance" DescriptionId="248561" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="E" Description="Synchro-check + Power Quality" DescriptionId="248562" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="F" Description="Distance + Power Quality" DescriptionId="248550" /> 
+		<CodeDetail BasicCode="UBF" Digit="14" Code="Z" Description="All options" DescriptionId="225421" /> 
+		<CodeDetail BasicCode="UBF" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="UBF" Digit="15" Code="A" Description="Fault locator" DescriptionId="225424" /> 
+		<CodeDetail BasicCode="UBF" Digit="15" Code="B" Description="Synchro-check" DescriptionId="225425" /> 
+		<CodeDetail BasicCode="UBF" Digit="15" Code="C" Description="Phase sequence voltage functions" DescriptionId="225423" />
+		<CodeDetail BasicCode="UBF" Digit="15" Code="D" Description="Distance protection" DescriptionId="229143" /> 
+		<CodeDetail BasicCode="UBF" Digit="15" Code="E" Description="Power quality" DescriptionId="248555" /> 
+		<CodeDetail BasicCode="UBF" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="UBF" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="UBF" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 
+		<CodeDetail BasicCode="UBF" Digit="18" Code="B" Description="Version 1.1" DescriptionId="248568" />
+		<CodeDetail BasicCode="VBF" Digit="4" Code="N" Description="No pre-configuration" DescriptionId="225390" /> 
+		<CodeDetail BasicCode="VBF" Digit="4" Code="A" Description="Pre-configuration A" DescriptionId="225391" /> 
+		<CodeDetail BasicCode="VBF" Digit="4" Code="B" Description="Pre-configuration B" DescriptionId="225392" /> 
+		<CodeDetail BasicCode="VBF" Digit="4" Code="C" Description="Pre-configuration C" DescriptionId="225393" /> 
+		<CodeDetail BasicCode="VBF" Digit="4" Code="D" Description="Pre-configuration D" DescriptionId="225394" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="AA" Description="4I + 5U (Io 1/5A)" DescriptionId="225395" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="AB" Description="5I + 4U (Io 0.1/0.5A)" DescriptionId="225396" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="AC" Description="4I + 5U (Io 0.1/0.5A)" DescriptionId="225397" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="BA" Description="4I + 5U (Io 1/5A) + 8mAin/RTD + 4mAout" DescriptionId="248541" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="BB" Description="5I + 4U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248542" /> 
+		<CodeDetail BasicCode="VBF" Digit="5,6" Code="BC" Description="4I + 5U (Io 0.1/0.5A) + 8mAin/RTD + 4mAout" DescriptionId="248540" />		
+		<CodeDetail BasicCode="VBF" Digit="7,8" Code="AA" Description="14BI + 9BO" DescriptionId="225399" /> 
+		<CodeDetail BasicCode="VBF" Digit="7,8" Code="AB" Description="23BI + 18BO" DescriptionId="225400" /> 
+		<CodeDetail BasicCode="VBF" Digit="7,8" Code="AC" Description="32BI + 27BO" DescriptionId="225401" /> 
+		<CodeDetail BasicCode="VBF" Digit="7,8" Code="AD" Description="41BI + 36BO" DescriptionId="225430" /> 
+		<CodeDetail BasicCode="VBF" Digit="7,8" Code="AE" Description="50BI + 45BO" DescriptionId="225431" /> 
+		<CodeDetail BasicCode="VBF" Digit="9" Code="A" Description="Serial glass fibre (ST connector)" DescriptionId="225402" /> 
+		<CodeDetail BasicCode="VBF" Digit="9" Code="B" Description="Serial plastic fibre (Snap-in connector)" DescriptionId="225403" /> 
+		<CodeDetail BasicCode="VBF" Digit="10" Code="A" Description="Ethernet 100Base-FX (LC connector)" DescriptionId="225404" /> 
+		<CodeDetail BasicCode="VBF" Digit="10" Code="B" Description="Ethernet 100Base-TX (RJ-45 connector)" DescriptionId="225405" /> 
+		<CodeDetail BasicCode="VBF" Digit="11" Code="A" Description="IEC 61850 protocol" DescriptionId="225406" /> 
+		<CodeDetail BasicCode="VBF" Digit="11" Code="B" Description="IEC 61850 and DNP3 protocols" DescriptionId="225407" /> 		
+		<CodeDetail BasicCode="VBF" Digit="11" Code="C" Description="IEC 61850 and IEC 60870-103 protocols" DescriptionId="248553" /> 
+		<CodeDetail BasicCode="VBF" Digit="12" Code="Z" Description="All released languages" DescriptionId="250753" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="N" Description="No LHMI" DescriptionId="225415" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="B" Description="Detached LHMI + 1 m cable" DescriptionId="225411" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="C" Description="Detached LHMI + 2 m cable" DescriptionId="225412" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="D" Description="Detached LHMI + 3 m cable" DescriptionId="225413" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="E" Description="Detached LHMI + 4 m cable" DescriptionId="225414" /> 
+		<CodeDetail BasicCode="VBF" Digit="13" Code="F" Description="Detached LHMI + 5 m cable" DescriptionId="231016" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="N" Description="No options" DescriptionId="225416" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="A" Description="Fault loc. + Synchro-check" DescriptionId="225417" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="B" Description="Fault loc. + Distance" DescriptionId="248551" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="C" Description="Fault loc. + Power Quality" DescriptionId="248552" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="D" Description="Synchro-check + Distance" DescriptionId="248561" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="E" Description="Synchro-check + Power Quality" DescriptionId="248562" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="F" Description="Distance + Power Quality" DescriptionId="248550" /> 
+		<CodeDetail BasicCode="VBF" Digit="14" Code="Z" Description="All options" DescriptionId="225421" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="N" Description="No options" DescriptionId="225422" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="A" Description="Fault locator" DescriptionId="225424" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="B" Description="Synchro-check" DescriptionId="225425" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="C" Description="Phase sequence voltage functions" DescriptionId="225423" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="D" Description="Distance protection" DescriptionId="229143" /> 
+		<CodeDetail BasicCode="VBF" Digit="15" Code="E" Description="Power quality" DescriptionId="248555" /> 		
+		<CodeDetail BasicCode="VBF" Digit="16" Code="A" Description="Power supply 48-125 VDC" DescriptionId="225426" /> 
+		<CodeDetail BasicCode="VBF" Digit="16" Code="B" Description="Power supply 110-250 VDC, 100-240 VAC" DescriptionId="225427" /> 
+		<CodeDetail BasicCode="VBF" Digit="17" Code="X" Description="Undefined" DescriptionId="225428" /> 		
+		<CodeDetail BasicCode="VBF" Digit="18" Code="B" Description="Version 1.1" DescriptionId="248568" /> 
+	</CodeDetails>
+	<CodeRules>
+		<CodeRule BasicCode="SBF" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC,BA,BB,BC" /> 
+		<CodeRule BasicCode="SBF" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="SBF" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="SBF" Digit="4" Code="C" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="SBF" Digit="4" Code="D" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="TBF" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC,BA,BB,BC" /> 
+		<CodeRule BasicCode="TBF" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="TBF" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="TBF" Digit="4" Code="C" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="TBF" Digit="4" Code="D" DependentDigit="5,6" PossibleCodes="AB" /> 
+        <CodeRule BasicCode="UBF" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC,BA,BB,BC" />
+		<CodeRule BasicCode="UBF" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="UBF" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="UBF" Digit="4" Code="C" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="UBF" Digit="4" Code="D" DependentDigit="5,6" PossibleCodes="AB" />  
+        <CodeRule BasicCode="VBF" Digit="4" Code="N" DependentDigit="5,6" PossibleCodes="AA,AB,AC,BA,BB,BC" /> 
+		<CodeRule BasicCode="VBF" Digit="4" Code="A" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="VBF" Digit="4" Code="B" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="VBF" Digit="4" Code="C" DependentDigit="5,6" PossibleCodes="AB" /> 
+		<CodeRule BasicCode="VBF" Digit="4" Code="D" DependentDigit="5,6" PossibleCodes="AB" /> 
+    	<CodeRule BasicCode="SBF" Digit="4;5,6" Code="N;AB" DependentDigit="7,8" PossibleCodes="AA,AB,AC" />
+		<CodeRule BasicCode="SBF" Digit="4;5,6" Code="A;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="SBF" Digit="4;5,6" Code="B;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="SBF" Digit="4;5,6" Code="C;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="SBF" Digit="4;5,6" Code="D;AB" DependentDigit="7,8" PossibleCodes="AB,AC" /> 
+		<CodeRule BasicCode="TBF" Digit="4;5,6" Code="N;AB" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD,AE" />
+		<CodeRule BasicCode="TBF" Digit="4;5,6" Code="A;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="TBF" Digit="4;5,6" Code="B;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="TBF" Digit="4;5,6" Code="C;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="TBF" Digit="4;5,6" Code="D;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" /> 
+		<CodeRule BasicCode="UBF" Digit="4;5,6" Code="N;AB" DependentDigit="7,8" PossibleCodes="AA,AB,AC" />
+		<CodeRule BasicCode="UBF" Digit="4;5,6" Code="A;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="UBF" Digit="4;5,6" Code="B;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="UBF" Digit="4;5,6" Code="C;AB" DependentDigit="7,8" PossibleCodes="AB,AC" />
+		<CodeRule BasicCode="UBF" Digit="4;5,6" Code="D;AB" DependentDigit="7,8" PossibleCodes="AB,AC" /> 
+		<CodeRule BasicCode="VBF" Digit="4;5,6" Code="N;AB" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD,AE" />
+		<CodeRule BasicCode="VBF" Digit="4;5,6" Code="A;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="VBF" Digit="4;5,6" Code="B;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="VBF" Digit="4;5,6" Code="C;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" />
+		<CodeRule BasicCode="VBF" Digit="4;5,6" Code="D;AB" DependentDigit="7,8" PossibleCodes="AB,AC,AD,AE" /> 
+		<CodeRule BasicCode="SBF" Digit="5,6" Code="BA" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="SBF" Digit="5,6" Code="BB" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="SBF" Digit="5,6" Code="BC" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="UBF" Digit="5,6" Code="BA" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="UBF" Digit="5,6" Code="BB" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="UBF" Digit="5,6" Code="BC" DependentDigit="7,8" PossibleCodes="AA,AB" /> 
+		<CodeRule BasicCode="TBF" Digit="5,6" Code="BA" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="TBF" Digit="5,6" Code="BB" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="TBF" Digit="5,6" Code="BC" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="VBF" Digit="5,6" Code="BA" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="VBF" Digit="5,6" Code="BB" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="VBF" Digit="5,6" Code="BC" DependentDigit="7,8" PossibleCodes="AA,AB,AC,AD" />
+		<CodeRule BasicCode="SBF" Digit="1" Code="S" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="TBF" Digit="1" Code="T" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="UBF" Digit="1" Code="U" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="VBF" Digit="1" Code="V" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="SBF" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+        <CodeRule BasicCode="SBF" Digit="4" Code="A" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="SBF" Digit="4" Code="B" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="SBF" Digit="4" Code="C" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="SBF" Digit="4" Code="D" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+        <CodeRule BasicCode="TBF" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+        <CodeRule BasicCode="TBF" Digit="4" Code="A" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="TBF" Digit="4" Code="B" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="TBF" Digit="4" Code="C" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="TBF" Digit="4" Code="D" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+	    <CodeRule BasicCode="UBF" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+        <CodeRule BasicCode="UBF" Digit="4" Code="A" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="UBF" Digit="4" Code="B" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="UBF" Digit="4" Code="C" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="UBF" Digit="4" Code="D" DependentDigit="13" PossibleCodes="N,A,B,C,D,E,F" />
+		<CodeRule BasicCode="VBF" Digit="4" Code="N" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+        <CodeRule BasicCode="VBF" Digit="4" Code="A" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="VBF" Digit="4" Code="B" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="VBF" Digit="4" Code="C" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="VBF" Digit="4" Code="D" DependentDigit="13" PossibleCodes="N,B,C,D,E,F" />
+		<CodeRule BasicCode="SBF" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N,A,B,D,E" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N,D,E" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="B" DependentDigit="15" PossibleCodes="N,B,E" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="C" DependentDigit="15" PossibleCodes="N,B,D" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="D" DependentDigit="15" PossibleCodes="N,A,E" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="E" DependentDigit="15" PossibleCodes="N,A,D" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="F" DependentDigit="15" PossibleCodes="N,A,B" /> 
+		<CodeRule BasicCode="SBF" Digit="14" Code="Z" DependentDigit="15" PossibleCodes="N" /> 		
+		<CodeRule BasicCode="TBF" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N,A,B,D,E" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N,D,E" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="B" DependentDigit="15" PossibleCodes="N,B,E" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="C" DependentDigit="15" PossibleCodes="N,B,D" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="D" DependentDigit="15" PossibleCodes="N,A,E" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="E" DependentDigit="15" PossibleCodes="N,A,D" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="F" DependentDigit="15" PossibleCodes="N,A,B" /> 
+		<CodeRule BasicCode="TBF" Digit="14" Code="Z" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N,A,B,D,E" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N,D,E" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="B" DependentDigit="15" PossibleCodes="N,B,E" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="C" DependentDigit="15" PossibleCodes="N,B,D" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="D" DependentDigit="15" PossibleCodes="N,A,E" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="E" DependentDigit="15" PossibleCodes="N,A,D" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="F" DependentDigit="15" PossibleCodes="N,A,B" /> 
+		<CodeRule BasicCode="UBF" Digit="14" Code="Z" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="N" DependentDigit="15" PossibleCodes="N,A,B,D,E" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="A" DependentDigit="15" PossibleCodes="N,D,E" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="B" DependentDigit="15" PossibleCodes="N,B,E" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="C" DependentDigit="15" PossibleCodes="N,B,D" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="D" DependentDigit="15" PossibleCodes="N,A,E" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="E" DependentDigit="15" PossibleCodes="N,A,D" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="F" DependentDigit="15" PossibleCodes="N,A,B" /> 
+		<CodeRule BasicCode="VBF" Digit="14" Code="Z" DependentDigit="15" PossibleCodes="N" /> 
+		<CodeRule BasicCode="SBF" Digit="4;14" Code="C;N" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="SBF" Digit="4;14" Code="C;A" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="SBF" Digit="4;14" Code="C;C" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="SBF" Digit="4;14" Code="C;E" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="TBF" Digit="4;14" Code="C;N" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="TBF" Digit="4;14" Code="C;A" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="TBF" Digit="4;14" Code="C;C" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="TBF" Digit="4;14" Code="C;E" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="UBF" Digit="4;14" Code="C;N" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="UBF" Digit="4;14" Code="C;A" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="UBF" Digit="4;14" Code="C;C" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="UBF" Digit="4;14" Code="C;E" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="VBF" Digit="4;14" Code="C;N" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="VBF" Digit="4;14" Code="C;A" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="VBF" Digit="4;14" Code="C;C" DependentDigit="15" PossibleCodes="D" />
+		<CodeRule BasicCode="VBF" Digit="4;14" Code="C;E" DependentDigit="15" PossibleCodes="D" />		
+	</CodeRules>
+	<MappedPlusCodes>
+		<MappedPlusCode OrderCodeMask="SBF?????????????XB" PlusCode="REF630EA01B" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????????????XB" PlusCode="REF630EB01B" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????????XB" PlusCode="REF630EA01B" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????????????XB" PlusCode="REF630EB01B" /> 
+        <MappedPlusCode OrderCodeMask="SBF?????????N???XB" PlusCode="DISA01A" />
+		<MappedPlusCode OrderCodeMask="SBF?????????A???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????????B???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????????C???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????????D???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????????E???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????????F???XB" PlusCode="DISA01A" /> 
+        <MappedPlusCode OrderCodeMask="TBF?????????N???XB" PlusCode="DISA01A" />
+		<MappedPlusCode OrderCodeMask="TBF?????????B???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????????C???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????????D???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????????E???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????????F???XB" PlusCode="DISA01A" /> 
+        <MappedPlusCode OrderCodeMask="UBF?????????N???XB" PlusCode="DISA01A" />
+		<MappedPlusCode OrderCodeMask="UBF?????????A???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????B???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????C???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????D???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????E???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????????F???XB" PlusCode="DISA01A" /> 		
+        <MappedPlusCode OrderCodeMask="VBF?????????N???XB" PlusCode="DISA01A" />
+		<MappedPlusCode OrderCodeMask="VBF?????????B???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????????C???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????????D???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????????E???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????????F???XB" PlusCode="DISA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?AA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?AA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?AB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?AB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?AC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?AC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?AA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?AA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?AB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?AB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?AC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?AC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BA??????????XB" PlusCode="AIMA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BB??????????XB" PlusCode="AIMA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BC??????????XB" PlusCode="AIMA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????AB??????XB" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????AB??????XB" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????AA??????XB" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????AA??????XB" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????BB??????XB" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????BB??????XB" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?????BA??????XB" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?????BA??????XB" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????AB??????XB" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????AB??????XB" PlusCode="COMA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????AA??????XB" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????AA??????XB" PlusCode="COMA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????BB??????XB" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????BB??????XB" PlusCode="COMA03A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?????BA??????XB" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?????BA??????XB" PlusCode="COMA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???AB????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AB????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???AB????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AB????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AC????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AD????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???AE????????XB" PlusCode="BIOA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BA??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BB??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF?BC??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BA??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BB??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF?BC??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BA??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BB??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF?BC??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BA??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BB??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF?BC??????????XB" PlusCode="RTDA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF????????????AXB" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF????????????AXB" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF????????????BXB" PlusCode="PSMA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF????????????BXB" PlusCode="PSMA02A" /> 		
+		<MappedPlusCode OrderCodeMask="UBF????????????AXB" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF????????????AXB" PlusCode="PSMA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF????????????BXB" PlusCode="PSMA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF????????????BXB" PlusCode="PSMA02A" /> 	
+		<MappedPlusCode OrderCodeMask="SBFN????????????XB" PlusCode="ACNA00A" /> 
+		<MappedPlusCode OrderCodeMask="TBFN????????????XB" PlusCode="ACNA00A" /> 
+		<MappedPlusCode OrderCodeMask="UBFN????????????XB" PlusCode="ACNA00A" /> 
+		<MappedPlusCode OrderCodeMask="VBFN????????????XB" PlusCode="ACNA00A" /> 		
+		<MappedPlusCode OrderCodeMask="SBFA????????????XB" PlusCode="ACNA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBFA????????????XB" PlusCode="ACNA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBFA????????????XB" PlusCode="ACNA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBFA????????????XB" PlusCode="ACNA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBFB????????????XB" PlusCode="ACNA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBFB????????????XB" PlusCode="ACNA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBFB????????????XB" PlusCode="ACNA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBFB????????????XB" PlusCode="ACNA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBFC????????????XB" PlusCode="ACNA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBFC????????????XB" PlusCode="ACNA03A" /> 
+		<MappedPlusCode OrderCodeMask="UBFC????????????XB" PlusCode="ACNA03A" /> 
+		<MappedPlusCode OrderCodeMask="VBFC????????????XB" PlusCode="ACNA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBFD????????????XB" PlusCode="ACNA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBFD????????????XB" PlusCode="ACNA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBFD????????????XB" PlusCode="ACNA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBFD????????????XB" PlusCode="ACNA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????A??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????B??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????C??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????Z??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????????A?XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????A??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????B??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????C??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????Z??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????????A?XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????A??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????B??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????C??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????Z??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????????A?XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????A??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????B??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????C??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????Z??XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????????A?XB" PlusCode="SWFA01A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????A??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????D??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????E??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????Z??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????????B?XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????A??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????D??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????E??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????Z??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????????B?XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????A??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????D??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????E??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????Z??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????????B?XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????A??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????D??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????E??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????Z??XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????????B?XB" PlusCode="SWFA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????B??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????D??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????F??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????Z??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????????D?XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????B??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????D??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????F??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????Z??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????????D?XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????B??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????D??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????F??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????Z??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????????D?XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????B??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????D??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????F??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????Z??XB" PlusCode="SWFA04A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????????D?XB" PlusCode="SWFA04A" /> 		
+		<MappedPlusCode OrderCodeMask="SBF??????????C??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????E??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????F??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF??????????Z??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????????E?XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????C??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????E??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????F??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF??????????Z??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????????E?XB" PlusCode="SWAA02A" /> 		
+		<MappedPlusCode OrderCodeMask="UBF??????????C??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????E??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????F??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF??????????Z??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????????E?XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????C??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????E??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????F??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF??????????Z??XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????????E?XB" PlusCode="SWAA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????B?????XB" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????B?????XB" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????B?????XB" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????B?????XB" PlusCode="SWCA02A" /> 
+		<MappedPlusCode OrderCodeMask="SBF???????C?????XB" PlusCode="SWCA03A" /> 
+		<MappedPlusCode OrderCodeMask="TBF???????C?????XB" PlusCode="SWCA03A" /> 
+		<MappedPlusCode OrderCodeMask="UBF???????C?????XB" PlusCode="SWCA03A" /> 
+		<MappedPlusCode OrderCodeMask="VBF???????C?????XB" PlusCode="SWCA03A" /> 
+		<MappedPlusCode OrderCodeMask="SBF????????Z????XB" PlusCode="LASA99A" /> 
+		<MappedPlusCode OrderCodeMask="TBF????????Z????XB" PlusCode="LASA99A" />
+		<MappedPlusCode OrderCodeMask="UBF????????Z????XB" PlusCode="LASA99A" /> 
+		<MappedPlusCode OrderCodeMask="VBF????????Z????XB" PlusCode="LASA99A" />  
+	</MappedPlusCodes>
+
+	<Hardwares>
+		<Hardware Code="BIOA01A" Name="BIOA01A_9I_9O" /> 
+		<Hardware Code="PSMA01A" Name="PSMA01A_9O" /> 
+		<Hardware Code="PSMA02A" Name="PSMA02A_9O" /> 
+		<Hardware Code="COMA01A" Name="COMA01A_14I" /> 
+		<Hardware Code="COMA02A" Name="COMA02A_14I" /> 
+		<Hardware Code="COMA03A" Name="COMA03A_14I" /> 
+		<Hardware Code="COMA04A" Name="COMA04A_14I" /> 
+		<Hardware Code="AIMA01A" Name="AIMA01A_4I_5U" /> 
+		<Hardware Code="AIMA02A" Name="AIMA02A_5I_4U" /> 
+		<Hardware Code="AIMA03A" Name="AIMA03A_4I_5U" /> 
+		<Hardware Code="RTDA01A" Name="RTDA01A_8I_4O" /> 
+		<Display Code="DISA01A" Name="DISA01A" /> 
+		<Display Code="No Display" Name="No Display" />
+	</Hardwares>
+
+<HardwarePriorities>		
+		<HardwarePriority  Name="RTDA01A_8I_4O" Priority="1"/>
+		<HardwarePriority  Name="BIOA01A_9I_9O" Priority="2"/>
+</HardwarePriorities>
+
+	<Housings>
+		<Housing Code="REF630EA01B" Name="4U ½ 19 Inch" /> 
+		<Housing Code="REF630EB01B" Name="6U ½ 19 Inch" /> 
+	</Housings>
+	<OrderOptions>
+		<OrderCode Name="Sys.ProdInfo.1.Param.1.Value" />
+		<SW>
+			<Software Code="Default" sDesc="">
+				<Flag Name="Sys.FLAGS.1.PARAM.0.Value"/>
+			</Software>
+			<Software Code="SWFA01A" sDesc="SCEFRFLO">
+				<Flag Name="Sys.FLAGS.1.PARAM.1.Value"/>
+			</Software>
+			<Software Code="SWFA02A" sDesc="SYNCRSYN">
+				<Flag Name="Sys.FLAGS.1.PARAM.2.Value"/>
+			</Software>			
+			<Software Code="SWFA04A" sDesc="DSTPDIS">
+				<Flag Name="Sys.FLAGS.1.PARAM.4.Value"/>
+			</Software>
+			<Software Code="SWAA02A" sDesc="PQ">
+				<Flag Name="Sys.FLAGS.1.PARAM.5.Value"/>
+			</Software>
+			<Software Code="SWCA02A" sDesc="DNP3">
+				<Flag Name="Sys.FLAGS.1.PARAM.3.Value"/>
+			</Software>
+			<Software Code="SWCA03A" sDesc="IEC103">
+				<Flag Name="Sys.FLAGS.1.PARAM.6.Value"/>
+			</Software>	
+		</SW>
+		<HW>
+			<Hardware Code="BIOA01A">
+				<Fsel Name="HWCFG.CONNECTOR.2.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.3.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.6.FSEL.0.Value" Value="1"/>
+				<Fsel Name="HWCFG.CONNECTOR.7.FSEL.0.Value" Value="1"/>
+			</Hardware>
+    <Hardware Code="RTDA01A">
+              <Fsel Name="HWCFG.CONNECTOR.2.FSEL.0.Value" Value="2"/>
+        </Hardware>
+			<Hardware Code="PSMA01A">
+				<Fsel Name="HWCFG.CONNECTOR.5.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="PSMA02A">
+				<Fsel Name="HWCFG.CONNECTOR.5.FSEL.0.Value" Value="2"/>
+			</Hardware>
+			<Hardware Code="COMA01A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="COMA02A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="2"/>
+			</Hardware>
+			<Hardware Code="COMA03A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="3"/>
+			</Hardware>
+			<Hardware Code="COMA04A">
+				<Fsel Name="HWCFG.CONNECTOR.4.FSEL.0.Value" Value="4"/>
+			</Hardware>
+			<Hardware Code="AIMA01A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="AIMA02A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="2"/>
+			</Hardware>
+			<Hardware Code="AIMA03A">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="3"/>
+			</Hardware>
+			<Hardware Code="AIMAXXA">
+				<Fsel Name="HWCFG.CONNECTOR.1.FSEL.0.Value" Value="4"/>
+			</Hardware>
+			<Hardware Code="DISA01A">
+				<Fsel Name="HWCFG.CONNECTOR.8.FSEL.0.Value" Value="1"/>
+			</Hardware>
+			<Hardware Code="No Display">
+				<Fsel Name="HWCFG.CONNECTOR.8.FSEL.0.Value" Value="0"/>
+			</Hardware>
+		</HW>
+		<Housing>
+			<Housing Code="REF630EA01B">
+				<Flag Name="Sys.TermId.1.PARAM.12.Value" Value="1"/>
+			</Housing>
+			<Housing Code="REF630EB01B">
+				<Flag Name="Sys.TermId.1.PARAM.12.Value" Value="2"/>
+			</Housing>
+		</Housing>
+	</OrderOptions>	
+</VarientList>

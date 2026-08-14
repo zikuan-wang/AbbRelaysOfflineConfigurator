@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -35,8 +36,9 @@ public sealed class UpdateCheckService
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
         var latestVersion = ParseReleaseVersion(release.TagName);
         var downloadAsset = release.Assets?
-            .Where(asset => !string.IsNullOrWhiteSpace(asset.BrowserDownloadUrl))
-            .OrderByDescending(asset => asset.Name.EndsWith(".msi", StringComparison.OrdinalIgnoreCase))
+            .Where(asset =>
+                !string.IsNullOrWhiteSpace(asset.BrowserDownloadUrl) &&
+                asset.Name.EndsWith(".msi", StringComparison.OrdinalIgnoreCase))
             .FirstOrDefault();
 
         return new UpdateCheckResult(
@@ -46,8 +48,11 @@ public sealed class UpdateCheckService
             latestVersion.ToString(3),
             release.Name,
             release.HtmlUrl,
+            NormalizeReleaseNotes(release.Body),
             downloadAsset?.BrowserDownloadUrl,
             downloadAsset?.Name,
+            downloadAsset?.Size,
+            downloadAsset?.Digest,
             null);
     }
 
@@ -65,6 +70,8 @@ public sealed class UpdateCheckService
         string downloadUrl,
         string? assetName,
         IProgress<UpdateDownloadProgress>? progress = null,
+        long? expectedSizeBytes = null,
+        string? expectedDigest = null,
         CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(downloadUrl))
@@ -83,24 +90,63 @@ public sealed class UpdateCheckService
         var targetPath = Path.Combine(updateDirectory, fileName);
         var tempPath = targetPath + ".download";
 
-        using var response = await Client.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-        response.EnsureSuccessStatusCode();
+        TryDeleteFile(tempPath);
+        TryDeleteFile(targetPath);
 
-        var totalBytes = response.Content.Headers.ContentLength;
-        await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
-        await using var target = File.Create(tempPath);
-        var buffer = new byte[1024 * 128];
-        long receivedBytes = 0;
-        int read;
-        while ((read = await source.ReadAsync(buffer.AsMemory(0, buffer.Length), cancellationToken)) > 0)
+        try
         {
-            await target.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
-            receivedBytes += read;
-            progress?.Report(new UpdateDownloadProgress(receivedBytes, totalBytes));
+            using var response = await Client.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+            response.EnsureSuccessStatusCode();
+
+            var responseContentLength = response.Content.Headers.ContentLength;
+            var totalBytes = expectedSizeBytes is > 0 ? expectedSizeBytes : responseContentLength;
+            await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
+            await using (var target = File.Create(tempPath))
+            {
+                var buffer = new byte[1024 * 128];
+                long receivedBytes = 0;
+                int read;
+                while ((read = await source.ReadAsync(buffer.AsMemory(0, buffer.Length), cancellationToken)) > 0)
+                {
+                    await target.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
+                    receivedBytes += read;
+                    progress?.Report(new UpdateDownloadProgress(receivedBytes, totalBytes));
+                }
+
+                await target.FlushAsync(cancellationToken);
+
+                if (responseContentLength is > 0 && receivedBytes != responseContentLength.Value)
+                {
+                    throw new InvalidOperationException(
+                        $"安装包下载不完整：已下载 {receivedBytes} 字节，服务器声明 {responseContentLength.Value} 字节。");
+                }
+
+                if (expectedSizeBytes is > 0 && receivedBytes != expectedSizeBytes.Value)
+                {
+                    throw new InvalidOperationException(
+                        $"安装包下载不完整：已下载 {receivedBytes} 字节，发布文件应为 {expectedSizeBytes.Value} 字节。");
+                }
+            }
+
+            var expectedSha256 = NormalizeSha256Digest(expectedDigest);
+            if (!string.IsNullOrWhiteSpace(expectedSha256))
+            {
+                var actualSha256 = await ComputeSha256Async(tempPath, cancellationToken);
+                if (!actualSha256.Equals(expectedSha256, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException("安装包 SHA256 校验失败，已删除损坏的下载文件。");
+                }
+            }
+
+            File.Move(tempPath, targetPath, true);
+        }
+        catch
+        {
+            TryDeleteFile(tempPath);
+            TryDeleteFile(targetPath);
+            throw;
         }
 
-        target.Close();
-        File.Move(tempPath, targetPath, true);
         return targetPath;
     }
 
@@ -141,6 +187,62 @@ public sealed class UpdateCheckService
         return fileName;
     }
 
+    private static async Task<string> ComputeSha256Async(string filePath, CancellationToken cancellationToken)
+    {
+        await using var stream = File.OpenRead(filePath);
+        var hash = await SHA256.HashDataAsync(stream, cancellationToken);
+        return Convert.ToHexString(hash);
+    }
+
+    private static string? NormalizeSha256Digest(string? digest)
+    {
+        if (string.IsNullOrWhiteSpace(digest))
+        {
+            return null;
+        }
+
+        var normalized = digest.Trim();
+        const string prefix = "sha256:";
+        if (!normalized.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        normalized = normalized[prefix.Length..].Trim();
+        return normalized.Length == 64 && normalized.All(Uri.IsHexDigit)
+            ? normalized.ToUpperInvariant()
+            : null;
+    }
+
+    private static void TryDeleteFile(string filePath)
+    {
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        catch
+        {
+            // The following write or move reports the real failure if the file is locked.
+        }
+    }
+
+    private static string NormalizeReleaseNotes(string? releaseBody)
+    {
+        if (string.IsNullOrWhiteSpace(releaseBody))
+        {
+            return "";
+        }
+
+        var notes = releaseBody.Replace("\r\n", "\n").Replace('\r', '\n').Trim();
+        const int maxLength = 2000;
+        return notes.Length <= maxLength
+            ? notes
+            : notes[..maxLength].TrimEnd() + "...";
+    }
+
     private static HttpClient CreateClient()
     {
         var client = new HttpClient { Timeout = TimeSpan.FromSeconds(20) };
@@ -157,12 +259,15 @@ public sealed record UpdateCheckResult(
     string LatestVersion,
     string ReleaseName,
     string ReleaseUrl,
+    string ReleaseNotes,
     string? DownloadUrl,
     string? DownloadAssetName,
+    long? DownloadAssetSizeBytes,
+    string? DownloadAssetDigest,
     string? ErrorMessage)
 {
     public static UpdateCheckResult Failed(string message) =>
-        new(false, false, "", "", "", "", null, null, message);
+        new(false, false, "", "", "", "", "", null, null, null, null, message);
 }
 
 public sealed record UpdateDownloadProgress(long ReceivedBytes, long? TotalBytes)
@@ -183,6 +288,9 @@ internal sealed class GitHubReleaseDto
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; set; } = "";
 
+    [JsonPropertyName("body")]
+    public string Body { get; set; } = "";
+
     [JsonPropertyName("assets")]
     public List<GitHubReleaseAssetDto>? Assets { get; set; }
 }
@@ -194,4 +302,10 @@ internal sealed class GitHubReleaseAssetDto
 
     [JsonPropertyName("browser_download_url")]
     public string BrowserDownloadUrl { get; set; } = "";
+
+    [JsonPropertyName("size")]
+    public long? Size { get; set; }
+
+    [JsonPropertyName("digest")]
+    public string? Digest { get; set; }
 }

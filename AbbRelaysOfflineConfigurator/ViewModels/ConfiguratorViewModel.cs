@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -25,14 +25,22 @@ public sealed class ConfiguratorViewModel : ObservableObject
     private string _onlineStatus = "未校验";
     private string _onlineOrderingNumber = "";
     private string _functionSearchText = "";
-    private string _appRecommendationVersion = "PCL1";
-    private string _appRecommendationSummary = "PCL1：输入 ANSI code、IEC 61850 功能码、中文或英文功能名称后添加。";
+    private string _appRecommendationVersion = "PCL3";
+    private string _appRecommendationSummary = "PCL3：输入 ANSI code、IEC 61850 功能码、中文或英文功能名称后添加。";
     private string _displayLanguage = ChineseLanguage;
     private bool _useFullDescription;
     private bool _isCombinationValid;
     private bool _isOnlineValidationBusy;
     private bool _isOnlineValidationSuccess;
     private bool _isOnlineValidationError;
+    private CnLegacySelectorViewModel? _cnLegacySelection;
+    private LegacyConversionViewModel? _legacyConversion;
+    private Rio600SelectionViewModel? _rio600Selection;
+    private Ssc600SelectionViewModel? _ssc600Selection;
+    private Rex600SelectionViewModel? _rex600Selection;
+    private Rex640SelectionViewModel? _rex640Selection;
+    private Re611SelectionViewModel? _re611Selection;
+    private Re630SelectionViewModel? _re630Selection;
 
     public ConfiguratorViewModel()
     {
@@ -52,12 +60,6 @@ public sealed class ConfiguratorViewModel : ObservableObject
         RequestedFunctions = [];
         AppRecommendations = [];
         Home = new HomeViewModel();
-        CnLegacySelection = new CnLegacySelectorViewModel();
-        LegacyConversion = new LegacyConversionViewModel(_onlineValidationService);
-        Rio600Selection = new Rio600SelectionViewModel();
-        Ssc600Selection = new Ssc600SelectionViewModel();
-        Rex600Selection = new Rex600SelectionViewModel();
-        Rex640Selection = new Rex640SelectionViewModel();
         CopyCodeCommand = new RelayCommand(CopyCode, () => !string.IsNullOrWhiteSpace(FullCode));
         CopyOrderingNumberCommand = new RelayCommand(CopyOrderingNumber, () => HasOnlineOrderingNumber);
         ResetCommand = new RelayCommand(Reset);
@@ -87,14 +89,42 @@ public sealed class ConfiguratorViewModel : ObservableObject
     public ObservableCollection<FunctionSuggestionViewModel> FunctionSuggestions { get; }
     public ObservableCollection<RequestedFunctionViewModel> RequestedFunctions { get; }
     public ObservableCollection<AppRecommendationViewModel> AppRecommendations { get; }
-    public IReadOnlyList<string> AppRecommendationVersions { get; } = ["PCL1", "PCL2"];
+    public IReadOnlyList<string> AppRecommendationVersions { get; } = ["PCL1", "PCL2", "PCL3"];
+    public string VersionText => IsEnglish ? "Product version" : "产品版本";
+    public IEnumerable<OptionViewModel> VersionOptions =>
+        MainGroups.Concat(OptionGroups)
+            .FirstOrDefault(group => group.Name.Equals("版本", StringComparison.OrdinalIgnoreCase))
+            ?.Options ?? [];
+    public OptionViewModel? SelectedVersionOption
+    {
+        get => MainGroups.Concat(OptionGroups)
+            .FirstOrDefault(group => group.Name.Equals("版本", StringComparison.OrdinalIgnoreCase))
+            ?.Options.FirstOrDefault(option => option.IsSelected);
+        set
+        {
+            if (value is not null && !value.IsSelected)
+            {
+                value.IsSelected = true;
+            }
+        }
+    }
     public HomeViewModel Home { get; }
-    public CnLegacySelectorViewModel CnLegacySelection { get; }
-    public LegacyConversionViewModel LegacyConversion { get; }
-    public Rio600SelectionViewModel Rio600Selection { get; }
-    public Ssc600SelectionViewModel Ssc600Selection { get; }
-    public Rex600SelectionViewModel Rex600Selection { get; }
-    public Rex640SelectionViewModel Rex640Selection { get; }
+    public CnLegacySelectorViewModel CnLegacySelection =>
+        _cnLegacySelection ??= InitializeChild(new CnLegacySelectorViewModel());
+    public LegacyConversionViewModel LegacyConversion =>
+        _legacyConversion ??= InitializeChild(new LegacyConversionViewModel(_onlineValidationService));
+    public Rio600SelectionViewModel Rio600Selection =>
+        _rio600Selection ??= InitializeChild(new Rio600SelectionViewModel());
+    public Ssc600SelectionViewModel Ssc600Selection =>
+        _ssc600Selection ??= InitializeChild(new Ssc600SelectionViewModel());
+    public Rex600SelectionViewModel Rex600Selection =>
+        _rex600Selection ??= InitializeChild(new Rex600SelectionViewModel());
+    public Rex640SelectionViewModel Rex640Selection =>
+        _rex640Selection ??= InitializeChild(new Rex640SelectionViewModel());
+    public Re611SelectionViewModel Re611Selection =>
+        _re611Selection ??= InitializeChild(new Re611SelectionViewModel());
+    public Re630SelectionViewModel Re630Selection =>
+        _re630Selection ??= InitializeChild(new Re630SelectionViewModel());
     public RelayCommand CopyCodeCommand { get; }
     public RelayCommand CopyOrderingNumberCommand { get; }
     public RelayCommand ResetCommand { get; }
@@ -122,22 +152,25 @@ public sealed class ConfiguratorViewModel : ObservableObject
         {
             var normalized = string.Equals(value, EnglishLanguage, StringComparison.OrdinalIgnoreCase)
                 ? EnglishLanguage
-                : ChineseLanguage;
+            : ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
                 OnPropertyChanged(nameof(IsEnglish));
+                OnPropertyChanged(nameof(VersionText));
                 foreach (var group in MainGroups.Concat(OptionGroups))
                 {
                     group.RefreshDisplayMode();
                 }
 
                 Home.DisplayLanguage = normalized;
-                Rio600Selection.DisplayLanguage = normalized;
-                CnLegacySelection.DisplayLanguage = normalized;
-                LegacyConversion.DisplayLanguage = normalized;
-                Ssc600Selection.DisplayLanguage = normalized;
-                Rex600Selection.DisplayLanguage = normalized;
-                Rex640Selection.DisplayLanguage = normalized;
+                if (_rio600Selection is not null) _rio600Selection.DisplayLanguage = normalized;
+                if (_cnLegacySelection is not null) _cnLegacySelection.DisplayLanguage = normalized;
+                if (_legacyConversion is not null) _legacyConversion.DisplayLanguage = normalized;
+                if (_ssc600Selection is not null) _ssc600Selection.DisplayLanguage = normalized;
+                if (_rex600Selection is not null) _rex600Selection.DisplayLanguage = normalized;
+                if (_rex640Selection is not null) _rex640Selection.DisplayLanguage = normalized;
+                if (_re611Selection is not null) _re611Selection.DisplayLanguage = normalized;
+                if (_re630Selection is not null) _re630Selection.DisplayLanguage = normalized;
                 Recalculate();
                 OnlineStatus = OnlineValidationService.LocalizeMessage(OnlineStatus, IsEnglish);
                 RefreshFunctionDisplay();
@@ -145,7 +178,40 @@ public sealed class ConfiguratorViewModel : ObservableObject
         }
     }
 
-    private string? CurrentVersion => MainGroups.Concat(OptionGroups)
+    private T InitializeChild<T>(T viewModel)
+    {
+        switch (viewModel)
+        {
+            case CnLegacySelectorViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case LegacyConversionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Rio600SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Ssc600SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Rex600SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Rex640SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Re611SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+            case Re630SelectionViewModel vm:
+                vm.DisplayLanguage = DisplayLanguage;
+                break;
+        }
+
+        return viewModel;
+    }
+
+    internal string? CurrentVersion => MainGroups.Concat(OptionGroups)
         .FirstOrDefault(group => group.Name.Equals("版本", StringComparison.OrdinalIgnoreCase))
         ?.SelectedOptions
         .FirstOrDefault()
@@ -252,7 +318,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         get => _appRecommendationVersion;
         set
         {
-            if (SetProperty(ref _appRecommendationVersion, string.IsNullOrWhiteSpace(value) ? "PCL1" : value))
+            if (SetProperty(ref _appRecommendationVersion, string.IsNullOrWhiteSpace(value) ? "PCL3" : value))
             {
                 RemapRequestedFunctionsForVersion();
                 RefreshFunctionSuggestions();
@@ -339,6 +405,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         Replace(IoSummaryItems, BuildIoSummary(selected));
         UpdateOptionStates(selected, validation);
         RefreshRecommendations();
+        OnPropertyChanged(nameof(SelectedVersionOption));
     }
 
     public void AddSuggestedFunction(FunctionSuggestionViewModel suggestion)
@@ -643,18 +710,12 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private void CopyCode()
     {
-        if (!string.IsNullOrWhiteSpace(FullCode))
-        {
-            Clipboard.SetText(FullCode);
-        }
+        ClipboardService.TrySetText(FullCode, "REX615", IsEnglish);
     }
 
     private void CopyOrderingNumber()
     {
-        if (!string.IsNullOrWhiteSpace(OnlineOrderingNumber))
-        {
-            Clipboard.SetText(OnlineOrderingNumber);
-        }
+        ClipboardService.TrySetText(OnlineOrderingNumber, "REX615", IsEnglish);
     }
 
     private async Task ValidateOnlineAsync()
@@ -777,13 +838,14 @@ public sealed class ConfiguratorViewModel : ObservableObject
     {
         var value = orderingNumber.Trim();
         if (value.EndsWith("_PCL1", StringComparison.OrdinalIgnoreCase) ||
-            value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase))
+            value.EndsWith("_PCL2", StringComparison.OrdinalIgnoreCase) ||
+            value.EndsWith("_PCL3", StringComparison.OrdinalIgnoreCase))
         {
             return value;
         }
 
         var version = (CurrentVersion ?? "PCL1").Trim().ToUpperInvariant();
-        if (version is not "PCL1" and not "PCL2")
+        if (version is not "PCL1" and not "PCL2" and not "PCL3")
         {
             version = "PCL1";
         }
@@ -1210,6 +1272,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
             group.RefreshSelectedSummary();
             group.RefreshSelectionMode();
+            group.RefreshDisplayMode();
             group.RefreshValidationState();
         }
     }

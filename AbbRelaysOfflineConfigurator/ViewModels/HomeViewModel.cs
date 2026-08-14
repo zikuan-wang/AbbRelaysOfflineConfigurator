@@ -75,7 +75,7 @@ public sealed class HomeViewModel : ObservableObject
     public bool HasRequestedFunctions => RequestedFunctions.Count > 0;
     public bool HasProductRecommendations => ProductRecommendations.Count > 0;
 
-    public string HeroTitle => IsEnglish ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具";
+    public string HeroTitle => IsEnglish ? "Unofficial ABB Relays Offline Configurator" : "非官方 ABB 继保离线选型工具";
     public string HeroSubtitle => IsEnglish
         ? "One local workspace for relay selection, order code generation, I/O summaries, validation and legacy code conversion."
         : "集中完成继保产品选型、订货代码生成、I/O 摘要、规则校验与旧订货号转换。";
@@ -92,12 +92,12 @@ public sealed class HomeViewModel : ObservableObject
     public string LicenseTitle => IsEnglish ? "License status" : "授权信息";
     public string SoftwareIntroTitle => IsEnglish ? "Software overview" : "软件介绍";
     public string SoftwareIntroText => IsEnglish
-        ? "This tool uses local data packages to perform offline selection for ABB relay products, validate ordering rules, generate codes, review I/O summaries, convert 615/620 legacy order codes and check selected order codes online when needed."
-        : "本工具基于本地数据包实现 ABB 继保产品离线选型、订货规则校验、代码生成、I/O 摘要、615/620 旧订货号转换，并可在需要时执行在线校验。";
+        ? "This unofficial tool uses local data packages to perform offline selection for ABB relay products, validate ordering rules, generate codes, review I/O summaries, convert 615/620 legacy order codes and check selected order codes online when needed."
+        : "本非官方工具基于本地数据包实现 ABB 继保产品离线选型、订货规则校验、代码生成、I/O 摘要、615/620 旧订货号转换，并可在需要时执行在线校验。";
     public string CoverageTitle => IsEnglish ? "Current coverage scope" : "当前覆盖范围";
     public string CoverageText => IsEnglish
-        ? "REX615, REX600, SSC600/SSC600 SW, RIO600, 615/620 CN selection and 615/620 conversion workflows."
-        : "支持 REX615、REX600、SSC600/SSC600 SW、RIO600、615/620 CN 选型，以及 615/620 订货号转换流程。";
+        ? "REX615, REX600, REX640, RE_611, RE_630, SSC600/SSC600 SW, RIO600, 615/620 CN selection and 615/620 conversion workflows."
+        : "支持 REX615、REX600、REX640、RE_611、RE_630、SSC600/SSC600 SW、RIO600、615/620 CN 选型，以及 615/620 订货号转换流程。";
     public string LocalDataTitle => IsEnglish ? "Local-first workflow" : "本地优先";
     public string LocalDataText => IsEnglish
         ? "Most selection and validation work runs locally. Online checks are only used for order number confirmation or release updates."
@@ -232,10 +232,12 @@ public sealed class HomeViewModel : ObservableObject
     {
         var products = new[]
         {
-            BuildRex615Product("REX615 PCL2", "REX615_PCL2", "PCL2", targetTabIndex: 1, priority: 1, requirements),
-            BuildRex615Product("REX615 PCL1", "REX615_PCL1", "PCL1", targetTabIndex: 1, priority: 2, requirements),
-            BuildRex640Product("REX640 PCL6", "REX640_PCL6", "PCL6", targetTabIndex: 8, priority: 3, requirements),
-            BuildRex640Product("REX640 PCL5", "REX640_PCL5", "PCL5", targetTabIndex: 8, priority: 4, requirements),
+            BuildRex615Product("REX615 PCL3", "REX615_PCL3", "PCL3", targetTabIndex: 1, priority: 1, requirements),
+            BuildRex615Product("REX615 PCL2", "REX615_PCL2", "PCL2", targetTabIndex: 1, priority: 2, requirements),
+            BuildRex615Product("REX615 PCL1", "REX615_PCL1", "PCL1", targetTabIndex: 1, priority: 3, requirements),
+            BuildRex640Product("REX640 PCL7", "REX640_PCL7", "PCL7", targetTabIndex: 8, priority: 4, requirements),
+            BuildRex640Product("REX640 PCL6", "REX640_PCL6", "PCL6", targetTabIndex: 8, priority: 5, requirements),
+            BuildRex640Product("REX640 PCL5", "REX640_PCL5", "PCL5", targetTabIndex: 8, priority: 6, requirements),
             BuildRex600Product(requirements),
             BuildSsc600Product(requirements),
             BuildRio600Product(requirements)
@@ -347,7 +349,7 @@ public sealed class HomeViewModel : ObservableObject
             IsEnglish ? "Compact protection relay configuration" : "紧凑型保护装置选型",
             coverage,
             IsEnglish ? "Select the REX600 variant and options according to the required functions." : "根据所需功能选择 REX600 型号及选项。",
-            priority: 5,
+            priority: 7,
             this);
     }
 
@@ -372,7 +374,7 @@ public sealed class HomeViewModel : ObservableObject
             IsEnglish ? "Remote I/O unit for extending binary, RTD and mA signals" : "用于扩展开关量、RTD 和 mA 信号的远程 I/O 装置",
             coverage,
             IsEnglish ? "Configure LECM and I/O modules according to required signal points." : "按所需信号点数配置 LECM 与 I/O 模块。",
-            priority: 7,
+            priority: 9,
             this);
     }
 
@@ -405,7 +407,7 @@ public sealed class HomeViewModel : ObservableObject
             IsEnglish ? "Centralized protection and control solution" : "集中式保护与控制选型",
             coverage,
             config,
-            priority: 6,
+            priority: 8,
             this);
     }
 
@@ -444,7 +446,7 @@ public sealed class HomeViewModel : ObservableObject
     private IReadOnlyList<HomeFunctionCandidate> ResolveExactAggregate(string query)
     {
         var candidates = new List<HomeFunctionCandidate>();
-        foreach (var version in new[] { "PCL1", "PCL2" })
+        foreach (var version in new[] { "PCL3", "PCL2", "PCL1" })
         {
             var function = _rex615Catalog.ResolveExact(version, query);
             if (function is not null)
@@ -453,7 +455,7 @@ public sealed class HomeViewModel : ObservableObject
             }
         }
 
-        foreach (var version in new[] { "PCL5", "PCL6" })
+        foreach (var version in new[] { "PCL5", "PCL6", "PCL7" })
         {
             var function = _rex640Catalog.ResolveExact(version, query);
             if (function is not null)
@@ -490,10 +492,12 @@ public sealed class HomeViewModel : ObservableObject
         }
 
         var candidates = new List<HomeFunctionCandidate>();
-        candidates.AddRange(_rex615Catalog.Search("PCL1", query, limit).Select(function => HomeFunctionCandidate.FromRex615Function("PCL1", function)));
+        candidates.AddRange(_rex615Catalog.Search("PCL3", query, limit).Select(function => HomeFunctionCandidate.FromRex615Function("PCL3", function)));
         candidates.AddRange(_rex615Catalog.Search("PCL2", query, limit).Select(function => HomeFunctionCandidate.FromRex615Function("PCL2", function)));
+        candidates.AddRange(_rex615Catalog.Search("PCL1", query, limit).Select(function => HomeFunctionCandidate.FromRex615Function("PCL1", function)));
         candidates.AddRange(_rex640Catalog.Search("PCL5", query, limit).Select(function => HomeFunctionCandidate.FromRex640Function("PCL5", function)));
         candidates.AddRange(_rex640Catalog.Search("PCL6", query, limit).Select(function => HomeFunctionCandidate.FromRex640Function("PCL6", function)));
+        candidates.AddRange(_rex640Catalog.Search("PCL7", query, limit).Select(function => HomeFunctionCandidate.FromRex640Function("PCL7", function)));
         candidates.AddRange(_rex600Catalog.Search(query).Take(limit).Select(HomeFunctionCandidate.FromRex600Function));
         candidates.AddRange(_ssc600Catalog.Search(query, limit).Select(HomeFunctionCandidate.FromSsc600Function));
         candidates.AddRange(Rio600FunctionCandidates()

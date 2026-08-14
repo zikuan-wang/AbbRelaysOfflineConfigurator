@@ -109,10 +109,11 @@ def parse_615_groups(page: str) -> list[dict]:
         if group["position"] == "17-18":
             group["options"] = [option for option in group["options"] if option["code"] == "1G"] or group["options"][:1]
             for option in group["options"]:
-                option["description"] = "Product Version 5.0 FP1"
+                option["description"] = "产品版本 5.0 FP1"
                 option["shortDescription"] = "5.0 FP1"
 
     add_615_rules(groups)
+    normalize_615_display(groups)
     return groups
 
 
@@ -209,6 +210,49 @@ def add_615_rules(groups: list[dict]) -> None:
                 )
 
 
+def normalize_615_display(groups: list[dict]) -> None:
+    for group in groups:
+        position = group["position"]
+        if position == "12":
+            z_options = [option for option in group["options"] if option["code"].upper() == "Z"]
+            if z_options:
+                group["options"] = z_options
+                z_options[0]["description"] = "中文"
+                z_options[0]["shortDescription"] = "中文"
+                z_options[0]["isDefault"] = True
+            continue
+
+        if position not in {"5-6", "7-8", "10", "14", "15"}:
+            continue
+
+        for option in group["options"]:
+            option["description"] = clean_615_display_description(option["description"])
+            option["shortDescription"] = clean_615_display_description(option["shortDescription"])
+
+
+def clean_615_display_description(value: str) -> str:
+    text = normalize_description(value)
+    previous = None
+    while text != previous:
+        previous = text
+        text = re.sub(
+            r"\s*[（(](?=[^（）()]*?(?:[,，、]|if\b|且|当|位为))[^（）()]*?(?:\b[A-Z]\b|位为\s*[A-Z])[^（）()]*[）)]",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        )
+        text = re.sub(r"\s*,\s*,", ",", text)
+        text = re.sub(r"\s*,\s*$", "", text)
+        text = re.sub(
+            r"\s+[A-Z](?:\s*[,，]\s*[A-Z])*(?:\s+if\s+(?:AIM|BIO)\s+[A-Z0-9/\s]+(?:\s+or\s+[A-Z0-9/\s]+)?)?\s*$",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+    return normalize_description(text)
+
+
 def infer_standard_config_codes(description: str, standard_codes: set[str]) -> set[str]:
     if not standard_codes:
         return set()
@@ -278,7 +322,7 @@ def common_620_groups(application_code: str, application_name: str, analog_optio
         ),
         group("15", "选项 2", option2, "N"),
         group("16", "电源", [("1", "48-250 VDC, 100-240 VAC"), ("2", "24-60 VDC")], "1"),
-        group("17-18", "版本", [("1G", "Product Version 2.0 FP1")], "1G"),
+        group("17-18", "版本", [("1G", "产品版本 2.0 FP1")], "1G"),
     ]
     return groups
 

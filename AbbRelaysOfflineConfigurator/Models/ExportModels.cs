@@ -1,4 +1,4 @@
-﻿namespace AbbRelaysOfflineConfigurator.Models;
+namespace AbbRelaysOfflineConfigurator.Models;
 
 public sealed record SelectedOptionSummary(
     string GroupName,
@@ -33,4 +33,5 @@ public sealed record ExportSnapshot(
     IReadOnlyList<ExportAppFunctionSummary> AppFunctions,
     IReadOnlyList<ExportSlotSummary> Slots,
     IReadOnlyList<string> Messages,
-    string DeviceDescription);
+    string DeviceDescription,
+    string ProductTitle = "ABB REX615 配置");

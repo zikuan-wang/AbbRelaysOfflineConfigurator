@@ -29,6 +29,9 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
             _rules.Groups.Select(group => new Ssc600GroupViewModel(this, group)));
         Messages = [];
         SelectedSummaryItems = [];
+        VersionOptions = _rules.Versions
+            .Select(version => new Ssc600VersionOptionViewModel(version.Id, $"{version.Id} / IED {version.IedVersion}"))
+            .ToList();
         FunctionCatalogItems = new ObservableCollection<Ssc600FunctionCatalogItemViewModel>(
             _functionCatalog.GetFunctions().Select(function => new Ssc600FunctionCatalogItemViewModel(
                 Package: function.IsBase ? "基础功能" : function.Category,
@@ -60,6 +63,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
     public ObservableCollection<Ssc600GroupViewModel> Groups { get; }
     public ObservableCollection<ValidationMessageViewModel> Messages { get; }
     public ObservableCollection<Ssc600SelectedSummaryItemViewModel> SelectedSummaryItems { get; }
+    public IReadOnlyList<Ssc600VersionOptionViewModel> VersionOptions { get; }
     public ObservableCollection<Ssc600FunctionCatalogItemViewModel> FunctionCatalogItems { get; }
     public ObservableCollection<Ssc600FunctionSuggestionViewModel> FunctionSuggestions { get; }
     public ObservableCollection<Ssc600RequestedFunctionViewModel> RequestedFunctions { get; }
@@ -77,6 +81,31 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
     public string SourceSummary => IsEnglish
         ? "SSC600_1.5.xml; descriptions are based on SSC600 product guide 1MRS758725 G."
         : "SSC600_1.5.xml；说明来自 SSC600 产品指南 1MRS758725 G。";
+    public string VersionText => IsEnglish ? "Product version" : "产品版本";
+    public Ssc600VersionOptionViewModel? SelectedVersion
+    {
+        get
+        {
+            var current = CurrentVersion(SelectedByGroup());
+            return VersionOptions.FirstOrDefault(version => version.Id.Equals(current, StringComparison.OrdinalIgnoreCase));
+        }
+        set
+        {
+            if (value is null)
+            {
+                return;
+            }
+
+            var group = Groups.FirstOrDefault(group => group.Name.Equals("Versions", StringComparison.OrdinalIgnoreCase));
+            var option = group?.Options.FirstOrDefault(option => option.Id.Equals(value.Id, StringComparison.OrdinalIgnoreCase));
+            if (option is not null && !option.IsSelected)
+            {
+                option.IsSelected = true;
+            }
+        }
+    }
+    public string ExpandAllText => IsEnglish ? "Expand" : "展开";
+    public string CollapseAllText => IsEnglish ? "Collapse" : "折叠";
     public string OnlineValidateText => IsEnglish ? "Online check" : "在线校验";
     public string OnlineStatusTitle => IsEnglish ? "Online check" : "在线校验";
     public string OrderingNumberTitle => IsEnglish ? "Ordering number" : "订货号";
@@ -95,6 +124,10 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
             {
                 OnPropertyChanged(nameof(IsEnglish));
                 OnPropertyChanged(nameof(SourceSummary));
+                OnPropertyChanged(nameof(VersionText));
+                OnPropertyChanged(nameof(SelectedVersion));
+                OnPropertyChanged(nameof(ExpandAllText));
+                OnPropertyChanged(nameof(CollapseAllText));
                 OnPropertyChanged(nameof(OnlineValidateText));
                 OnPropertyChanged(nameof(OnlineStatusTitle));
                 OnPropertyChanged(nameof(OrderingNumberTitle));
@@ -253,6 +286,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
             : messages);
         Replace(SelectedSummaryItems, BuildSelectedSummary(selectedVersion));
         UpdateOptionStates(selectedByGroup, selectedVersion);
+        OnPropertyChanged(nameof(SelectedVersion));
     }
 
     private IReadOnlyList<string> ApplyOrderCode(string orderCode)
@@ -535,18 +569,12 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private void CopyOrderCode()
     {
-        if (!string.IsNullOrWhiteSpace(OrderCode))
-        {
-            Clipboard.SetText(OrderCode);
-        }
+        ClipboardService.TrySetText(OrderCode, "SSC600", IsEnglish);
     }
 
     private void CopyOrderingNumber()
     {
-        if (!string.IsNullOrWhiteSpace(OnlineOrderingNumber))
-        {
-            Clipboard.SetText(OnlineOrderingNumber);
-        }
+        ClipboardService.TrySetText(OnlineOrderingNumber, "SSC600", IsEnglish);
     }
 
     private async Task ValidateOnlineAsync()
@@ -1054,6 +1082,8 @@ public sealed class Ssc600OptionViewModel(Ssc600GroupViewModel group, Ssc600Opti
         OnPropertyChanged(nameof(SummaryText));
     }
 }
+
+public sealed record Ssc600VersionOptionViewModel(string Id, string DisplayName);
 
 public sealed record Ssc600SelectedSummaryItemViewModel(string Name, string Value);
 

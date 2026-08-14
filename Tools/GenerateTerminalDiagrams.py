@@ -13,7 +13,9 @@ import matplotlib.pyplot as plt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_DIR = ROOT / "REX615 Terminal diagrams"
+SOURCE_DIR = ROOT / "manual" / "REX615 Terminal diagrams"
+if not SOURCE_DIR.exists():
+    SOURCE_DIR = ROOT / "REX615 Terminal diagrams"
 DXF_DIR = ROOT / "Generated" / "TerminalDiagramsDxf"
 PNG_DIR = ROOT / "AbbRelaysOfflineConfigurator" / "Data" / "TerminalDiagrams"
 

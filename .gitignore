@@ -27,6 +27,7 @@ REX615 Terminal diagrams/
 REX615_PCL*.xml
 REX615_ROL.xml
 !AbbRelaysOfflineConfigurator/Data/REX615_ROL.xml
+!Web/src/RelayConfigurator.PublicApi/Rules/REX615_ROL.xml
 
 # Logs and temporary files
 *.log
@@ -39,3 +40,28 @@ AbbRelaysAuthorizationTool/AuthorizationPrivateKeyProvider.local.cs
 authorization-private-key.txt
 *.zwreq
 *.zwlic
+
+# Greenfield Web workspace
+Web/frontend/node_modules/
+Web/frontend/.next/
+Web/frontend/.vinext/
+Web/frontend/.wrangler/
+Web/frontend/dist/
+Web/frontend/.env
+Web/frontend/.env.*
+!Web/frontend/.env.example
+Web/**/bin/
+Web/**/obj/
+Web/**/*.db
+Web/**/*.db-shm
+Web/**/*.db-wal
+Web/.local/
+Web/tmp/
+
+# Independent nested repository and local audit/temp artifacts
+/Web/
+/audit_outputs/
+/tmp/
+**/__pycache__/
+*.py[cod]
+/RE_630/Select.png

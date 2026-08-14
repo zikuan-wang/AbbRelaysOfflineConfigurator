@@ -1,7 +1,11 @@
 {
   "profiles": {
-    "ABB Relays Offline Configurator": {
-      "commandName": "Project"
+    "Unofficial ABB Relays Offline Configurator": {
+      "commandName": "Project",
+      "hotReloadEnabled": false,
+      "environmentVariables": {
+        "ENABLE_XAML_DIAGNOSTICS_SOURCE_INFO": "0"
+      }
     }
   }
 }

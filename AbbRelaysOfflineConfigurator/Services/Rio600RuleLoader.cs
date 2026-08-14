@@ -6,8 +6,11 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rio600RuleLoader
 {
     private const string RulesFileName = "RIO600_1.8.xml";
+    private static readonly Lazy<Rio600RuleSet> SharedRules = new(LoadCore);
 
-    public Rio600RuleSet Load()
+    public Rio600RuleSet Load() => SharedRules.Value;
+
+    private static Rio600RuleSet LoadCore()
     {
         var path = ResolveRulesPath();
         var document = XDocument.Load(path);

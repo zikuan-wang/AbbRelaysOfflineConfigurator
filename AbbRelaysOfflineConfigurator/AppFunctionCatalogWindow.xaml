@@ -2,12 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="APP 功能代码对照表"
+        Title="REX615 APP 功能对照表"
         Width="1220"
         Height="700"
         MinWidth="920"
         MinHeight="520"
-        Icon="Assets/abb-relays.ico"
+        Icon="pack://application:,,,/AbbRelaysOfflineConfigurator;component/Assets/abb-relays.ico"
         WindowStartupLocation="CenterOwner"
         FontFamily="Segoe UI, Microsoft YaHei UI"
         Background="#F3F6FA">
@@ -56,13 +56,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <TextBlock Text="ABB Code / ANSI Code 对照表"
+                    <TextBlock Text="REX615 APP 功能对照表"
                                FontSize="18"
                                FontWeight="SemiBold"
                                Foreground="#101828" />
-                    <TextBlock Text="显示当前产品指南提取的 APP 保护功能、ANSI 代码、适用 APP 和来自 ABB 技术手册 Functionality 条目的保护原理摘要。"
+                    <TextBlock Text="显示 REX615 产品指南提取的 APP 保护功能、ABB Code、ANSI Code、适用 APP 和来自 ABB 技术手册 Functionality 条目的保护原理摘要。"
                                FontSize="12"
                                Foreground="#64748B"
                                Margin="0,3,0,0" />
@@ -84,6 +85,11 @@
                           VerticalAlignment="Center"
                           SelectionChanged="VersionComboBox_OnSelectionChanged" />
                 <Button Grid.Column="3"
+                        Content="Export Excel"
+                        Style="{StaticResource DialogButtonStyle}"
+                        Margin="8,0,0,0"
+                        Click="ExportExcelButton_OnClick" />
+                <Button Grid.Column="4"
                         Content="关闭"
                         Style="{StaticResource DialogButtonStyle}"
                         Margin="8,0,0,0"

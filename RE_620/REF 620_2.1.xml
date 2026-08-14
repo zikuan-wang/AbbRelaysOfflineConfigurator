@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+    <OrderCodeVersions>
+        <!--Order code version, IED version, Application Designs -->
+        <Version Id = "XF" IED_version = "2.0" Conpack_version = "2.0"/>
+        <Version Id = "1G" IED_version = "2.1" Conpack_version = "2.1"/>
+    </OrderCodeVersions>
+    <Default OrderCode = "NBFNAANNABC1BNN11G"/>
+    <OrderCodes>
+        <Digit Location = "1" Group = "Mountings">
+            <!--Product Series, Size, Plug-in -->
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "Product_N"/>
+  			<Option Id = "5" Version = "1G" OptionCode = "" Description = "Product_5"/>
+        </Digit>
+        <Digit Location = "2" Group = "Standards">
+            <!--Standard -->
+            <Option Id = "B" Version = "*" OptionCode = "" Description = "Standards_B"/>
+            <Option Id = "C" Version = "*" OptionCode = "" Description = "Standards_C"/>
+        </Digit>
+        <Digit Location = "3" Group = "MainApps">
+            <!--Main Application -->
+            <Option Id = "F" Version = "*" OptionCode = "" Description = "Feeder"/>
+        </Digit>
+        <Digit Location = "1+2+3" Group = "IED_type">
+            <!--Product Series, Size, Plug-in + Standard + Main Application -->
+            <Option Id = "NBF" Version = "*" OptionCode = "" Description = "IED_type_NBF"/>
+        </Digit>
+        <Digit Location = "4" Group = "FunctionalApps">
+            <!--Functional Application -->
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "FunctionalApps_N"/>
+            <!--<Option Id="B" Version="*" OptionCode="" Description="FunctionalApps_B"/>
+            <Option Id="C" Version="*" OptionCode="" Description="FunctionalApps_C"/>
+            <Option Id="D" Version="*" OptionCode="" Description="FunctionalApps_D"/>
+            <Option Id="E" Version="XF" OptionCode="" Description="FunctionalApps_E"/>
+            <Option Id="F" Version="XF" OptionCode="" Description="FunctionalApps_F"/>
+            <Option Id="G" Version="XF" OptionCode="" Description="FunctionalApps_G"/>
+            <Option Id="H" Version="XF" OptionCode="" Description="FunctionalApps_H"/>
+            <Option Id="J" Version="XC,XD" OptionCode="" Description="FunctionalApps_J"/>
+            <Option Id="K" Version="XF" OptionCode="" Description="FunctionalApps_K"/>
+	    <Option Id="L" Version="XF,1G" OptionCode="" Description="FunctionalApps_L"/>-->
+        </Digit>
+        <Digit Location = "5+6" Group = "Aios">
+            <!--Analog Inputs/Outputs -->
+            <Option Id = "AA" Version = "*" OptionCode = "" Description = "Aios_AA"/>
+            <Option Id = "AB" Version = "*" OptionCode = "" Description = "Aios_AB"/>
+            <Option Id = "AC" Version = "*" OptionCode = "" Description = "Aios_AC"/>
+            <Option Id = "DB" Version = "1G" OptionCode = "" Description = "Aios_DB"/>
+        </Digit>
+        <Digit Location = "7+8" Group = "Bios">
+            <!--Binary I/O -->
+            <Option Id = "AA" Version = "*" OptionCode = "" Description = "Bios_AA"/>
+            <Option Id = "AB" Version = "*" OptionCode = "" Description = "Bios_AB"/>
+            <Option Id = "AC" Version = "*" OptionCode = "" Description = "Bios_AC"/>
+            <Option Id = "NN" Version = "*" OptionCode = "" Description = "Bios_NN"/>
+        </Digit>
+        <Digit Location = "9" Group = "CommSerials">
+            <!--Communication (Serial) -->
+            <Option Id = "A" Version = "*" OptionCode = "" Description = "CommSerials_A"/>
+            <Option Id = "B" Version = "*" OptionCode = "" Description = "CommSerials_B"/>
+            <Option Id = "C" Version = "1G" OptionCode = "" Description = "CommSerials_C"/>
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "CommSerials_N"/>
+        </Digit>
+        <!--<Digit Location="9+14" Group="SerialSoftwares">-->
+        <!--Communication (Serial) + Option 1 -->
+        <!--<Option Id="AB" Version="*" OptionCode="" Description="SerialSoftwares_AB"/>
+        <Option Id="BB" Version="*" OptionCode="" Description="SerialSoftwares_BB"/>
+        </Digit>-->
+        <Digit Location = "10" Group = "CommEthernets">
+            <!--Communication (Ethernet) -->
+            <Option Id = "A" Version = "*" OptionCode = "" Description = "CommEthernets_A"/>
+            <Option Id = "B" Version = "*" OptionCode = "" Description = "CommEthernets_B"/>
+            <Option Id = "C" Version = "*" OptionCode = "" Description = "CommEthernets_C"/>
+            <Option Id = "D" Version = "*" OptionCode = "" Description = "CommEthernets_D"/>
+            <Option Id = "E" Version = "*" OptionCode = "" Description = "CommEthernets_E"/>
+            <Option Id = "F" Version = "1G" OptionCode = "" Description = "CommEthernets_F"/>
+            <Option Id = "G" Version = "1G" OptionCode = "" Description = "CommEthernets_G"/>
+            <Option Id = "H" Version = "1G" OptionCode = "" Description = "CommEthernets_H"/>
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "CommEthernets_N"/>
+        </Digit>
+        <!--<Digit Location="10+14" Group="CommEthernets">
+        <Option Id="AB" Version="*" OptionCode="" Description="CommSoftwares_AB"/>
+        <Option Id="BB" Version="*" OptionCode="" Description="CommSoftwares_BB"/>
+        <Option Id="CB" Version="*" OptionCode="" Description="CommSoftwares_CB"/>
+        <Option Id="DB" Version="*" OptionCode="" Description="CommSoftwares_DB"/>
+        <Option Id="EB" Version="*" OptionCode="" Description="CommSoftwares_EB"/>
+        </Digit>-->
+        <Digit Location = "11" Group = "CommProtocols">
+            <!--Communication (Protocol) -->
+            <Option Id = "A" Version = "*" OptionCode = "" Description = "CommProtocols_A"/>
+            <Option Id = "B" Version = "*" OptionCode = "" Description = "CommProtocols_B"/>
+            <Option Id = "C" Version = "*" OptionCode = "" Description = "CommProtocols_C"/>
+            <Option Id = "D" Version = "*" OptionCode = "" Description = "CommProtocols_D"/>
+            <Option Id = "E" Version = "*" OptionCode = "" Description = "CommProtocols_E"/>
+            <Option Id = "G" Version = "*" OptionCode = "" Description = "CommProtocols_G"/>
+            <Option Id = "H" Version = "*" OptionCode = "" Description = "CommProtocols_H"/>
+        </Digit>
+        <Digit Location = "12" Group = "Languages">
+            <!--Language -->
+            <Option Id = "1" Version = "*" OptionCode = "" Description = "Languages_1"/>
+            <Option Id = "2" Version = "*" OptionCode = "" Description = "Languages_2"/>
+            <Option Id = "3" Version = "*" OptionCode = "" Description = "Languages_3"/>
+            <Option Id = "4" Version = "*" OptionCode = "" Description = "Languages_4"/>
+            <Option Id = "5" Version = "*" OptionCode = "" Description = "Languages_5"/>
+            <Option Id = "6" Version = "*" OptionCode = "" Description = "Languages_6"/>
+            <Option Id = "7" Version = "*" OptionCode = "" Description = "Languages_7"/>
+            <Option Id = "8" Version = "*" OptionCode = "" Description = "Languages_8"/>
+            <Option Id = "A" Version = "*" OptionCode = "" Description = "Languages_A"/>
+           <Option Id = "B" Version = "*" OptionCode = "" Description = "Languages_B"/>
+            <Option Id = "C" Version = "*" OptionCode = "" Description = "Languages_C"/>
+            <Option Id = "E" Version = "*" OptionCode = "" Description = "Languages_E"/>
+            <Option Id = "L" Version = "*" OptionCode = "" Description = "Languages_L"/>
+            <Option Id = "M" Version = "*" OptionCode = "" Description = "Languages_M"/>
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "Languages_N"/>
+            <Option Id = "P" Version = "*" OptionCode = "" Description = "Languages_P"/>
+            <Option Id = "Q" Version = "1G" OptionCode = "" Description = "Languages_Q"/>
+            <Option Id = "R" Version = "1G" OptionCode = "" Description = "Languages_R"/>
+            <Option Id = "S" Version = "1G" OptionCode = "" Description = "Languages_S"/>
+            <Option Id = "T" Version = "1G" OptionCode = "" Description = "Languages_T"/>
+            <Option Id = "U" Version = "1G" OptionCode = "" Description = "Languages_U"/>
+            <Option Id = "V" Version = "1G" OptionCode = "" Description = "Languages_V"/>
+            <Option Id = "W" Version = "1G" OptionCode = "" Description = "Languages_W"/>
+            <Option Id = "X" Version = "1G" OptionCode = "" Description = "Languages_X"/>
+            <Option Id = "Y" Version = "1G" OptionCode = "" Description = "Languages_Y"/>
+            <Option Id = "Z" Version = "1G" OptionCode = "" Description = "Languages_Z"/>
+        </Digit>
+        <Digit Location = "13" Group = "FrontPanels">
+            <!--Front Panel -->
+            <Option Id = "B" Version = "*" OptionCode = "*" Description = "FrontPanels_B"/>
+            <Option Id = "D" Version = "*" OptionCode = "*" Description = "FrontPanels_D"/>
+            <!--<Option Id="B" Version="XA,XB,XC" OptionCode="DISB02" Description="FrontPanels_B_1"/>
+            <Option Id="B" Version="XF" OptionCode="" Description="FrontPanels_B_2"/>
+            <Option Id="C" Version="XF" OptionCode="" Description="FrontPanels_C"/>
+            <Option Id="D" Version="XF" OptionCode="" Description="FrontPanels_D"/>-->
+        </Digit>
+        <Digit Location = "14" Group = "Options_1">
+            <!--Option 1 -->
+            <Option Id = "B" Version = "*" OptionCode = "" Description = "Options_1_B"/>
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "Options_1_N"/>
+        </Digit>
+        <Digit Location = "15" Group = "Options_2">
+            <!--Option 2 -->
+            <Option Id = "F" Version = "1G" OptionCode = "" Description = "Options_2_F"/>
+ 			<Option Id = "C" Version = "1G" OptionCode = "" Description = "Options_2_C"/>
+            <Option Id = "D" Version = "1G" OptionCode = "" Description = "Options_2_D"/>
+            <Option Id = "P" Version = "1G" OptionCode = "" Description = "Options_2_P"/>
+            <Option Id = "L" Version = "1G" OptionCode = "" Description = "Options_2_L"/>
+            <Option Id = "N" Version = "*" OptionCode = "" Description = "Options_2_N"/>
+			<Option Id = "L" Version = "1G" OptionCode = "" Description = "Options_2_L_AC"/>
+        </Digit>
+        <Digit Location = "16" Group = "PowerSupplies">
+            <!--Power Supply -->
+            <Option Id = "1" Version = "*" OptionCode = "" Description = "PowerSupplies_1"/>
+            <Option Id = "2" Version = "*" OptionCode = "" Description = "PowerSupplies_2"/>
+        </Digit>
+        <Digit Location = "17+18" Group = "Versions">
+            <!--Product Version -->
+            <Option Id = "XF" Version = "*" Edition="ED1" OptionCode = "" Description = "Versions_XF"/>
+            <Option Id = "1G" Version = "*" OptionCode = "" Description = "Versions_1G"/>
+        </Digit>
+        <!--<Digit Location="17" Group="Reserved">
+        <Option Id="X" Version="*" OptionCode="" Description="Reserved_X"/>
+        </Digit>
+        <Digit Location="18" Group="Versions">
+        <Option Id="F" Version="*" OptionCode="" Description="Versions_F"/>
+        <Option Id="D" Version="*" OptionCode="" Description="Versions_D"/>
+        </Digit>-->
+    </OrderCodes>
+    <ValidOrderCodes>
+           <FunctionalApplication>
+            <!--XYYZZNW - X=Functional app. YY=AIO, ZZ=BIO, N=Option_1,W=Option_2 -->
+            <Rule nr = "1" Version = "XF,1G">NAAAA##</Rule>
+            <Rule nr = "2" Version = "XF,1G">NAAAB##</Rule>
+            <Rule nr = "3" Version = "XF,1G">NAAAC##</Rule>
+            <Rule nr = "4" Version = "XF,1G">NAANN##</Rule>
+            <Rule nr = "5" Version = "XF,1G">NABAA##</Rule>
+            <Rule nr = "6" Version = "XF,1G">NABAB##</Rule>
+            <Rule nr = "7" Version = "XF,1G">NABAC##</Rule>
+            <Rule nr = "8" Version = "XF,1G">NABNN##</Rule>
+            <Rule nr = "9" Version = "1G">NAC###F</Rule>  			
+ 			<Rule nr = "10" Version = "1G">NAC###D</Rule>
+ 			<Rule nr = "11" Version = "1G">NAC###P</Rule>
+ 			<Rule nr = "12" Version = "1G,XF">NAC###N</Rule>
+            <Rule nr = "13" Version = "1G">NDB###F</Rule>  			
+ 			<Rule nr = "14" Version = "1G">NDB###D</Rule>
+ 			<Rule nr = "15" Version = "1G">NDB###P</Rule>
+ 			<Rule nr = "16" Version = "1G">NDB###N</Rule>
+		
+	        </FunctionalApplication>
+        <Communication>
+            <!--MXYZ - M=Mounting, X=Comm.serial, Y=Comm.ethernet, Z=Comm.protocol, T=Option_1 -->
+            <Rule nr = "1" Version = "XF">#AAA</Rule>
+            <Rule nr = "2" Version = "*">#AAB</Rule>
+            <Rule nr = "3" Version = "*">#AAC</Rule>
+            <Rule nr = "4" Version = "*">#AAE</Rule>
+            <Rule nr = "5" Version = "*">#AAG</Rule>
+            <Rule nr = "6" Version = "*">#AAH</Rule>
+            <Rule nr = "8" Version = "XF">#ABA</Rule>
+            <Rule nr = "9" Version = "*">#ABB</Rule>
+            <Rule nr = "10" Version = "*">#ABC</Rule>
+            <Rule nr = "11" Version = "*">#ABE</Rule>
+            <Rule nr = "12" Version = "*">#ABG</Rule>
+            <Rule nr = "13" Version = "*">#ABH</Rule>
+            <Rule nr = "14" Version = "*">#ANB</Rule>
+            <Rule nr = "15" Version = "*">#AND</Rule>
+            <Rule nr = "16" Version = "*">#ANE</Rule>
+            <Rule nr = "17" Version = "*">#BBB</Rule>
+            <Rule nr = "18" Version = "*">#BBC</Rule>
+            <Rule nr = "19" Version = "*">#BBE</Rule>
+            <Rule nr = "20" Version = "*">#BBG</Rule>
+            <Rule nr = "21" Version = "*">#BBH</Rule>
+            <Rule nr = "22" Version = "*">#BNB</Rule>
+            <Rule nr = "22" Version = "*">#BND</Rule>
+            <Rule nr = "24" Version = "*">#BNE</Rule>
+            <Rule nr = "25" Version = "1G">#CBB</Rule>
+            <Rule nr = "26" Version = "1G">#CBC</Rule>
+            <Rule nr = "27" Version = "1G">#CBE</Rule>
+            <Rule nr = "28" Version = "1G">#CBG</Rule>
+            <Rule nr = "29" Version = "1G">#CBH</Rule>
+            <Rule nr = "30" Version = "1G">#CNB</Rule>
+            <Rule nr = "31" Version = "1G">#CND</Rule>
+            <Rule nr = "32" Version = "1G">#CNE</Rule>
+            <Rule nr = "33" Version = "*">#NAA</Rule>
+            <Rule nr = "34" Version = "*">#NAB</Rule>
+            <Rule nr = "35" Version = "*">#NAC</Rule>
+            <Rule nr = "36" Version = "*">#NAE</Rule>
+            <Rule nr = "37" Version = "*">#NAH</Rule>
+            <Rule nr = "38" Version = "*">#NBA</Rule>
+            <Rule nr = "39" Version = "*">#NBB</Rule>
+            <Rule nr = "40" Version = "*">#NBC</Rule>
+            <Rule nr = "41" Version = "*">#NBE</Rule>
+            <Rule nr = "42" Version = "*">#NBH</Rule>
+            <Rule nr = "43" Version = "*">#BCB</Rule>
+            <Rule nr = "44" Version = "*">#BCC</Rule>
+            <Rule nr = "45" Version = "*">#BCE</Rule>
+            <Rule nr = "46" Version = "*">#BCG</Rule>
+            <Rule nr = "47" Version = "*">#BCH</Rule>
+            <Rule nr = "48" Version = "*">#NCA</Rule>
+            <Rule nr = "49" Version = "*">#NCB</Rule>
+            <Rule nr = "50" Version = "*">#NCC</Rule>
+            <Rule nr = "51" Version = "*">#NCE</Rule>
+            <Rule nr = "52" Version = "*">#NCH</Rule>
+            <Rule nr = "53" Version = "*">#BEB</Rule>
+            <Rule nr = "54" Version = "*">#BEC</Rule>
+            <Rule nr = "55" Version = "*">#BEE</Rule>
+            <Rule nr = "56" Version = "*">#BEG</Rule>
+            <Rule nr = "57" Version = "*">#BEH</Rule>
+            <Rule nr = "58" Version = "*">#NEA</Rule>
+            <Rule nr = "59" Version = "*">#NEB</Rule>
+            <Rule nr = "60" Version = "*">#NEC</Rule>
+            <Rule nr = "61" Version = "*">#NEE</Rule>
+            <Rule nr = "62" Version = "*">#NEH</Rule>
+            <Rule nr = "63" Version = "*">#NDA</Rule>
+            <Rule nr = "64" Version = "*">#NDB</Rule>
+            <Rule nr = "65" Version = "*">#NDC</Rule>
+            <Rule nr = "66" Version = "*">#NDE</Rule>
+            <Rule nr = "67" Version = "*">#NDH</Rule>
+            <Rule nr = "68" Version = "*">#BDB</Rule>
+            <Rule nr = "69" Version = "*">#BDC</Rule>
+            <Rule nr = "70" Version = "*">#BDE</Rule>
+            <Rule nr = "71" Version = "*">#BDG</Rule>
+            <Rule nr = "72" Version = "*">#BDH</Rule>
+            <Rule nr = "73" Version = "1G">#BFB</Rule>
+            <Rule nr = "74" Version = "1G">#BFC</Rule>
+            <Rule nr = "75" Version = "1G">#BFE</Rule>
+            <Rule nr = "76" Version = "1G">#BFG</Rule>
+            <Rule nr = "77" Version = "1G">#BFH</Rule>
+            <Rule nr = "78" Version = "1G">#BGB</Rule>
+            <Rule nr = "79" Version = "1G">#BGC</Rule>
+            <Rule nr = "80" Version = "1G">#BGE</Rule>
+            <Rule nr = "81" Version = "1G">#BGG</Rule>
+            <Rule nr = "82" Version = "1G">#BGH</Rule>
+            <Rule nr = "83" Version = "1G">#BHB</Rule>
+            <Rule nr = "84" Version = "1G">#BHC</Rule>
+            <Rule nr = "85" Version = "1G">#BHE</Rule>
+            <Rule nr = "86" Version = "1G">#BHG</Rule>
+            <Rule nr = "87" Version = "1G">#BHH</Rule>
+            <Rule nr = "88" Version = "1G">#NFB</Rule>
+            <Rule nr = "89" Version = "1G">#NFC</Rule>
+            <Rule nr = "90" Version = "1G">#NFE</Rule>
+            <Rule nr = "91" Version = "1G">#NFA</Rule>
+            <Rule nr = "92" Version = "1G">#NFH</Rule>
+            <Rule nr = "93" Version = "1G">#NGB</Rule>
+            <Rule nr = "94" Version = "1G">#NGC</Rule>
+            <Rule nr = "95" Version = "1G">#NGE</Rule>
+            <Rule nr = "96" Version = "1G">#NGA</Rule>
+            <Rule nr = "97" Version = "1G">#NGH</Rule>
+            <Rule nr = "98" Version = "1G">#NHB</Rule>
+            <Rule nr = "99" Version = "1G">#NHC</Rule>
+            <Rule nr = "100" Version = "1G">#NHE</Rule>
+            <Rule nr = "101" Version = "1G">#NHA</Rule>
+            <Rule nr = "102" Version = "1G">#NHH</Rule>
+            <Rule nr = "103" Version = "*">#NNA</Rule>
+        </Communication>
+        <Language>
+            <!--XY- X=Standard, Y=Language-->
+            <Rule nr = "1" Version = "*">B1B</Rule>
+            <Rule nr = "2" Version = "1G">B2B</Rule>
+            <Rule nr = "3" Version = "*">B3B</Rule>
+            <Rule nr = "4" Version = "*">B4B</Rule>
+            <Rule nr = "5" Version = "*">B5B</Rule>
+            <Rule nr = "6" Version = "*">B6B</Rule>
+            <Rule nr = "7" Version = "*">B7B</Rule>
+            <Rule nr = "8" Version = "*">B8B</Rule>
+            <Rule nr = "9" Version = "*">B9B</Rule>
+            <Rule nr = "10" Version = "XF">C2B</Rule>
+            <Rule nr = "11" Version = "*">BAB</Rule>
+            <Rule nr = "12" Version = "*">BBB</Rule>
+            <Rule nr = "13" Version = "*">BCB</Rule>
+            <Rule nr = "14" Version = "*">BDB</Rule>
+            <Rule nr = "15" Version = "*">BEB</Rule>
+            <Rule nr = "16" Version = "*">BFB</Rule>
+            <Rule nr = "17" Version = "*">BGB</Rule>
+            <Rule nr = "18" Version = "*">BHB</Rule>
+            <Rule nr = "19" Version = "*">BJB</Rule>
+            <Rule nr = "20" Version = "*">BKB</Rule>
+            <Rule nr = "21" Version = "*">BLB</Rule>
+            <Rule nr = "22" Version = "*">BMB</Rule>
+            <Rule nr = "23" Version = "*">BNB</Rule>
+            <Rule nr = "24" Version = "*">BPB</Rule>
+            <Rule nr = "25" Version = "XF">B1D</Rule>
+            <Rule nr = "26" Version = "XF">B3D</Rule>
+            <Rule nr = "27" Version = "XF">B4D</Rule>
+            <Rule nr = "28" Version = "XF">B5D</Rule>
+            <Rule nr = "29" Version = "XF">B6D</Rule>
+            <Rule nr = "30" Version = "XF">B7D</Rule>
+            <Rule nr = "31" Version = "XF">B8D</Rule>
+            <Rule nr = "32" Version = "XF">B9D</Rule>
+            <Rule nr = "33" Version = "*">C2D</Rule>
+            <Rule nr = "34" Version = "XF">BAD</Rule>
+            <Rule nr = "35" Version = "XF">BBD</Rule>
+            <Rule nr = "36" Version = "XF">BCD</Rule>
+            <Rule nr = "37" Version = "XF">BDD</Rule>
+            <Rule nr = "38" Version = "XF">BED</Rule>
+            <Rule nr = "39" Version = "XF">BFD</Rule>
+            <Rule nr = "40" Version = "XF">BGD</Rule>
+            <Rule nr = "41" Version = "XF">BHD</Rule>
+            <Rule nr = "42" Version = "XF">BJD</Rule>
+            <Rule nr = "43" Version = "XF">BKD</Rule>
+            <Rule nr = "44" Version = "XF">BLD</Rule>
+            <Rule nr = "45" Version = "XF">BMD</Rule>
+            <Rule nr = "46" Version = "XF">BND</Rule>
+            <Rule nr = "47" Version = "XF">BPD</Rule>
+            <Rule nr = "48" Version = "1G">BQB</Rule>
+            <Rule nr = "49" Version = "1G">BRB</Rule>
+            <Rule nr = "50" Version = "1G">BSB</Rule>
+            <Rule nr = "51" Version = "1G">BTB</Rule>
+            <Rule nr = "52" Version = "1G">BUB</Rule>
+            <Rule nr = "53" Version = "1G">BVB</Rule>
+            <Rule nr = "54" Version = "1G">BWB</Rule>
+            <Rule nr = "55" Version = "1G">BXB</Rule>
+            <Rule nr = "56" Version = "1G">BYB</Rule>
+            <Rule nr = "57" Version = "1G">BZB</Rule>
+        </Language>
+        <Software>
+            <!--MXYZ - M=Mounting, X=Comm.serial, Y=Comm.ethernet, Z=Option_1 -->
+            <Rule nr = "1" Version = "*">NAA#</Rule>
+            <Rule nr = "3" Version = "*">NAB#</Rule>
+            <Rule nr = "5" Version = "*">NAN#</Rule>
+            <Rule nr = "7" Version = "*">NBBN</Rule>
+            <Rule nr = "8" Version = "*">NBNN</Rule>
+            <Rule nr = "9" Version = "*">NNA#</Rule>
+            <Rule nr = "11" Version = "*">NNB#</Rule>
+            <Rule nr = "13" Version = "*">NBC#</Rule>
+            <Rule nr = "15" Version = "*">NNC#</Rule>
+            <Rule nr = "17" Version = "*">NBE#</Rule>
+            <Rule nr = "19" Version = "*">NNE#</Rule>
+            <Rule nr = "21" Version = "*">NND#</Rule>
+            <Rule nr = "23" Version = "*">NBD#</Rule>
+            <Rule nr = "25" Version = "*">NNNN</Rule>
+            <Rule nr = "25" Version = "1G">NBF#</Rule>
+            <Rule nr = "25" Version = "1G">NBG#</Rule>
+            <Rule nr = "25" Version = "1G">NBH#</Rule>
+            <Rule nr = "25" Version = "1G">NNF#</Rule>
+            <Rule nr = "25" Version = "1G">NNG#</Rule>
+            <Rule nr = "25" Version = "1G">NNH#</Rule>
+            <Rule nr = "25" Version = "1G">NCBN</Rule>
+            <Rule nr = "25" Version = "1G">NCNN</Rule>
+        </Software>
+    </ValidOrderCodes>
+  <Configurations>
+        <Configuration Name = "FE201" Version = "1G" File = "fe201_complete_ed1.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml" EventConfigurationFile="fe201_hmi_ed1.xml">
+            <OrderCode Name = "##FNAA##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE201" Version = "1G" Edition = "ED2" File = "fe201_complete.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml" EventConfigurationFile="fe201_hmi.xml">
+            <OrderCode Name = "##FNAA##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE201" Version = "XF" File = "fe201_complete.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml" >
+            <OrderCode Name = "##FNAA##########XF"/>
+        </Configuration>
+        <Configuration Name = "FE201" Version = "1G" File = "fe201_complete_ed1.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml" EventConfigurationFile="fe201_hmi_ed1.xml">
+            <OrderCode Name = "##FNAB##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE201" Version = "1G" Edition = "ED2" File = "fe201_complete.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml" EventConfigurationFile="fe201_hmi.xml">
+            <OrderCode Name = "##FNAB##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE201" Version = "XF" File = "fe201_complete.xml" ModulesFile = "fe201_products.xml" LayoutFile = "fe201_layout.xml" AdditionalSldFile = "fe201_asld.xml">
+            <OrderCode Name = "##FNAB##########XF"/>
+        </Configuration>
+        <Configuration Name = "FE202" Version = "1G" File = "fe202_complete_ed1.xml" ModulesFile = "fe202_products.xml" LayoutFile = "fe202_layout.xml" AdditionalSldFile = "fe202_asld.xml" EventConfigurationFile="fe202_hmi_ed1.xml"> 
+            <OrderCode Name = "##FNAC##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE202" Version = "1G" Edition = "ED2" File = "fe202_complete.xml" ModulesFile = "fe202_products.xml" LayoutFile = "fe202_layout.xml" AdditionalSldFile = "fe202_asld.xml" EventConfigurationFile="fe202_hmi.xml">
+            <OrderCode Name = "##FNAC##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE202" Version = "1G" File = "fe202_complete_ed1.xml" ModulesFile = "fe202_products.xml" LayoutFile = "fe202_layout.xml" AdditionalSldFile = "fe202_asld.xml" EventConfigurationFile="fe202_hmi_ed1.xml"> 
+            <OrderCode Name = "##FNDB##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE202" Version = "1G" Edition = "ED2" File = "fe202_complete.xml" ModulesFile = "fe202_products.xml" LayoutFile = "fe202_layout.xml" AdditionalSldFile = "fe202_asld.xml" EventConfigurationFile="fe202_hmi.xml">
+            <OrderCode Name = "##FNDB##########1G"/>
+        </Configuration>
+        <Configuration Name = "FE202" Version = "XF" File = "fe202_complete.xml" ModulesFile = "fe202_products.xml" LayoutFile = "fe202_layout.xml" AdditionalSldFile = "fe202_asld.xml">
+            <OrderCode Name = "##FNAC##########XF"/>
+        </Configuration>
+    </Configurations>
+</ProductTypeCode>

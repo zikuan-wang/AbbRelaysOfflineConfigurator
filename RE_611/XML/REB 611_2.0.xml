@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProductTypeCode>
+  <OrderCodeVersions>
+     <!-- Order code version, IED version, Application Designs -->
+     <Version Id="XE" IED_version="1.0" Conpack_version="1.0"/>
+     <Version Id="1G" IED_version="2.0" Conpack_version="2.0"/>
+  </OrderCodeVersions>
+  <Default OrderCode="REB611HBAAAA1NN11G"/>
+  <OrderCodes>
+     <Digit Location="1+2+3+4+5+6" Group="MainApps">
+         <!-- IED Series -->
+         <Option Id="REB611" Version="*" OptionCode="" Description="MainApps_REB611"/>
+     </Digit>
+     <Digit Location="7" Group="Mountings">
+         <!-- IED case, plugin unit, test switch -->
+         <Option Id="H" Version="*" OptionCode="" Description="Mountings_H"/>
+         <Option Id="K" Version="*" OptionCode="" Description="Mountings_K"/>
+         <Option Id="L" Version="*" OptionCode="" Description="Mountings_L"/>
+     </Digit>
+     <Digit Location="8" Group="Standards">
+         <!-- Standard -->
+         <Option Id="B" Version="*" OptionCode="" Description="Standards_B"/>
+         <Option Id="C" Version="*" OptionCode="" Description="Standards_C"/>
+     </Digit>
+     <Digit Location="9+10" Group="FunctionalApps">
+         <!-- Standard Configuration -->
+         <Option Id="AA" Version="*" OptionCode="" Description="FunctionalApps_AA"/>
+         <Option Id="AB" Version="*" OptionCode="" Description="FunctionalApps_AB"/>
+     </Digit>
+     <Digit Location="11" Group="CommEthernets">
+         <!-- Communication module -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommEthernets_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommEthernets_B"/>
+         <Option Id="C" Version="*" OptionCode="" Description="CommEthernets_C"/>
+         <Option Id="D" Version="XE" OptionCode="" Description="CommEthernets_D_1"/>
+         <Option Id="D" Version="1G" OptionCode="" Description="CommEthernets_D_2"/>
+         <Option Id="N" Version="*" OptionCode="" Description="CommEthernets_N"/>
+     </Digit>
+     <Digit Location="12" Group="CommProtocols">
+         <!-- Communication (Protocol) -->
+         <Option Id="A" Version="*" OptionCode="" Description="CommProtocols_A"/>
+         <Option Id="B" Version="*" OptionCode="" Description="CommProtocols_B"/>
+         <Option Id="C" Version="1G" OptionCode="" Description="CommProtocols_C"/>
+     </Digit>
+     <Digit Location="13" Group="Languages">
+         <!-- Language -->
+         <Option Id="1" Version="*" OptionCode="" Description="Languages_1"/>
+         <Option Id="2" Version="*" OptionCode="" Description="Languages_2"/>
+         <Option Id="3" Version="*" OptionCode="" Description="Languages_3"/>
+         <Option Id="4" Version="1G" OptionCode="" Description="Languages_4"/>
+         <Option Id="5" Version="*" OptionCode="" Description="Languages_5"/>
+         <Option Id="6" Version="*" OptionCode="" Description="Languages_6"/>
+         <Option Id="7" Version="*" OptionCode="" Description="Languages_7"/>
+         <Option Id="8" Version="*" OptionCode="" Description="Languages_8"/>
+         <Option Id="A" Version="*" OptionCode="" Description="Languages_A"/>
+         <Option Id="C" Version="*" OptionCode="" Description="Languages_C"/>
+         <Option Id="E" Version="*" OptionCode="" Description="Languages_E"/>
+         <Option Id="L" Version="1G" OptionCode="" Description="Languages_L"/>
+         <Option Id="M" Version="1G" OptionCode="" Description="Languages_M"/>
+         <Option Id="N" Version="1G" OptionCode="" Description="Languages_N"/>
+         <Option Id="P" Version="1G" OptionCode="" Description="Languages_P"/>
+         <Option Id="Q" Version="1G" OptionCode="" Description="Languages_Q"/>
+         <Option Id="R" Version="1G" OptionCode="" Description="Languages_R"/>
+         <Option Id="S" Version="1G" OptionCode="" Description="Languages_S"/>
+         <Option Id="T" Version="1G" OptionCode="" Description="Languages_T"/>
+         <Option Id="U" Version="1G" OptionCode="" Description="Languages_U"/>
+         <Option Id="V" Version="1G" OptionCode="" Description="Languages_V"/>
+         <Option Id="W" Version="1G" OptionCode="" Description="Languages_W"/>
+         <Option Id="X" Version="1G" OptionCode="" Description="Languages_X"/>
+         <Option Id="Y" Version="1G" OptionCode="" Description="Languages_Y"/>
+         <Option Id="Z" Version="1G" OptionCode="" Description="Languages_Z"/>
+     </Digit>
+     <Digit Location="14" Group="Options_1">
+         <!-- Option 1 -->
+         <Option Id="N" Version="*" OptionCode="" Description="Options_1_N"/>
+     </Digit>
+     <Digit Location="15" Group="Options_2">
+         <!-- Option 2 -->
+         <Option Id="N" Version="*" OptionCode="" Description="Options_2_N"/>
+     </Digit>
+     <Digit Location="16" Group="PowerSupplies">
+         <!-- Power Supply -->
+         <Option Id="1" Version="*" OptionCode="" Description="PowerSupplies_1"/>
+         <Option Id="2" Version="*" OptionCode="" Description="PowerSupplies_2"/>
+     </Digit>
+     <Digit Location="17+18" Group="Versions">
+         <!-- Version -->
+         <Option Id="XE" Version="*" Edition="ED1" OptionCode="" Description="Versions_XE"/>
+         <Option Id="1G" Version="*" OptionCode="" Description="Versions_1G"/>
+     </Digit>
+  </OrderCodes>
+  <ValidOrderCodes>
+     <FunctionalApplication>
+         <!-- XAWU - X=Functional app and AIO, W=Option_1, U=Option_2 -->
+         <Rule nr="1" Version="*">####</Rule>
+     </FunctionalApplication>
+     <Communication>
+         <!-- MXZ - M=Mounting, X=Comm.serial & Comm.ethernet, Z=Comm.protocol -->
+         <Rule nr="1" Version="*">#AA</Rule>
+         <Rule nr="2" Version="*">#AB</Rule>
+         <Rule nr="3" Version="1G">#AC</Rule>
+         <Rule nr="4" Version="*">#BA</Rule>
+         <Rule nr="5" Version="*">#BB</Rule>
+         <Rule nr="6" Version="1G">#BC</Rule>
+         <Rule nr="7" Version="*">#CB</Rule>
+         <Rule nr="8" Version="*">#DA</Rule>
+         <Rule nr="9" Version="*">#DB</Rule>
+         <Rule nr="10" Version="1G">#DC</Rule>
+         <Rule nr="11" Version="*">#NA</Rule>
+     </Communication>
+     <Language>
+         <!-- XY- X=Standard, Y=Language -->
+         <Rule nr="1" Version="*">C2</Rule>
+         <Rule nr="2" Version="*">B1</Rule>
+         <Rule nr="3" Version="*">B2</Rule>
+         <Rule nr="4" Version="*">B3</Rule>
+         <Rule nr="5" Version="1G">B4</Rule>
+         <Rule nr="6" Version="*">B5</Rule>
+         <Rule nr="7" Version="*">B6</Rule>
+         <Rule nr="8" Version="*">B7</Rule>
+         <Rule nr="9" Version="*">B8</Rule>
+         <Rule nr="10" Version="*">BA</Rule>
+         <Rule nr="11" Version="*">BC</Rule>
+         <Rule nr="12" Version="*">BE</Rule>
+         <Rule nr="13" Version="1G">BL</Rule>
+         <Rule nr="14" Version="1G">BM</Rule>
+         <Rule nr="15" Version="1G">BN</Rule>
+         <Rule nr="16" Version="1G">BP</Rule>
+         <Rule nr="17" Version="1G">BQ</Rule>
+         <Rule nr="18" Version="1G">BR</Rule>
+         <Rule nr="19" Version="1G">BS</Rule>
+         <Rule nr="20" Version="1G">BT</Rule>
+         <Rule nr="21" Version="1G">BU</Rule>
+         <Rule nr="22" Version="1G">BV</Rule>
+         <Rule nr="23" Version="1G">BW</Rule>
+         <Rule nr="24" Version="1G">BX</Rule>
+         <Rule nr="25" Version="1G">BY</Rule>
+         <Rule nr="26" Version="1G">BZ</Rule>
+     </Language>
+  </ValidOrderCodes>
+   <Configurations>
+      <Configuration Name="BE101" Version="XE" File="be101_complete.xml" ModulesFile="be101_products.xml" LayoutFile="be101_layout.xml" AdditionalSldFile="be101_asld.xml" EventConfigurationFile="be101_hmi.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#BA#########"/>
+      </Configuration>
+      <Configuration Name="BE101" Version="1G" File="be101_complete_ed1.xml" ModulesFile="be101_products.xml" LayoutFile="be101_layout.xml" AdditionalSldFile="be101_asld.xml" EventConfigurationFile="be101_hmi_ed1.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#BA#########"/>
+      </Configuration>
+      <Configuration Name="BE101" Version="1G" Edition="ED2" File="be101_complete.xml" ModulesFile="be101_products.xml" LayoutFile="be101_layout.xml" AdditionalSldFile="be101_asld.xml" EventConfigurationFile="be101_hmi.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#BA#########"/>
+      </Configuration>
+      <Configuration Name="BC101" Version="XE" File="bc101_complete.xml" ModulesFile="bc101_products.xml" LayoutFile="bc101_layout.xml" AdditionalSldFile="bc101_asld.xml" EventConfigurationFile="bc101_hmi.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#CA#########"/>
+      </Configuration>
+      <Configuration Name="BC101" Version="1G" File="bc101_complete_ed1.xml" ModulesFile="bc101_products.xml" LayoutFile="bc101_layout.xml" AdditionalSldFile="bc101_asld.xml" EventConfigurationFile="bc101_hmi_ed1.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#CA#########"/>
+      </Configuration>
+      <Configuration Name="BC101" Version="1G" Edition="ED2" File="bc101_complete.xml" ModulesFile="bc101_products.xml" LayoutFile="bc101_layout.xml" AdditionalSldFile="bc101_asld.xml" EventConfigurationFile="bc101_hmi.xml">
+         <!-- "High impedance differential"-->
+         <OrderCode Name="REB611#CA#########"/>
+      </Configuration>
+   </Configurations>
+</ProductTypeCode>

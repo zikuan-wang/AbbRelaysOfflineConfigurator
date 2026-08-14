@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using AbbRelaysLicensing;
 using AbbRelaysOfflineConfigurator.Services;
 using AbbRelaysOfflineConfigurator.ViewModels;
+using AbbRelaysOfflineConfigurator.Views;
 using MaterialDesignThemes.Wpf;
 
 namespace AbbRelaysOfflineConfigurator;
@@ -23,6 +24,8 @@ public partial class MainWindow : Window
     private const int AboutTabIndex = 6;
     private const int Rex600TabIndex = 7;
     private const int Rex640TabIndex = 8;
+    private const int Re630TabIndex = 9;
+    private const int Re611TabIndex = 10;
     private static readonly IReadOnlySet<string> ThemeColorOptions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "#6ECC54",
@@ -65,15 +68,20 @@ public partial class MainWindow : Window
         ["REX615 选型"] = "REX615 Configurator",
         ["REX600 选型"] = "REX600 Configurator",
         ["REX640 选型"] = "REX640 Configurator",
+        ["RE_611 选型"] = "RE_611 Configurator",
+        ["RE_630 选型"] = "RE_630 Configurator",
         ["RIO600 选型"] = "RIO600 Configurator",
         ["SSC600 选型"] = "SSC600 Configurator",
         ["615/620 CN 选型"] = "615/620 CN Configurator",
         ["615/620 转换"] = "615/620 Conversion",
-        ["ABB 继保离线选型工具"] = "ABB Relays Offline Configurator",
+        ["非官方 ABB 继保离线选型工具"] = "Unofficial ABB Relays Offline Configurator",
         ["选型规则"] = "Selection rules",
         ["REX615 组合代码选项"] = "REX615 combination code options",
         ["全部展开"] = "Expand all",
         ["全部折叠"] = "Collapse all",
+        ["展开"] = "Expand",
+        ["折叠"] = "Collapse",
+        ["产品版本"] = "Product version",
         ["组合代码"] = "Combination code",
         ["导入代码"] = "Import code",
         ["导入订货号"] = "Import ordering number",
@@ -89,6 +97,7 @@ public partial class MainWindow : Window
         ["订货号："] = "Ordering number:",
         ["复制"] = "Copy",
         ["APP 功能推荐"] = "APP function recommendation",
+        ["APP 功能对照表"] = "APP function table",
         ["代码表"] = "Code table",
         ["应用推荐"] = "Recommend APPs",
         ["添加"] = "Add",
@@ -105,11 +114,11 @@ public partial class MainWindow : Window
         ["1. 在本机导出 .zwreq 授权申请文件。\n2. 将申请文件交给授权管理员，或在授权工具中打开。\n3. 授权工具读取申请文件中的机器指纹，填写授权对象和有效期后导出 .zwlic 激活文件。\n4. 将激活文件发回本机，在本页面导入。\n5. 主程序会校验加密封装、RSA 签名、机器指纹和有效期；校验通过后授权立即生效。"] =
             "1. Export a .zwreq request file on this computer.\n2. Send the request file to the license administrator, or open it in the authorization tool.\n3. The authorization tool reads the machine fingerprint, licensee and expiry date, then exports a .zwlic activation file.\n4. Import the activation file on this page.\n5. The main program verifies encryption, RSA signature, machine fingerprint and validity period before enabling the license.",
         ["免责声明"] = "Disclaimer",
-        ["本工具仅作为离线选型和组合代码校验辅助，不构成 ABB 官方报价、订货确认、工程设计结论或技术承诺。最终型号、订货号、价格、交期和技术适用性应以 ABB 官方资料、在线校验结果及正式商务文件为准，使用者需自行复核。"] =
-            "This tool is only an offline selection and code validation aid. It does not constitute an ABB official quotation, ordering confirmation, engineering design conclusion or technical commitment. Final types, ordering numbers, prices, lead times and technical applicability should be checked against ABB official materials, online validation results and formal commercial documents.",
+        ["本工具为非官方工具，仅作为离线选型和组合代码校验辅助，不属于 ABB 官方软件，不构成 ABB 官方报价、订货确认、工程设计结论或技术承诺。最终型号、订货号、价格、交期和技术适用性应以 ABB 官方资料、在线校验结果及正式商务文件为准，使用者需自行复核。"] =
+            "This is an unofficial tool for offline selection and code validation assistance only. It is not ABB official software and does not constitute an ABB official quotation, ordering confirmation, engineering design conclusion or technical commitment. Final types, ordering numbers, prices, lead times and technical applicability should be checked against ABB official materials, online validation results and formal commercial documents.",
         ["工具说明"] = "Tool description",
-        ["本工具基于本地数据包进行 ABB 继保产品离线选型、互斥校验、槽位分配、I/O 摘要统计、组合代码生成、SSC600/SSC600 SW 订货码生成、615/620 CN 选型、旧订货号转换、RIO600/REX640 选型，以及在线校验订货号。"] =
-            "This tool uses local data packages for ABB relay offline selection, mutual-exclusion checks, slot allocation, I/O summaries, combination code generation, SSC600/SSC600 SW order code generation, 615/620 CN selection, legacy order code conversion, RIO600/REX640 selection and online order number validation.",
+        ["本非官方工具基于本地数据包进行 ABB 继保产品离线选型、互斥校验、槽位分配、I/O 摘要统计、组合代码生成、SSC600/SSC600 SW 订货码生成、615/620 CN 选型、旧订货号转换、RIO600/REX640/RE_611/RE_630 选型，以及在线校验订货号。"] =
+            "This unofficial tool uses local data packages for ABB relay offline selection, mutual-exclusion checks, slot allocation, I/O summaries, combination code generation, SSC600/SSC600 SW order code generation, 615/620 CN selection, legacy order code conversion, RIO600/REX640/RE_611/RE_630 selection and online order number validation.",
         ["在线更新"] = "Online update",
         ["更新源固定为 GitHub Releases：zikuan-wang/AbbRelaysOfflineConfigurator_Release。"] =
             "The update source is fixed to GitHub Releases: zikuan-wang/AbbRelaysOfflineConfigurator_Release.",
@@ -118,8 +127,8 @@ public partial class MainWindow : Window
         ["打开发布页"] = "Open release page",
         ["下载并安装"] = "Download and install",
         ["版权信息"] = "Copyright",
-        ["版权属于 zikuan wang。ABB、REX615、REX640、SSC600、RIO600 及相关产品名称归其权利人所有。本工具仅在本地实现选型辅助和组合代码生成，不复制 ABB 官方在线配置器页面或受版权保护的表现形式。"] =
-            "Copyright belongs to zikuan wang. ABB, REX615, REX640, SSC600, RIO600 and related product names belong to their respective owners. This tool only implements local selection assistance and code generation, and does not copy ABB official online configurator pages or protected presentation forms.",
+        ["版权属于 zikuan wang。ABB、REX615、REX640、RE_611、RE_630、SSC600、RIO600 及相关产品名称归其权利人所有。本工具为非官方工具，未获得 ABB 赞助、认可或授权，仅在本地实现选型辅助和组合代码生成，不复制 ABB 官方在线配置器页面或受版权保护的表现形式。"] =
+            "Copyright belongs to zikuan wang. ABB, REX615, REX640, RE_611, RE_630, SSC600, RIO600 and related product names belong to their respective owners. This is an unofficial tool and is not sponsored, endorsed, or authorized by ABB. It only implements local selection assistance and code generation, and does not copy ABB official online configurator pages or protected presentation forms.",
         ["推荐版本"] = "Recommendation version",
         ["模块类型"] = "Module type",
         ["硬件类型"] = "Hardware type",
@@ -142,7 +151,7 @@ public partial class MainWindow : Window
         ["应用包功能清单"] = "Application package function list",
         ["产品系列"] = "Product series",
         ["装置类型"] = "Device type",
-        ["615 CN 5.0FP1 / 620 CN 2.0FP1 订货号选项"] = "615 CN 5.0FP1 / 620 CN 2.0FP1 ordering options",
+        ["615 CN 5.1 / 620 CN 2.1 订货号选项"] = "615 CN 5.1 / 620 CN 2.1 ordering options",
         ["当前选择"] = "Current selection",
         ["当前无离线校验错误。"] = "No offline validation errors.",
         ["标准配置推荐"] = "Standard configuration recommendation",
@@ -179,7 +188,12 @@ public partial class MainWindow : Window
     private string? _updateReleaseUrl;
     private string? _updateDownloadUrl;
     private string? _updateDownloadAssetName;
+    private long? _updateDownloadAssetSizeBytes;
+    private string? _updateDownloadAssetDigest;
     private bool _isSyncingDisplayLanguage;
+    private bool _isCnLegacyPushSubscribed;
+    private bool _isPreloadScheduled;
+    private bool _isPreloadingTabs;
 
     public MainWindow()
     {
@@ -188,7 +202,6 @@ public partial class MainWindow : Window
         LoadUserSettings();
         if (DataContext is ConfiguratorViewModel viewModel)
         {
-            viewModel.CnLegacySelection.PushToConversionRequested += CnLegacySelection_OnPushToConversionRequested;
             viewModel.PropertyChanged += ViewModel_OnPropertyChanged;
             SyncDisplayLanguageComboBox(viewModel.DisplayLanguage);
         }
@@ -217,8 +230,9 @@ public partial class MainWindow : Window
             _ = Dispatcher.BeginInvoke(() => MainTabControl.SelectedIndex = AboutTabIndex, DispatcherPriority.Background);
         }
 
-        await Dispatcher.Yield(DispatcherPriority.Background);
-        await CheckForStartupUpdateAsync();
+        await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+        SchedulePreloadProtectedTabs();
+        _ = CheckForStartupUpdateAsync();
     }
 
     private async Task CheckForStartupUpdateAsync()
@@ -236,21 +250,25 @@ public partial class MainWindow : Window
                 : result.ReleaseUrl;
             _updateDownloadUrl = result.DownloadUrl;
             _updateDownloadAssetName = result.DownloadAssetName;
+            _updateDownloadAssetSizeBytes = result.DownloadAssetSizeBytes;
+            _updateDownloadAssetDigest = result.DownloadAssetDigest;
             OpenUpdateReleaseButton.IsEnabled = true;
             DownloadInstallUpdateButton.IsEnabled = !string.IsNullOrWhiteSpace(result.DownloadUrl);
 
             var assetText = string.IsNullOrWhiteSpace(result.DownloadAssetName)
                 ? UiText("Open the release page to download the latest installer.", "可打开发布页面下载最新安装包。")
                 : UiText($"Installer available: {result.DownloadAssetName}", $"可下载安装包：{result.DownloadAssetName}");
+            var releaseNotesText = BuildUpdateReleaseNotesText(result);
             UpdateStatusTextBlock.Text =
                 UiText(
                     $"New version {result.LatestVersion} found. Current version {result.CurrentVersion}. {assetText}",
-                    $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}");
+                    $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}") +
+                releaseNotesText;
 
             var message =
                 UiText(
-                    $"New version {result.LatestVersion} found.\nCurrent version {result.CurrentVersion}.\n{assetText}\n\nOpen the update page?",
-                    $"发现新版本 {result.LatestVersion}。\n当前版本 {result.CurrentVersion}。\n{assetText}\n\n是否打开更新页面？");
+                    $"New version {result.LatestVersion} found.\nCurrent version {result.CurrentVersion}.\n{assetText}{releaseNotesText}\n\nOpen the update page?",
+                    $"发现新版本 {result.LatestVersion}。\n当前版本 {result.CurrentVersion}。\n{assetText}{releaseNotesText}\n\n是否打开更新页面？");
             if (MessageBox.Show(this, message, UiText("New version found", "发现新版本"), MessageBoxButton.YesNo, MessageBoxImage.Information) ==
                 MessageBoxResult.Yes)
             {
@@ -344,6 +362,8 @@ public partial class MainWindow : Window
         DownloadInstallUpdateButton.IsEnabled = false;
         _updateDownloadUrl = null;
         _updateDownloadAssetName = null;
+        _updateDownloadAssetSizeBytes = null;
+        _updateDownloadAssetDigest = null;
         UpdateStatusTextBlock.Text = UiText("Checking GitHub Release updates...", "正在检查 GitHub Release 更新...");
 
         try
@@ -363,17 +383,21 @@ public partial class MainWindow : Window
             OpenUpdateReleaseButton.IsEnabled = true;
             _updateDownloadUrl = result.DownloadUrl;
             _updateDownloadAssetName = result.DownloadAssetName;
+            _updateDownloadAssetSizeBytes = result.DownloadAssetSizeBytes;
+            _updateDownloadAssetDigest = result.DownloadAssetDigest;
 
             if (result.HasUpdate)
             {
                 var assetText = string.IsNullOrWhiteSpace(result.DownloadAssetName)
                     ? UiText("Open the release page to download the latest installer.", "请打开发布页下载最新安装包。")
                     : UiText($"Download available: {result.DownloadAssetName}", $"可下载：{result.DownloadAssetName}");
+                var releaseNotesText = BuildUpdateReleaseNotesText(result);
                 DownloadInstallUpdateButton.IsEnabled = !string.IsNullOrWhiteSpace(result.DownloadUrl);
                 UpdateStatusTextBlock.Text =
                     UiText(
                         $"New version {result.LatestVersion} found. Current version {result.CurrentVersion}. {assetText}",
-                        $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}");
+                        $"发现新版本 {result.LatestVersion}，当前版本 {result.CurrentVersion}。{assetText}") +
+                    releaseNotesText;
             }
             else
             {
@@ -420,7 +444,9 @@ public partial class MainWindow : Window
             var installerPath = await _updateCheckService.DownloadInstallerAsync(
                 _updateDownloadUrl,
                 _updateDownloadAssetName,
-                progress);
+                progress,
+                expectedSizeBytes: _updateDownloadAssetSizeBytes,
+                expectedDigest: _updateDownloadAssetDigest);
 
             UpdateStatusTextBlock.Text = UiText($"Installer downloaded: {installerPath}. Starting installer...", $"安装包已下载：{installerPath}。正在启动安装程序...");
             UpdateCheckService.StartInstaller(installerPath);
@@ -471,6 +497,8 @@ public partial class MainWindow : Window
         LegacyConversionTabItem.IsEnabled = status.IsLicensed;
         Rex600TabItem.IsEnabled = status.IsLicensed;
         Rex640TabItem.IsEnabled = status.IsLicensed;
+        Re630TabItem.IsEnabled = status.IsLicensed;
+        Re611TabItem.IsEnabled = status.IsLicensed;
 
         LicenseStatusTextBlock.Text = IsEnglishChrome
             ? status.IsLicensed ? "License valid" : "Not licensed or license invalid"
@@ -491,6 +519,10 @@ public partial class MainWindow : Window
         if (!status.IsLicensed && IsProtectedTabIndex(MainTabControl.SelectedIndex))
         {
             MainTabControl.SelectedIndex = AboutTabIndex;
+        }
+        else if (status.IsLicensed && IsLoaded)
+        {
+            SchedulePreloadProtectedTabs();
         }
     }
 
@@ -599,6 +631,16 @@ public partial class MainWindow : Window
         NavigateToProtectedTab(Rex640TabIndex);
     }
 
+    private void Re630SelectionPageButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        NavigateToProtectedTab(Re630TabIndex);
+    }
+
+    private void Re611SelectionPageButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        NavigateToProtectedTab(Re611TabIndex);
+    }
+
     private void HomeFunctionSuggestion_OnClick(object sender, RoutedEventArgs e)
     {
         if (DataContext is ConfiguratorViewModel viewModel &&
@@ -647,6 +689,11 @@ public partial class MainWindow : Window
             return;
         }
 
+        if (EnsureTabContent(index) && IsEnglishChrome)
+        {
+            ApplyStaticLanguage(LanguageScopeForIndex(index), true);
+        }
+
         MainTabControl.SelectedIndex = index;
     }
 
@@ -654,14 +701,164 @@ public partial class MainWindow : Window
     {
         if (e.Source == MainTabControl)
         {
+            if (EnsureTabContent(MainTabControl.SelectedIndex) && IsEnglishChrome)
+            {
+                ApplyStaticLanguage(CurrentLanguageScope(), true);
+            }
+
             UpdateTopBarTitle();
-            ApplyStaticLanguage(MainTabControl, IsEnglishChrome);
         }
     }
+
+    private async void SchedulePreloadProtectedTabs()
+    {
+        if (_isPreloadScheduled || _isPreloadingTabs)
+        {
+            return;
+        }
+
+        _isPreloadScheduled = true;
+        try
+        {
+            await Task.Delay(2500);
+            await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+            BeginPreloadProtectedTabs();
+        }
+        finally
+        {
+            _isPreloadScheduled = false;
+        }
+    }
+
+    private async void BeginPreloadProtectedTabs()
+    {
+        if (_isPreloadingTabs ||
+            !IsLoaded ||
+            !LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64).IsLicensed)
+        {
+            return;
+        }
+
+        _isPreloadingTabs = true;
+        try
+        {
+            foreach (var index in new[] { 2, 3, 4, 5, Rex600TabIndex, Rex640TabIndex, Re630TabIndex, Re611TabIndex })
+            {
+                while (RootDrawerHost.IsLeftDrawerOpen)
+                {
+                    await Task.Delay(200);
+                }
+
+                await Dispatcher.Yield(DispatcherPriority.ContextIdle);
+                if (EnsureTabContent(index) && IsEnglishChrome)
+                {
+                    ApplyStaticLanguage(LanguageScopeForIndex(index), true);
+                }
+
+                await Task.Delay(120);
+            }
+        }
+        finally
+        {
+            _isPreloadingTabs = false;
+        }
+    }
+
+    private bool EnsureTabContent(int index)
+    {
+        if (DataContext is not ConfiguratorViewModel viewModel)
+        {
+            return false;
+        }
+
+        switch (index)
+        {
+            case 2 when Ssc600ContentHost.Content is null:
+                Ssc600ContentHost.Content = new Ssc600SelectorView { DataContext = viewModel.Ssc600Selection };
+                return true;
+            case 3 when Rio600ContentHost.Content is null:
+                Rio600ContentHost.Content = new Rio600SelectorView { DataContext = viewModel.Rio600Selection };
+                return true;
+            case 4 when CnLegacyContentHost.Content is null:
+                var cnLegacySelection = viewModel.CnLegacySelection;
+                if (!_isCnLegacyPushSubscribed)
+                {
+                    cnLegacySelection.PushToConversionRequested += CnLegacySelection_OnPushToConversionRequested;
+                    _isCnLegacyPushSubscribed = true;
+                }
+
+                CnLegacyContentHost.Content = new CnLegacySelectorView { DataContext = cnLegacySelection };
+                return true;
+            case 5 when LegacyConversionContentHost.Content is null:
+                LegacyConversionContentHost.Content = new LegacyConversionView { DataContext = viewModel.LegacyConversion };
+                return true;
+            case Rex600TabIndex when Rex600ContentHost.Content is null:
+                Rex600ContentHost.Content = new Rex600SelectorView { DataContext = viewModel.Rex600Selection };
+                return true;
+            case Rex640TabIndex when Rex640ContentHost.Content is null:
+                Rex640ContentHost.Content = new Rex640SelectorView { DataContext = viewModel.Rex640Selection };
+                return true;
+            case Re630TabIndex when Re630ContentHost.Content is null:
+                Re630ContentHost.Content = new Re630SelectorView { DataContext = viewModel.Re630Selection };
+                return true;
+            case Re611TabIndex when Re611ContentHost.Content is null:
+                Re611ContentHost.Content = new Re611SelectorView { DataContext = viewModel.Re611Selection };
+                return true;
+        }
+
+        return false;
+    }
+
+    private DependencyObject CurrentLanguageScope() => LanguageScopeForIndex(MainTabControl.SelectedIndex);
+
+    private DependencyObject LanguageScopeForIndex(int index) => index switch
+    {
+        0 => HomeTabItem,
+        1 => ConfiguratorTabItem,
+        2 => Ssc600TabItem,
+        3 => Rio600TabItem,
+        4 => CnLegacyTabItem,
+        5 => LegacyConversionTabItem,
+        AboutTabIndex => AboutLicenseTabItem,
+        Rex600TabIndex => Rex600TabItem,
+        Rex640TabIndex => Rex640TabItem,
+        Re630TabIndex => Re630TabItem,
+        Re611TabIndex => Re611TabItem,
+        _ => MainTabControl
+    };
 
     private bool IsEnglishChrome => DataContext is ConfiguratorViewModel { IsEnglish: true };
 
     private string UiText(string english, string chinese) => IsEnglishChrome ? english : chinese;
+
+    private string BuildUpdateReleaseNotesText(UpdateCheckResult result)
+    {
+        if (string.IsNullOrWhiteSpace(result.ReleaseNotes))
+        {
+            return "";
+        }
+
+        var notes = StripReleaseNotesHeading(result.ReleaseNotes.Trim());
+        return string.IsNullOrWhiteSpace(notes) ? "" : $"\n\n修改功能：\n{notes}";
+    }
+
+    private static string StripReleaseNotesHeading(string releaseNotes)
+    {
+        var lines = releaseNotes
+            .TrimStart('\uFEFF')
+            .Replace("\r\n", "\n")
+            .Replace('\r', '\n')
+            .Split('\n');
+        if (lines.Length == 0)
+        {
+            return "";
+        }
+
+        var firstLine = lines[0].Trim().TrimEnd(':', '：');
+        return firstLine.Equals("修改功能", StringComparison.OrdinalIgnoreCase)
+            ? string.Join('\n', lines.Skip(1)).Trim()
+            : releaseNotes;
+    }
 
     private void ApplyChromeLanguage()
     {
@@ -670,13 +867,15 @@ public partial class MainWindow : Window
             ? $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0"}"
             : $"版本 {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0"}";
 
-        Title = english ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具";
-        DrawerTitleTextBlock.Text = english ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具";
+        Title = english ? "Unofficial ABB Relays Offline Configurator" : "非官方 ABB 继保离线选型工具";
+        DrawerTitleTextBlock.Text = english ? "Unofficial ABB Relays Offline Configurator" : "非官方 ABB 继保离线选型工具";
         DrawerSubtitleTextBlock.Text = "";
         NavHomeTextBlock.Text = english ? "Home" : "首页";
         NavRex615TextBlock.Text = english ? "REX615 Configurator" : "REX615 选型";
         NavRex600TextBlock.Text = english ? "REX600 Configurator" : "REX600 选型";
         NavRex640TextBlock.Text = english ? "REX640 Configurator" : "REX640 选型";
+        NavRe630TextBlock.Text = english ? "RE_630 Configurator" : "RE_630 选型";
+        NavRe611TextBlock.Text = english ? "RE_611 Configurator" : "RE_611 选型";
         NavSsc600TextBlock.Text = english ? "SSC600 Configurator" : "SSC600 选型";
         NavRio600TextBlock.Text = english ? "RIO600 Configurator" : "RIO600 选型";
         NavCnLegacyTextBlock.Text = english ? "615/620 CN Configurator" : "615/620 CN 选型";
@@ -705,16 +904,6 @@ public partial class MainWindow : Window
             : "本地离线选型 / 在线校验 / 授权管理";
         AboutVersionTextBlock.Text = versionText;
         StatusVersionTextBlock.Text = versionText;
-
-        HomeTabItem.Header = english ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具";
-        ConfiguratorTabItem.Header = english ? "REX615 Configurator" : "REX615 选型";
-        Ssc600TabItem.Header = english ? "SSC600 Configurator" : "SSC600 选型";
-        Rio600TabItem.Header = english ? "RIO600 Configurator" : "RIO600 选型";
-        CnLegacyTabItem.Header = english ? "615/620 CN Configurator" : "615/620 CN 选型";
-        LegacyConversionTabItem.Header = english ? "615/620 Conversion" : "615/620 转换";
-        AboutLicenseTabItem.Header = english ? "License / About" : "授权/关于";
-        Rex600TabItem.Header = english ? "REX600 Configurator" : "REX600 选型";
-        Rex640TabItem.Header = english ? "REX640 Configurator" : "REX640 选型";
 
         ApplyStaticLanguage(this, english);
         SyncDisplayLanguageComboBoxContent();
@@ -748,7 +937,7 @@ public partial class MainWindow : Window
         var english = IsEnglishChrome;
         return index switch
         {
-            0 => english ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具",
+            0 => english ? "Unofficial ABB Relays Offline Configurator" : "非官方 ABB 继保离线选型工具",
             1 => english ? "REX615 Configurator" : "REX615 选型",
             2 => english ? "SSC600 Configurator" : "SSC600 选型",
             3 => english ? "RIO600 Configurator" : "RIO600 选型",
@@ -757,12 +946,18 @@ public partial class MainWindow : Window
             AboutTabIndex => english ? "License / About / Update" : "授权 / 关于 / 更新",
             Rex600TabIndex => english ? "REX600 Configurator" : "REX600 选型",
             Rex640TabIndex => english ? "REX640 Configurator" : "REX640 选型",
-            _ => english ? "ABB Relays Offline Configurator" : "ABB 继保离线选型工具"
+            Re630TabIndex => english ? "RE_630 Configurator" : "RE_630 选型",
+            Re611TabIndex => english ? "RE_611 Configurator" : "RE_611 选型",
+            _ => english ? "Unofficial ABB Relays Offline Configurator" : "非官方 ABB 继保离线选型工具"
         };
     }
 
     private static bool IsProtectedTabIndex(int index) =>
-        index is >= 1 and <= 5 || index == Rex600TabIndex || index == Rex640TabIndex;
+        index is >= 1 and <= 5 ||
+        index == Rex600TabIndex ||
+        index == Rex640TabIndex ||
+        index == Re630TabIndex ||
+        index == Re611TabIndex;
 
     private static string LocalizeLicenseMessage(string message, bool english)
     {

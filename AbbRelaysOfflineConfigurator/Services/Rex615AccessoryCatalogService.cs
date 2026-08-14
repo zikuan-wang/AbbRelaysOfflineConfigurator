@@ -6,19 +6,20 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rex615AccessoryCatalogService
 {
     private const string CatalogFileName = "Rex615Accessories.json";
-    private readonly Lazy<IReadOnlyList<Rex615AccessoryCatalogItem>> _items;
+    private static readonly Lazy<string> SharedCatalogPath = new(ResolveCatalogPath);
+    private static readonly Lazy<IReadOnlyList<Rex615AccessoryCatalogItem>> SharedItems = new(
+        () => LoadItems(SharedCatalogPath.Value));
 
     public Rex615AccessoryCatalogService()
     {
-        CatalogPath = ResolveCatalogPath();
-        _items = new Lazy<IReadOnlyList<Rex615AccessoryCatalogItem>>(() => LoadItems(CatalogPath));
+        CatalogPath = SharedCatalogPath.Value;
     }
 
     public string CatalogPath { get; }
 
     public IReadOnlyList<Rex615AccessoryCatalogItem> GetItems(string query = "")
     {
-        var items = _items.Value;
+        var items = SharedItems.Value;
         if (string.IsNullOrWhiteSpace(query))
         {
             return items;

@@ -1,0 +1,3317 @@
+{
+  "FormatVersion": 1,
+  "Source": "RE_630 product guide PDFs: REF630_pg_756976_ENh, REG630_pg_757583_ENc, REM630_pg_756977_ENh, RET630_pg_756978_ENh. Extracted from the 'Functions, codes and symbols' tables.",
+  "GeneratedAt": "2026-05-21T05:45:00Z",
+  "Functions": [
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Circuit breaker failure protection",
+      "Iec61850": "CCBRBRF",
+      "Iec60617": "3I>/I0>BF",
+      "Ansi": "51BF/51NBF",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Automatic switch-onto-fault logic",
+      "Iec61850": "CVRSOF",
+      "Iec60617": "SOTF",
+      "Ansi": "SOTF",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Frequency gradient protection",
+      "Iec61850": "DAPFRC",
+      "Iec60617": "df/dt>",
+      "Ansi": "81R",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Overfrequency protection",
+      "Iec61850": "DAPTOF",
+      "Iec60617": "f>",
+      "Ansi": "81O",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Underfrequency protection",
+      "Iec61850": "DAPTUF",
+      "Iec60617": "f<",
+      "Ansi": "81U",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Autoreclosing",
+      "Iec61850": "DARREC",
+      "Iec60617": "O -> I",
+      "Ansi": "79",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, high stage",
+      "Iec61850": "DEFHPDEF",
+      "Iec60617": "I0>> ->",
+      "Ansi": "67N-2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, low stage",
+      "Iec61850": "DEFLPDEF",
+      "Iec60617": "I0> ->",
+      "Ansi": "67N-1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Reverse power/directional overpower protection",
+      "Iec61850": "DOPPDPR",
+      "Iec60617": "P>",
+      "Ansi": "32R/32O",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, high stage",
+      "Iec61850": "DPHHPDOC",
+      "Iec60617": "3I>> ->",
+      "Ansi": "67-2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, low stage",
+      "Iec61850": "DPHLPDOC",
+      "Iec60617": "3I> ->",
+      "Ansi": "67-1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Directional reactive power undervoltage protection",
+      "Iec61850": "DQPTUV",
+      "Iec60617": "Q>-->,3U<",
+      "Ansi": "32Q,27",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Distance protection",
+      "Iec61850": "DSTPDIS",
+      "Iec60617": "Z<",
+      "Ansi": "21, 21P, 21N",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, high stage",
+      "Iec61850": "EFHPTOC",
+      "Iec60617": "I0>>",
+      "Ansi": "51N-2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, instantaneous stage",
+      "Iec61850": "EFIPTOC",
+      "Iec60617": "I0>>>",
+      "Ansi": "50N/51N",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, low stage",
+      "Iec61850": "EFLPTOC",
+      "Iec60617": "I0>",
+      "Ansi": "51N-1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Admittance-based earth-fault protection",
+      "Iec61850": "EFPADM",
+      "Iec60617": "Yo>->",
+      "Ansi": "21YN",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Harmonics based earth-fault protection",
+      "Iec61850": "HAEFPTOC",
+      "Iec60617": "Io>HA",
+      "Ansi": "51NHA",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase current inrush detection",
+      "Iec61850": "INRPHAR",
+      "Iec60617": "3I2f>",
+      "Ansi": "68",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Transient/intermittent earth-fault protection",
+      "Iec61850": "INTRPTEF",
+      "Iec60617": "I0> -> IEF",
+      "Ansi": "67NIEF",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Load shedding",
+      "Iec61850": "LSHDPFRQ",
+      "Iec60617": "UFLS/R",
+      "Ansi": "81LSH",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Multipurpose analog protection",
+      "Iec61850": "MAPGAPC",
+      "Iec60617": "MAP",
+      "Ansi": "MAP",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Multi-frequency admittance-based earth-fault protection",
+      "Iec61850": "MFADPSDE",
+      "Iec60617": "I0> ->Y",
+      "Ansi": "67YN",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overcurrent protection",
+      "Iec61850": "NSPTOC",
+      "Iec60617": "I2>",
+      "Ansi": "46",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overvoltage protection",
+      "Iec61850": "NSPTOV",
+      "Iec60617": "U2>",
+      "Ansi": "47O-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Phase discontinuity protection",
+      "Iec61850": "PDNSPTOC",
+      "Iec60617": "I2/I1>",
+      "Ansi": "46PD",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, high stage",
+      "Iec61850": "PHHPTOC",
+      "Iec60617": "3I>>",
+      "Ansi": "51P-2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, instantaneous stage",
+      "Iec61850": "PHIPTOC",
+      "Iec60617": "3I>>>",
+      "Ansi": "50P/51P",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, low stage",
+      "Iec61850": "PHLPTOC",
+      "Iec60617": "3I>",
+      "Ansi": "51P-1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase overvoltage protection",
+      "Iec61850": "PHPTOV",
+      "Iec60617": "3U>",
+      "Ansi": "59",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase undervoltage protection",
+      "Iec61850": "PHPTUV",
+      "Iec60617": "3U<",
+      "Ansi": "27",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Positive-sequence overvoltage protection",
+      "Iec61850": "PSPTOV",
+      "Iec60617": "U1>",
+      "Ansi": "47O+",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Positive-sequence undervoltage protection",
+      "Iec61850": "PSPTUV",
+      "Iec60617": "U1<",
+      "Ansi": "47U+",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Residual overvoltage protection",
+      "Iec61850": "ROVPTOV",
+      "Iec60617": "U0>",
+      "Ansi": "59G",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Fault locator",
+      "Iec61850": "SCEFRFLO",
+      "Iec60617": "FLOC",
+      "Ansi": "21FL",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Three-phase thermal overload protection for feeder",
+      "Iec61850": "T1PTTR",
+      "Iec60617": "3Ith>F",
+      "Ansi": "49F",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Tripping logic",
+      "Iec61850": "TRPPTRC",
+      "Iec60617": "I -> O",
+      "Ansi": "94",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection",
+      "Description": "Wattmetric earth-fault protection",
+      "Iec61850": "WPWDE",
+      "Iec60617": "Po>->",
+      "Ansi": "32N",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 77
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection-related functions",
+      "Description": "Current reversal and WEI logic",
+      "Iec61850": "CRWPSCH",
+      "Iec60617": "CLCRW",
+      "Ansi": "85CRW",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection-related functions",
+      "Description": "Scheme communication logic",
+      "Iec61850": "DSOCPSCH",
+      "Iec60617": "CL",
+      "Ansi": "85",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection-related functions",
+      "Description": "Local acceleration logic",
+      "Iec61850": "DSTPLAL",
+      "Iec60617": "LAL",
+      "Ansi": "LAL",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection-related functions",
+      "Description": "Current reversal and WEI logic for residual overcurrent",
+      "Iec61850": "RCRWPSCH",
+      "Iec60617": "CLCRWN",
+      "Ansi": "85NCRW",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Protection-related functions",
+      "Description": "Communication logic for residual overcurrent",
+      "Iec61850": "RESCPSCH",
+      "Iec60617": "CLN",
+      "Ansi": "85N",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Circuit breaker",
+      "Iec61850": "DAXCBR",
+      "Iec60617": "I <-> O CB",
+      "Ansi": "I <-> O CB",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Disconnector",
+      "Iec61850": "DAXSWI",
+      "Iec60617": "I <-> O DC",
+      "Ansi": "I <-> O DC",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Circuit breaker/disconnector control",
+      "Iec61850": "GNRLCSWI",
+      "Iec60617": "I <-> O CB/DC",
+      "Ansi": "I <-> O CB/DC",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Local/remote switch interface",
+      "Iec61850": "LOCREM",
+      "Iec60617": "R/L",
+      "Ansi": "R/L",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Bay control",
+      "Iec61850": "QCCBAY",
+      "Iec60617": "CBAY",
+      "Ansi": "CBAY",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Interlocking interface",
+      "Iec61850": "SCILO",
+      "Iec60617": "3",
+      "Ansi": "3",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Control",
+      "Description": "Synchrocheck",
+      "Iec61850": "SYNCRSYN",
+      "Iec60617": "SYNC",
+      "Ansi": "25",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Event counter",
+      "Iec61850": "CNTGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Double point indication",
+      "Iec61850": "DPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Generic measured value",
+      "Iec61850": "MVGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Pulse counter for energy metering",
+      "Iec61850": "PCGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Logic Rotating Switch for function selection and LHMI presentation",
+      "Iec61850": "SLGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Single point control (8 signals)",
+      "Iec61850": "SPC8GGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Single point indication",
+      "Iec61850": "SPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Generic process I/O",
+      "Description": "Selector mini switch",
+      "Iec61850": "VSGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Current circuit supervision",
+      "Iec61850": "CCRDIF",
+      "Iec60617": "MCS 3I",
+      "Ansi": "MCS 3I",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Energy monitoring",
+      "Iec61850": "EPDMMTR",
+      "Iec60617": "E",
+      "Ansi": "E",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Runtime counter for machines and devices",
+      "Iec61850": "MDSOPT",
+      "Iec60617": "OPTS",
+      "Ansi": "OPTM",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Measured value limit supervision",
+      "Iec61850": "MVEXP",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Fuse failure supervision",
+      "Iec61850": "SEQRFUF",
+      "Iec60617": "FUSEF",
+      "Ansi": "60",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Station battery supervision",
+      "Iec61850": "SPVNZBAT",
+      "Iec60617": "U<>",
+      "Ansi": "U<>",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Circuit breaker condition monitoring",
+      "Iec61850": "SSCBR",
+      "Iec60617": "CBCM",
+      "Ansi": "CBCM",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Supervision and monitoring",
+      "Description": "Trip-circuit supervision",
+      "Iec61850": "TCSSCBR",
+      "Iec60617": "TCS",
+      "Ansi": "TCM",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 78
+    },
+    {
+      "Device": "REF630",
+      "Category": "Power quality",
+      "Description": "Current harmonics",
+      "Iec61850": "CMHAI",
+      "Iec60617": "PQM3I",
+      "Ansi": "PQM3I",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Power quality",
+      "Description": "Voltage variation",
+      "Iec61850": "PHQVVR",
+      "Iec60617": "PQMU",
+      "Ansi": "PQMV",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Power quality",
+      "Description": "Voltage harmonics (phase-to-earth)",
+      "Iec61850": "VPHMHAI",
+      "Iec60617": "PQM3Upe",
+      "Ansi": "PQM3Vpg",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Power quality",
+      "Description": "Voltage harmonics (phase-to-phase)",
+      "Iec61850": "VPPMHAI",
+      "Iec60617": "PQM3Upp",
+      "Ansi": "PQM3Vpp",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Power quality",
+      "Description": "Voltage unbalance",
+      "Iec61850": "VSQVUB",
+      "Iec60617": "PQMUBU",
+      "Ansi": "PQMUBV",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Analog channels 1-10 (samples)",
+      "Iec61850": "A1RADR",
+      "Iec60617": "ACH1",
+      "Ansi": "ACH1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Analog channels 11-20 (samples)",
+      "Iec61850": "A2RADR",
+      "Iec60617": "ACH2",
+      "Ansi": "ACH2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Analog channels 21-30 (calc. val.)",
+      "Iec61850": "A3RADR",
+      "Iec60617": "ACH3",
+      "Ansi": "ACH3",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Analog channels 31-40 (calc. val.)",
+      "Iec61850": "A4RADR",
+      "Iec60617": "ACH4",
+      "Ansi": "ACH4",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Binary channels 1-16",
+      "Iec61850": "B1RBDR",
+      "Iec60617": "BCH1",
+      "Ansi": "BCH1",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Binary channels 17 -32",
+      "Iec61850": "B2RBDR",
+      "Iec60617": "BCH2",
+      "Ansi": "BCH2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Binary channels 33 -48",
+      "Iec61850": "B3RBDR",
+      "Iec60617": "BCH3",
+      "Ansi": "BCH3",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Binary channels 49 -64",
+      "Iec61850": "B4RBDR",
+      "Iec60617": "BCH4",
+      "Ansi": "BCH4",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Three-phase current measurement",
+      "Iec61850": "CMMXU",
+      "Iec60617": "3I",
+      "Ansi": "3I",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Sequence current measurement",
+      "Iec61850": "CSMSQI",
+      "Iec60617": "I1, I2",
+      "Ansi": "I1, I2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Power monitoring with P, Q, S, power factor, frequency",
+      "Iec61850": "PWRMMXU",
+      "Iec60617": "PQf",
+      "Ansi": "PQf",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Residual current measurement",
+      "Iec61850": "RESCMMXU",
+      "Iec60617": "I0",
+      "Ansi": "I0",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Residual voltage measurement",
+      "Iec61850": "RESVMMXU",
+      "Iec60617": "U0",
+      "Ansi": "U0",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-earth)",
+      "Iec61850": "VPHMMXU",
+      "Iec60617": "3Upe",
+      "Ansi": "3Upe",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-phase)",
+      "Iec61850": "VPPMMXU",
+      "Iec60617": "3Upp",
+      "Ansi": "3Upp",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Measurement",
+      "Description": "Sequence voltage measurement",
+      "Iec61850": "VSMSQI",
+      "Iec60617": "U1, U2",
+      "Ansi": "V1, V2",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Binary receive",
+      "Iec61850": "GOOSEBINRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Double point receive",
+      "Iec61850": "GOOSEDPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Interlock receive",
+      "Iec61850": "GOOSEINTLKRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Integer receive",
+      "Iec61850": "GOOSEINTRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Measured value receive",
+      "Iec61850": "GOOSEMVRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REF630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Single point receive",
+      "Iec61850": "GOOSESPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REF630_pg_756976_ENh.pdf",
+      "Page": 79
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Circuit breaker failure protection",
+      "Iec61850": "CCBRBRF",
+      "Iec60617": "3I>/I0>BF",
+      "Ansi": "51BF/51NBF",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Frequency gradient protection",
+      "Iec61850": "DAPFRC",
+      "Iec60617": "df/dt>",
+      "Ansi": "81R",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Overfrequency protection",
+      "Iec61850": "DAPTOF",
+      "Iec60617": "f>",
+      "Ansi": "81O",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Underfrequency protection",
+      "Iec61850": "DAPTUF",
+      "Iec60617": "f<",
+      "Ansi": "81U",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, high stage",
+      "Iec61850": "DEFHPDEF",
+      "Iec60617": "I0>> ->",
+      "Ansi": "67N-2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, low stage",
+      "Iec61850": "DEFLPDEF",
+      "Iec60617": "I0> ->",
+      "Ansi": "67N-1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Reverse power/directional overpower protection",
+      "Iec61850": "DOPPDPR",
+      "Iec60617": "P>",
+      "Ansi": "32R/32O",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, high stage",
+      "Iec61850": "DPHHPDOC",
+      "Iec60617": "3I>> ->",
+      "Ansi": "67-2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, low stage",
+      "Iec61850": "DPHLPDOC",
+      "Iec60617": "3I> ->",
+      "Ansi": "67-1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Directional reactive power undervoltage protection",
+      "Iec61850": "DQPTUV",
+      "Iec60617": "Q>-->,3U<",
+      "Ansi": "32Q,27",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Underpower protection",
+      "Iec61850": "DUPPDPR",
+      "Iec60617": "P<",
+      "Ansi": "32U",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, high stage",
+      "Iec61850": "EFHPTOC",
+      "Iec60617": "I0>>",
+      "Ansi": "51N-2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, instantaneous stage",
+      "Iec61850": "EFIPTOC",
+      "Iec60617": "I0>>>",
+      "Ansi": "50N/51N",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, low stage",
+      "Iec61850": "EFLPTOC",
+      "Iec60617": "I0>",
+      "Ansi": "51N-1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "High-impedance or flux-balance based differential protection",
+      "Iec61850": "for",
+      "Iec60617": "",
+      "Ansi": "",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Third harmonic based stator earth-fault protection",
+      "Iec61850": "H3EFPSEF",
+      "Iec60617": "dUo(3H)>/Uo(3H)<",
+      "Ansi": "27/59THD",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "High-impedance based restricted earth-fault protection",
+      "Iec61850": "HREFPDIF",
+      "Iec60617": "dI0Hi>",
+      "Ansi": "87NH",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase current inrush detection",
+      "Iec61850": "INRPHAR",
+      "Iec60617": "3I2f>",
+      "Ansi": "68",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Low voltage ride through protection function",
+      "Iec61850": "LVRTPTUV",
+      "Iec60617": "U<RT",
+      "Ansi": "27RT",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Multipurpose analog protection",
+      "Iec61850": "MAPGAPC",
+      "Iec60617": "MAP",
+      "Ansi": "MAP",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "machines",
+      "Iec61850": "MHZPDIF",
+      "Iec60617": "3dIHi>G/M",
+      "Ansi": "87GH/87MH",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overcurrent protection for machines",
+      "Iec61850": "MNSPTOC",
+      "Iec60617": "I2>G/M",
+      "Ansi": "46G/46M",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Stabilized differential protection for machines",
+      "Iec61850": "MPDIF",
+      "Iec60617": "3dI>G/M",
+      "Ansi": "87G/87M",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Rotor earth-fault protection",
+      "Iec61850": "MREFPTOC",
+      "Iec60617": "Io>R",
+      "Ansi": "64R",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overvoltage protection",
+      "Iec61850": "NSPTOV",
+      "Iec60617": "U2>",
+      "Ansi": "47O-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Overexcitation protection",
+      "Iec61850": "OEPVPH",
+      "Iec60617": "U/f>",
+      "Ansi": "24",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, high stage",
+      "Iec61850": "PHHPTOC",
+      "Iec60617": "3I>>",
+      "Ansi": "51P-2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, instantaneous stage",
+      "Iec61850": "PHIPTOC",
+      "Iec60617": "3I>>>",
+      "Ansi": "50P/51P",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, low stage",
+      "Iec61850": "PHLPTOC",
+      "Iec60617": "3I>",
+      "Ansi": "51P-1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase overvoltage protection",
+      "Iec61850": "PHPTOV",
+      "Iec60617": "3U>",
+      "Ansi": "59",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase undervoltage protection",
+      "Iec61850": "PHPTUV",
+      "Iec60617": "3U<",
+      "Ansi": "27",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Voltage dependent overcurrent protection",
+      "Iec61850": "PHPVOC",
+      "Iec60617": "I(U)>",
+      "Ansi": "51V",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Positive-sequence overvoltage protection",
+      "Iec61850": "PSPTOV",
+      "Iec60617": "U1>",
+      "Ansi": "47O+",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Positive-sequence undervoltage protection",
+      "Iec61850": "PSPTUV",
+      "Iec60617": "U1<",
+      "Ansi": "47U+",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Residual overvoltage protection",
+      "Iec61850": "ROVPTOV",
+      "Iec60617": "U0>",
+      "Ansi": "59G",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase thermal overload protection, two time constants",
+      "Iec61850": "T2PTTR",
+      "Iec60617": "3Ith>T/G",
+      "Ansi": "49T/G",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Transformer differential protection for two-winding transformers",
+      "Iec61850": "TR2PTDF",
+      "Iec60617": "3dI>T",
+      "Ansi": "87T",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 66
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Tripping logic",
+      "Iec61850": "TRPPTRC",
+      "Iec60617": "I -> O",
+      "Ansi": "94",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase underexcitation protection",
+      "Iec61850": "UEXPDIS",
+      "Iec60617": "X<",
+      "Ansi": "40",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Three-phase underimpedance protection",
+      "Iec61850": "UZPDIS",
+      "Iec60617": "Z< GT",
+      "Ansi": "21GT",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Protection",
+      "Description": "Voltage vector shift protection",
+      "Iec61850": "VVSPPAM",
+      "Iec60617": "VS",
+      "Ansi": "78V",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Circuit breaker",
+      "Iec61850": "DAXCBR",
+      "Iec60617": "I <-> O CB",
+      "Ansi": "I <-> O CB",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Disconnector",
+      "Iec61850": "DAXSWI",
+      "Iec60617": "I <-> O DC",
+      "Ansi": "I <-> O DC",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Circuit breaker/disconnector control",
+      "Iec61850": "GNRLCSWI",
+      "Iec60617": "I <-> O CB/DC",
+      "Ansi": "I <-> O CB/DC",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Local/remote switch interface",
+      "Iec61850": "LOCREM",
+      "Iec60617": "R/L",
+      "Ansi": "R/L",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Bay control",
+      "Iec61850": "QCCBAY",
+      "Iec60617": "CBAY",
+      "Ansi": "CBAY",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Interlocking interface",
+      "Iec61850": "SCILO",
+      "Iec60617": "3",
+      "Ansi": "3",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Control",
+      "Description": "Synchrocheck",
+      "Iec61850": "SYNCRSYN",
+      "Iec60617": "SYNC",
+      "Ansi": "25",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Event counter",
+      "Iec61850": "CNTGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Double point indication",
+      "Iec61850": "DPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Generic measured value",
+      "Iec61850": "MVGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Pulse counter for energy metering",
+      "Iec61850": "PCGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Logic Rotating Switch for function selection and LHMI presentation",
+      "Iec61850": "SLGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Single point control (8 signals)",
+      "Iec61850": "SPC8GGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Single point indication",
+      "Iec61850": "SPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Generic process I/O",
+      "Description": "Selector mini switch",
+      "Iec61850": "VSGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Current circuit supervision",
+      "Iec61850": "CCRDIF",
+      "Iec60617": "MCS 3I",
+      "Ansi": "MCS 3I",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Energy monitoring",
+      "Iec61850": "EPDMMTR",
+      "Iec60617": "E",
+      "Ansi": "E",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Runtime counter for machines and devices",
+      "Iec61850": "MDSOPT",
+      "Iec60617": "OPTS",
+      "Ansi": "OPTM",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Measured value limit supervision",
+      "Iec61850": "MVEXP",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Fuse failure supervision",
+      "Iec61850": "SEQRFUF",
+      "Iec60617": "FUSEF",
+      "Ansi": "60",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Station battery supervision",
+      "Iec61850": "SPVNZBAT",
+      "Iec60617": "U<>",
+      "Ansi": "U<>",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Circuit breaker condition monitoring",
+      "Iec61850": "SSCBR",
+      "Iec60617": "CBCM",
+      "Ansi": "CBCM",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Supervision and monitoring",
+      "Description": "Trip-circuit supervision",
+      "Iec61850": "TCSSCBR",
+      "Iec60617": "TCS",
+      "Ansi": "TCM",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Analog channels 1-10 (samples)",
+      "Iec61850": "A1RADR",
+      "Iec60617": "ACH1",
+      "Ansi": "ACH1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Analog channels 11-20 (samples)",
+      "Iec61850": "A2RADR",
+      "Iec60617": "ACH2",
+      "Ansi": "ACH2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Analog channels 21-30 (calc. val.)",
+      "Iec61850": "A3RADR",
+      "Iec60617": "ACH3",
+      "Ansi": "ACH3",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Analog channels 31-40 (calc. val.)",
+      "Iec61850": "A4RADR",
+      "Iec60617": "ACH4",
+      "Ansi": "ACH4",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Binary channels 1-16",
+      "Iec61850": "B1RBDR",
+      "Iec60617": "BCH1",
+      "Ansi": "BCH1",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Binary channels 17 -32",
+      "Iec61850": "B2RBDR",
+      "Iec60617": "BCH2",
+      "Ansi": "BCH2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Binary channels 33 -48",
+      "Iec61850": "B3RBDR",
+      "Iec60617": "BCH3",
+      "Ansi": "BCH3",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Binary channels 49 -64",
+      "Iec61850": "B4RBDR",
+      "Iec60617": "BCH4",
+      "Ansi": "BCH4",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Three-phase current measurement",
+      "Iec61850": "CMMXU",
+      "Iec60617": "3I",
+      "Ansi": "3I",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Sequence current measurement",
+      "Iec61850": "CSMSQI",
+      "Iec60617": "I1, I2",
+      "Ansi": "I1, I2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Power monitoring with P, Q, S, power factor, frequency",
+      "Iec61850": "PWRMMXU",
+      "Iec60617": "PQf",
+      "Ansi": "PQf",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Residual current measurement",
+      "Iec61850": "RESCMMXU",
+      "Iec60617": "I0",
+      "Ansi": "I0",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Residual voltage measurement",
+      "Iec61850": "RESVMMXU",
+      "Iec60617": "U0",
+      "Ansi": "U0",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-earth)",
+      "Iec61850": "VPHMMXU",
+      "Iec60617": "3Upe",
+      "Ansi": "3Upe",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-phase)",
+      "Iec61850": "VPPMMXU",
+      "Iec60617": "3Upp",
+      "Ansi": "3Upp",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 67
+    },
+    {
+      "Device": "REG630",
+      "Category": "Measurement",
+      "Description": "Sequence voltage measurement",
+      "Iec61850": "VSMSQI",
+      "Iec60617": "U1, U2",
+      "Ansi": "V1, V2",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Binary receive",
+      "Iec61850": "GOOSEBINRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Double point receive",
+      "Iec61850": "GOOSEDPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Interlock receive",
+      "Iec61850": "GOOSEINTLKRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Integer receive",
+      "Iec61850": "GOOSEINTRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Measured value receive",
+      "Iec61850": "GOOSEMVRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REG630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Single point receive",
+      "Iec61850": "GOOSESPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REG630_pg_757583_ENc.pdf",
+      "Page": 68
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Circuit breaker failure protection",
+      "Iec61850": "CCBRBRF",
+      "Iec60617": "3I>/I0>BF",
+      "Ansi": "51BF/51NBF",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Frequency gradient protection",
+      "Iec61850": "DAPFRC",
+      "Iec60617": "df/dt>",
+      "Ansi": "81R",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Overfrequency protection",
+      "Iec61850": "DAPTOF",
+      "Iec60617": "f>",
+      "Ansi": "81O",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Underfrequency protection",
+      "Iec61850": "DAPTUF",
+      "Iec60617": "f<",
+      "Ansi": "81U",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, high stage",
+      "Iec61850": "DEFHPDEF",
+      "Iec60617": "I0>> ->",
+      "Ansi": "67N-2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, low stage",
+      "Iec61850": "DEFLPDEF",
+      "Iec60617": "I0> ->",
+      "Ansi": "67N-1",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Reverse power/directional overpower protection",
+      "Iec61850": "DOPPDPR",
+      "Iec60617": "P>",
+      "Ansi": "32R/32O",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, high stage",
+      "Iec61850": "EFHPTOC",
+      "Iec60617": "I0>>",
+      "Ansi": "51N-2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, instantaneous stage",
+      "Iec61850": "EFIPTOC",
+      "Iec60617": "I0>>>",
+      "Ansi": "50N/51N",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, low stage",
+      "Iec61850": "EFLPTOC",
+      "Iec60617": "I0>",
+      "Ansi": "51N-1",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Emergency start",
+      "Iec61850": "ESMGAPC",
+      "Iec60617": "ESTART",
+      "Ansi": "ESTART",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Motor load jam protection",
+      "Iec61850": "JAMPTOC",
+      "Iec60617": "Ist>",
+      "Ansi": "51LR",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Loss of load supervision High-impedance or flux-balance based differential",
+      "Iec61850": "LOFLPTUC",
+      "Iec60617": "3I<",
+      "Ansi": "37",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Multipurpose analog protection",
+      "Iec61850": "MAPGAPC",
+      "Iec60617": "MAP",
+      "Ansi": "MAP",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "protection for machines",
+      "Iec61850": "MHZPDIF",
+      "Iec60617": "3dIHi>G/M",
+      "Ansi": "87GH/87MH",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overcurrent protection for machines",
+      "Iec61850": "MNSPTOC",
+      "Iec60617": "I2>G/M",
+      "Ansi": "46G/46M",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Stabilized differential protection for machines",
+      "Iec61850": "MPDIF",
+      "Iec60617": "3dI>G/M",
+      "Ansi": "87G/87M",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase thermal overload protection for motors",
+      "Iec61850": "MPTTR",
+      "Iec60617": "3Ith>M",
+      "Ansi": "49M",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Rotor earth-fault protection",
+      "Iec61850": "MREFPTOC",
+      "Iec60617": "Io>R",
+      "Ansi": "64R",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overvoltage protection",
+      "Iec61850": "NSPTOV",
+      "Iec60617": "U2>",
+      "Ansi": "47O-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, instantaneous stage",
+      "Iec61850": "PHIPTOC",
+      "Iec60617": "3I>>>",
+      "Ansi": "50P/51P",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, low stage",
+      "Iec61850": "PHLPTOC",
+      "Iec60617": "3I>",
+      "Ansi": "51P-1",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase overvoltage protection",
+      "Iec61850": "PHPTOV",
+      "Iec60617": "3U>",
+      "Ansi": "59",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase undervoltage protection",
+      "Iec61850": "PHPTUV",
+      "Iec60617": "3U<",
+      "Ansi": "27",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Phase-reversal protection",
+      "Iec61850": "PREVPTOC",
+      "Iec60617": "I2>>",
+      "Ansi": "46R",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Positive-sequence overvoltage protection",
+      "Iec61850": "PSPTOV",
+      "Iec60617": "U1>",
+      "Ansi": "47O+",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Positive-sequence undervoltage protection",
+      "Iec61850": "PSPTUV",
+      "Iec60617": "U1<",
+      "Ansi": "47U+",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Residual overvoltage protection",
+      "Iec61850": "ROVPTOV",
+      "Iec60617": "U0>",
+      "Ansi": "59G",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Motor startup supervision",
+      "Iec61850": "STTPMSU",
+      "Iec60617": "Is2t n<",
+      "Ansi": "48,66,14,51LR",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Tripping logic",
+      "Iec61850": "TRPPTRC",
+      "Iec60617": "I -> O",
+      "Ansi": "94",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Protection",
+      "Description": "Three-phase underexcitation protection",
+      "Iec61850": "UEXPDIS",
+      "Iec60617": "X<",
+      "Ansi": "40",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Circuit breaker",
+      "Iec61850": "DAXCBR",
+      "Iec60617": "I <-> O CB",
+      "Ansi": "I <-> O CB",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Disconnector",
+      "Iec61850": "DAXSWI",
+      "Iec60617": "I <-> O DC",
+      "Ansi": "I <-> O DC",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Circuit breaker/disconnector control",
+      "Iec61850": "GNRLCSWI",
+      "Iec60617": "I <-> O CB/DC",
+      "Ansi": "I <-> O CB/DC",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Local/remote switch interface",
+      "Iec61850": "LOCREM",
+      "Iec60617": "R/L",
+      "Ansi": "R/L",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Bay control",
+      "Iec61850": "QCCBAY",
+      "Iec60617": "CBAY",
+      "Ansi": "CBAY",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 55
+    },
+    {
+      "Device": "REM630",
+      "Category": "Control",
+      "Description": "Interlocking interface",
+      "Iec61850": "SCILO",
+      "Iec60617": "3",
+      "Ansi": "3",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Event counter",
+      "Iec61850": "CNTGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Double point indication",
+      "Iec61850": "DPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Generic measured value",
+      "Iec61850": "MVGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Pulse counter for energy metering",
+      "Iec61850": "PCGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Logic Rotating Switch for function selection and LHMI presentation",
+      "Iec61850": "SLGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Single point control (8 signals)",
+      "Iec61850": "SPC8GGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Single point indication",
+      "Iec61850": "SPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Generic process I/O",
+      "Description": "Selector mini switch",
+      "Iec61850": "VSGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Current circuit supervision",
+      "Iec61850": "CCRDIF",
+      "Iec60617": "MCS 3I",
+      "Ansi": "MCS 3I",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Energy monitoring",
+      "Iec61850": "EPDMMTR",
+      "Iec60617": "E",
+      "Ansi": "E",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Runtime counter for machines and devices",
+      "Iec61850": "MDSOPT",
+      "Iec60617": "OPTS",
+      "Ansi": "OPTM",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Measured value limit supervision",
+      "Iec61850": "MVEXP",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Fuse failure supervision",
+      "Iec61850": "SEQRFUF",
+      "Iec60617": "FUSEF",
+      "Ansi": "60",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Station battery supervision",
+      "Iec61850": "SPVNZBAT",
+      "Iec60617": "U<>",
+      "Ansi": "U<>",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Circuit breaker condition monitoring",
+      "Iec61850": "SSCBR",
+      "Iec60617": "CBCM",
+      "Ansi": "CBCM",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Supervision and monitoring",
+      "Description": "Trip-circuit supervision",
+      "Iec61850": "TCSSCBR",
+      "Iec60617": "TCS",
+      "Ansi": "TCM",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Analog channels 1-10 (samples)",
+      "Iec61850": "A1RADR",
+      "Iec60617": "ACH1",
+      "Ansi": "ACH1",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Analog channels 11-20 (samples)",
+      "Iec61850": "A2RADR",
+      "Iec60617": "ACH2",
+      "Ansi": "ACH2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Analog channels 21-30 (calc. val.)",
+      "Iec61850": "A3RADR",
+      "Iec60617": "ACH3",
+      "Ansi": "ACH3",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Analog channels 31-40 (calc. val.)",
+      "Iec61850": "A4RADR",
+      "Iec60617": "ACH4",
+      "Ansi": "ACH4",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Binary channels 1-16",
+      "Iec61850": "B1RBDR",
+      "Iec60617": "BCH1",
+      "Ansi": "BCH1",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Binary channels 17 -32",
+      "Iec61850": "B2RBDR",
+      "Iec60617": "BCH2",
+      "Ansi": "BCH2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Binary channels 33 -48",
+      "Iec61850": "B3RBDR",
+      "Iec60617": "BCH3",
+      "Ansi": "BCH3",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Binary channels 49 -64",
+      "Iec61850": "B4RBDR",
+      "Iec60617": "BCH4",
+      "Ansi": "BCH4",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Three-phase current measurement",
+      "Iec61850": "CMMXU",
+      "Iec60617": "3I",
+      "Ansi": "3I",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Sequence current measurement",
+      "Iec61850": "CSMSQI",
+      "Iec60617": "I1, I2",
+      "Ansi": "I1, I2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Power monitoring with P, Q, S, power factor, frequency",
+      "Iec61850": "PWRMMXU",
+      "Iec60617": "PQf",
+      "Ansi": "PQf",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Residual current measurement",
+      "Iec61850": "RESCMMXU",
+      "Iec60617": "I0",
+      "Ansi": "I0",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Residual voltage measurement",
+      "Iec61850": "RESVMMXU",
+      "Iec60617": "U0",
+      "Ansi": "U0",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-earth)",
+      "Iec61850": "VPHMMXU",
+      "Iec60617": "3Upe",
+      "Ansi": "3Upe",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-phase)",
+      "Iec61850": "VPPMMXU",
+      "Iec60617": "3Upp",
+      "Ansi": "3Upp",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Measurement",
+      "Description": "Sequence voltage measurement",
+      "Iec61850": "VSMSQI",
+      "Iec60617": "U1, U2",
+      "Ansi": "V1, V2",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 56
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Binary receive",
+      "Iec61850": "GOOSEBINRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Double point receive",
+      "Iec61850": "GOOSEDPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Interlock receive",
+      "Iec61850": "GOOSEINTLKRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Integer receive",
+      "Iec61850": "GOOSEINTRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Measured value receive",
+      "Iec61850": "GOOSEMVRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "REM630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Single point receive",
+      "Iec61850": "GOOSESPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "REM630_pg_756977_ENh.pdf",
+      "Page": 57
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Circuit breaker failure protection",
+      "Iec61850": "CCBRBRF",
+      "Iec60617": "3I>/I0>BF",
+      "Ansi": "51BF/51NBF",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Frequency gradient protection",
+      "Iec61850": "DAPFRC",
+      "Iec60617": "df/dt>",
+      "Ansi": "81R",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Overfrequency protection",
+      "Iec61850": "DAPTOF",
+      "Iec60617": "f>",
+      "Ansi": "81O",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Underfrequency protection",
+      "Iec61850": "DAPTUF",
+      "Iec60617": "f<",
+      "Ansi": "81U",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, high stage",
+      "Iec61850": "DEFHPDEF",
+      "Iec60617": "I0>> ->",
+      "Ansi": "67N-2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Directional earth-fault protection, low stage",
+      "Iec61850": "DEFLPDEF",
+      "Iec60617": "I0> ->",
+      "Ansi": "67N-1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, high stage",
+      "Iec61850": "DPHHPDOC",
+      "Iec60617": "3I>> ->",
+      "Ansi": "67-2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase directional overcurrent protection, low stage",
+      "Iec61850": "DPHLPDOC",
+      "Iec60617": "3I> ->",
+      "Ansi": "67-1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, high stage",
+      "Iec61850": "EFHPTOC",
+      "Iec60617": "I0>>",
+      "Ansi": "51N-2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Non-directional earth-fault protection, low stage",
+      "Iec61850": "EFLPTOC",
+      "Iec60617": "I0>",
+      "Ansi": "51N-1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "High-impedance based restricted earth-fault protection",
+      "Iec61850": "HREFPDIF",
+      "Iec60617": "dI0Hi>",
+      "Ansi": "87NH",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase current inrush detection Transformer differential protection for two-winding",
+      "Iec61850": "INRPHAR",
+      "Iec60617": "3I2f>",
+      "Ansi": "68",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Stabilised restricted earth-fault protection",
+      "Iec61850": "LREFPNDF",
+      "Iec60617": "dI0Lo>",
+      "Ansi": "87NL",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Multipurpose analog protection",
+      "Iec61850": "MAPGAPC",
+      "Iec60617": "MAP",
+      "Ansi": "MAP",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overcurrent protection Three-phase thermal overload protection, two time",
+      "Iec61850": "NSPTOC",
+      "Iec60617": "I2>",
+      "Ansi": "46",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Negative-sequence overvoltage protection",
+      "Iec61850": "NSPTOV",
+      "Iec60617": "U2>",
+      "Ansi": "47O-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Overexcitation protection",
+      "Iec61850": "OEPVPH",
+      "Iec60617": "U/f>",
+      "Ansi": "24",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, high stage",
+      "Iec61850": "PHHPTOC",
+      "Iec60617": "3I>>",
+      "Ansi": "51P-2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, instantaneous stage",
+      "Iec61850": "PHIPTOC",
+      "Iec60617": "3I>>>",
+      "Ansi": "50P/51P",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase non-directional overcurrent protection, low stage",
+      "Iec61850": "PHLPTOC",
+      "Iec60617": "3I>",
+      "Ansi": "51P-1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase overvoltage protection",
+      "Iec61850": "PHPTOV",
+      "Iec60617": "3U>",
+      "Ansi": "59",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase undervoltage protection",
+      "Iec61850": "PHPTUV",
+      "Iec60617": "3U<",
+      "Ansi": "27",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Positive-sequence overvoltage protection",
+      "Iec61850": "PSPTOV",
+      "Iec60617": "U1>",
+      "Ansi": "47O+",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Positive-sequence undervoltage protection",
+      "Iec61850": "PSPTUV",
+      "Iec60617": "U1<",
+      "Ansi": "47U+",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Residual overvoltage protection",
+      "Iec61850": "ROVPTOV",
+      "Iec60617": "U0>",
+      "Ansi": "59G",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "constants",
+      "Iec61850": "T2PTTR",
+      "Iec60617": "3Ith>T/G",
+      "Ansi": "49T/G",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "transformers",
+      "Iec61850": "TR2PTDF",
+      "Iec60617": "3dI>T",
+      "Ansi": "87T",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Tripping logic",
+      "Iec61850": "TRPPTRC",
+      "Iec60617": "I -> O",
+      "Ansi": "94",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Protection",
+      "Description": "Three-phase underimpedance protection",
+      "Iec61850": "UZPDIS",
+      "Iec60617": "Z< GT",
+      "Ansi": "21GT",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Circuit breaker",
+      "Iec61850": "DAXCBR",
+      "Iec60617": "I <-> O CB",
+      "Ansi": "I <-> O CB",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Disconnector",
+      "Iec61850": "DAXSWI",
+      "Iec60617": "I <-> O DC",
+      "Ansi": "I <-> O DC",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Circuit breaker/disconnector control",
+      "Iec61850": "GNRLCSWI",
+      "Iec60617": "I <-> O CB/DC",
+      "Ansi": "I <-> O CB/DC",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Local/remote switch interface",
+      "Iec61850": "LOCREM",
+      "Iec60617": "R/L",
+      "Ansi": "R/L",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Tap changer control with voltage regulator",
+      "Iec61850": "OLATCC",
+      "Iec60617": "COLTC",
+      "Ansi": "90V",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Bay control",
+      "Iec61850": "QCCBAY",
+      "Iec60617": "CBAY",
+      "Ansi": "CBAY",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Interlocking interface",
+      "Iec61850": "SCILO",
+      "Iec60617": "3",
+      "Ansi": "3",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 58
+    },
+    {
+      "Device": "RET630",
+      "Category": "Control",
+      "Description": "Synchrocheck",
+      "Iec61850": "SYNCRSYN",
+      "Iec60617": "SYNC",
+      "Ansi": "25",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Event counter",
+      "Iec61850": "CNTGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Double point indication",
+      "Iec61850": "DPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Generic measured value",
+      "Iec61850": "MVGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Pulse counter for energy metering",
+      "Iec61850": "PCGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Logic Rotating Switch for function selection and LHMI presentation",
+      "Iec61850": "SLGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Single point control (8 signals)",
+      "Iec61850": "SPC8GGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Single point indication",
+      "Iec61850": "SPGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Generic process I/O",
+      "Description": "Selector mini switch",
+      "Iec61850": "VSGGIO",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Current circuit supervision",
+      "Iec61850": "CCRDIF",
+      "Iec60617": "MCS 3I",
+      "Ansi": "MCS 3I",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Energy monitoring",
+      "Iec61850": "EPDMMTR",
+      "Iec60617": "E",
+      "Ansi": "E",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "transformers",
+      "Iec61850": "HSARSPTR",
+      "Iec60617": "3Ihp>T",
+      "Ansi": "26/49HS",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Runtime counter for machines and devices",
+      "Iec61850": "MDSOPT",
+      "Iec60617": "OPTS",
+      "Ansi": "OPTM",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Measured value limit supervision Hot-spot and insulation ageing rate monitoring for",
+      "Iec61850": "MVEXP",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Fuse failure supervision",
+      "Iec61850": "SEQRFUF",
+      "Iec60617": "FUSEF",
+      "Ansi": "60",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Station battery supervision",
+      "Iec61850": "SPVNZBAT",
+      "Iec60617": "U<>",
+      "Ansi": "U<>",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Circuit breaker condition monitoring",
+      "Iec61850": "SSCBR",
+      "Iec60617": "CBCM",
+      "Ansi": "CBCM",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Trip-circuit supervision",
+      "Iec61850": "TCSSCBR",
+      "Iec60617": "TCS",
+      "Ansi": "TCM",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Supervision and monitoring",
+      "Description": "Tap position indication",
+      "Iec61850": "TPOSSLTC",
+      "Iec60617": "TPOSM",
+      "Ansi": "84M",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Analog channels 1-10 (samples)",
+      "Iec61850": "A1RADR",
+      "Iec60617": "ACH1",
+      "Ansi": "ACH1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Analog channels 11-20 (samples)",
+      "Iec61850": "A2RADR",
+      "Iec60617": "ACH2",
+      "Ansi": "ACH2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Analog channels 21-30 (calc. val.)",
+      "Iec61850": "A3RADR",
+      "Iec60617": "ACH3",
+      "Ansi": "ACH3",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Analog channels 31-40 (calc. val.)",
+      "Iec61850": "A4RADR",
+      "Iec60617": "ACH4",
+      "Ansi": "ACH4",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Binary channels 1-16",
+      "Iec61850": "B1RBDR",
+      "Iec60617": "BCH1",
+      "Ansi": "BCH1",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Binary channels 17 -32",
+      "Iec61850": "B2RBDR",
+      "Iec60617": "BCH2",
+      "Ansi": "BCH2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Binary channels 33 -48",
+      "Iec61850": "B3RBDR",
+      "Iec60617": "BCH3",
+      "Ansi": "BCH3",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Binary channels 49 -64",
+      "Iec61850": "B4RBDR",
+      "Iec60617": "BCH4",
+      "Ansi": "BCH4",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Three-phase current measurement",
+      "Iec61850": "CMMXU",
+      "Iec60617": "3I",
+      "Ansi": "3I",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Sequence current measurement",
+      "Iec61850": "CSMSQI",
+      "Iec60617": "I1, I2",
+      "Ansi": "I1, I2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Power monitoring with P, Q, S, power factor, frequency",
+      "Iec61850": "PWRMMXU",
+      "Iec60617": "PQf",
+      "Ansi": "PQf",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Residual current measurement",
+      "Iec61850": "RESCMMXU",
+      "Iec60617": "I0",
+      "Ansi": "I0",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Residual voltage measurement",
+      "Iec61850": "RESVMMXU",
+      "Iec60617": "U0",
+      "Ansi": "U0",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-earth)",
+      "Iec61850": "VPHMMXU",
+      "Iec60617": "3Upe",
+      "Ansi": "3Upe",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Three-phase voltage measurement (phase-to-phase)",
+      "Iec61850": "VPPMMXU",
+      "Iec60617": "3Upp",
+      "Ansi": "3Upp",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Measurement",
+      "Description": "Sequence voltage measurement",
+      "Iec61850": "VSMSQI",
+      "Iec60617": "U1, U2",
+      "Ansi": "V1, V2",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 59
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Binary receive",
+      "Iec61850": "GOOSEBINRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Double point receive",
+      "Iec61850": "GOOSEDPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Interlock receive",
+      "Iec61850": "GOOSEINTLKRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Integer receive",
+      "Iec61850": "GOOSEINTRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Measured value receive",
+      "Iec61850": "GOOSEMVRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    },
+    {
+      "Device": "RET630",
+      "Category": "Station communication (GOOSE)",
+      "Description": "Single point receive",
+      "Iec61850": "GOOSESPRCV",
+      "Iec60617": "-",
+      "Ansi": "-",
+      "Source": "RET630_pg_756978_ENh.pdf",
+      "Page": 60
+    }
+  ]
+}

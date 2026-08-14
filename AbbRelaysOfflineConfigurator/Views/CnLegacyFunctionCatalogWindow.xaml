@@ -7,7 +7,7 @@
         Height="720"
         MinWidth="960"
         MinHeight="540"
-        Icon="/Assets/abb-relays.ico"
+        Icon="pack://application:,,,/AbbRelaysOfflineConfigurator;component/Assets/abb-relays.ico"
         WindowStartupLocation="CenterOwner"
         FontFamily="Segoe UI, Microsoft YaHei UI"
         Background="#F3F6FA">
@@ -57,13 +57,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock Text="615/620 保护功能清单"
                                FontSize="18"
                                FontWeight="SemiBold"
                                Foreground="#101828" />
-                    <TextBlock Text="显示 615 CN 5.0FP1 与 620 CN 2.0FP1 产品指南中的保护功能、ABB Code、ANSI Code 和适用标准配置。"
+                    <TextBlock Text="显示 615 CN 5.1 与 620 CN 2.1 产品指南中的保护功能、ABB Code、ANSI Code 和适用标准配置。"
                                FontSize="12"
                                Foreground="#64748B"
                                Margin="0,3,0,0"
@@ -86,6 +87,11 @@
                           VerticalAlignment="Center"
                           SelectionChanged="DeviceComboBox_OnSelectionChanged" />
                 <Button Grid.Column="3"
+                        Content="Export Excel"
+                        Style="{StaticResource DialogButtonStyle}"
+                        Margin="8,0,0,0"
+                        Click="ExportExcelButton_OnClick" />
+                <Button Grid.Column="4"
                         Content="关闭"
                         Style="{StaticResource DialogButtonStyle}"
                         Margin="8,0,0,0"

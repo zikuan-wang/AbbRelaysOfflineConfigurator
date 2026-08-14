@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using AbbRelaysOfflineConfigurator.Services;
+using Microsoft.Win32;
 
 namespace AbbRelaysOfflineConfigurator.Views;
 
@@ -98,6 +99,57 @@ public partial class CnLegacyFunctionCatalogWindow : Window
     }
 
     private void SearchTextBox_OnTextChanged(object sender, TextChangedEventArgs e) => RefreshRows();
+
+    private void ExportExcelButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var selectedDevice = DeviceComboBox.SelectedItem as CnLegacyDeviceFilterItem;
+        var deviceText = string.IsNullOrWhiteSpace(selectedDevice?.DeviceId) ? "All" : selectedDevice.DeviceId;
+        var dialog = new SaveFileDialog
+        {
+            Title = "Export 615/620 function catalog",
+            FileName = $"615_620_function_catalog_{deviceText}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx",
+            Filter = "Excel workbook (*.xlsx)|*.xlsx"
+        };
+
+        if (dialog.ShowDialog(this) != true)
+        {
+            return;
+        }
+
+        try
+        {
+            CatalogExcelExportService.Export(
+                dialog.FileName,
+                "615-620 Functions",
+                new[]
+                {
+                    "Product",
+                    "Standard configuration",
+                    "Category",
+                    "ABB Code",
+                    "ANSI Code",
+                    "Chinese name",
+                    "English name",
+                    "Source page"
+                },
+                _rows.Select(row => new[]
+                {
+                    row.DeviceName,
+                    row.Configurations,
+                    row.Category,
+                    row.AbbCode,
+                    row.AnsiCode,
+                    row.ChineseName,
+                    row.EnglishName,
+                    row.SourcePage.ToString()
+                }),
+                new[] { 14d, 24d, 14d, 16d, 16d, 34d, 34d, 10d });
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, $"Export failed: {ex.Message}", "Export Excel", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 
     private void CloseButton_OnClick(object sender, RoutedEventArgs e) => Close();
 }

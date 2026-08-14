@@ -12,7 +12,7 @@ public partial class DeviceDescriptionWindow : Window
 
     private void CopyButton_OnClick(object sender, RoutedEventArgs e)
     {
-        Clipboard.SetText(DescriptionTextBox.Text);
+        Services.ClipboardService.TrySetText(DescriptionTextBox.Text, Title);
     }
 
     private void CloseButton_OnClick(object sender, RoutedEventArgs e)

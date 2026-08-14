@@ -58,7 +58,7 @@ public partial class Rex615AccessoryCatalogWindow : Window
     {
         if (sender is Button { Tag: string product } && !string.IsNullOrWhiteSpace(product))
         {
-            Clipboard.SetText(product);
+            ClipboardService.TrySetText(product, "REX615");
         }
     }
 

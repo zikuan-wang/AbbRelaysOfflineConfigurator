@@ -7,8 +7,11 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Ssc600RuleLoader
 {
     private const string RulesFileName = "SSC600_1.5.xml";
+    private static readonly Lazy<Ssc600RuleSet> SharedRules = new(LoadCore);
 
-    public Ssc600RuleSet Load()
+    public Ssc600RuleSet Load() => SharedRules.Value;
+
+    private static Ssc600RuleSet LoadCore()
     {
         var path = ResolveRulesPath();
         var document = XDocument.Load(path);

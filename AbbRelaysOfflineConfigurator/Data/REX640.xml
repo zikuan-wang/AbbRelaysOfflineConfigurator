@@ -5,21 +5,21 @@
 			<Option Id="REX640" Version="*" Description="REX640Product_REX640"/>
 		</Digit>
 		<Digit Location="7" Group="Housing" IsMandatory="True">
-			<Option Id="A" Version="*" Description="Case_CAS1" Validity="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="B" Version="*" Description="Case_CAS2"  Validity="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="A" Version="*" Description="Case_CAS1" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="B" Version="*" Description="Case_CAS2" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Digit>
 		<Digit Location="8" Group="ProductVersion" IsMandatory="True">
-			<Option Id="2" Version="*" Description="ProductVersion_2" Validity="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="2" Version="*" Description="ProductVersion_2" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Digit>
 		<Digit Location="9" Group="InterfaceLevel" IsMandatory="True">
 			<Option Id="0" Version="*" Description="InterfaceLevel_0"/>
 		</Digit>
 		<Digit Location="10" Group="CustomerSpecific" IsMandatory="False">
-			<Option Id="G" Version="*" Description="CustomerSpecific_G" Validity="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="C" Version="*" Description="CustomerSpecific_C" Validity="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="G" Version="*" Description="CustomerSpecific_G" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="C" Version="*" Description="CustomerSpecific_C" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Digit>
 		<Digit Location="11" Group="ConformalCoating" IsMandatory="True">
-			<Option Id="C" Version="*" Description="ConformalCoating_C" Validity="ConnectivityLevel=PCL5,PCL6" />
+			<Option Id="C" Version="*" Description="ConformalCoating_C" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Digit>
 	</MainCodes>
 	<OptionCodes>
@@ -37,43 +37,43 @@
 		<Category Name="Slot_B" Slot="B" IsMandatory="True">
 			<Option Id="BIO1" Version="*" Description="Slot_B_BIO1" ShortDescription="Slot_B_BIO1_Short" Selection_Priority="1"/>
 			<Option Id="BIO2" Version="*" Description="Slot_B_BIO2" ShortDescription="Slot_B_BIO2_Short" Selection_Priority="2"/>
-			<Option Id="BIM1" Version="*" Description="Slot_B_BIM1" ShortDescription="Slot_B_BIM1_Short" Selection_Priority="3" Visibility="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="BIM1" Version="*" Description="Slot_B_BIM1" ShortDescription="Slot_B_BIM1_Short" Selection_Priority="3" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Category>
 		<Category Name="Slot_C" Slot="C" IsMandatory="True">
 			<Option Id="BIO1" Version="*" Description="Slot_C_BIO1" ShortDescription="Slot_C_BIO1_Short" Selection_Priority="7" Slot_Priority="1" Visibility="Housing=A,B"/>
 			<Option Id="BIO2" Version="*" Description="Slot_C_BIO2" ShortDescription="Slot_C_BIO2_Short" Selection_Priority="8" Slot_Priority="1" Visibility="Housing=A,B"/>
-			<Option Id="BIM1" Version="*" Description="Slot_C_BIM1" ShortDescription="Slot_C_BIM1_Short" Selection_Priority="9" Slot_Priority="1" Visibility="Housing=A,B&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="BIM1" Version="*" Description="Slot_C_BIM1" ShortDescription="Slot_C_BIM1_Short" Selection_Priority="9" Slot_Priority="1" Visibility="Housing=A,B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="RTD1" Version="*" Description="Slot_C_RTD1" ShortDescription="Slot_C_RTD1_Short" Selection_Priority="5" Slot_Priority="1" Visibility="Housing=A,B"/>
-			<Option Id="RTD2" Version="*" Description="Slot_C_RTD2" ShortDescription="Slot_C_RTD2_Short" Selection_Priority="6" Slot_Priority="1" Visibility="Housing=A,B&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="RTD2" Version="*" Description="Slot_C_RTD2" ShortDescription="Slot_C_RTD2_Short" Selection_Priority="6" Slot_Priority="1" Visibility="Housing=A,B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="None" Version="*" Description="Slot_C_None" ShortDescription="Slot_C_None_Short" Selection_Priority="10" Slot_Priority="1"/>
 		</Category>
 		<Category Name="Slot_D" Slot="D" IsMandatory="True" InvalidSlot="Housing=A">
 			<Option Id="BIO1" Version="*" Description="Slot_D_BIO1" ShortDescription="Slot_D_BIO1_Short" Selection_Priority="7" Slot_Priority="2" Visibility="Housing=B"/>
 			<Option Id="BIO2" Version="*" Description="Slot_D_BIO2" ShortDescription="Slot_D_BIO2_Short" Selection_Priority="8" Slot_Priority="2" Visibility="Housing=B"/>
-			<Option Id="BIM1" Version="*" Description="Slot_D_BIM1" ShortDescription="Slot_D_BIM1_Short" Selection_Priority="9" Slot_Priority="2" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="BIM1" Version="*" Description="Slot_D_BIM1" ShortDescription="Slot_D_BIM1_Short" Selection_Priority="9" Slot_Priority="2" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="RTD1" Version="*" Description="Slot_D_RTD1" ShortDescription="Slot_D_RTD1_Short" Selection_Priority="5" Slot_Priority="2" Visibility="Housing=B"/>
-			<Option Id="RTD2" Version="*" Description="Slot_D_RTD2" ShortDescription="Slot_D_RTD2_Short" Selection_Priority="6" Slot_Priority="2" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="RTD2" Version="*" Description="Slot_D_RTD2" ShortDescription="Slot_D_RTD2_Short" Selection_Priority="6" Slot_Priority="2" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="None" Version="*" Description="Slot_D_None" ShortDescription="Slot_D_None_Short" Selection_Priority="10" Slot_Priority="2"/>
 		</Category>
 		<Category Name="Slot_E" Slot="E" IsMandatory="True" InvalidSlot="Housing=A">
 			<Option Id="AIM1" Version="*" Description="Slot_E_AIM1" ShortDescription="Slot_E_AIM1_Short" Selection_Priority="1" Slot_Priority="1" Visibility="Housing=B"/>
 			<Option Id="AIM2" Version="*" Description="Slot_E_AIM2" ShortDescription="Slot_E_AIM2_Short" Selection_Priority="2" Slot_Priority="1" Visibility="Housing=B"/>
-			<Option Id="AIM3" Version="*" Description="Slot_E_AIM3" ShortDescription="Slot_E_AIM3_Short" Selection_Priority="3" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="AIM3" Version="*" Description="Slot_E_AIM3" ShortDescription="Slot_E_AIM3_Short" Selection_Priority="3" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="SIM1" Version="*" Description="Slot_E_SIM1" ShortDescription="Slot_E_SIM1_Short" Selection_Priority="4" Slot_Priority="1" Visibility="Housing=B"/>
-			<Option Id="SIM2" Version="*" Description="Slot_E_SIM2" ShortDescription="Slot_E_SIM2_Short" Selection_Priority="5" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="SIM3" Version="*" Description="Slot_E_SIM3" ShortDescription="Slot_E_SIM3_Short" Selection_Priority="6" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="BIO3" Version="*" Description="Slot_E_BIO3" ShortDescription="Slot_E_BIO3_Short" Selection_Priority="7" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;Slot_D=BIO1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="BIO4" Version="*" Description="Slot_E_BIO4" ShortDescription="Slot_E_BIO4_Short" Selection_Priority="8" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,BIO2,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;Slot_D=BIO1,BIO2,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="BIM3" Version="*" Description="Slot_E_BIM3" ShortDescription="Slot_E_BIM3_Short" Selection_Priority="9" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,BIO2,BIM1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6" Validity="Housing=B&amp;Slot_D=BIO1,BIO2,BIM1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="SIM2" Version="*" Description="Slot_E_SIM2" ShortDescription="Slot_E_SIM2_Short" Selection_Priority="5" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="SIM3" Version="*" Description="Slot_E_SIM3" ShortDescription="Slot_E_SIM3_Short" Selection_Priority="6" Slot_Priority="1" Visibility="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="BIO3" Version="*" Description="Slot_E_BIO3" ShortDescription="Slot_E_BIO3_Short" Selection_Priority="7" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;Slot_D=BIO1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="BIO4" Version="*" Description="Slot_E_BIO4" ShortDescription="Slot_E_BIO4_Short" Selection_Priority="8" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,BIO2,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;Slot_D=BIO1,BIO2,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="BIM3" Version="*" Description="Slot_E_BIM3" ShortDescription="Slot_E_BIM3_Short" Selection_Priority="9" Slot_Priority="3" Visibility="Housing=B&amp;Slot_D=BIO1,BIO2,BIM1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7" Validity="Housing=B&amp;Slot_D=BIO1,BIO2,BIM1,RTD1,RTD2&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="None" Version="*" Description="Slot_E_None" ShortDescription="Slot_E_None_Short" Selection_Priority="10" Slot_Priority="3"/>
 		</Category>
 		<Category Name="Slot_F" Slot="F" IsMandatory="True">
 			<Option Id="AIM1" Version="*" Description="Slot_F_AIM1" ShortDescription="Slot_F_AIM1_Short" Selection_Priority="1"/>
-			<Option Id="AIM2" Version="*" Description="Slot_F_AIM2" ShortDescription="Slot_F_AIM2_Short" Selection_Priority="2"/>			
-			<Option Id="AIM3" Version="*" Description="Slot_F_AIM3" ShortDescription="Slot_F_AIM3_Short" Selection_Priority="3" Visibility="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="AIM2" Version="*" Description="Slot_F_AIM2" ShortDescription="Slot_F_AIM2_Short" Selection_Priority="2"/>
+			<Option Id="AIM3" Version="*" Description="Slot_F_AIM3" ShortDescription="Slot_F_AIM3_Short" Selection_Priority="3" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="SIM1" Version="*" Description="Slot_F_SIM1" ShortDescription="Slot_F_SIM1_Short" Selection_Priority="4"/>
-			<Option Id="SIM2" Version="*" Description="Slot_F_SIM2" ShortDescription="Slot_F_SIM2_Short" Selection_Priority="5" Visibility="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="SIM3" Version="*" Description="Slot_F_SIM3" ShortDescription="Slot_F_SIM3_Short" Selection_Priority="6" Visibility="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="SIM2" Version="*" Description="Slot_F_SIM2" ShortDescription="Slot_F_SIM2_Short" Selection_Priority="5" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="SIM3" Version="*" Description="Slot_F_SIM3" ShortDescription="Slot_F_SIM3_Short" Selection_Priority="6" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Category>
 		<Category Name="Slot_G" Slot="G" IsMandatory="True">
 			<Option Id="PSM1" Version="*" Description="Slot_G_PSM1" ShortDescription="Slot_G_PSM1_Short"/>
@@ -94,24 +94,24 @@
 			<Option Id="APP11" Version="*" Description="Application_APP11" ShortDescription="Application_APP11_Short"/>
 			<Option Id="APP12" Version="*" Description="Application_APP12" ShortDescription="Application_APP12_Short"/>
 			<Option Id="APP13" Version="*" Description="Application_APP13" ShortDescription="Application_APP13_Short"/>
-			<Option Id="APP14" Version="PCL5,PCL6" Description="Application_APP14" ShortDescription="Application_APP14_Short" Visibility="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="APP51" Version="*" Description="Application_APP51" ShortDescription="Application_APP51_Short" Validity="Application=!APP52,!APP53" Visibility="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="APP52" Version="*" Description="Application_APP52" ShortDescription="Application_APP52_Short" Validity="Application=!APP51,!APP53" Visibility="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="APP53" Version="*" Description="Application_APP53" ShortDescription="Application_APP53_Short" Validity="Application=!APP51,!APP52" Visibility="ConnectivityLevel=PCL5,PCL6"/>
+			<Option Id="APP14" Version="PCL5,PCL6,PCL7" Description="Application_APP14" ShortDescription="Application_APP14_Short" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="APP51" Version="*" Description="Application_APP51" ShortDescription="Application_APP51_Short" Validity="Application=!APP52,!APP53" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="APP52" Version="*" Description="Application_APP52" ShortDescription="Application_APP52_Short" Validity="Application=!APP51,!APP53" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="APP53" Version="*" Description="Application_APP53" ShortDescription="Application_APP53_Short" Validity="Application=!APP51,!APP52" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 			<Option Id="ADD1" Version="*" Description="Application_ADD1" ShortDescription="Application_ADD1_Short" Validity="Application=APP7"/>
 			<Option Id="ADD2" Version="*" Description="Application_ADD2" ShortDescription="Application_ADD2_Short" Validity="Application=APP8"/>
 		</Category>
 		<Category Name="Protocol" IsMandatory="True">
-			<IsMultiple Version="PCL5,PCL6" Value="True"/>
+			<IsMultiple Version="PCL5,PCL6,PCL7" Value="True"/>
 			<Option Id="CMP1" Version="*" Description="Protocol_CMP1" ShortDescription="Protocol_CMP1_Short"/>
 			<Option Id="CMP2" Version="*" Description="Protocol_CMP2" ShortDescription="Protocol_CMP2_Short"/>
 			<Option Id="CMP3" Version="*" Description="Protocol_CMP3" ShortDescription="Protocol_CMP3_Short" Validity="Slot_A2=COM4,COM5"/>
 			<Option Id="CMP4" Version="*" Description="Protocol_CMP4" ShortDescription="Protocol_CMP4_Short"/>
-			<Option Id="CMP5" Version="*" Description="Protocol_CMP5" ShortDescription="Protocol_CMP5_Short" Validity="ConnectivityLevel=PCL5,PCL6"/>
-			<Option Id="CMP30" Version="*" Description="Protocol_CMP30" ShortDescription="Protocol_CMP30_Short" Validity="Slot_A2=COM4,COM5&amp;ConnectivityLevel=PCL5,PCL6"/>
-		</Category>	
-		<Category Name="Language">			
-			<Option Id="None" Version="*" Description="None" CultureCode="None" Visibility="ConnectivityLevel=PCL5,PCL6" />
+			<Option Id="CMP5" Version="*" Description="Protocol_CMP5" ShortDescription="Protocol_CMP5_Short" Validity="ConnectivityLevel=PCL5,PCL6,PCL7"/>
+			<Option Id="CMP30" Version="*" Description="Protocol_CMP30" ShortDescription="Protocol_CMP30_Short" Validity="Slot_A2=COM4,COM5&amp;ConnectivityLevel=PCL5,PCL6,PCL7"/>
+		</Category>
+		<Category Name="Language">
+			<Option Id="None" Version="*" Description="None" CultureCode="None" Visibility="ConnectivityLevel=PCL5,PCL6,PCL7"/>
 		</Category>
 		<Category Name="Signal_Connectors" IsMultiple="False">
 			<Option Id="SCT1" Version="*" Description="Signal_Connectors_SCT1" ShortDescription="Signal_Connectors_SCT1_Short"/>
@@ -127,10 +127,11 @@
 		<Category Name="ConnectivityLevel" IsMandatory="True">
 			<Option Id="PCL5" Version="*" Description="ConnectivityLevel_PCL5" ShortDescription="ConnectivityLevel_PCL5_Short" Validity="Housing=A,B"/>
 			<Option Id="PCL6" Version="*" Description="ConnectivityLevel_PCL6" ShortDescription="ConnectivityLevel_PCL6_Short" Validity="Housing=A,B"/>
+			<Option Id="PCL7" Version="*" Description="ConnectivityLevel_PCL7" ShortDescription="ConnectivityLevel_PCL7_Short" Validity="Housing=A,B"/>
 		</Category>
 	</OptionCodes>
 	<Configurations>
-		<Configuration Name="XX401" Version="*" File="xx401_complete_ed1.xml" ModulesFile="xx401_products.xml" CapabilityFile="xx401_capability.xml" LayoutFile="xx401_layout.xml" AdditionalSldFile="xx401_asld.xml" EventConfigurationFile="xx401_hmi_ed1.xml" ParametersFile="xx401_parameters.xml" MBMMappingsFile="xx401_mbm01.xml" SecuritySettingsFile="xx401_secsettings.json" >
+		<Configuration Name="XX401" Version="*" File="xx401_complete_ed1.xml" ModulesFile="xx401_products.xml" CapabilityFile="xx401_capability.xml" LayoutFile="xx401_layout.xml" AdditionalSldFile="xx401_asld.xml" EventConfigurationFile="xx401_hmi_ed1.xml" ParametersFile="xx401_parameters.xml" MBMMappingsFile="xx401_mbm01.xml" SecuritySettingsFile="xx401_secsettings.json">
 			<!-- "Ref conf PC24 - 640"-->
 			<MainCode Name="REX640##0##"/>
 		</Configuration>

@@ -1,0 +1,400 @@
+{
+  "formatVersion": 1,
+  "source": "REX640 Accessories and additional items.xlsx",
+  "categories": [
+    {
+      "name": "Arc sensors",
+      "nameZh": "弧光传感器",
+      "items": [
+        {
+          "product": "1MSC380018.100",
+          "image": "",
+          "description": "Sensor fiber 100 m",
+          "descriptionZh": "传感器光纤，100 m。",
+          "add": ""
+        },
+        {
+          "product": "1MSC380018.300",
+          "image": "",
+          "description": "Sensor fiber 300 m",
+          "descriptionZh": "传感器光纤，300 m。",
+          "add": ""
+        },
+        {
+          "product": "1MSC380018.500",
+          "image": "",
+          "description": "Sensor fiber 500 m",
+          "descriptionZh": "传感器光纤，500 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA036424P0001",
+          "image": "",
+          "description": "Cover plate for ARC",
+          "descriptionZh": "弧光保护用盖板。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040290A0001",
+          "image": "",
+          "description": "ARC lens sensor cable 1,5 m",
+          "descriptionZh": "弧光透镜传感器电缆，1.5 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040290A0003",
+          "image": "",
+          "description": "ARC lens sensor cable 3 m",
+          "descriptionZh": "弧光透镜传感器电缆，3 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040290A0005",
+          "image": "",
+          "description": "ARC lens sensor cable 5 m",
+          "descriptionZh": "弧光透镜传感器电缆，5 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040290A0007",
+          "image": "",
+          "description": "ARC lens sensor cable 7,5 m",
+          "descriptionZh": "弧光透镜传感器电缆，7.5 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040290A0015",
+          "image": "",
+          "description": "ARC lens sensor cable 15 m",
+          "descriptionZh": "弧光透镜传感器电缆，15 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA041050A0040",
+          "image": "",
+          "description": "ARC loop sensor cable 40 m (glass fiber)",
+          "descriptionZh": "弧光环形传感器电缆，40 m（玻璃光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA041050A0050",
+          "image": "",
+          "description": "ARC loop sensor cable 50 m (glass fiber)",
+          "descriptionZh": "弧光环形传感器电缆，50 m（玻璃光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA041050A0060",
+          "image": "",
+          "description": "ARC loop sensor cable 60 m (glass fiber)",
+          "descriptionZh": "弧光环形传感器电缆，60 m（玻璃光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0005",
+          "image": "",
+          "description": "ARC loop sensor cable 5 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，5 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0010",
+          "image": "",
+          "description": "ARC loop sensor cable 10 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，10 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0015",
+          "image": "",
+          "description": "ARC loop sensor cable 15 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，15 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0020",
+          "image": "",
+          "description": "ARC loop sensor cable 20 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，20 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0025",
+          "image": "",
+          "description": "ARC loop sensor cable 25 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，25 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051658A0030",
+          "image": "",
+          "description": "ARC loop sensor cable 30 m (plastic fiber)",
+          "descriptionZh": "弧光环形传感器电缆，30 m（塑料光纤）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051662A0001",
+          "image": "",
+          "description": "Blind extension cable for ARC loop sensors, 2 m (to be used with plastic fiber loops only)",
+          "descriptionZh": "弧光环形传感器盲端延长电缆，2 m（仅适用于塑料光纤环）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA056821",
+          "image": "",
+          "description": "ARC fiber spacer sleeve (25 pcs.)",
+          "descriptionZh": "弧光光纤间隔套管（25 件）。",
+          "add": ""
+        },
+        {
+          "product": "SJG BP05226-02",
+          "image": "",
+          "description": "ARC sensor fiber connector (25 pcs.)",
+          "descriptionZh": "弧光传感器光纤连接器（25 件）。",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "Communication",
+      "nameZh": "通信附件",
+      "items": [
+        {
+          "product": "2RCA045621",
+          "image": "",
+          "description": "LC SFP plug-in connector for optical multi mode media 100M",
+          "descriptionZh": "LC SFP 插拔式连接器，用于 100M 多模光纤介质。",
+          "add": ""
+        },
+        {
+          "product": "2RCA045622",
+          "image": "",
+          "description": "LC SFP plug-in connector for optical single mode media 100M, 20km",
+          "descriptionZh": "LC SFP 插拔式连接器，用于 100M 单模光纤介质，20 km。",
+          "add": ""
+        },
+        {
+          "product": "2RCA045623",
+          "image": "",
+          "description": "LC SFP plug-in connector for optical single mode media 100M, 50 km",
+          "descriptionZh": "LC SFP 插拔式连接器，用于 100M 单模光纤介质，50 km。",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "LHMI",
+      "nameZh": "就地人机界面",
+      "items": [
+        {
+          "product": "1MRS120549-05",
+          "image": "",
+          "description": "0,5m connection cable for HMI",
+          "descriptionZh": "HMI 连接电缆，0.5 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120549-1",
+          "image": "",
+          "description": "1m connection cable for HMI",
+          "descriptionZh": "HMI 连接电缆，1 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120549-2",
+          "image": "",
+          "description": "2m connection cable for HMI",
+          "descriptionZh": "HMI 连接电缆，2 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120549-3",
+          "image": "",
+          "description": "3m connection cable for HMI",
+          "descriptionZh": "HMI 连接电缆，3 m。",
+          "add": ""
+        },
+        {
+          "product": "1MRS120549-5",
+          "image": "",
+          "description": "5m connection cable for HMI",
+          "descriptionZh": "HMI 连接电缆，5 m。",
+          "add": ""
+        },
+        {
+          "product": "2RCA033008A0901",
+          "image": "",
+          "description": "Local HMI, conformal coated (including mounting bracket kit)",
+          "descriptionZh": "本地 HMI，带三防涂层（含安装支架套件）。",
+          "add": ""
+        },
+        {
+          "product": "2RCA033008A0902",
+          "image": "",
+          "description": "Switchgear HMI, conformal coated (including mounting bracket kit)",
+          "descriptionZh": "开关柜 HMI，带三防涂层（含安装支架套件）。",
+          "add": ""
+        },
+        {
+          "product": "SYJ-ZBE 8A17",
+          "image": "",
+          "description": "RJ45 coupler for HMI service port",
+          "descriptionZh": "HMI 服务端口用 RJ45 耦合器。",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "Mounting",
+      "nameZh": "安装附件",
+      "items": [
+        {
+          "product": "2RCA038782A0001",
+          "image": "",
+          "description": "Tilt mounting kit for LHMI",
+          "descriptionZh": "LHMI 倾斜安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA038783A0001",
+          "image": "",
+          "description": "Surface mounting kit for LHMI",
+          "descriptionZh": "LHMI 表面安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA039981A0001",
+          "image": "",
+          "description": "Grounding bar kit for RTD module",
+          "descriptionZh": "RTD 模块接地排套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040872A0001",
+          "image": "",
+          "description": "Back wall / side wall mounting kit standard housing",
+          "descriptionZh": "标准机箱背板/侧壁安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040873A0001",
+          "image": "",
+          "description": "Roof mounting kit standard housing",
+          "descriptionZh": "标准机箱顶部安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA040882A0001",
+          "image": "",
+          "description": "Door mounting for relay and LHMI standard housing",
+          "descriptionZh": "标准机箱继电器和 LHMI 门安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA041125A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting for relay and LHMI standard housing, 7U",
+          "descriptionZh": "标准机箱继电器和 LHMI 的 19 英寸机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA041127A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting for relay without LHMI standard housing, 7U",
+          "descriptionZh": "标准机箱继电器（不带 LHMI）的 19 英寸机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051498A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting for standard housing relay and LHMI, including a provision for RTXP 24 test switch, 6U",
+          "descriptionZh": "标准机箱继电器和 LHMI 的 19 英寸机架安装套件，含 RTXP 24 试验开关预留位，6U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA051503A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting standard housing for relay and LHMI, including a provision for RTXP 24 test switch, 7U",
+          "descriptionZh": "标准机箱继电器和 LHMI 的 19 英寸机架安装套件，含 RTXP 24 试验开关预留位，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058741A0001",
+          "image": "",
+          "description": "Back wall / side wall mounting kit narrow housing",
+          "descriptionZh": "窄机箱背板/侧壁安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058742A0001",
+          "image": "",
+          "description": "Door mounting with LHMI narrow housing",
+          "descriptionZh": "窄机箱带 LHMI 门安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058746A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting without HMI one narrow unit, 7U",
+          "descriptionZh": "一个窄机箱单元（不带 HMI）的 19 英寸继电器机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058747A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting with HMI one narrow unit, 7U",
+          "descriptionZh": "一个窄机箱单元（带 HMI）的 19 英寸继电器机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058749A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting without HMI two narrow units, 7U",
+          "descriptionZh": "两个窄机箱单元（不带 HMI）的 19 英寸继电器机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA058750A0001",
+          "image": "",
+          "description": "19 inch relay rack mounting with HMI two narrow units, 7U",
+          "descriptionZh": "两个窄机箱单元（带 HMI）的 19 英寸继电器机架安装套件，7U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA060365A0001",
+          "image": "",
+          "description": "REX640 Narrow Roof installation kit",
+          "descriptionZh": "REX640 窄机箱顶部安装套件。",
+          "add": ""
+        },
+        {
+          "product": "2RCA060414A0001",
+          "image": "",
+          "description": "REX640 RTXP24 installation kit 6U",
+          "descriptionZh": "REX640 RTXP24 安装套件，6U。",
+          "add": ""
+        },
+        {
+          "product": "2RCA060417A0001",
+          "image": "",
+          "description": "",
+          "descriptionZh": "",
+          "add": ""
+        }
+      ]
+    },
+    {
+      "name": "Warranty",
+      "nameZh": "质保",
+      "items": [
+        {
+          "product": "640EXTW5",
+          "image": "",
+          "description": "5 years extended warranty for REX640 relay main unit. FI manufactured.",
+          "descriptionZh": "REX640 继电器主机 5 年延长质保，适用于芬兰制造产品。",
+          "add": ""
+        }
+      ]
+    }
+  ]
+}

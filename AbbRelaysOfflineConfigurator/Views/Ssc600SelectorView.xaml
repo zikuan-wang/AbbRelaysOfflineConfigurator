@@ -42,6 +42,7 @@
         <Style x:Key="SscButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
@@ -54,6 +55,7 @@
         <Style x:Key="SscPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -66,6 +68,7 @@
         <Style x:Key="SscDangerButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
             <Setter Property="Height" Value="36" />
             <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="Margin" Value="0,0,8,8" />
             <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}" />
@@ -73,6 +76,15 @@
             <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="SscToolbarComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFilledComboBox}">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="8,0,4,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
@@ -108,12 +120,24 @@
                                    TextWrapping="Wrap"
                                    Margin="0,2,0,0" />
                     </StackPanel>
-                    <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <WrapPanel Grid.Column="1"
+                               HorizontalAlignment="Right"
+                               Margin="12,0,0,0">
+                        <TextBlock Text="{Binding VersionText}"
+                                   Foreground="{DynamicResource MutedBrush}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,6,8" />
+                        <ComboBox Width="132"
+                                  ItemsSource="{Binding VersionOptions}"
+                                  SelectedItem="{Binding SelectedVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="DisplayName"
+                                  Style="{StaticResource SscToolbarComboBoxStyle}"
+                                  Margin="0,0,12,8" />
                         <Button Command="{Binding ExpandAllCommand}"
                                 Style="{StaticResource SscButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="UnfoldMoreHorizontal" Width="18" Height="18" />
-                                <TextBlock Text="全部展开" Margin="6,0,0,0" />
+                                <TextBlock Text="{Binding ExpandAllText}" Margin="6,0,0,0" />
                             </StackPanel>
                         </Button>
                         <Button Command="{Binding CollapseAllCommand}"
@@ -121,7 +145,7 @@
                                 Margin="0,0,0,8">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="UnfoldLessHorizontal" Width="18" Height="18" />
-                                <TextBlock Text="全部折叠" Margin="6,0,0,0" />
+                                <TextBlock Text="{Binding CollapseAllText}" Margin="6,0,0,0" />
                             </StackPanel>
                         </Button>
                     </WrapPanel>
@@ -353,10 +377,10 @@
                                     Click="FunctionCatalogButton_OnClick"
                                     Style="{StaticResource SscButtonStyle}"
                                     Margin="8,0,0,0"
-                                    ToolTip="查看 SSC600 应用包功能清单">
+                                    ToolTip="查看 SSC600 APP 功能对照表">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="TableSearch" Width="18" Height="18" />
-                                    <TextBlock Text="应用包功能清单" Margin="6,0,0,0" />
+                                    <TextBlock Text="APP 功能对照表" Margin="6,0,0,0" />
                                 </StackPanel>
                             </Button>
                         </Grid>

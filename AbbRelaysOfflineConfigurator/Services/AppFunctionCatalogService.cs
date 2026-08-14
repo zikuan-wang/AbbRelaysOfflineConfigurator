@@ -7,12 +7,16 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class AppFunctionCatalogService
 {
     private const string CatalogFileName = "AppFunctionCatalog.json";
-    private readonly Lazy<AppFunctionCatalogDocument> _catalog;
+    private static readonly Lazy<string> SharedCatalogPath = new(ResolveCatalogPath);
+    private static readonly Lazy<AppFunctionCatalogDocument> SharedCatalog = new(() => Load(SharedCatalogPath.Value));
+    private static readonly Lazy<IReadOnlyDictionary<string, int>> SharedAppPriorityIndex = new(
+        () => SharedCatalog.Value.AppPriority
+            .Select((value, position) => new { value, position })
+            .ToDictionary(item => item.value, item => item.position, StringComparer.OrdinalIgnoreCase));
 
     public AppFunctionCatalogService()
     {
-        CatalogPath = ResolveCatalogPath();
-        _catalog = new Lazy<AppFunctionCatalogDocument>(() => Load(CatalogPath));
+        CatalogPath = SharedCatalogPath.Value;
     }
 
     public string CatalogPath { get; }
@@ -146,12 +150,12 @@ public sealed class AppFunctionCatalogService
     public IReadOnlyList<AppFunctionEntry> GetFunctions(string version)
     {
         var normalizedVersion = string.IsNullOrWhiteSpace(version) ? "PCL1" : version.Trim();
-        return _catalog.Value.Versions
+        return SharedCatalog.Value.Versions
             .FirstOrDefault(item => item.Version.Equals(normalizedVersion, StringComparison.OrdinalIgnoreCase))
-            ?.Functions ?? _catalog.Value.Versions.FirstOrDefault()?.Functions ?? [];
+            ?.Functions ?? SharedCatalog.Value.Versions.FirstOrDefault()?.Functions ?? [];
     }
 
-    public IReadOnlyList<string> AppPriority => _catalog.Value.AppPriority;
+    public IReadOnlyList<string> AppPriority => SharedCatalog.Value.AppPriority;
 
     private static AppFunctionCatalogDocument Load(string path)
     {
@@ -164,11 +168,7 @@ public sealed class AppFunctionCatalogService
 
     private int AppPriorityIndex(string app)
     {
-        var index = AppPriority
-            .Select((value, position) => new { value, position })
-            .FirstOrDefault(item => item.value.Equals(app, StringComparison.OrdinalIgnoreCase))
-            ?.position;
-        return index ?? int.MaxValue / 2;
+        return SharedAppPriorityIndex.Value.TryGetValue(app, out var index) ? index : int.MaxValue / 2;
     }
 
     private static IEnumerable<string> ExpandDependencies(string app)

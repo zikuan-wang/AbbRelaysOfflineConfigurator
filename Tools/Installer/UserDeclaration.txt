@@ -1,8 +1,8 @@
 ﻿用户声明与免责声明
 
-ABB Relays Offline Configurator 由 zikuan wang 开发，版权属于 zikuan wang。
+Unofficial ABB Relays Offline Configurator 由 zikuan wang 开发，版权属于 zikuan wang。
 
-本工具是 ABB 继保产品离线选型、组合代码生成、逻辑校验、SSC600/SSC600 SW 订货码生成、615/620 系列订货号转换、RIO600 选型和在线校验的辅助工具，不是 ABB 官方软件、报价系统或订货确认文件。
+本工具是 ABB 继保产品离线选型、组合代码生成、逻辑校验、SSC600/SSC600 SW 订货码生成、615/620 系列订货号转换、RIO600 选型和在线校验的非官方辅助工具，不是 ABB 官方软件、报价系统或订货确认文件，未获得 ABB 赞助、认可或授权。
 
 ABB、REX615、SSC600、RIO600 以及相关产品名称、商标和资料版权归其权利人所有。本工具中的产品资料、功能清单和校验逻辑仅用于辅助选型，应结合 ABB 官方产品指南、硬件模块说明、正式报价和商务文件复核。
 

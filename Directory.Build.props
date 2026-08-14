@@ -1,4 +1,15 @@
 <Project>
+  <PropertyGroup>
+    <AbbRelaysProductVersion>2.2.11</AbbRelaysProductVersion>
+    <Version>$(AbbRelaysProductVersion)</Version>
+    <AssemblyVersion>$(AbbRelaysProductVersion).0</AssemblyVersion>
+    <FileVersion>$(AbbRelaysProductVersion).0</FileVersion>
+    <InformationalVersion>$(AbbRelaysProductVersion)</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <MaterialDesignThemesVersion>5.3.2</MaterialDesignThemesVersion>
+    <PdfSharpVersion>6.2.4</PdfSharpVersion>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <Optimize>true</Optimize>
     <DebugSymbols>false</DebugSymbols>

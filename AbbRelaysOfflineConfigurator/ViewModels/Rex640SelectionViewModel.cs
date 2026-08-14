@@ -1,8 +1,11 @@
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Windows;
+using AbbRelaysOfflineConfigurator.Models;
 using AbbRelaysOfflineConfigurator.Services;
+using Microsoft.Win32;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
@@ -18,7 +21,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     private string _onlineOrderingNumber = "";
     private string _functionSearchText = "";
     private string _appRecommendationSummary = "";
-    private string _appRecommendationVersion = "PCL6";
+    private string _appRecommendationVersion = "PCL7";
     private string _displayLanguage = ConfiguratorViewModel.ChineseLanguage;
     private bool _isValid;
     private bool _isOnlineValidationBusy;
@@ -37,6 +40,9 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         FunctionSuggestions = [];
         RequestedFunctions = [];
         AppRecommendations = [];
+        VersionOptions = AppRecommendationVersions
+            .Select(version => new Rex640VersionOptionViewModel(version, version))
+            .ToList();
 
         CopyOrderCodeCommand = new RelayCommand(CopyOrderCode, () => !string.IsNullOrWhiteSpace(OrderCode));
         CopyOrderingNumberCommand = new RelayCommand(CopyOrderingNumber, () => HasOnlineOrderingNumber);
@@ -44,6 +50,10 @@ public sealed class Rex640SelectionViewModel : ObservableObject
             () => _ = ValidateOnlineAsync(),
             () => !IsOnlineValidationBusy && !string.IsNullOrWhiteSpace(OrderCode));
         ImportOrderCodeCommand = new RelayCommand(ImportOrderCode);
+        ImportOrderingNumberCommand = new RelayCommand(() => _ = ImportOrderingNumberAsync(), () => !IsOnlineValidationBusy);
+        ExportWordCommand = new RelayCommand(() => Export("Word"), CanExport);
+        ExportExcelCommand = new RelayCommand(() => Export("Excel"), CanExport);
+        ExportPdfCommand = new RelayCommand(() => Export("PDF"), CanExport);
         ShowDeviceDescriptionCommand = new RelayCommand(ShowDeviceDescription, () => !string.IsNullOrWhiteSpace(OrderCode));
         AddFunctionInputCommand = new RelayCommand(AddFunctionInput, () => !string.IsNullOrWhiteSpace(FunctionSearchText));
         ClearFunctionRecommendationCommand = new RelayCommand(ClearFunctionRecommendation, () => RequestedFunctions.Count > 0);
@@ -64,11 +74,16 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     public ObservableCollection<Rex640FunctionSuggestionViewModel> FunctionSuggestions { get; }
     public ObservableCollection<Rex640RequestedFunctionViewModel> RequestedFunctions { get; }
     public ObservableCollection<Rex640AppRecommendationViewModel> AppRecommendations { get; }
-    public IReadOnlyList<string> AppRecommendationVersions { get; } = ["PCL5", "PCL6"];
+    public IReadOnlyList<string> AppRecommendationVersions { get; } = ["PCL5", "PCL6", "PCL7"];
+    public IReadOnlyList<Rex640VersionOptionViewModel> VersionOptions { get; }
     public RelayCommand CopyOrderCodeCommand { get; }
     public RelayCommand CopyOrderingNumberCommand { get; }
     public RelayCommand OnlineValidateCommand { get; }
     public RelayCommand ImportOrderCodeCommand { get; }
+    public RelayCommand ImportOrderingNumberCommand { get; }
+    public RelayCommand ExportWordCommand { get; }
+    public RelayCommand ExportExcelCommand { get; }
+    public RelayCommand ExportPdfCommand { get; }
     public RelayCommand ShowDeviceDescriptionCommand { get; }
     public RelayCommand AddFunctionInputCommand { get; }
     public RelayCommand ClearFunctionRecommendationCommand { get; }
@@ -107,13 +122,37 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     public string PageTitle => IsEnglish ? "REX640 Configuration Rules" : "REX640 选型规则";
 
     public string SourceSummary => IsEnglish
-        ? "Selection items are limited to REX640 2.0 PCL5/PCL6 and validated with REX640.xml."
-        : "选型项限定为 REX640 2.0 的 PCL5/PCL6，并结合 REX640.xml 做有效性校验。";
+        ? "Selection items are limited to REX640 2.0 PCL5/PCL6/PCL7 and validated with REX640.xml."
+        : "选型项限定为 REX640 2.0 的 PCL5/PCL6/PCL7，并结合 REX640.xml 做有效性校验。";
 
-    public string ExpandAllText => IsEnglish ? "Expand all" : "全部展开";
-    public string CollapseAllText => IsEnglish ? "Collapse all" : "全部折叠";
+    public string VersionText => IsEnglish ? "Product version" : "产品版本";
+    public Rex640VersionOptionViewModel? SelectedVersion
+    {
+        get
+        {
+            var current = CurrentConnectivityLevel(SelectedByGroup(includeUnavailable: true));
+            return VersionOptions.FirstOrDefault(version => version.Id.Equals(current, StringComparison.OrdinalIgnoreCase));
+        }
+        set
+        {
+            if (value is null)
+            {
+                return;
+            }
+
+            var group = Groups.FirstOrDefault(group => group.Rule.Name.Equals("ConnectivityLevel", StringComparison.OrdinalIgnoreCase));
+            var option = group?.Options.FirstOrDefault(option => option.Id.Equals(value.Id, StringComparison.OrdinalIgnoreCase));
+            if (option is not null && !option.IsSelected)
+            {
+                option.IsSelected = true;
+            }
+        }
+    }
+    public string ExpandAllText => IsEnglish ? "Expand" : "展开";
+    public string CollapseAllText => IsEnglish ? "Collapse" : "折叠";
     public string OrderCodeTitle => IsEnglish ? "REX640 combination code" : "REX640 组合代码";
     public string ImportOrderCodeText => IsEnglish ? "Import code" : "导入代码";
+    public string ImportOrderingNumberText => IsEnglish ? "Import ordering number" : "导入订货号";
     public string CopyOrderCodeText => IsEnglish ? "Copy code" : "复制代码";
     public string OnlineValidateText => IsEnglish ? "Online check" : "在线校验";
     public string OnlineStatusTitle => IsEnglish ? "Online check" : "在线校验";
@@ -123,6 +162,10 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     public string CopyText => IsEnglish ? "Copy" : "复制";
     public string CopyOrderingNumberText => IsEnglish ? "Copy ordering number" : "复制订货号";
     public string DeviceDescriptionText => IsEnglish ? "Device description" : "装置描述";
+    public string AccessoriesText => IsEnglish ? "Accessories / extra items" : "附件/额外功能";
+    public string ExportWordText => IsEnglish ? "Export Word" : "导出 Word";
+    public string ExportExcelText => IsEnglish ? "Export Excel" : "导出 Excel";
+    public string ExportPdfText => IsEnglish ? "Export PDF" : "导出 PDF";
     public string ResetText => IsEnglish ? "Reset" : "重置";
     public string IoSummaryTitle => IsEnglish ? "I/O summary" : "I/O 摘要";
     public string SelectedSummaryTitle => IsEnglish ? "Current selection" : "当前选型";
@@ -130,8 +173,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     public string ValidationMessagesTitle => IsEnglish ? "Validation messages" : "校验消息";
     public string AppRecommendationTitle => IsEnglish ? "APP recommendation" : "APP 推荐";
     public string AppRecommendationVersionText => IsEnglish ? "Recommendation version" : "推荐版本";
-    public string FunctionCatalogText => IsEnglish ? "APP function code table" : "APP 功能代码对照表";
-    public string FunctionCatalogShortText => IsEnglish ? "Code table" : "代码表";
+    public string FunctionCatalogText => IsEnglish ? "APP function table" : "APP 功能对照表";
+    public string FunctionCatalogShortText => IsEnglish ? "APP function table" : "APP 功能对照表";
     public string FunctionInputHint => IsEnglish ? "ANSI code / ABB code / protection function" : "ANSI CODE / ABB CODE / 保护功能";
     public string RecommendFunctionText => IsEnglish ? "Recommend" : "应用推荐";
     public string AddFunctionText => IsEnglish ? "Add" : "添加";
@@ -182,6 +225,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
             {
                 OnPropertyChanged(nameof(HasOnlineOrderingNumber));
                 CopyOrderingNumberCommand.RaiseCanExecuteChanged();
+                RaiseExportCanExecuteChanged();
             }
         }
     }
@@ -196,6 +240,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
             if (SetProperty(ref _isOnlineValidationBusy, value))
             {
                 OnlineValidateCommand.RaiseCanExecuteChanged();
+                ImportOrderingNumberCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -203,7 +248,13 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     public bool IsOnlineValidationSuccess
     {
         get => _isOnlineValidationSuccess;
-        private set => SetProperty(ref _isOnlineValidationSuccess, value);
+        private set
+        {
+            if (SetProperty(ref _isOnlineValidationSuccess, value))
+            {
+                RaiseExportCanExecuteChanged();
+            }
+        }
     }
 
     public bool IsOnlineValidationError
@@ -238,7 +289,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         {
             var normalized = AppRecommendationVersions.Contains(value, StringComparer.OrdinalIgnoreCase)
                 ? value.ToUpperInvariant()
-                : "PCL6";
+                : "PCL7";
             if (SetProperty(ref _appRecommendationVersion, normalized))
             {
                 RefreshFunctionSuggestions();
@@ -344,6 +395,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         Replace(Slots, BuildSlots());
         RefreshIoSummary();
         RefreshGroupErrors();
+        OnPropertyChanged(nameof(SelectedVersion));
     }
 
     internal void JumpToMessage(ValidationMessageViewModel message)
@@ -1173,7 +1225,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private static bool IsSupportedConnectivityLevel(string value) =>
         value.Equals("PCL5", StringComparison.OrdinalIgnoreCase) ||
-        value.Equals("PCL6", StringComparison.OrdinalIgnoreCase);
+        value.Equals("PCL6", StringComparison.OrdinalIgnoreCase) ||
+        value.Equals("PCL7", StringComparison.OrdinalIgnoreCase);
 
     private static string CurrentConnectivityLevel(IReadOnlyDictionary<string, IReadOnlyList<string>> selectedByGroup) =>
         selectedByGroup.TryGetValue("ConnectivityLevel", out var selected) &&
@@ -1265,6 +1318,15 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         return string.Join(IsEnglish ? "; " : "；", readable);
     }
 
+    private bool CanExport() => IsOnlineValidationSuccess && HasOnlineOrderingNumber;
+
+    private void RaiseExportCanExecuteChanged()
+    {
+        ExportWordCommand.RaiseCanExecuteChanged();
+        ExportExcelCommand.RaiseCanExecuteChanged();
+        ExportPdfCommand.RaiseCanExecuteChanged();
+    }
+
     private void ImportOrderCode()
     {
         var window = new CombinationCodeImportWindow(
@@ -1290,8 +1352,133 @@ public sealed class Rex640SelectionViewModel : ObservableObject
                 string.Join(Environment.NewLine, notFound),
                 IsEnglish ? "Import warnings" : "导入提示",
                 MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            MessageBoxImage.Warning);
         }
+    }
+
+    private async Task ImportOrderingNumberAsync()
+    {
+        if (IsOnlineValidationBusy)
+        {
+            return;
+        }
+
+        var window = new CombinationCodeImportWindow(
+            IsEnglish ? "Import REX640 ordering number" : "导入 REX640 订货号",
+            IsEnglish
+                ? "Enter an ordering number. The tool will reverse-look up the REX640 combination code with the current PCL version. Example: REX640B."
+                : "输入订货号，系统会按当前 PCL 版本在线反查 REX640 组合代码。例如：REX640B。",
+            IsEnglish ? "Lookup" : "反查",
+            "REX640B")
+        {
+            Owner = Application.Current.Windows.OfType<Window>().FirstOrDefault(item => item.IsActive)
+        };
+
+        if (window.ShowDialog() != true)
+        {
+            return;
+        }
+
+        var orderingNumber = window.CombinationCode.Trim();
+        if (string.IsNullOrWhiteSpace(orderingNumber))
+        {
+            MessageBox.Show(
+                window.Owner,
+                IsEnglish ? "Ordering number is empty." : "订货号为空。",
+                "REX640",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            return;
+        }
+
+        IsOnlineValidationBusy = true;
+        IsOnlineValidationSuccess = false;
+        IsOnlineValidationError = false;
+        OnlineOrderingNumber = "";
+        OnlineStatus = IsEnglish ? "Reverse lookup in progress..." : "订货号反查中...";
+        var requestedOrderingNumber = EnsureOrderingNumberCurrentVersion(orderingNumber);
+
+        try
+        {
+            var pclVersion = CurrentConnectivityLevel(SelectedByGroup(includeUnavailable: true));
+            var result = await _onlineValidationService.ReverseLookupAsync(requestedOrderingNumber, pclVersion);
+            if (!result.IsValid || string.IsNullOrWhiteSpace(result.CompositionCode))
+            {
+                IsOnlineValidationSuccess = false;
+                IsOnlineValidationError = true;
+                OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
+                OnlineStatus = string.IsNullOrWhiteSpace(result.Message)
+                    ? IsEnglish ? "Reverse lookup failed" : "订货号反查失败"
+                    : OnlineValidationService.LocalizeMessage(result.Message.TrimEnd('。'), IsEnglish);
+                return;
+            }
+
+            if (!result.CompositionCode.Trim().StartsWith("REX640", StringComparison.OrdinalIgnoreCase))
+            {
+                IsOnlineValidationSuccess = false;
+                IsOnlineValidationError = true;
+                OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
+                OnlineStatus = IsEnglish
+                    ? "Reverse lookup did not return a REX640 combination code."
+                    : "订货号反查未返回 REX640 组合代码。";
+                return;
+            }
+
+            var notFound = ApplyOrderCode(result.CompositionCode);
+            Recalculate();
+            OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
+            if (notFound.Count > 0)
+            {
+                IsOnlineValidationSuccess = false;
+                IsOnlineValidationError = true;
+                OnlineStatus = IsEnglish
+                    ? "Reverse lookup returned a code, but some options could not be matched."
+                    : "订货号反查已返回组合代码，但部分选项未能匹配。";
+                MessageBox.Show(
+                    window.Owner,
+                    string.Join(Environment.NewLine, notFound),
+                    IsEnglish ? "Import warnings" : "导入提示",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+
+            IsOnlineValidationSuccess = IsValid;
+            IsOnlineValidationError = !IsOnlineValidationSuccess;
+            OnlineStatus = IsOnlineValidationSuccess
+                ? IsEnglish ? "Reverse lookup passed" : "订货号反查通过"
+                : IsEnglish ? "Reverse lookup returned a code that needs adjustment." : "订货号反查返回的组合代码需要调整。";
+        }
+        catch (Exception ex)
+        {
+            IsOnlineValidationSuccess = false;
+            IsOnlineValidationError = true;
+            OnlineOrderingNumber = requestedOrderingNumber;
+            OnlineStatus = IsEnglish ? $"Order number reverse lookup failed: {ex.Message}" : $"订货号反查失败：{ex.Message}";
+        }
+        finally
+        {
+            IsOnlineValidationBusy = false;
+        }
+    }
+
+    private string EnsureOrderingNumberCurrentVersion(string orderingNumber)
+    {
+        var value = orderingNumber.Trim();
+        if (value.EndsWith("_PCL5", StringComparison.OrdinalIgnoreCase) ||
+            value.EndsWith("_PCL6", StringComparison.OrdinalIgnoreCase) ||
+            value.EndsWith("_PCL7", StringComparison.OrdinalIgnoreCase))
+        {
+            return value;
+        }
+
+        var version = CurrentConnectivityLevel(SelectedByGroup(includeUnavailable: true)).ToUpperInvariant();
+        if (!IsSupportedConnectivityLevel(version))
+        {
+            version = "PCL7";
+        }
+
+        return $"{value}_{version}";
     }
 
     private IReadOnlyList<string> ApplyOrderCode(string orderCode)
@@ -1341,8 +1528,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
                 else
                 {
                     notFound.Add(IsEnglish
-                        ? $"{pclToken}: unsupported REX640 connectivity level. This page supports only PCL5/PCL6."
-                        : $"{pclToken}：不支持的 REX640 PCL 版本。本页面仅支持 PCL5/PCL6。");
+                        ? $"{pclToken}: unsupported REX640 connectivity level. This page supports only PCL5/PCL6/PCL7."
+                        : $"{pclToken}：不支持的 REX640 PCL 版本。本页面仅支持 PCL5/PCL6/PCL7。");
                 }
 
                 optionTokens.Remove(pclToken);
@@ -1462,18 +1649,12 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private void CopyOrderCode()
     {
-        if (!string.IsNullOrWhiteSpace(OrderCode))
-        {
-            Clipboard.SetText(OrderCode);
-        }
+        ClipboardService.TrySetText(OrderCode, "REX640", IsEnglish);
     }
 
     private void CopyOrderingNumber()
     {
-        if (!string.IsNullOrWhiteSpace(OnlineOrderingNumber))
-        {
-            Clipboard.SetText(OnlineOrderingNumber);
-        }
+        ClipboardService.TrySetText(OnlineOrderingNumber, "REX640", IsEnglish);
     }
 
     private async Task ValidateOnlineAsync()
@@ -1518,6 +1699,158 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         }
     }
 
+    private void Export(string format)
+    {
+        if (!CanExport())
+        {
+            MessageBox.Show(
+                IsEnglish ? "Run online validation and confirm the combination code is correct before exporting." : "请先完成在线校验，并确认组合代码正确后再导出。",
+                "REX640",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            return;
+        }
+
+        var extension = format switch
+        {
+            "Word" => "docx",
+            "Excel" => "xlsx",
+            _ => "pdf"
+        };
+
+        var dialog = new SaveFileDialog
+        {
+            FileName = $"{SanitizeFileName(OrderCode)}.{extension}",
+            Filter = format switch
+            {
+                "Word" => IsEnglish ? "Word document (*.docx)|*.docx" : "Word 文档 (*.docx)|*.docx",
+                "Excel" => IsEnglish ? "Excel workbook (*.xlsx)|*.xlsx" : "Excel 工作簿 (*.xlsx)|*.xlsx",
+                _ => IsEnglish ? "PDF file (*.pdf)|*.pdf" : "PDF 文件 (*.pdf)|*.pdf"
+            }
+        };
+
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        try
+        {
+            var snapshot = BuildExportSnapshot();
+            switch (format)
+            {
+                case "Word":
+                    ExportService.ExportWord(snapshot, dialog.FileName);
+                    break;
+                case "Excel":
+                    ExportService.ExportExcel(snapshot, dialog.FileName);
+                    break;
+                default:
+                    ExportService.ExportPdf(snapshot, dialog.FileName);
+                    break;
+            }
+
+            MessageBox.Show(IsEnglish ? "Export completed." : "导出完成。", "REX640", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(IsEnglish ? $"Export failed: {ex.Message}" : $"导出失败：{ex.Message}", "REX640", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private ExportSnapshot BuildExportSnapshot() =>
+        new(
+            OrderCode,
+            OnlineOrderingNumber,
+            Status,
+            OnlineStatus,
+            IsValid,
+            SelectedSummaryItems.Select(item => new SelectedOptionSummary(item.GroupName, item.Code, item.Description)).ToList(),
+            IoSummaryItems.Select(item => new ExportIoSummary(item.Name, item.Value)).ToList(),
+            BuildSelectedAppSummaryText(),
+            BuildSelectedAppFunctionSummaries(),
+            Slots.Select(slot => new ExportSlotSummary(slot.SlotId, slot.Code, slot.Description)).ToList(),
+            Messages.Select(message => message.Text).ToList(),
+            BuildDeviceDescription(),
+            IsEnglish ? "ABB REX640 configuration" : "ABB REX640 配置");
+
+    private IReadOnlyList<ExportAppFunctionSummary> BuildSelectedAppFunctionSummaries()
+    {
+        var selectedApps = SelectedAppPackageIds().ToList();
+        if (selectedApps.Count == 0)
+        {
+            return [];
+        }
+
+        var functions = _functionCatalog.GetFunctions(CurrentConnectivityLevel(SelectedByGroup(includeUnavailable: true)));
+        return selectedApps
+            .SelectMany(app => functions
+                .Where(function => function.Apps.Contains(app, StringComparer.OrdinalIgnoreCase))
+                .OrderBy(function => function.Code, StringComparer.OrdinalIgnoreCase)
+                .Select(function => new ExportAppFunctionSummary(
+                    app,
+                    function.Code,
+                    function.Ansi,
+                    function.ChineseName,
+                    function.EnglishName)))
+            .ToList();
+    }
+
+    private string BuildSelectedAppSummaryText()
+    {
+        var selectedApps = SelectedAppPackageIds().ToList();
+        if (selectedApps.Count == 0)
+        {
+            return IsEnglish ? "None" : "无";
+        }
+
+        var functions = _functionCatalog.GetFunctions(CurrentConnectivityLevel(SelectedByGroup(includeUnavailable: true)));
+        var summaries = selectedApps.Select(app =>
+        {
+            var functionTexts = functions
+                .Where(function => function.Apps.Contains(app, StringComparer.OrdinalIgnoreCase))
+                .Select(function => string.IsNullOrWhiteSpace(function.Ansi) ? function.Code : function.Ansi.Trim())
+                .Where(text => !string.IsNullOrWhiteSpace(text))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+            var text = functionTexts.Count == 0
+                ? IsEnglish ? "no catalog functions" : "无功能清单"
+                : string.Join(", ", functionTexts);
+            return $"{app} ({text})";
+        });
+
+        return string.Join(IsEnglish ? "; " : "；", summaries);
+    }
+
+    private IEnumerable<string> SelectedAppPackageIds()
+    {
+        var group = Groups.FirstOrDefault(group => group.Rule.Name.Equals("Application", StringComparison.OrdinalIgnoreCase));
+        if (group is null)
+        {
+            return [];
+        }
+
+        return group.SelectedOptions
+            .Where(option => option.IsSelected && IsAppPackageId(option.Id))
+            .Select(option => option.Id)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(AppExportPriorityIndex)
+            .ThenBy(id => id, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private int AppExportPriorityIndex(string app)
+    {
+        var index = _functionCatalog.AppPriority
+            .Select((value, position) => new { value, position })
+            .FirstOrDefault(item => item.value.Equals(app, StringComparison.OrdinalIgnoreCase))
+            ?.position;
+        return index ?? int.MaxValue / 2;
+    }
+
+    private static bool IsAppPackageId(string id) =>
+        Regex.IsMatch(id, @"^(APP\d+|ADD\d+)$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
     private void ResetOnlineValidationState()
     {
         OnlineOrderingNumber = "";
@@ -1537,32 +1870,46 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private string BuildDeviceDescription()
     {
+        var selected = SelectedSummaryItems.ToList();
         var lines = new List<string>
         {
-            IsEnglish ? "REX640 device description" : "REX640 装置描述",
-            $"{(IsEnglish ? "Combination code" : "组合代码")}：{OrderCode}",
-            $"{(IsEnglish ? "Online check" : "在线校验")}：{OnlineStatus}",
-            $"{(IsEnglish ? "Status" : "状态")}：{Status}",
+            IsEnglish ? "ABB REX640 protection and control relay device description" : "ABB REX640 保护和控制继电器装置描述",
+            IsEnglish ? $"Combination code: {OrderCode}" : $"组合代码：{OrderCode}",
+            IsEnglish ? $"Status: {Status}" : $"状态：{Status}",
             ""
         };
+
         if (HasOnlineOrderingNumber)
         {
-            lines.Insert(2, $"{(IsEnglish ? "Ordering number" : "订货号")}：{OnlineOrderingNumber}");
+            lines.Insert(2, IsEnglish ? $"Ordering number: {OnlineOrderingNumber}" : $"订货号：{OnlineOrderingNumber}");
         }
 
-        lines.Add(IsEnglish ? "Selected items:" : "选型清单：");
-        lines.AddRange(SelectedSummaryItems.Select(item => $"{item.GroupName}: {item.Code} - {item.Description}"));
+        foreach (var group in selected.GroupBy(selection => selection.GroupName))
+        {
+            lines.Add(IsEnglish
+                ? $"{group.Key}: {string.Join("; ", group.Select(selection => $"{selection.Code} ({selection.Description})"))}"
+                : $"{group.Key}：{string.Join("；", group.Select(selection => $"{selection.Code}({selection.Description})"))}");
+        }
+
         lines.Add("");
         lines.Add(IsEnglish ? "I/O summary:" : "I/O 摘要：");
         lines.Add(IoSummaryItems.Count == 0
             ? IsEnglish ? "None" : "无"
             : string.Join(IsEnglish ? "; " : "；", IoSummaryItems.Select(item => $"{item.Name}={item.Value}")));
 
-        if (Messages.Any(message => !message.IsSuccess))
+        lines.Add("");
+        lines.Add(IsEnglish ? "Selected APP summary:" : "当前已选择 APP 摘要：");
+        lines.Add(BuildSelectedAppSummaryText());
+
+        lines.Add("");
+        lines.Add(IsEnglish ? "Slot allocation:" : "槽位配置：");
+        lines.AddRange(Slots.Select(slot => $"{slot.SlotId} {slot.Code} - {slot.Description}"));
+
+        if (Messages.Count > 0)
         {
             lines.Add("");
-            lines.Add(IsEnglish ? "Validation messages:" : "校验消息：");
-            lines.AddRange(Messages.Where(message => !message.IsSuccess).Select(message => message.Text));
+            lines.Add(IsEnglish ? "Validation messages:" : "校验提示：");
+            lines.AddRange(Messages.Select(message => message.Text));
         }
 
         return string.Join(Environment.NewLine, lines);
@@ -1580,10 +1927,13 @@ public sealed class Rex640SelectionViewModel : ObservableObject
     {
         OnPropertyChanged(nameof(PageTitle));
         OnPropertyChanged(nameof(SourceSummary));
+        OnPropertyChanged(nameof(VersionText));
+        OnPropertyChanged(nameof(SelectedVersion));
         OnPropertyChanged(nameof(ExpandAllText));
         OnPropertyChanged(nameof(CollapseAllText));
         OnPropertyChanged(nameof(OrderCodeTitle));
         OnPropertyChanged(nameof(ImportOrderCodeText));
+        OnPropertyChanged(nameof(ImportOrderingNumberText));
         OnPropertyChanged(nameof(CopyOrderCodeText));
         OnPropertyChanged(nameof(OnlineValidateText));
         OnPropertyChanged(nameof(OnlineStatusTitle));
@@ -1593,6 +1943,10 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         OnPropertyChanged(nameof(CopyText));
         OnPropertyChanged(nameof(CopyOrderingNumberText));
         OnPropertyChanged(nameof(DeviceDescriptionText));
+        OnPropertyChanged(nameof(AccessoriesText));
+        OnPropertyChanged(nameof(ExportWordText));
+        OnPropertyChanged(nameof(ExportExcelText));
+        OnPropertyChanged(nameof(ExportPdfText));
         OnPropertyChanged(nameof(ResetText));
         OnPropertyChanged(nameof(IoSummaryTitle));
         OnPropertyChanged(nameof(SelectedSummaryTitle));
@@ -1609,6 +1963,13 @@ public sealed class Rex640SelectionViewModel : ObservableObject
         OnPropertyChanged(nameof(ClearFunctionsText));
         OnPropertyChanged(nameof(ApplyRecommendedAppsText));
         OnPropertyChanged(nameof(PushRecommendedAppsText));
+    }
+
+    private static string SanitizeFileName(string value)
+    {
+        var invalid = Path.GetInvalidFileNameChars();
+        var safe = new string(value.Select(ch => invalid.Contains(ch) ? '_' : ch).ToArray());
+        return string.IsNullOrWhiteSpace(safe) ? "REX640" : safe;
     }
 
     private static void Replace<T>(ObservableCollection<T> collection, IEnumerable<T> values)
@@ -1839,6 +2200,8 @@ public sealed class Rex640OptionViewModel : ObservableObject
         IsAvailable = isAvailable;
     }
 }
+
+public sealed record Rex640VersionOptionViewModel(string Id, string DisplayName);
 
 public sealed record Rex640SelectedSummaryItemViewModel(string GroupName, string Code, string Description);
 

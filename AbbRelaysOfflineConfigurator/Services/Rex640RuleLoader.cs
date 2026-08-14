@@ -6,8 +6,11 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class Rex640RuleLoader
 {
     private const string RulesFileName = "REX640.xml";
+    private static readonly Lazy<Rex640RuleSet> SharedRules = new(LoadCore);
 
-    public Rex640RuleSet Load()
+    public Rex640RuleSet Load() => SharedRules.Value;
+
+    private static Rex640RuleSet LoadCore()
     {
         var path = ResolveRulesPath();
         var xml = SanitizeXml(File.ReadAllText(path));
@@ -83,16 +86,16 @@ public sealed class Rex640RuleLoader
             Group("BIM1Module", "BIM 模块", "BIM module", false, false, order++,
             [
                 Option("None", "无 BIM1 模块", "No BIM1 module"),
-                Option("1x BIM1", "1x BIM1：24BI", "1x BIM1: 24BI", "ConnectivityLevel=PCL5,PCL6"),
-                Option("2x BIM1", "2x BIM1：每块 24BI", "2x BIM1: each 24BI", "ConnectivityLevel=PCL5,PCL6"),
-                Option("3x BIM1", "3x BIM1：每块 24BI", "3x BIM1: each 24BI", "Housing=B&ConnectivityLevel=PCL5,PCL6")
+                Option("1x BIM1", "1x BIM1：24BI", "1x BIM1: 24BI", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("2x BIM1", "2x BIM1：每块 24BI", "2x BIM1: each 24BI", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("3x BIM1", "3x BIM1：每块 24BI", "3x BIM1: each 24BI", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7")
             ]),
             Group("WideSlotEModule", "宽模块槽 E", "Wide module slot E", false, false, order++,
             [
                 Option("None", "槽 E 不选宽模块", "No wide module in slot E"),
-                Option("1x BIO3", "1x BIO3：14BI + 8SO（宽模块槽 E）", "1x BIO3: 14BI + 8SO (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6"),
-                Option("1x BIO4", "1x BIO4：9BI + 6SPO + 2SPO with TCS（宽模块槽 E）", "1x BIO4: 9BI + 6SPO + 2SPO with TCS (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6"),
-                Option("1x BIM3", "1x BIM3：24BI（宽模块槽 E）", "1x BIM3: 24BI (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6")
+                Option("1x BIO3", "1x BIO3：14BI + 8SO（宽模块槽 E）", "1x BIO3: 14BI + 8SO (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("1x BIO4", "1x BIO4：9BI + 6SPO + 2SPO with TCS（宽模块槽 E）", "1x BIO4: 9BI + 6SPO + 2SPO with TCS (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("1x BIM3", "1x BIM3：24BI（宽模块槽 E）", "1x BIM3: 24BI (wide module slot E)", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7")
             ]),
             Group("AnalogModule", "模拟量/传感器模块", "Analog/sensor module", true, false, order++,
             [
@@ -100,14 +103,14 @@ public sealed class Rex640RuleLoader
                 Option("2x AIM1", "2x AIM1：每块 4CT(1/5A) + 1CT(0.2/1A) + 5VT", "2x AIM1: each 4CT (1/5A) + 1CT (0.2/1A) + 5VT", "Housing=B"),
                 Option("1x AIM2", "1x AIM2：6CT(1/5A) + 4VT", "1x AIM2: 6CT (1/5A) + 4VT"),
                 Option("2x AIM2", "2x AIM2：每块 6CT(1/5A) + 4VT", "2x AIM2: each 6CT (1/5A) + 4VT", "Housing=B"),
-                Option("1x AIM3", "1x AIM3：7CT(1/5A) + 3VT", "1x AIM3: 7CT (1/5A) + 3VT", "ConnectivityLevel=PCL5,PCL6"),
-                Option("2x AIM3", "2x AIM3：每块 7CT(1/5A) + 3VT", "2x AIM3: each 7CT (1/5A) + 3VT", "Housing=B&ConnectivityLevel=PCL5,PCL6"),
+                Option("1x AIM3", "1x AIM3：7CT(1/5A) + 3VT", "1x AIM3: 7CT (1/5A) + 3VT", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("2x AIM3", "2x AIM3：每块 7CT(1/5A) + 3VT", "2x AIM3: each 7CT (1/5A) + 3VT", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7"),
                 Option("1x SIM1", "1x SIM1：3 个组合传感器 + 1CT(0.2/1A) + 1VT，IEC 60044", "1x SIM1: 3 combi sensors + 1CT (0.2/1A) + 1VT IEC 60044"),
                 Option("2x SIM1", "2x SIM1：每块 3 个组合传感器 + 1CT(0.2/1A) + 1VT，IEC 60044", "2x SIM1: each 3 combi sensors + 1CT (0.2/1A) + 1VT IEC 60044", "Housing=B"),
                 Option("1x SIM2", "1x SIM2：3 个组合传感器 + 1CT(0.2/1A) + 1VT，IEC 61869", "1x SIM2: 3 combi sensors + 1CT (0.2/1A) + 1VT IEC 61869"),
                 Option("2x SIM2", "2x SIM2：每块 3 个组合传感器 + 1CT(0.2/1A) + 1VT，IEC 61869", "2x SIM2: each 3 combi sensors + 1CT (0.2/1A) + 1VT IEC 61869", "Housing=B"),
-                Option("1x SIM3", "1x SIM3：2 x 3 个组合传感器，IEC 61869", "1x SIM3: 2 x 3 combi sensors IEC 61869", "ConnectivityLevel=PCL5,PCL6"),
-                Option("2x SIM3", "2x SIM3：每块 2 x 3 个组合传感器，IEC 61869", "2x SIM3: each 2 x 3 combi sensors IEC 61869", "Housing=B&ConnectivityLevel=PCL5,PCL6")
+                Option("1x SIM3", "1x SIM3：2 x 3 个组合传感器，IEC 61869", "1x SIM3: 2 x 3 combi sensors IEC 61869", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+                Option("2x SIM3", "2x SIM3：每块 2 x 3 个组合传感器，IEC 61869", "2x SIM3: each 2 x 3 combi sensors IEC 61869", "Housing=B&ConnectivityLevel=PCL5,PCL6,PCL7")
             ]),
             Group("PSM", "电源模块", "Power supply module", true, false, order++,
             [
@@ -121,8 +124,9 @@ public sealed class Rex640RuleLoader
             GroupFromRaw("Protocol", "通信协议", "Protocols", rawGroups, catalog, order++),
             Group("ConnectivityLevel", "PCL 版本", "Connectivity level", true, false, order++,
             [
-                Option("PCL5", "PCL5：软件版本 2.0", "PCL5: SW version 2.0"),
-                Option("PCL6", "PCL6：软件版本 6.1（REX640 2.0 推荐）", "PCL6: SW version 6.1 (recommended for REX640 2.0)")
+                Option("PCL5", "版本 PCL5", "Version PCL5"),
+                Option("PCL6", "版本 PCL6", "Version PCL6"),
+                Option("PCL7", "版本 PCL7", "Version PCL7")
             ])
         ];
     }
@@ -226,9 +230,9 @@ public sealed class Rex640RuleLoader
             Option("APP12", "APP12：网络自动同期包", "APP12: Network autosynchronizer package"),
             Option("APP13", "APP13：消弧线圈控制包", "APP13: Petersen coil control package"),
             Option("APP14", "APP14：柴油发电机组监视包", "APP14: DG-set monitoring package"),
-            Option("APP51", "APP51：一路备用馈线高速切换装置", "APP51: HSTD for one stand-by feeder", "Application=!APP52,!APP53", "ConnectivityLevel=PCL5,PCL6"),
-            Option("APP52", "APP52：两路备用馈线高速切换装置", "APP52: HSTD for two stand-by feeders", "Application=!APP51,!APP53", "ConnectivityLevel=PCL5,PCL6"),
-            Option("APP53", "APP53：三路等价馈线高速切换装置", "APP53: HSTD for three equal feeders", "Application=!APP51,!APP52", "ConnectivityLevel=PCL5,PCL6")
+            Option("APP51", "APP51：一路备用馈线高速切换装置", "APP51: HSTD for one stand-by feeder", "Application=!APP52,!APP53", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+            Option("APP52", "APP52：两路备用馈线高速切换装置", "APP52: HSTD for two stand-by feeders", "Application=!APP51,!APP53", "ConnectivityLevel=PCL5,PCL6,PCL7"),
+            Option("APP53", "APP53：三路等价馈线高速切换装置", "APP53: HSTD for three equal feeders", "Application=!APP51,!APP52", "ConnectivityLevel=PCL5,PCL6,PCL7")
         ]);
 
     private static Rex640OptionRule Option(
@@ -619,7 +623,7 @@ internal sealed class Rex640DescriptionCatalog
 
         if (groupName.Equals("ConnectivityLevel", StringComparison.OrdinalIgnoreCase))
         {
-            return english ? $"{id}: product connectivity level" : $"{id}：产品连接包等级";
+            return english ? $"Version {id}" : $"版本 {id}";
         }
 
         if (groupName.Equals("Application", StringComparison.OrdinalIgnoreCase))

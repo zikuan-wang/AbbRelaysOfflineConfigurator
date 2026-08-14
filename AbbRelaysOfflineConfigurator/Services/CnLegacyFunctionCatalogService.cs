@@ -7,15 +7,15 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed class CnLegacyFunctionCatalogService
 {
     private const string CatalogFileName = "CnLegacyFunctionCatalog.json";
-    private readonly Lazy<CnLegacyFunctionCatalogDocument> _catalog = new(LoadCatalog);
+    private static readonly Lazy<CnLegacyFunctionCatalogDocument> SharedCatalog = new(LoadCatalog);
 
-    public IReadOnlyList<CnLegacyFunctionDeviceCatalog> Devices => _catalog.Value.Devices;
+    public IReadOnlyList<CnLegacyFunctionDeviceCatalog> Devices => SharedCatalog.Value.Devices;
 
     public IReadOnlyList<CnLegacyFunctionEntry> GetFunctions(string? deviceId = null)
     {
         var devices = string.IsNullOrWhiteSpace(deviceId)
-            ? _catalog.Value.Devices
-            : _catalog.Value.Devices.Where(device => device.DeviceId.Equals(deviceId, StringComparison.OrdinalIgnoreCase));
+            ? SharedCatalog.Value.Devices
+            : SharedCatalog.Value.Devices.Where(device => device.DeviceId.Equals(deviceId, StringComparison.OrdinalIgnoreCase));
 
         return devices.SelectMany(device => device.Functions.Select(function => function with
         {
@@ -69,7 +69,7 @@ public sealed class CnLegacyFunctionCatalogService
         IEnumerable<CnLegacyFunctionEntry> requestedFunctions,
         IReadOnlyList<string> selectableCodes)
     {
-        var device = _catalog.Value.Devices.FirstOrDefault(item =>
+        var device = SharedCatalog.Value.Devices.FirstOrDefault(item =>
             item.DeviceId.Equals(deviceId, StringComparison.OrdinalIgnoreCase));
         if (device is null)
         {
@@ -113,7 +113,7 @@ public sealed class CnLegacyFunctionCatalogService
     }
 
     public CnLegacyFunctionDeviceCatalog? GetDeviceCatalog(string deviceId) =>
-        _catalog.Value.Devices.FirstOrDefault(device =>
+        SharedCatalog.Value.Devices.FirstOrDefault(device =>
             device.DeviceId.Equals(deviceId, StringComparison.OrdinalIgnoreCase));
 
     public static IReadOnlyList<string> SplitSearchInput(string input) =>

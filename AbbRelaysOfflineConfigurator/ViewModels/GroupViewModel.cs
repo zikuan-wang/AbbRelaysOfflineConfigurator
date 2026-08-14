@@ -28,6 +28,7 @@ public sealed class GroupViewModel : ObservableObject
     public bool IsMandatory => Group.IsMandatory;
     public bool IsMultiple => Group.IsMultiple;
     public bool AllowsMultiple => _owner.AllowsMultiple(Group);
+    internal string CurrentVersion => _owner.CurrentVersion ?? "PCL1";
     internal bool UseFullDescription => _owner.UseFullDescription;
     internal bool UseEnglishDescription => _owner.IsEnglish;
     public ObservableCollection<OptionViewModel> Options { get; }

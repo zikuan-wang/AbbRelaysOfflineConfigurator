@@ -17,8 +17,8 @@ public sealed class OptionViewModel(RuleOption option, GroupViewModel group) : O
     public string SummaryText => $"{Id}: {DisplayDescription}";
     public string Description => DisplayDescription;
     public string Detail => Group.UseEnglishDescription
-        ? Fallback(Option.EnglishDescription, Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
-        : Option.Description;
+        ? Fallback(Versioned("DescriptionEn"), Versioned("EnglishDescription"), Option.EnglishDescription, Versioned("ShortDescriptionEn"), Versioned("EnglishShortDescription"), Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
+        : Fallback(Versioned("Description"), Option.Description);
 
     public bool IsSelected
     {
@@ -86,12 +86,14 @@ public sealed class OptionViewModel(RuleOption option, GroupViewModel group) : O
     }
 
     private string ChineseDisplayDescription() => Group.UseFullDescription
-        ? Fallback(Option.Description, Option.ShortDescription)
-        : Fallback(Option.ShortDescription, Option.Description);
+        ? Fallback(Versioned("Description"), Option.Description, Versioned("ShortDescription"), Option.ShortDescription)
+        : Fallback(Versioned("ShortDescription"), Option.ShortDescription, Versioned("Description"), Option.Description);
 
     private string EnglishDisplayDescription() => Group.UseFullDescription
-        ? Fallback(Option.EnglishDescription, Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
-        : Fallback(Option.EnglishShortDescription, Option.ShortDescription, Option.EnglishDescription, Option.Description);
+        ? Fallback(Versioned("DescriptionEn"), Versioned("EnglishDescription"), Option.EnglishDescription, Versioned("ShortDescriptionEn"), Versioned("EnglishShortDescription"), Option.EnglishShortDescription, Option.ShortDescription, Option.Description)
+        : Fallback(Versioned("ShortDescriptionEn"), Versioned("EnglishShortDescription"), Option.EnglishShortDescription, Option.ShortDescription, Versioned("DescriptionEn"), Versioned("EnglishDescription"), Option.EnglishDescription, Option.Description);
+
+    private string Versioned(string baseName) => Option.Attribute($"{baseName}{Group.CurrentVersion}");
 
     private static string Fallback(params string?[] values) =>
         values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "";

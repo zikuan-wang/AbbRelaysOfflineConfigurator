@@ -4,7 +4,8 @@ namespace AbbRelaysOfflineConfigurator.Services;
 
 public sealed class Ssc600FunctionCatalogService
 {
-    private readonly IReadOnlyList<Ssc600FunctionEntry> _functions = BuildFunctions();
+    private static readonly Lazy<IReadOnlyList<Ssc600FunctionEntry>> SharedFunctions = new(BuildFunctions);
+    private static IReadOnlyList<Ssc600FunctionEntry> Functions => SharedFunctions.Value;
 
     public IReadOnlyList<Ssc600FunctionEntry> Search(string query, int limit = 20)
     {
@@ -14,7 +15,7 @@ public sealed class Ssc600FunctionCatalogService
             return [];
         }
 
-        return _functions
+        return Functions
             .Select(function => new { Function = function, Score = MatchScore(function, token) })
             .Where(item => item.Score < int.MaxValue)
             .OrderBy(item => item.Score)
@@ -32,7 +33,7 @@ public sealed class Ssc600FunctionCatalogService
             return null;
         }
 
-        var matches = _functions
+        var matches = Functions
             .Where(function =>
                 IsCodeMatch(function.Code, token) ||
                 ExpandAnsiSearchTerms(function.Ansi).Any(ansi => Normalize(ansi) == token))
@@ -40,12 +41,12 @@ public sealed class Ssc600FunctionCatalogService
         return matches.Count == 1 ? matches[0] : null;
     }
 
-    public IReadOnlyList<Ssc600FunctionEntry> GetFunctions() => _functions;
+    public IReadOnlyList<Ssc600FunctionEntry> GetFunctions() => Functions;
 
     public Ssc600RecommendationResult Recommend(IReadOnlyCollection<string> functionCodes)
     {
         var functions = functionCodes
-            .Select(code => _functions.FirstOrDefault(function => function.Code.Equals(code, StringComparison.OrdinalIgnoreCase)))
+            .Select(code => Functions.FirstOrDefault(function => function.Code.Equals(code, StringComparison.OrdinalIgnoreCase)))
             .Where(function => function is not null)
             .Cast<Ssc600FunctionEntry>()
             .DistinctBy(function => function.Code, StringComparer.OrdinalIgnoreCase)
