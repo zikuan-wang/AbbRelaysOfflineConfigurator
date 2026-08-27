@@ -2,6 +2,8 @@
 
 namespace AbbRelaysOfflineConfigurator.Services;
 
+// REX615 选择结果的集中校验器。校验分为四层：组基数、选项条件、依赖条件和物理槽位；
+// 返回值同时包含面向用户的错误消息与槽位展示快照，使界面无需自行重复推导装配结果。
 public sealed class SelectionValidator(ProductRuleSet rules)
 {
     public ValidationResult Validate(
@@ -10,9 +12,13 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         bool useEnglishDescription = false)
     {
         var messages = new List<string>();
+        // 后续表达式均按“组名 -> 已选代码集合”查询。统一建立索引可保证大小写规则一致，
+        // 也避免各校验阶段反复遍历 ViewModel 选择集合。
         var selectedByGroup = BuildSelectedByGroup(selectedOptions);
         var selectedVersion = GetSelectedVersion(selectedByGroup);
 
+        // 先报告最基础的缺选/多选，再检查跨组条件，最后执行成本更高的槽位搜索。
+        // 即使已有错误仍继续生成槽位结果，界面才能在不完整选择下展示可诊断的当前状态。
         ValidateMandatoryGroups(rules.MainGroups, selectedVersion, selectedByGroup, messages);
         ValidateMandatoryGroups(rules.OptionGroups, selectedVersion, selectedByGroup, messages);
         ValidateValidityExpressions(selectedOptions, selectedByGroup, messages);
@@ -109,6 +115,8 @@ public sealed class SelectionValidator(ProductRuleSet rules)
 
     private static bool EvaluateCondition(string condition, IReadOnlyDictionary<string, HashSet<string>> selectedByGroup)
     {
+        // 规则语法为“组=候选1,候选2,!排除项”：正值之间是 OR，所有负值均不得出现；
+        // 外层调用用 & 拆分多个条件，因此不同组条件之间是 AND。
         var parts = condition.Split('=', 2, StringSplitOptions.TrimEntries);
         if (parts.Length != 2)
         {
@@ -140,6 +148,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         bool useFullDescription,
         bool useEnglishDescription)
     {
+        // 槽位规则随 PCL 版本切换；机箱选择确定要搜索的槽位集合，模块选项随后展开为物理单元。
         var slotConstraints = ResolveSlotConstraints(selectedByGroup, messages);
         if (!selectedByGroup.TryGetValue("机箱", out var housingSet) || housingSet.Count != 1)
         {
@@ -154,6 +163,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             return BuildFixedAssignments(selectedByGroup, useFullDescription, useEnglishDescription);
         }
 
+        // 一个组合代码选项可能代表多个同型模块，必须按 ModuleCount 展开后再计算容量。
         var units = BuildModuleUnits(selectedOptions, useFullDescription, useEnglishDescription);
         var assignments = new Dictionary<string, List<ModuleUnit>>(StringComparer.OrdinalIgnoreCase);
 
@@ -165,11 +175,14 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             }
         }
 
+        // 先放置可选槽位最少的模块以缩小回溯分支；具体槽位顺序仍由物理分配优先级决定。
         var orderedUnits = units
             .OrderBy(unit => housing.Slots.Count(slot => slot.Modules.Contains(unit.ModuleType)))
             .ThenBy(unit => unit.ModuleType, StringComparer.OrdinalIgnoreCase)
             .ToList();
 
+        // TryAssign 找到任一满足模块兼容性与容量的完整放置方案即可；若失败，assignments 仅用于辅助展示，
+        // 不能被当作一个有效的部分装配方案继续生成组合代码。
         if (!TryAssign(orderedUnits, housing, assignments, index: 0))
         {
             messages.Add($"当前模块组合无法装入 {housingId} 机箱槽位。");
@@ -200,6 +213,8 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             messages.Add($"版本 / {selectedVersion} 未找到对应的槽位规则。");
         }
 
+        // 首个约束集保留为旧调用或尚未选定版本时的兼容回退；
+        // 若数据包提供了版本索引却缺少当前版本，上方仍会显式记录错误，避免静默掩盖数据缺口。
         return rules.SlotConstraints;
     }
 
@@ -249,6 +264,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
             return null;
         }
 
+        // 多数量选项只占一个选型代码；槽位表按物理模块逐项展示，因此优先复用同类型单模块选项的描述。
         return rules.OptionGroups
             .SelectMany(group => group.Options)
             .FirstOrDefault(candidate =>
@@ -264,6 +280,8 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         bool useFullDescription,
         bool useEnglishDescription)
     {
+        // 固定接口槽与可分配硬件槽合并为同一展示模型；空物理槽也保留，
+        // 让槽位表始终完整反映机箱布局，而不是只列出已安装模块。
         var slots = BuildFixedAssignments(selectedByGroup, useFullDescription, useEnglishDescription).ToList();
 
         foreach (var slot in housing.Slots)
@@ -307,6 +325,7 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         bool useFullDescription,
         bool useEnglishDescription)
     {
+        // X000 通讯模块与 X100 电源模块由选项组直接决定，不参与可变硬件槽的回溯搜索。
         return
         [
             BuildFixedAssignment("X000", "通讯模块", useEnglishDescription ? "COM: not selected" : "COM: 未选择"),
@@ -374,7 +393,9 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         }
 
         var unit = units[index];
-        // ABB CodeOrder is independent from the preferred physical slot priority.
+        // ABB CodeOrder 仅控制组合代码输出顺序，不代表物理槽位优先级；这里必须使用 AssignmentPriority。
+        // 每次尝试先写入 assignments，递归失败后再严格撤销；这一“选择-递归-回滚”保证其他分支
+        // 看到的容量状态不受前一次失败尝试污染。
         foreach (var slot in housing.Slots
                      .Where(slot => slot.Modules.Contains(unit.ModuleType))
                      .OrderBy(slot => slot.AssignmentPriority))
@@ -411,6 +432,8 @@ public sealed class SelectionValidator(ProductRuleSet rules)
         IReadOnlyDictionary<string, List<ModuleUnit>> assignments,
         ICollection<string> messages)
     {
+        // 兼容槽位和容量只回答“能否放下”；机箱 Requirement 还表达“必须放在哪里/至少包含什么”。
+        // 因而它们必须在完整放置后统一检查，不能用搜索成功代替最终业务合法性。
         var valid = true;
         foreach (var requirement in housing.Requirements)
         {

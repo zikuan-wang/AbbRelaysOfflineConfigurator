@@ -6,6 +6,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 负责 RE_611 多装置、多版本订货码选择，并将规则依赖、分类校验、I/O 汇总和标准配置推荐统一编排。
+// _preferredCodes 保存用户意图，Groups 保存经当前版本与组合规则收敛后的实际选择，两者不能混作同一状态。
 public sealed class Re611SelectionViewModel : ObservableObject
 {
     private const int OrderCodeLength = 18;
@@ -88,6 +90,7 @@ public sealed class Re611SelectionViewModel : ObservableObject
                 : ConfiguratorViewModel.ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 语言切换重新生成本地化校验与推荐说明，但不重新选择规则项或清空用户功能需求。
                 RefreshStaticText();
                 RefreshStatus();
                 ValidateCurrentSelection();
@@ -132,6 +135,7 @@ public sealed class Re611SelectionViewModel : ObservableObject
                 return;
             }
 
+            // 装置切换必须成组替换版本、位段和选项集合，再应用该装置默认码，避免复用另一装置的规则对象。
             if (!value.DeviceId.Equals(SelectedDeviceFilter, StringComparison.OrdinalIgnoreCase))
             {
                 _selectedDeviceFilter = value.DeviceId;
@@ -345,6 +349,8 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private void ApplyOrderCode(string value)
     {
+        // 导入码先自动识别装置并切换规则集，再按每组实际码长拆分为“偏好值”，由统一收敛管线决定最终可选项。
+        // 解析期间不逐组触发界面重算，完整的偏好映射建立后才一次刷新全部派生状态。
         var code = NormalizeOrderCode(value);
         if (code.Length != OrderCodeLength)
         {
@@ -392,6 +398,8 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private void RefreshSelection(bool preservePreferredCodes = false)
     {
+        // 规则组互相依赖，单次顺序遍历不足以稳定；最多进行 20 轮候选、可用性和首选项更新直至无变化。
+        // 收敛后才固化实际选择，并按代码、位段、I/O、分类校验、功能推荐的顺序刷新下游结果。
         if (SelectedRuleSet is null)
         {
             return;
@@ -474,6 +482,7 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private bool IsCandidateAllowed(string groupName, string candidateCode)
     {
+        // 候选过滤使用“允许不完整”的分类校验，只排除已确定冲突，不会因尚未选择的后续组过早封死选项。
         if (SelectedRuleSet is null)
         {
             return true;
@@ -495,6 +504,8 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private void ValidateCurrentSelection()
     {
+        // 最终校验要求 18 位完整，并分别验证功能应用、通信、标准/语言三类组合模式。
+        // 分类失败会同时标记相关组选项并生成可导航目标，便于从汇总消息直接定位冲突来源。
         var messages = new List<ValidationMessageViewModel>();
         ClearValidationErrors();
         if (OrderCode.Length != OrderCodeLength)
@@ -783,6 +794,7 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private IEnumerable<IoSummaryItemViewModel> BuildIoSummary()
     {
+        // I/O 计数取自规则选项的原始说明字段并叠加固定 BO，通信信息则由独立硬件组汇总，避免重复计数。
         var communication = Groups
             .Where(IsCommunicationHardwareGroup)
             .Select(BuildCommunicationSummaryPart)
@@ -1020,6 +1032,8 @@ public sealed class Re611SelectionViewModel : ObservableObject
 
     private void RefreshStandardConfigurationRecommendations()
     {
+        // 推荐按功能覆盖度排序，并区分完整覆盖、部分覆盖以及当前版本不可直接应用的手册参考配置。
+        // 推荐只改变 FunctionalApps 组的首选项，应用后仍需经过完整规则收敛与离线校验。
         StandardConfigurationRecommendations.Clear();
         if (SelectedRuleSet is null || RequestedFunctions.Count == 0)
         {

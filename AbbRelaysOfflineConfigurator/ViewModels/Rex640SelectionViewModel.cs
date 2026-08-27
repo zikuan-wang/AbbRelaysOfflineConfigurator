@@ -9,6 +9,8 @@ using Microsoft.Win32;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 聚合 REX640 规则选择、组合代码、槽位/I/O 摘要、APP 功能推荐、在线校验与导出状态。
+// Groups 中的选择是装置配置的唯一事实来源；组合代码、摘要、槽位与 I/O 均由统一重算管线派生。
 public sealed class Rex640SelectionViewModel : ObservableObject
 {
     private readonly Rex640RuleSet _rules = new Rex640RuleLoader().Load();
@@ -104,6 +106,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
                 : ConfiguratorViewModel.ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 语言切换只刷新展示文案并重建派生摘要，不改变用户已经选择的硬件、应用或协议选项。
                 OnPropertyChanged(nameof(IsEnglish));
                 RefreshStaticText();
                 foreach (var group in Groups)
@@ -304,6 +307,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     public void Reset()
     {
+        // 重置期间静默批量清空并写入默认项，最后只触发一次完整重算，避免中间态被校验或显示。
         _isRefreshing = true;
         try
         {
@@ -370,6 +374,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     internal void Recalculate()
     {
+        // 先收敛必选项和版本可用性，再依次生成代码、校验消息、选择摘要、槽位和 I/O 派生结果。
+        // 所有用户选择入口最终都汇入这里，因此在线校验状态也会随 OrderCode 变化统一失效。
         _isRefreshing = true;
         try
         {
@@ -1012,6 +1018,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private IReadOnlyList<Rex640SlotViewModel> BuildSlots()
     {
+        // A1/A2/G 是弧光、通信和电源的固定槽位；模拟量及宽模块先占专用位置，再分配小型离散模块。
+        // 机箱类型决定 D/E 是否存在，无法容纳的剩余模块明确标为“未分配”，供界面展示和用户定位。
         var housing = SelectedSingle("Housing");
         var slots = new Dictionary<string, Rex640SlotViewModel>(StringComparer.OrdinalIgnoreCase);
         foreach (var slotId in new[] { "A1", "A2", "B", "C", "D", "E", "F", "G" })
@@ -1483,6 +1491,8 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private IReadOnlyList<string> ApplyOrderCode(string orderCode)
     {
+        // 导入按“主代码 + 无序选件令牌”解析；批量清空和回填均处于刷新保护区，完成后由调用方统一重算。
+        // 未识别的位段、数量或 PCL 版本只记录为导入告警，不把半完成的解析过程逐步暴露给界面。
         var code = (orderCode ?? "").Trim().ToUpperInvariant();
         var parts = code.Split('+', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         if (parts.Length == 0)
@@ -1659,6 +1669,7 @@ public sealed class Rex640SelectionViewModel : ObservableObject
 
     private async Task ValidateOnlineAsync()
     {
+        // 请求返回时再次比对起始代码，丢弃用户已修改配置后的旧响应，防止过期订货号覆盖当前状态。
         if (string.IsNullOrWhiteSpace(OrderCode) || IsOnlineValidationBusy)
         {
             return;

@@ -18,6 +18,8 @@ using MaterialDesignThemes.Wpf;
 
 namespace AbbRelaysOfflineConfigurator;
 
+// 主窗口负责应用级外壳：页面导航、授权门控、延迟加载、显示语言、主题以及更新入口。
+// 各产品的选型状态和规则运算仍由对应 ViewModel 持有，窗口层只协调视图生命周期与跨页动作。
 public partial class MainWindow : Window
 {
     private const string DefaultThemeColor = "#018B8D";
@@ -197,6 +199,7 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        // 先恢复主题和语言偏好，再刷新窗口静态文本与授权状态，避免首屏出现默认样式闪烁或短暂开放受保护页。
         InitializeComponent();
         ApplyThemeColor(DefaultThemeColor);
         LoadUserSettings();
@@ -225,6 +228,7 @@ public partial class MainWindow : Window
 
     private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
+        // 首屏完成布局后才安排授权页跳转、后台预加载和更新检查，避免这些非关键工作阻塞窗口显示。
         if (!LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64).IsLicensed)
         {
             _ = Dispatcher.BeginInvoke(() => MainTabControl.SelectedIndex = AboutTabIndex, DispatcherPriority.Background);
@@ -489,6 +493,7 @@ public partial class MainWindow : Window
 
     private void ApplyLicenseGate()
     {
+        // 所有受保护页共用这一处授权判定；状态变化时同时更新页签、首页提示和当前导航位置。
         var status = LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64);
         ConfiguratorTabItem.IsEnabled = status.IsLicensed;
         Ssc600TabItem.IsEnabled = status.IsLicensed;
@@ -681,6 +686,7 @@ public partial class MainWindow : Window
 
     private void NavigateToProtectedTab(int index)
     {
+        // 受保护导航统一在进入前复核授权，并在首次访问时创建内容，避免各按钮各自实现不一致的门控逻辑。
         CloseTransientPopups();
         if (!LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64).IsLicensed)
         {
@@ -712,6 +718,7 @@ public partial class MainWindow : Window
 
     private async void SchedulePreloadProtectedTabs()
     {
+        // 延迟到启动空闲期再预加载较重的产品页，使首次交互保持轻量，同时降低后续切页等待时间。
         if (_isPreloadScheduled || _isPreloadingTabs)
         {
             return;
@@ -732,6 +739,7 @@ public partial class MainWindow : Window
 
     private async void BeginPreloadProtectedTabs()
     {
+        // 逐页让出调度器并避开导航抽屉动画，防止一次性构造全部规则视图造成明显的 UI 卡顿。
         if (_isPreloadingTabs ||
             !IsLoaded ||
             !LicenseService.GetStatus(LicenseKeyProvider.PublicKeyXmlBase64).IsLicensed)
@@ -766,6 +774,7 @@ public partial class MainWindow : Window
 
     private bool EnsureTabContent(int index)
     {
+        // ContentHost 为空才实例化视图；已创建的 ViewModel 和事件订阅会跨导航复用，不重复加载规则数据。
         if (DataContext is not ConfiguratorViewModel viewModel)
         {
             return false;
@@ -811,6 +820,7 @@ public partial class MainWindow : Window
 
     private DependencyObject CurrentLanguageScope() => LanguageScopeForIndex(MainTabControl.SelectedIndex);
 
+    // 静态文本翻译限定在目标页的可视树内，避免延迟创建的其他页被提前遍历或重复改写。
     private DependencyObject LanguageScopeForIndex(int index) => index switch
     {
         0 => HomeTabItem,
@@ -1006,6 +1016,7 @@ public partial class MainWindow : Window
 
     private static void ApplyStaticLanguage(DependencyObject root, bool english)
     {
+        // 只翻译没有数据绑定的静态属性；动态文案由 ViewModel 负责，防止覆盖绑定表达式和业务状态文本。
         var visited = new HashSet<DependencyObject>();
         foreach (var element in EnumerateElements(root, visited))
         {
@@ -1112,6 +1123,7 @@ public partial class MainWindow : Window
 
     private void LoadUserSettings()
     {
+        // 本地设置仅属于可选的界面偏好，文件缺失或损坏不得影响核心选型功能启动。
         try
         {
             var settings = ReadSettings();

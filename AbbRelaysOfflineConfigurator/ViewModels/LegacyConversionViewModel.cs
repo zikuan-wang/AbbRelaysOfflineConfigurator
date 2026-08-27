@@ -8,6 +8,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 615/620 -> REX615 批量转换页的工作流协调器。离线模式先用本地工作簿规则生成组合代码，
+// 在线模式由 ABB 接口生成；两条路径最终都调用在线校验，并用接口返回的订货号形成最终行状态。
 public sealed class LegacyConversionViewModel : ObservableObject
 {
     private readonly LegacyOrderCodeConversionService _offlineConversionService = new();
@@ -124,6 +126,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
 
     private async Task ConvertBatchAsync()
     {
+        // 输入先按常见中英文分隔符拆分并去重，保证一次批处理中同一订货号只请求/求值一次。
         var codes = ParseInputCodes(InputCodes).ToList();
         if (codes.Count == 0)
         {
@@ -139,6 +142,8 @@ public sealed class LegacyConversionViewModel : ObservableObject
         {
             if (UseOnlineConversion)
             {
+                // 在线接口逐条处理并立即更新对应行，既能保持输入顺序，也能让用户看到渐进结果；
+                // 当前没有并发发请求，避免批量输入对外部服务形成瞬时压力。
                 foreach (var code in codes)
                 {
                     var row = CreateRow(
@@ -152,6 +157,8 @@ public sealed class LegacyConversionViewModel : ObservableObject
             }
             else
             {
+                // 本地公式求值整批在后台线程完成；成功生成组合代码后仍逐条向 ABB 校验，
+                // 因此“离线转换成功”不等同于本页最终的“转换并在线校验通过”。
                 var offlineResults = await _offlineConversionService.ConvertOfflineBatchAsync(codes);
                 foreach (var offlineResult in offlineResults)
                 {
@@ -191,6 +198,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
 
     private async Task ConvertOnlineAsync(LegacyConversionRowViewModel row)
     {
+        // 每行自行捕获异常，单个订货号的网络或响应问题不会中断整批后续项目。
         try
         {
             var result = await _onlineValidationService.ConvertLegacyCodeAsync(row.SourceOrderingCode);
@@ -215,6 +223,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
 
     private async Task ValidateRexCodeAsync(LegacyConversionRowViewModel row)
     {
+        // 在线校验是两种转换模式的汇合点：只有服务端确认有效且返回订货号，行才标记为最终成功。
         try
         {
             var validation = await _onlineValidationService.ValidateAsync(row.CompositionCode);
@@ -257,6 +266,8 @@ public sealed class LegacyConversionViewModel : ObservableObject
             return false;
         }
 
+        // CN 主代码保留本地规则生成结果，不用在线响应覆盖；其他系列若服务端规范化了组合代码，
+        // 则采用服务端版本供后续导出，减少旧规则格式差异。
         var mainCode = currentCompositionCode.Split('+', 2)[0];
         return !mainCode.EndsWith("CN", StringComparison.OrdinalIgnoreCase) &&
                !string.Equals(currentCompositionCode, onlineCompositionCode, StringComparison.OrdinalIgnoreCase);
@@ -311,6 +322,7 @@ public sealed class LegacyConversionViewModel : ObservableObject
 
     private void ResultsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        // 集合是导出权限和结果计数的共同来源，集中监听可避免每条处理分支遗漏命令状态刷新。
         ExportCommand.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(ResultSummary));
     }

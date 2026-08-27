@@ -7,6 +7,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 615/620 CN 历史型号选型页的总状态协调器。它按固定订货号位号管理单选组，
+// 同时区分“候选是否可选”的交互规则与“当前完整组合是否合规”的 XML 终态校验规则。
 public sealed class CnLegacySelectorViewModel : ObservableObject
 {
     private const string DefaultOrderingCode = "HCFCACABNBCZCCN11G";
@@ -23,6 +25,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     public CnLegacySelectorViewModel()
     {
+        // 数据包先构造成系列/装置/位号三级 ViewModel，再通过默认订货号走正式导入流程初始化；
+        // 这样首次页面状态与用户后来导入同一代码的行为完全一致。
         var rules = new CnLegacySelectionRuleLoader().Load();
         Series = new ObservableCollection<CnLegacySeriesViewModel>(
             rules.Series.Select(series => new CnLegacySeriesViewModel(series)));
@@ -198,6 +202,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     internal void RefreshFromSelection()
     {
+        // 一次选择变化的刷新顺序固定为：候选状态 -> 展示摘要/I/O/订货号 -> 终态校验 -> 功能推荐。
+        // 所有阶段读取同一组 SelectedOption，避免订货号已更新而错误提示仍对应旧选择。
         RefreshAvailability();
         RefreshSummary();
         RefreshIoSummary();
@@ -208,6 +214,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private void LoadDevice(CnLegacyDeviceViewModel? device)
     {
+        // 切换装置会替换整套位号定义，旧装置选项不能复用；新组在构造时先选默认值，
+        // 集合完整建立后再统一刷新派生状态。
         Groups.Clear();
         if (device is not null)
         {
@@ -529,9 +537,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         {
             foreach (var option in group.Options)
             {
-                // PDF-derived requirements control which page choices are
-                // currently compatible. The original XML pattern blocks are
-                // deliberately evaluated only as validation below.
+                // PDF 选型表衍生规则只控制页面当前可选项；原 XML pattern 块保留给最终校验和错误定位，两层不可混用。
+                // 计算候选时 SelectedCodesWith 会临时把该候选代入自己的位号，不会改变当前真实选择。
                 var selectionResult = EvaluateSelectionRules(option);
                 option.SetAvailability(selectionResult.IsValid);
 
@@ -582,6 +589,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private void RefreshValidationMessagesWithTargets()
     {
+        // 每次完整重建消息集合，并把业务问题关联到一个或多个位号/代码；
+        // 导航目标不是新的校验规则，只为界面展开最可能需要调整的选择组。
         ValidationMessages.Clear();
 
         foreach (var group in Groups)
@@ -616,6 +625,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private CnLegacyEvaluationResultWithTargets EvaluateValidationWithTargets(CnLegacyOptionViewModel option)
     {
+        // 终态校验依次覆盖版本适用性、结构化依赖/排除关系和原 XML pattern 块。
+        // 同一问题同时携带触发项和期望项，便于用户在消息区直接定位冲突双方。
         var issues = new List<CnLegacyValidationIssue>();
         var selectedCodes = SelectedCodesWith(option);
         var version = CurrentVersionCode(option);
@@ -714,6 +725,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
     {
         foreach (var block in SelectedDevice?.Model.ValidationBlocks ?? [])
         {
+            // 一个跨位号块只由其首个位号负责生成消息，避免遍历每个已选项时重复报告同一组合错误。
             if (block.Positions.Count == 0 ||
                 !block.Positions[0].Equals(option.Group.Position, StringComparison.OrdinalIgnoreCase))
             {
@@ -762,6 +774,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private CnLegacyEvaluationResult EvaluateSelectionRules(CnLegacyOptionViewModel option)
     {
+        // 交互可用性只检查能直接解释为候选前置条件的版本、RequiredSelections 和排除组合；
+        // pattern 规则通常描述完整代码块，选择尚未完成时不应用它提前禁用候选。
         var messages = new List<string>();
         var selectedCodes = SelectedCodesWith(option);
         var version = CurrentVersionCode(option);
@@ -813,6 +827,7 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private IReadOnlyDictionary<string, string> SelectedCodesWith(CnLegacyOptionViewModel option)
     {
+        // 建立当前选择快照后覆盖候选所在位号，用于无副作用地回答“如果选它会怎样”。
         var selectedCodes = Groups
             .Select(group => (group.Position, Code: group.SelectedOption?.Code ?? ""))
             .Where(item => !string.IsNullOrWhiteSpace(item.Code))
@@ -837,6 +852,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         CnLegacyValidationBlock block,
         IReadOnlyDictionary<string, string> selectedCodes)
     {
+        // pattern 必须针对完整连续逻辑块判断；任一参与位号尚未选择时返回空值并暂缓校验，
+        // 防止把“不完整”误报为“组合不允许”。
         var parts = new List<string>();
         foreach (var position in block.Positions)
         {
@@ -980,6 +997,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
 
     private void ImportOrderingCodeValue(string value, bool showMessages = true)
     {
+        // 导入先规范化为纯大写字母数字，再依次确认固定长度、产品系列和第 3 位主要应用；
+        // 在这些结构条件成立前不会清空当前页面选择。
         var code = NormalizeOrderingCode(value);
         if (code.Length != 18)
         {
@@ -1016,6 +1035,8 @@ public sealed class CnLegacySelectorViewModel : ObservableObject
         SelectedSeries = series;
         SelectedDevice = device;
 
+        // 先静默写入全部位号，再统一刷新可用性和校验，避免半导入状态用旧选择误判后续位号。
+        // 单个位号无法匹配时继续解析其余位号，并在末尾汇总报告，便于识别数据包版本差异。
         var index = 0;
         var notFound = new List<string>();
         foreach (var group in Groups)
@@ -1227,6 +1248,8 @@ public sealed class CnLegacyGroupViewModel : ObservableObject
             return;
         }
 
+        // 每个位号是严格单选；先静默同步同组所有 IsSelected，再设置 SelectedOption，
+        // 最后只通知 owner 刷新一次完整状态。
         foreach (var item in Options)
         {
             item.SetSelected(ReferenceEquals(item, option));

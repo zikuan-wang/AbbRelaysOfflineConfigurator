@@ -6,6 +6,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 负责 SSC600/SSC600 SW 的 18 位订货码选择、版本兼容、组合规则、在线校验及 AppPack 功能推荐。
+// 选型规则和功能目录分别提供“可订组合”与“功能覆盖”证据，推荐结果不会绕过订货码离线校验。
 public sealed class Ssc600SelectionViewModel : ObservableObject
 {
     private readonly Ssc600RuleSet _rules = new Ssc600RuleLoader().Load();
@@ -122,6 +124,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
                 : ConfiguratorViewModel.ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 语言变化只重建文案、消息和推荐展示；当前组选项保持不变并通过重算重新生成派生状态。
                 OnPropertyChanged(nameof(IsEnglish));
                 OnPropertyChanged(nameof(SourceSummary));
                 OnPropertyChanged(nameof(VersionText));
@@ -242,6 +245,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     public void Reset()
     {
+        // 先静默清除全部组，再按规则默认码整体回填，避免重置过程中产生多个互相矛盾的临时订货码。
         foreach (var group in Groups)
         {
             foreach (var option in group.Options)
@@ -269,6 +273,8 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     internal void Recalculate()
     {
+        // 重算顺序固定为单选归一化、版本兼容回退、代码生成、组合校验、摘要和选项状态刷新。
+        // 版本切换可能替换不再支持的选项，因此必须在生成订货码之前完成可用项收敛。
         EnsureSingleSelection();
         NormalizeUnsupportedSelections();
         OrderCode = BuildOrderCode();
@@ -291,6 +297,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private IReadOnlyList<string> ApplyOrderCode(string orderCode)
     {
+        // 导入按各组 Location 提取位段并静默选中；无法匹配的位段回落到首个规则项并作为告警返回。
         var code = (orderCode ?? "").Trim().ToUpperInvariant();
         if (code.Length < 18)
         {
@@ -340,6 +347,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private void NormalizeUnsupportedSelections()
     {
+        // 当前选项不支持目标版本时，优先采用默认码对应项，其次采用该版本首个可用项，保证组始终可计算。
         var selectedByGroup = SelectedByGroup();
         var version = CurrentVersion(selectedByGroup);
         foreach (var group in Groups)
@@ -399,6 +407,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
         IReadOnlyDictionary<string, Ssc600OptionViewModel> selectedByGroup,
         string version)
     {
+        // 校验分两层：单项版本可用性，以及功能应用/软件位段是否命中对应版本的组合规则块。
         foreach (var group in Groups)
         {
             var selected = group.SelectedOption;
@@ -579,6 +588,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private async Task ValidateOnlineAsync()
     {
+        // 在线请求只接受仍对应当前订货码的响应，用户修改选型后到达的旧结果直接丢弃。
         if (string.IsNullOrWhiteSpace(OrderCode) || IsOnlineValidationBusy)
         {
             return;
@@ -679,6 +689,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private void ImportOrderCode()
     {
+        // 只有规范化后恰好 18 位才进入批量回填；未匹配位段回退到可用规则项并集中提示用户复核。
         var window = new CombinationCodeImportWindow(
             IsEnglish ? "Import SSC600 order code" : "导入 SSC600 订货码",
             IsEnglish ? "Enter a complete 18-character SSC600 or SSC600 SW order code." : "请输入完整 18 位 SSC600 或 SSC600 SW 订货码。",
@@ -816,6 +827,7 @@ public sealed class Ssc600SelectionViewModel : ObservableObject
 
     private void RefreshRecommendations()
     {
+        // 功能需求先由目录求 AppPack 覆盖集合，是否真正可选仍由用户应用后触发订货码规则重算确认。
         if (RequestedFunctions.Count == 0)
         {
             AppRecommendations.Clear();

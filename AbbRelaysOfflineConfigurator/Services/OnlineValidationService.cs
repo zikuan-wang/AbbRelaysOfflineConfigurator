@@ -7,12 +7,15 @@ namespace AbbRelaysOfflineConfigurator.Services;
 public sealed record OnlineValidationResult(bool IsValid, string? OrderingNumber, string? CompositionCode, string Message);
 public sealed record LegacyOnlineConversionResult(bool IsValid, string? CompositionCode, string Message);
 
+// ABB 在线接口的轻量适配层：只负责构造请求、兼容响应形态和规范化 PCL 后缀。
+// 它不持有界面状态；请求期间选择是否已变化、结果是否仍可应用，由调用它的 ViewModel 判断。
 public sealed class OnlineValidationService
 {
     private static readonly Uri PricesEndpoint = new("https://relays.protection-control.abb/api/Prices");
     private static readonly Uri LegacyConvertEndpoint = new("https://relays.protection-control.abb/api/Products/ConvertCode");
     private static readonly HttpClient HttpClient = new()
     {
+        // 复用单例客户端避免频繁建立连接；统一超时限制防止界面任务无限等待外部服务。
         Timeout = TimeSpan.FromSeconds(30)
     };
 
@@ -20,6 +23,7 @@ public sealed class OnlineValidationService
         string combinationCode,
         CancellationToken cancellationToken = default)
     {
+        // Prices 接口以 multipart 字段接收组合代码；GenerateOrderingCodes=true 才会返回可导出的订货号。
         using var request = new HttpRequestMessage(HttpMethod.Post, PricesEndpoint);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         request.Headers.UserAgent.ParseAdd("ABBRelaysOfflineConfigurator/1.0");
@@ -30,6 +34,8 @@ public sealed class OnlineValidationService
         content.Add(new StringContent("false"), "GetLeadTime");
         request.Content = content;
 
+        // HTTP 非成功状态转换为业务结果；网络异常、取消和无法解析的成功响应继续抛出，
+        // 由上层按具体工作流更新忙碌状态和错误文案。
         using var response = await HttpClient.SendAsync(request, cancellationToken);
         var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
 
@@ -47,6 +53,8 @@ public sealed class OnlineValidationService
 
     public static string LocalizeMessage(string message, bool english)
     {
+        // 仅翻译本应用和接口适配层已知的状态前缀，未知服务器消息原样保留，
+        // 避免语言切换时丢失对诊断有价值的原始信息。
         if (string.IsNullOrWhiteSpace(message))
         {
             return "";
@@ -109,6 +117,7 @@ public sealed class OnlineValidationService
         string orderingCode,
         CancellationToken cancellationToken = default)
     {
+        // 旧订货号作为查询参数发送，必须转义后再拼入 URI，避免其中的保留字符改变请求结构。
         var uri = new Uri($"{LegacyConvertEndpoint}?orderingCode={Uri.EscapeDataString(orderingCode.Trim())}");
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -133,6 +142,8 @@ public sealed class OnlineValidationService
         string version,
         CancellationToken cancellationToken = default)
     {
+        // ABB 反查与正向校验共用 Prices 接口；客户端先补齐当前 PCL 后缀，
+        // 防止无版本订货号被服务端按错误的默认产品连接级别解释。
         var normalizedOrderingNumber = NormalizeOrderingNumber(orderingNumber, version);
         using var request = new HttpRequestMessage(HttpMethod.Post, PricesEndpoint);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -168,6 +179,7 @@ public sealed class OnlineValidationService
 
         try
         {
+            // 历史接口在不同部署中可能返回 JSON 字符串，也可能返回带 orderingCode/compositionCode 的对象。
             using var document = JsonDocument.Parse(responseBody);
             string? compositionCode = null;
 
@@ -193,6 +205,7 @@ public sealed class OnlineValidationService
         }
         catch (JsonException)
         {
+            // 再兼容纯文本或被引号包裹的响应；只有明确的 REX615 前缀才作为成功结果接受。
             var value = responseBody.Trim().Trim('"');
             if (value.StartsWith("REX615", StringComparison.OrdinalIgnoreCase))
             {
@@ -205,6 +218,7 @@ public sealed class OnlineValidationService
 
     private static OnlineValidationResult ParseResponse(string responseBody, string versionSource)
     {
+        // 当前工作流一次只提交一个代码，因此只消费 products[0]；空数组表示接口未识别该产品。
         using var document = JsonDocument.Parse(responseBody);
         if (!document.RootElement.TryGetProperty("products", out var products) ||
             products.ValueKind != JsonValueKind.Array ||
@@ -223,6 +237,8 @@ public sealed class OnlineValidationService
             ? compositionCodeElement.GetString()
             : null;
 
+        // 部分服务响应遗漏订货号的 PCL 后缀，从返回组合代码和原始请求中推断后补齐，
+        // 使后续导出与反查始终携带同一版本语义。
         orderingNumber = EnsureOrderingNumberVersionSuffix(orderingNumber, $"{compositionCode} {versionSource}");
 
         if (isValid && !string.IsNullOrWhiteSpace(orderingNumber))

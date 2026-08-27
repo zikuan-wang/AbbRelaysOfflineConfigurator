@@ -1,5 +1,7 @@
 ﻿namespace AbbRelaysOfflineConfigurator.Services;
 
+// 客户端只内置 RSA 公钥，用于验证授权工具签发的激活载荷。
+// 公钥允许随程序分发；与之配对的私钥必须始终留在独立授权工具及受控发布环境中。
 internal static class LicenseKeyProvider
 {
     public const string PublicKeyXmlBase64 =

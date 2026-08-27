@@ -4,6 +4,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 负责 RE_630 系列装置/版本规则切换、18 位订货码导入、依赖选项收敛和离线完整性校验。
+// _preferredCodes 仅表达重置或导入时希望保留的位段，最终选择必须经过当前 BasicCode 下的依赖规则过滤。
 public sealed class Re630SelectionViewModel : ObservableObject
 {
     private const string DefaultOrderCode = "TBMNAAAAAAAZNNNAXD";
@@ -101,6 +103,7 @@ public sealed class Re630SelectionViewModel : ObservableObject
                 return;
             }
 
+            // 规则集切换会重建全部组选项并应用该版本默认值，不能沿用旧版本中的 Option 实例。
             if (!value.DeviceId.Equals(SelectedDeviceFilter, StringComparison.OrdinalIgnoreCase))
             {
                 _selectedDeviceFilter = value.DeviceId;
@@ -179,6 +182,7 @@ public sealed class Re630SelectionViewModel : ObservableObject
 
     private void Reset()
     {
+        // 重置先建立各位段默认偏好，再交给统一收敛管线处理依赖关系，而不是直接逐项强制选中。
         _preferredCodes.Clear();
         if (SelectedRuleSet is not null)
         {
@@ -226,6 +230,8 @@ public sealed class Re630SelectionViewModel : ObservableObject
 
     private void ApplyOrderCode(string value)
     {
+        // 导入码中的装置位和版本位先决定规则集，再按每组 CodeLength 拆分偏好值，最后一次性刷新选择。
+        // 因此跨装置导入不会在旧规则组上解释新代码，也不会把拆分过程的中间态暴露给界面。
         var code = NormalizeOrderCode(value);
         if (code.Length != 18)
         {
@@ -262,6 +268,8 @@ public sealed class Re630SelectionViewModel : ObservableObject
 
     private Re630RuleSet? FindRuleSetForOrderCode(string code)
     {
+        // 第 3 位装置和第 18 位版本优先共同定位规则集；未匹配时保留当前规则集，
+        // 再由后续位段告警和完整性校验提示用户复核。
         var deviceCode = code[2].ToString();
         var versionCode = code[17].ToString();
         return RuleSets.FirstOrDefault(ruleSet =>
@@ -272,6 +280,8 @@ public sealed class Re630SelectionViewModel : ObservableObject
 
     private void RefreshSelection()
     {
+        // 各位段候选会随 BasicCode 和其他依赖位变化，最多迭代 20 轮直至选项集合与选中值都稳定。
+        // 收敛过程中抑制组选中事件，结束后统一生成代码、位段摘要、校验和状态，避免递归重算。
         if (SelectedRuleSet is null)
         {
             return;
@@ -320,6 +330,7 @@ public sealed class Re630SelectionViewModel : ObservableObject
         string basicCode,
         IReadOnlyDictionary<string, string> selectedCodes)
     {
+        // 先取得 BasicCode 对应的基础候选，再将所有已命中的依赖规则取交集；多条限制必须同时满足。
         if (SelectedRuleSet is null)
         {
             return [];
@@ -349,6 +360,7 @@ public sealed class Re630SelectionViewModel : ObservableObject
 
     private void ValidateCurrentSelection()
     {
+        // 经过依赖过滤后，最终有效性要求每组都有选项且拼接结果恰好为 18 位。
         var messages = new List<ValidationMessageViewModel>();
         var code = BuildOrderCode();
         if (code.Length != 18)

@@ -5,15 +5,19 @@ using AbbRelaysOfflineConfigurator.Models;
 
 namespace AbbRelaysOfflineConfigurator.Services;
 
+// 615/620 CN 选型规则包的加载和兼容归一化入口。JSON 保留从历史资料提取的业务结构，
+// 本类只修正已知版本的展示/默认项差异，最终可用性与组合校验由 ViewModel 分层执行。
 public sealed class CnLegacySelectionRuleLoader
 {
     private const string RulesFileName = "CnLegacySelectionRules.json";
+    // 规则包在进程内只反序列化并归一化一次；返回对象被所有 CN 选型页面共享，使用方应按只读数据处理。
     private static readonly Lazy<CnLegacyRuleSet> SharedRules = new(LoadCore);
 
     public CnLegacyRuleSet Load() => SharedRules.Value;
 
     private static CnLegacyRuleSet LoadCore()
     {
+        // 发布包与源码调试的路径解析统一在这里完成，避免各 ViewModel 对数据位置做不同假设。
         var path = ResolveRulesPath();
         if (!File.Exists(path))
         {
@@ -26,6 +30,7 @@ public sealed class CnLegacySelectionRuleLoader
                         new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
                     ?? throw new InvalidOperationException("615/620 CN 选型规则数据包为空。");
 
+        // 反序列化后集中归一化，再向上层暴露规则，保证所有调用者看到同一套显示文本和默认项。
         NormalizeRules(rules);
         return rules;
     }
@@ -55,6 +60,7 @@ public sealed class CnLegacySelectionRuleLoader
                 continue;
             }
 
+            // 以下修正仅适用于 615 CN 5.0 FP1 的已知源资料差异，不能扩散到其他系列或版本。
             if (group.Position == "12")
             {
                 Normalize615LanguageGroup(group);
@@ -93,6 +99,8 @@ public sealed class CnLegacySelectionRuleLoader
 
     private static void Normalize615LanguageGroup(CnLegacyCodeGroup group)
     {
+        // 源资料中的代码 2 不属于当前可交付语言选项；Z 才是本版本的中文默认值。
+        // 在加载阶段统一处理可防止界面默认项、导入匹配和订货号拼接出现不同结果。
         group.Options.RemoveAll(option => option.Code.Equals("2", StringComparison.OrdinalIgnoreCase));
 
         var zOption = group.Options.FirstOrDefault(option => option.Code.Equals("Z", StringComparison.OrdinalIgnoreCase));
@@ -112,6 +120,8 @@ public sealed class CnLegacySelectionRuleLoader
 
     private static void Clean615DisplayDescriptions(CnLegacyCodeGroup group)
     {
+        // 这里只清理说明文本中夹带的位号兼容条件；真正的约束已由结构化规则字段表达，
+        // 不能从清理后的短描述反向推导选型合法性。
         foreach (var option in group.Options)
         {
             option.Description = Clean615DisplayDescription(option.Description);
@@ -153,6 +163,8 @@ public sealed class CnLegacySelectionRuleLoader
 
     private static string ResolveRulesPath()
     {
+        // 优先使用程序或当前工作目录的 Data，向父目录搜索用于源码树内调试；
+        // 若都不存在则返回标准发布路径，由 LoadCore 抛出带路径的明确错误。
         var candidates = new List<string>
         {
             Path.Combine(AppContext.BaseDirectory, "Data", RulesFileName),

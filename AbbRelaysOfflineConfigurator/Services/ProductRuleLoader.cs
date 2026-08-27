@@ -4,13 +4,19 @@ using AbbRelaysOfflineConfigurator.Models;
 
 namespace AbbRelaysOfflineConfigurator.Services;
 
+// 将 REX615 XML 数据包投影为界面和校验器共用的内存规则模型。
+// 这里负责结构解析、缺省值和显示文本回退，不负责判断某次用户选择是否合法。
 public sealed class ProductRuleLoader
 {
+    // 同一路径的规则在进程内只解析一次。缓存对象由多个 ViewModel 共享，应视为只读规则快照，
+    // 业务代码若直接修改集合会影响后续所有使用者。
     private static readonly object CacheLock = new();
     private static readonly Dictionary<string, ProductRuleSet> RuleCache = new(StringComparer.OrdinalIgnoreCase);
 
     public ProductRuleSet Load(string path)
     {
+        // 使用绝对路径作为键，避免工作目录不同导致同一数据包被重复解析。
+        // 锁同时保护字典和首次构造，确保并发调用不会得到两个不一致的规则实例。
         var cacheKey = System.IO.Path.GetFullPath(path);
         lock (CacheLock)
         {
@@ -30,6 +36,8 @@ public sealed class ProductRuleLoader
         var root = document.Root ?? throw new InvalidOperationException("REX615_ROL.xml 缺少根节点。");
         var rules = new ProductRuleSet();
 
+        // 三类数据保持各自职责：主代码定义固定位置，槽位约束描述物理装配，
+        // 选项代码承载可选功能、模块数量及跨组选型条件。
         LoadMainCodes(root, rules);
         LoadSlotConstraints(root, rules);
         LoadOptionCodes(root, rules);
@@ -39,6 +47,8 @@ public sealed class ProductRuleLoader
 
     private static void LoadMainCodes(XElement root, ProductRuleSet rules)
     {
+        // 主代码按 XML Digit 顺序连续拼接，因此 SortOrder 必须反映源文件位置，
+        // 不能按组名或选项代码重新排序。
         var order = 0;
         foreach (var digit in root.Element("MainCodes")?.Elements("Digit") ?? [])
         {
@@ -81,6 +91,8 @@ public sealed class ProductRuleLoader
 
             foreach (var multipleElement in category.Elements("IsMultiple"))
             {
+                // 同一选项组在不同 PCL 版本可能具有不同的单选/多选语义；
+                // 基础 IsMultiple 只作为未声明版本覆盖时的回退。
                 var version = Attr(multipleElement, "Version");
                 if (!string.IsNullOrWhiteSpace(version))
                 {
@@ -125,6 +137,8 @@ public sealed class ProductRuleLoader
 
                 foreach (var slotElement in housingElement.Elements("Slot"))
                 {
+                    // AssignmentPriority 决定模块优先尝试的物理槽位；CodeOrder 只决定组合代码中的输出次序。
+                    // 两个序号表达不同业务维度，加载时必须分别保留。
                     var slot = new SlotDefinition
                     {
                         Id = Attr(slotElement, "Id"),
@@ -143,6 +157,8 @@ public sealed class ProductRuleLoader
 
                 foreach (var requirementElement in housingElement.Elements("Requirement"))
                 {
+                    // Requirement 是槽位分配完成后的机箱级约束，例如指定槽必须包含某类模块，
+                    // 不应提前折叠为某个选项的简单 Validity 表达式。
                     var requirement = new SlotRequirement
                     {
                         Id = Attr(requirementElement, "Id"),
@@ -166,6 +182,7 @@ public sealed class ProductRuleLoader
                 constraintSet.Housings[housing.Id] = housing;
             }
 
+            // 首个约束集保留为无版本或旧规则调用的回退；带 Version 的约束集同时进入按版本索引。
             if (rules.SlotConstraints.Housings.Count == 0)
             {
                 rules.SlotConstraints = constraintSet;
@@ -205,6 +222,8 @@ public sealed class ProductRuleLoader
 
         foreach (var attribute in element.Attributes())
         {
+            // 除显式映射字段外，保留所有 XML 属性供 Requires、I/O 数量和导出等上层逻辑读取。
+            // 这样新增非结构化业务属性时无需同步扩展加载器模型。
             option.Attributes[attribute.Name.LocalName] = attribute.Value;
         }
 
@@ -253,6 +272,8 @@ public sealed class ProductRuleLoader
 
 internal static class Rex615EnglishTextCatalog
 {
+    // 英文目录只补齐旧数据包中缺少或仍含中文的显示文本；代码、模块类型和校验条件始终沿用源规则，
+    // 因此语言切换不会改变任何选型或槽位判定结果。
     private static readonly Dictionary<string, string> GroupNames = new(StringComparer.OrdinalIgnoreCase)
     {
         ["REX615产品"] = "REX615 product",

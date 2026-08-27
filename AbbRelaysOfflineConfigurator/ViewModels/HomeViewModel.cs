@@ -4,6 +4,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 首页跨产品功能推荐协调器：聚合不同产品/版本的功能目录，把用户输入统一为功能候选，
+// 仅当某个产品能够覆盖全部已选需求时才给出跳转建议；具体选型合法性仍由目标页面负责。
 public sealed class HomeViewModel : ObservableObject
 {
     private readonly AppFunctionCatalogService _rex615Catalog = new();
@@ -127,6 +129,8 @@ public sealed class HomeViewModel : ObservableObject
 
     private void AddFunctionInput()
     {
+        // 每个输入词先尝试跨目录唯一精确匹配；只有无法唯一确定时才展开模糊候选，
+        // 防止同名或跨版本功能在用户未确认时被静默选错。
         var tokens = Regex.Split(FunctionSearchText, @"[\r\n,;，；、]+")
             .Select(token => token.Trim())
             .Where(token => !string.IsNullOrWhiteSpace(token))
@@ -214,6 +218,7 @@ public sealed class HomeViewModel : ObservableObject
             return;
         }
 
+        // 推荐按“全覆盖”而非命中数量排序：任一需求无法在产品目录中对应时，该产品不会出现。
         var requirements = RequestedFunctions.Select(function => function.Function).ToList();
         var recommendations = BuildProductRecommendations(requirements).ToList();
         Replace(ProductRecommendations, recommendations);
@@ -230,6 +235,8 @@ public sealed class HomeViewModel : ObservableObject
 
     private IEnumerable<HomeProductRecommendationViewModel> BuildProductRecommendations(IReadOnlyList<HomeFunctionCandidate> requirements)
     {
+        // 每个产品版本独立评估，避免把 PCL1/PCL2/PCL3 的功能或 APP 能力合并成一个并不存在的配置。
+        // priority 是稳定的产品展示顺序，不代表技术优劣或自动替用户作最终型号选择。
         var products = new[]
         {
             BuildRex615Product("REX615 PCL3", "REX615_PCL3", "PCL3", targetTabIndex: 1, priority: 1, requirements),
@@ -415,6 +422,8 @@ public sealed class HomeViewModel : ObservableObject
         IReadOnlyList<HomeFunctionCandidate> requirements,
         IReadOnlyList<HomeFunctionCandidate> productFunctions)
     {
+        // 返回的是产品目录中的匹配项而非原始需求；调用方以数量相等判断全部覆盖，
+        // 后续 APP 推荐也因此使用目标版本真实存在的功能代码。
         var matched = new List<HomeFunctionCandidate>();
         foreach (var requirement in requirements)
         {
@@ -432,6 +441,8 @@ public sealed class HomeViewModel : ObservableObject
 
     private static bool IsSameFunction(HomeFunctionCandidate requested, HomeFunctionCandidate candidate)
     {
+        // ABB/IEC 功能代码精确相同时优先认定为同一功能；代码体系不一致时再以规范化 ANSI 术语求交集。
+        // 名称相似不用于跨产品覆盖判定，避免仅靠文本包含关系产生技术能力误报。
         if (!string.IsNullOrWhiteSpace(requested.Code) &&
             requested.Code.Equals(candidate.Code, StringComparison.OrdinalIgnoreCase))
         {
@@ -445,6 +456,8 @@ public sealed class HomeViewModel : ObservableObject
 
     private IReadOnlyList<HomeFunctionCandidate> ResolveExactAggregate(string query)
     {
+        // 精确解析覆盖所有已索引版本，随后按 FunctionKey 去重；
+        // 如果同一输入仍对应多个技术功能，上层会要求用户从候选中明确选择。
         var candidates = new List<HomeFunctionCandidate>();
         foreach (var version in new[] { "PCL3", "PCL2", "PCL1" })
         {
@@ -559,6 +572,8 @@ public sealed class HomeViewModel : ObservableObject
     }
 
     private static string NormalizeSearchToken(string value) =>
+        // 搜索规范化去除 ASCII 范围内的空白和标点，并保留字母、数字及中文字符，
+        // 兼容“50/51”“50-51”等常见录入差异。
         new((value ?? "")
             .Trim()
             .ToUpperInvariant()

@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 
 namespace AbbRelaysOfflineConfigurator.Services;
 
+// 客户端更新流程的服务边界：读取独立 Release 仓库的 Latest 元数据、流式下载 MSI，
+// 校验服务端长度及可用的 SHA256 摘要后再交给系统安装器。界面只消费结构化状态和进度。
 public sealed class UpdateCheckService
 {
     public const string ReleaseRepositoryUrl = "https://github.com/zikuan-wang/AbbRelaysOfflineConfigurator_Release";
@@ -16,6 +18,8 @@ public sealed class UpdateCheckService
 
     public async Task<UpdateCheckResult> CheckLatestAsync(CancellationToken cancellationToken = default)
     {
+        // 更新版本与源码仓库解耦，以发布仓库 Latest Release 为唯一线上入口；
+        // 这里只选择 MSI 资产，不把源码压缩包或其他附件暴露为可安装更新。
         using var response = await Client.GetAsync(LatestReleaseApiUrl, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
@@ -33,6 +37,8 @@ public sealed class UpdateCheckService
             return UpdateCheckResult.Failed("GitHub Release 返回内容无效。");
         }
 
+        // 使用完整程序集 Version 与去掉 v 前缀的 Release 标签比较，结果展示时再缩减为三段；
+        // 无法解析的标签降为 0.0.0，因而不会把异常标签误报为新版本。
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
         var latestVersion = ParseReleaseVersion(release.TagName);
         var downloadAsset = release.Assets?
@@ -58,6 +64,7 @@ public sealed class UpdateCheckService
 
     public static void OpenReleasePage(string? url)
     {
+        // 该路径只打开浏览器供用户查看发布页，不会下载或执行其中的任何内容。
         if (string.IsNullOrWhiteSpace(url))
         {
             url = ReleaseRepositoryUrl + "/releases";
@@ -74,6 +81,8 @@ public sealed class UpdateCheckService
         string? expectedDigest = null,
         CancellationToken cancellationToken = default)
     {
+        // downloadUrl、文件名、大小和摘要应来自同一次 Release 查询结果；
+        // 方法会验证本地落盘结果，但不会自行重新判断资产是否属于期望的 GitHub Release。
         if (string.IsNullOrWhiteSpace(downloadUrl))
         {
             throw new InvalidOperationException("没有可下载的安装包地址。");
@@ -88,6 +97,7 @@ public sealed class UpdateCheckService
         var updateDirectory = Path.Combine(Path.GetTempPath(), "AbbRelaysOfflineConfigurator", "Updates");
         Directory.CreateDirectory(updateDirectory);
         var targetPath = Path.Combine(updateDirectory, fileName);
+        // 下载阶段使用非 MSI 临时扩展名；长度及发布信息提供的 SHA256（如有）校验通过后，才移动到最终安装路径。
         var tempPath = targetPath + ".download";
 
         TryDeleteFile(tempPath);
@@ -95,6 +105,8 @@ public sealed class UpdateCheckService
 
         try
         {
+            // ResponseHeadersRead 配合固定缓冲区边读边写，避免大型 MSI 整体驻留内存；
+            // 进度总量优先采用 Release 元数据，缺失时再使用响应 Content-Length。
             using var response = await Client.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             response.EnsureSuccessStatusCode();
 
@@ -128,6 +140,8 @@ public sealed class UpdateCheckService
                 }
             }
 
+            // GitHub 若提供规范 sha256: 摘要则执行内容校验；没有摘要时只执行响应头或
+            // Release 元数据中实际可用的长度校验。
             var expectedSha256 = NormalizeSha256Digest(expectedDigest);
             if (!string.IsNullOrWhiteSpace(expectedSha256))
             {
@@ -142,6 +156,7 @@ public sealed class UpdateCheckService
         }
         catch
         {
+            // 失败或取消时同时清理临时文件和可能存在的旧目标文件，避免后续流程误执行不完整安装包。
             TryDeleteFile(tempPath);
             TryDeleteFile(targetPath);
             throw;
@@ -152,6 +167,8 @@ public sealed class UpdateCheckService
 
     public static void StartInstaller(string installerPath)
     {
+        // 下载与校验已在前一步完成；此处只把明确存在的 MSI 交给 Windows Installer，
+        // 安装权限提示和发布者证书提示仍由操作系统负责。
         if (string.IsNullOrWhiteSpace(installerPath) || !File.Exists(installerPath))
         {
             throw new FileNotFoundException("安装包不存在。", installerPath);
@@ -171,6 +188,7 @@ public sealed class UpdateCheckService
 
     private static string SafeInstallerFileName(string? assetName, string downloadUrl)
     {
+        // 只保留单个安全文件名，替换 Windows 不允许的字符，防止 Release 资产名改变更新目录之外的路径。
         var fileName = string.IsNullOrWhiteSpace(assetName)
             ? Path.GetFileName(new Uri(downloadUrl).LocalPath)
             : assetName.Trim();
@@ -225,7 +243,7 @@ public sealed class UpdateCheckService
         }
         catch
         {
-            // The following write or move reports the real failure if the file is locked.
+            // 清理是尽力而为；若文件被占用，紧随其后的写入或移动会报告更贴近真实操作的错误。
         }
     }
 
@@ -236,6 +254,7 @@ public sealed class UpdateCheckService
             return "";
         }
 
+        // 统一换行并限制展示长度，防止异常超长的远端说明拖慢或撑坏更新对话框。
         var notes = releaseBody.Replace("\r\n", "\n").Replace('\r', '\n').Trim();
         const int maxLength = 2000;
         return notes.Length <= maxLength

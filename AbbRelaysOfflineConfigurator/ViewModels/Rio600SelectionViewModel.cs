@@ -6,6 +6,8 @@ using Microsoft.Win32;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 负责 RIO600 电源、通信模块和连续扩展位置的组合选择，并派生规则代码、容量校验、I/O 与模块订货清单。
+// 内部 OrderCode 用于匹配规则；对外可采购成果是按模块订货号合并后的 OrderListItems，而非整机订货码。
 public sealed class Rio600SelectionViewModel : ObservableObject
 {
     private readonly Rio600RuleSet _rules = new Rio600RuleLoader().Load();
@@ -74,6 +76,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
                 : ConfiguratorViewModel.ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 名称本地化后重新执行同一选择管线，使摘要、容量提示和订货清单使用一致语言。
                 foreach (var row in Rows)
                 {
                     row.RefreshLanguage();
@@ -149,6 +152,8 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
     private void RefreshSelections(Rio600CompositionRowViewModel? changedRow, bool useDefaults = false)
     {
+        // 在刷新保护区内一次性重建模块、硬件和软件候选，避免级联属性通知递归触发半完成的计算。
+        // 扩展位置必须连续配置：前一位置为空时，后续位置禁用并回落为“-”，不能形成物理装配空洞。
         _isRefreshing = true;
         try
         {
@@ -356,6 +361,8 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
     private void Recalculate()
     {
+        // 先按规则位置拼出内部代码，再根据通信配置和第二电源状态确定容量上限，最后刷新全部展示派生物。
+        // 通道数与点数分别校验；第二电源启用时采用扩展上限，不能只依据模块数量判断组合有效性。
         var chars = _rules.DefaultOrderCode.ToCharArray();
         foreach (var row in Rows)
         {
@@ -422,6 +429,7 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
     private Rio600Totals CalculateTotals(Rio600Configuration? configuration)
     {
+        // I/O 容量取自当前通信配置允许的模块目录，同一模块字符在不同配置下不能直接套用固定计数。
         var totals = new Rio600Totals();
         if (configuration is null)
         {
@@ -467,6 +475,8 @@ public sealed class Rio600SelectionViewModel : ObservableObject
 
     private void RefreshSelectedModules()
     {
+        // 规则字符先映射到模块目录实体，再由实体提供订货号、说明和机械宽度，保持选型规则与产品资料分层。
+        // 模块明细完成后按订货号聚合数量；相同物料在多个位置出现时只生成一条采购清单记录。
         SelectedModules.Clear();
         foreach (var row in Rows.Where(row => row.SelectedModuleValue != "-"))
         {

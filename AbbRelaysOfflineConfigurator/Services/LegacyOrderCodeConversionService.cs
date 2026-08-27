@@ -12,9 +12,12 @@ public sealed record LegacyOfflineConversionResult(
     bool IsSuccess,
     string Message);
 
+// 在不依赖 Excel 的情况下复现历史 615/620 工作簿转换逻辑：加载预导出的单元格和公式，
+// 注入旧订货号，求得 REX615 组合代码，并在无法直接识别型号时对所有工作表结果评分择优。
 public sealed class LegacyOrderCodeConversionService
 {
     private const string RulesFileName = "LegacyConversionRules.json";
+    // 规则包体积较大且只在离线转换时需要，延迟解析可避免拖慢应用启动。
     private readonly Lazy<LegacyWorkbook> _workbook;
 
     public LegacyOrderCodeConversionService()
@@ -38,6 +41,7 @@ public sealed class LegacyOrderCodeConversionService
     public Task<IReadOnlyList<LegacyOfflineConversionResult>> ConvertOfflineBatchAsync(
         IReadOnlyList<string> orderingCodes)
     {
+        // JSON 解析和公式求值属于同步的 CPU/内存工作，放到后台线程以免阻塞 WPF 界面。
         return Task.Run<IReadOnlyList<LegacyOfflineConversionResult>>(() => ConvertOfflineBatch(orderingCodes));
     }
 
@@ -74,6 +78,7 @@ public sealed class LegacyOrderCodeConversionService
             return new LegacyOfflineConversionResult(orderingCode, "", null, false, "615/620 订货号为空。");
         }
 
+        // 已知系列前后缀可唯一定位工作表时直接使用，既减少公式求值量，也避免相近版本规则误胜出。
         var preferredDeviceType = DetectDeviceType(orderingCode);
         if (!string.IsNullOrWhiteSpace(preferredDeviceType) &&
             _workbook.Value.TryGetSheet(preferredDeviceType, out var preferredSheet))
@@ -81,6 +86,8 @@ public sealed class LegacyOrderCodeConversionService
             return BuildResult(orderingCode, preferredSheet.ConvertCandidate(orderingCode), "根据订货号型号自动识别");
         }
 
+        // 未命中显式映射时才运行所有工作表。成功输出获得最高权重，其次结合输出片段数、
+        // 615/620 家族及 IEC/CN/ANSI 前缀特征评分，以保留对未知修订后缀的兼容能力。
         var candidates = _workbook.Value.Sheets
             .Select(sheet => sheet.ConvertCandidate(orderingCode))
             .OrderByDescending(candidate => candidate.Score)
@@ -171,6 +178,8 @@ public sealed class LegacyOrderCodeConversionService
 
     private static string ResolveRulesPath()
     {
+        // 发布环境优先从程序 Data 目录读取；向父目录搜索仅服务于源码调试和测试运行。
+        // 最终仍返回首选发布路径，让缺失文件错误包含稳定、可诊断的位置。
         var candidates = new List<string>
         {
             Path.Combine(AppContext.BaseDirectory, "Data", RulesFileName),
@@ -191,6 +200,8 @@ public sealed class LegacyOrderCodeConversionService
 
 internal sealed class LegacyWorkbook
 {
+    // 规则包保留“工作簿 -> 工作表 -> 单元格”的原始边界，使每种历史装置版本可以独立求值，
+    // 而不必把大量 Excel 分支人工改写成难以核对的 C# 条件树。
     private LegacyWorkbook(IReadOnlyList<LegacyWorksheet> sheets)
     {
         Sheets = sheets;
@@ -288,6 +299,7 @@ internal sealed class LegacyWorksheet
             }
         }
 
+        // Excel 共享公式只在基准单元格保存公式文本，其余单元格需按相对偏移还原后才能离线求值。
         foreach (var cell in cells.Values)
         {
             if (!string.IsNullOrWhiteSpace(cell.Formula) ||
@@ -308,6 +320,8 @@ internal sealed class LegacyWorksheet
 
     public LegacyConversionCandidate ConvertCandidate(string orderingCode)
     {
+        // overrides 相当于把用户订货号写入工作簿输入格；其余单元格按需递归求值，
+        // 每个候选使用独立 evaluator，缓存和循环检测不会跨订货号或工作表泄漏状态。
         var evaluator = new FormulaEvaluator(this, new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             [InputCellReference] = orderingCode
@@ -316,6 +330,8 @@ internal sealed class LegacyWorksheet
         var value = evaluator.EvaluateCell(OutputCellReference);
         var compositionCode = FormulaEvaluator.ToText(value);
 
+        // 某些历史表的汇总输出格为空，但第 23 列仍保留拼接结果；该位置是规则包兼容回退，
+        // 不能推广为任意工作簿的通用 Excel 行为。
         if (string.IsNullOrWhiteSpace(compositionCode))
         {
             var outputAddress = CellAddress.Parse(OutputCellReference);
@@ -323,6 +339,8 @@ internal sealed class LegacyWorksheet
             compositionCode = FormulaEvaluator.ToText(fallback);
         }
 
+        // 输出片段越多，通常说明当前工作表识别了更多订货号位；它只参与型号猜测评分，
+        // 最终成功仍要求结果以 REX615 开头且不含 error 标记。
         var fragmentCount = CountOutputFragments(evaluator);
         var isSuccess = compositionCode.StartsWith("REX615", StringComparison.OrdinalIgnoreCase) &&
                         !compositionCode.Contains("error", StringComparison.OrdinalIgnoreCase);
@@ -422,6 +440,8 @@ internal sealed record LegacyConversionCandidate(
 
 internal sealed class FormulaEvaluator
 {
+    // 这是针对转换规则包的受限 Excel 解释器，只实现已导出公式实际使用的比较、引用和少量函数；
+    // 未知函数返回空值，调用方必须通过最终组合代码形态判断转换是否成功，不能视其为通用表格引擎。
     private static readonly Regex CellReferenceRegex = new(@"^\$?[A-Z]{1,3}\$?\d+$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private static readonly Regex RangeReferenceRegex = new(@"^(?<start>\$?[A-Z]{1,3}\$?\d+):(?<end>\$?[A-Z]{1,3}\$?\d+)$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private readonly Dictionary<string, object?> _cache = new(StringComparer.OrdinalIgnoreCase);
@@ -443,6 +463,8 @@ internal sealed class FormulaEvaluator
             return overrideValue;
         }
 
+        // 公式依赖图会多次引用同一格，按单元格缓存可避免指数级重复计算；输入覆盖优先于缓存，
+        // 且 evaluator 生命周期只对应一个候选转换，因此缓存键无需包含订货号。
         if (_cache.TryGetValue(normalizedReference, out var cached))
         {
             return cached;
@@ -453,6 +475,7 @@ internal sealed class FormulaEvaluator
             return "";
         }
 
+        // 正常规则不应循环引用；异常时按空值结束本次求值，避免递归耗尽调用栈。
         if (!_stack.Add(normalizedReference))
         {
             return "";
@@ -485,6 +508,7 @@ internal sealed class FormulaEvaluator
             return "";
         }
 
+        // 只在括号和字符串之外寻找比较运算符，保证 IF(A1="X",...) 内部比较不会被外层错误拆分。
         if (TryFindTopLevelComparison(value, out var comparisonIndex, out var comparisonOperator))
         {
             var left = EvaluateExpression(value[..comparisonIndex]);
@@ -536,6 +560,7 @@ internal sealed class FormulaEvaluator
                     return "";
                 }
 
+                // 只求值命中的分支，保持 Excel IF 的短路语义；未命中分支中的无效引用不会污染结果。
                 return ToBoolean(EvaluateExpression(arguments[0]))
                     ? EvaluateExpression(arguments[1])
                     : arguments.Count >= 3 ? EvaluateExpression(arguments[2]) : "";
@@ -733,6 +758,8 @@ internal sealed class FormulaEvaluator
 
     private static IReadOnlyList<string> SplitArguments(string value)
     {
+        // 逗号只有在最外层且不位于字符串中时才分隔参数，从而正确处理嵌套 IF、CONCATENATE
+        // 以及字符串字面量中的逗号。
         var arguments = new List<string>();
         var start = 0;
         var depth = 0;
@@ -866,6 +893,8 @@ internal sealed class SpreadsheetCell
 
 internal readonly record struct CellAddress(int Row, int Column)
 {
+    // 内部行列均使用 Excel 的 1 基坐标；绝对引用符号仅影响共享公式平移，
+    // 作为字典键时会被 NormalizeReference 去除。
     private static readonly Regex ReferenceRegex = new(@"^\$?(?<column>[A-Z]{1,3})\$?(?<row>\d+)$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public static CellAddress Parse(string reference)
@@ -920,6 +949,8 @@ internal static partial class FormulaReferenceTranslator
 
     public static string Translate(string formula, CellAddress baseAddress, CellAddress targetAddress)
     {
+        // 共享公式按目标格与基准格的行列偏移平移相对引用；带 $ 的绝对行或绝对列保持不变。
+        // 正则边界避免把函数名、普通数字或更长标识符的一部分误识别为单元格地址。
         var rowOffset = targetAddress.Row - baseAddress.Row;
         var columnOffset = targetAddress.Column - baseAddress.Column;
 

@@ -5,6 +5,8 @@ using System.Text.Json;
 
 namespace AbbRelaysLicensing;
 
+// 授权文件协议的唯一入口：客户端生成机器绑定申请，授权端签发带 RSA 签名的激活载荷，
+// 客户端再依次完成封装解密、验签、机器标识和有效期校验。调用方不应绕过本类直接信任文件内容。
 public static class LicenseService
 {
     public const string ProductId = "ZW_ABB_RELAYS_OFFLINE_CONFIGURATOR";
@@ -16,6 +18,8 @@ public static class LicenseService
     private const int EnvelopeVersion = 1;
     private const int NonceSize = 12;
     private const int TagSize = 16;
+    // 固定 AES 密钥只用于文件封装和历史格式兼容，不是发行者身份凭据；
+    // 客户端二进制中的固定密钥不能构成可信根，激活真实性必须由未随客户端分发的 RSA 私钥签名保证。
     private static readonly byte[] AesKey = SHA256.HashData(Encoding.UTF8.GetBytes("zikuan-wang|ABBRelaysOfflineConfigurator|offline-license|v1"));
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web)
     {
@@ -31,6 +35,8 @@ public static class LicenseService
 
     public static LicenseRequest CreateCurrentRequest()
     {
+        // 请求标识用于关联一次签发记录；机器标识用于最终绑定。机器名和用户名仅供授权人员识别设备，
+        // 不能替代 MachineId，也不会被客户端单独作为授权依据。
         var identity = WindowsIdentity.GetCurrent();
         return new LicenseRequest(
             RequestFileType,
@@ -85,6 +91,7 @@ public static class LicenseService
             DateTimeOffset.Now,
             expiresAt);
 
+        // 签名覆盖序列化后的完整载荷，任何机器、用户、签发时间或有效期字段被修改都会导致客户端验签失败。
         var payloadJson = JsonSerializer.SerializeToUtf8Bytes(payload, JsonOptions);
         using var rsa = RSA.Create();
         rsa.FromXmlString(DecodeXmlKey(privateKeyXmlBase64));
@@ -105,6 +112,8 @@ public static class LicenseService
 
         try
         {
+            // ReadActivationFile 已完成文件类型、版本、RSA 签名和字段完整性校验；
+            // 此处只处理与当前运行环境相关的机器绑定及有效期判定，并转换为适合界面展示的状态。
             var activation = ReadActivationFile(licensePath, publicKeyXmlBase64);
             if (!activation.Payload.MachineId.Equals(GetCurrentMachineId(), StringComparison.OrdinalIgnoreCase))
             {
@@ -129,6 +138,8 @@ public static class LicenseService
 
     public static SignedLicenseActivation ReadActivationFile(string path, string publicKeyXmlBase64)
     {
+        // 校验顺序是协议边界的一部分：先验证加密封装，再核对载荷的产品、文件类型和版本，
+        // 随后验证发行者签名，最后检查其余业务字段，防止调用方信任尚未完成校验的数据。
         var bytes = DecryptEnvelope(File.ReadAllText(path, Encoding.UTF8), ActivationFileType);
         var activation = JsonSerializer.Deserialize<SignedLicenseActivation>(bytes, JsonOptions)
             ?? throw new InvalidOperationException("激活文件内容为空。");
@@ -154,6 +165,7 @@ public static class LicenseService
 
     public static void InstallActivationFile(string sourcePath, string publicKeyXmlBase64)
     {
+        // 只有通过签名校验且属于本机的文件才能复制到固定运行路径；覆盖安装用于续期或重新签发。
         var activation = ReadActivationFile(sourcePath, publicKeyXmlBase64);
         if (!activation.Payload.MachineId.Equals(GetCurrentMachineId(), StringComparison.OrdinalIgnoreCase))
         {
@@ -168,6 +180,8 @@ public static class LicenseService
 
     private static string EncryptToEnvelope(string format, byte[] plaintext)
     {
+        // 每个文件使用独立随机 nonce；AAD 将产品、文件类型和协议版本绑定到认证标签，
+        // 因而申请文件与激活文件不能仅替换外层 Format 后互相冒充。
         var nonce = RandomNumberGenerator.GetBytes(NonceSize);
         var cipherText = new byte[plaintext.Length];
         var tag = new byte[TagSize];
@@ -204,7 +218,8 @@ public static class LicenseService
         }
         catch (CryptographicException)
         {
-            // Backward compatibility for activation/request files produced before AAD binding was added.
+            // 兼容引入 AAD 绑定前生成的历史申请/激活文件。回退只省略 AAD，AES-GCM 标签仍会校验密文完整性；
+            // 激活文件解密后还必须通过独立 RSA 签名校验，因此不能把兼容分支当作签名绕过路径。
             plaintext = new byte[cipherText.Length];
             aes.Decrypt(nonce, cipherText, tag, plaintext);
         }
@@ -257,6 +272,8 @@ public static class LicenseService
 
     private static string GetCurrentMachineId()
     {
+        // 机器标识同时绑定产品、Windows 机器名、当前用户 SID 和系统版本。
+        // 因此更换 Windows 账户或显著变更系统环境可能需要重新申请授权，这是当前协议的预期行为。
         var identity = WindowsIdentity.GetCurrent();
         var raw = string.Join(
             "|",

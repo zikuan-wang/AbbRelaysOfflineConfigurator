@@ -4,6 +4,8 @@ using AbbRelaysLicensing;
 
 namespace AbbRelaysAuthorizationTool;
 
+// 授权工具侧的本地签发台账，仅用于设备追踪、重复签发计数和界面展示；
+// 它不是客户端授权判定的依据，真正的可信凭据仍是由私钥签名后交付的 .zwlic 文件。
 internal static class AuthorizationRecordStore
 {
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web)
@@ -23,6 +25,8 @@ internal static class AuthorizationRecordStore
 
         try
         {
+            // 台账损坏不应阻止授权工具启动或签发，但会表现为无历史记录；
+            // 调用方不能据此推断某台设备从未签发过授权。
             return JsonSerializer.Deserialize<List<AuthorizationDeviceRecord>>(
                     File.ReadAllText(RecordsPath),
                     JsonOptions) ?? [];
@@ -40,6 +44,8 @@ internal static class AuthorizationRecordStore
         DateTimeOffset? expiresAt,
         string activationFilePath)
     {
+        // 同一 MachineId 视为同一设备：保留一条最新记录并累加签发次数，
+        // 避免续期或补发在列表中产生多条难以辨认的重复设备。
         var records = Load().ToList();
         var existingIndex = records.FindIndex(record =>
             record.MachineId.Equals(request.MachineId, StringComparison.OrdinalIgnoreCase));
@@ -71,6 +77,8 @@ internal static class AuthorizationRecordStore
             .ThenBy(item => item.MachineName, StringComparer.OrdinalIgnoreCase)
             .ToList();
 
+        // 只有激活文件已经成功生成后才调用本方法；台账写入失败应向授权人员暴露，
+        // 不能静默声称签发记录已保存。
         var directory = Path.GetDirectoryName(RecordsPath)
             ?? throw new InvalidOperationException("无法定位授权记录目录。");
         Directory.CreateDirectory(directory);

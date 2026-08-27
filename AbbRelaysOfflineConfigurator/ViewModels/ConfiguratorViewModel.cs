@@ -9,6 +9,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// REX615 主选型页的状态协调器：连接本地规则、离线校验、槽位/I/O 摘要、APP 推荐、
+// 组合代码导入导出及在线订货号校验。所有派生界面状态都应从当前选择经 Recalculate 统一刷新。
 public sealed class ConfiguratorViewModel : ObservableObject
 {
     public const string ChineseLanguage = "zh-CN";
@@ -44,6 +46,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     public ConfiguratorViewModel()
     {
+        // 构造阶段只加载本地规则并建立轻量主页面状态；其他产品和旧型号转换 ViewModel 按访问延迟创建，
+        // 避免用户仅使用 REX615 时提前加载所有数据包。
         var dataPath = ResolveDataPath();
         _rules = new ProductRuleLoader().Load(dataPath);
         _validator = new SelectionValidator(_rules);
@@ -155,6 +159,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
             : ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 先刷新现有子项的显示文本，再按新语言重算校验/摘要，最后翻译在线状态；
+                // 延迟创建的子页面由 InitializeChild 在首次访问时继承当前语言。
                 OnPropertyChanged(nameof(IsEnglish));
                 OnPropertyChanged(nameof(VersionText));
                 foreach (var group in MainGroups.Concat(OptionGroups))
@@ -180,6 +186,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private T InitializeChild<T>(T viewModel)
     {
+        // 子页面没有独立的全局语言源，创建时必须从主 ViewModel 注入当前值，
+        // 否则先切换语言、后打开页面会短暂显示错误语言。
         switch (viewModel)
         {
             case CnLegacySelectorViewModel vm:
@@ -253,6 +261,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         {
             if (SetProperty(ref _fullCode, value))
             {
+                // 在线成功只对发起请求时的完整组合代码有效；任何重新拼码都立即撤销该状态和导出权限。
                 ResetOnlineValidationState();
                 CopyCodeCommand.RaiseCanExecuteChanged();
                 OnlineValidateCommand.RaiseCanExecuteChanged();
@@ -364,6 +373,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     public void Reset()
     {
+        // 批量重置时使用静默选择，避免每个选项都触发一次递归重算；
+        // 全部默认值落定后只执行一次 Recalculate，保证界面不会观察到中间状态。
         foreach (var group in MainGroups.Concat(OptionGroups))
         {
             foreach (var option in group.Options)
@@ -387,6 +398,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     public void Recalculate()
     {
+        // 刷新顺序保持单一数据流：选择快照 -> 规则校验 -> 三段代码 -> 消息/槽位/I/O ->
+        // 选项可用性与推荐。后续阶段只消费前面得到的同一快照，避免一次刷新中混用新旧选择。
         var selected = SelectedOptions().ToList();
         var validation = _validator.Validate(selected, UseFullDescription, IsEnglish);
 
@@ -535,6 +548,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return;
         }
 
+        // 推荐器把已选功能拆为基础功能、需购买的最小 APP 集和未匹配项；
+        // 推荐结果只是建议，只有 ApplyRecommendedApps 才会实际修改选型。
         var result = _appFunctionCatalogService.Recommend(AppRecommendationVersion, RequestedFunctions.Select(function => function.Code).ToList());
         Replace(AppRecommendations, result.Apps.Select(app => new AppRecommendationViewModel(app.Id, app.CoveredFunctions, this)));
 
@@ -578,6 +593,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return;
         }
 
+        // 同样采用静默批量更新：先令“应用包”组与推荐集合完全一致，再统一刷新摘要和所有规则状态。
         var recommended = AppRecommendations.Select(app => app.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
         foreach (var option in appGroup.Options)
         {
@@ -657,6 +673,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
         AppendGroup(parts, selectedOptions, "应用包");
 
+        // 物理槽位按 AssignmentPriority 分配；生成组合代码时仍必须按 ABB CodeOrder 输出，二者不可混用。
         var hardwareCodes = validation.SlotAssignments
             .Where(slot => slot.IsHardware && slot.IsAssigned)
             .OrderBy(slot => slot.CodeOrder)
@@ -725,6 +742,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return;
         }
 
+        // 捕获不可变请求快照。进入忙碌态时先清除上次订货号，防止用户把旧结果误认为本次结果。
         var codeAtRequestStart = FullCode;
         IsOnlineValidationBusy = true;
         OnlineOrderingNumber = "";
@@ -735,6 +753,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
         try
         {
             var result = await _onlineValidationService.ValidateAsync(codeAtRequestStart);
+            // 正常返回后再次核对组合代码；若用户已修改选择，则丢弃这次成功响应，
+            // 避免它覆盖当前配置的在线校验状态。
             if (!codeAtRequestStart.Equals(FullCode, StringComparison.OrdinalIgnoreCase))
             {
                 return;
@@ -799,6 +819,7 @@ public sealed class ConfiguratorViewModel : ObservableObject
         IsOnlineValidationError = false;
         OnlineOrderingNumber = "";
         OnlineStatus = IsEnglish ? "Reverse lookup in progress..." : "订货号反查中...";
+        // 反查请求必须绑定当前页面选择的 PCL；服务返回组合代码后再走与手工导入相同的解析和重算路径。
         var requestedOrderingNumber = EnsureOrderingNumberCurrentVersion(orderingNumber);
 
         try
@@ -815,6 +836,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
                 return;
             }
 
+            // 先应用并离线重算服务端返回的组合代码，再恢复本次反查得到的在线成功状态；
+            // ApplyCombinationCode 内部会按正常规则清除旧在线结果，这是预期的状态过渡。
             ApplyCombinationCode(result.CompositionCode);
             OnlineOrderingNumber = result.OrderingNumber ?? requestedOrderingNumber;
             IsOnlineValidationSuccess = true;
@@ -895,6 +918,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
             throw new InvalidOperationException(IsEnglish ? "Combination code is empty." : "组合代码为空。");
         }
 
+        // 导入采用“清空 -> 静默解析主代码/选项代码 -> 单次重算”的事务式界面更新，
+        // 避免解析到一半时触发依赖规则并自动改变尚未导入的组。
         foreach (var group in MainGroups.Concat(OptionGroups))
         {
             foreach (var option in group.Options)
@@ -913,6 +938,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private void ParseMainCode(string mainPart)
     {
+        // 主代码没有分隔符，必须严格按规则组顺序消费；同组内优先匹配较长代码，
+        // 防止短代码成为长代码前缀时提前截断。
         var position = 0;
         foreach (var group in MainGroups.OrderBy(group => group.Group.SortOrder))
         {
@@ -945,6 +972,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
             .Split('+', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .ToList();
 
+        // 非硬件选项可按代码直接匹配；硬件组合代码会把 ModuleCount 展开成重复模块代码，
+        // 因而先统计剩余模块次数，再反查代表该数量的规则选项。
         var exactOptions = OptionGroups
             .SelectMany(group => group.Options)
             .Where(option => string.IsNullOrWhiteSpace(option.Option.ModuleType) || option.Id.Equals(option.Option.ModuleType, StringComparison.OrdinalIgnoreCase))
@@ -1251,6 +1280,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private void UpdateOptionStates(IReadOnlyCollection<RuleOption> selectedOptions, ValidationResult validation)
     {
+        // “可选”表示把某候选加入当前选择后不会破坏既有有效关系；“错误”则标记当前已选项自身、
+        // 硬件槽位冲突或尚未满足的依赖。两者分开计算，已选错误项仍允许用户取消。
         var selectedByGroup = BuildSelectedByGroup(selectedOptions);
         var slotConstraintFailed = validation.Messages.Any(message =>
             message.Contains("槽位", StringComparison.OrdinalIgnoreCase) ||
@@ -1279,6 +1310,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
 
     private ValidationMessageViewModel CreateValidationMessage(string text, IReadOnlyCollection<RuleOption> selectedOptions)
     {
+        // 校验器保持纯业务文本，本层再解析出组/选项/机箱目标供界面跳转；
+        // 无法识别的消息仍保留原文，只是没有精确导航目标。
         var targets = new List<ValidationMessageTargetViewModel>();
 
         var optionSeparator = text.IndexOf(" / ", StringComparison.Ordinal);
@@ -1640,6 +1673,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
         IReadOnlyCollection<RuleOption> selectedOptions,
         IReadOnlyDictionary<string, HashSet<string>> selectedByGroup)
     {
+        // 在克隆的选择索引上模拟点击候选：单选组替换当前值，多选组追加当前值。
+        // 模拟不得修改真实 ViewModel，否则仅计算可用性就会触发级联重算。
         var candidate = CloneSelectedByGroup(selectedByGroup);
         var group = FindGroup(option.GroupName);
         if (group is null)
@@ -1672,6 +1707,8 @@ public sealed class ConfiguratorViewModel : ObservableObject
             return false;
         }
 
+        // 除候选自身外，还需确认这次替换不会让原本有效的已选项失效；
+        // 原本已经无效的项不用于锁死选择，用户仍可通过调整其他组逐步修复配置。
         foreach (var selectedOption in selectedOptions)
         {
             if (selectedOption.IsMainCode)

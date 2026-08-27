@@ -5,6 +5,8 @@ using AbbRelaysOfflineConfigurator.Services;
 
 namespace AbbRelaysOfflineConfigurator.ViewModels;
 
+// 负责 REX600 18 位订货码的按位选择、版本兼容、I/O 摘要、离线规则与在线订货号校验。
+// Groups 保存用户选择，代码、摘要、消息和 I/O 均在同一重算周期中派生，避免界面区域之间状态漂移。
 public sealed class Rex600SelectionViewModel : ObservableObject
 {
     private readonly Rex600RuleSet _rules = new Rex600RuleLoader().Load();
@@ -70,6 +72,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
                 : ConfiguratorViewModel.ChineseLanguage;
             if (SetProperty(ref _displayLanguage, normalized))
             {
+                // 语言切换保留当前选项，只重建本地化文本、校验消息和摘要。
                 OnPropertyChanged(nameof(IsEnglish));
                 RefreshStaticText();
                 foreach (var group in Groups)
@@ -202,6 +205,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     public void Reset()
     {
+        // 默认码通过与导入相同的位段回填通道应用，确保重置和正常解析遵循完全一致的规则。
         ApplyOrderCode(_rules.DefaultOrderCode);
         Recalculate();
     }
@@ -221,6 +225,8 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     internal void Recalculate()
     {
+        // 先保证每组单选并替换版本不支持项，再生成订货码，最后刷新校验、摘要、I/O 与可用状态。
+        // OrderCode 一旦变化会统一清空在线结果，因此任何本地改动都必须重新在线确认。
         EnsureSingleSelection();
         NormalizeUnsupportedSelections();
         OrderCode = BuildOrderCode();
@@ -244,6 +250,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private void RefreshIoSummary(IReadOnlyDictionary<string, Rex600OptionViewModel> selectedByGroup)
     {
+        // I/O、通信和电源能力来自已选硬件位段，而不是从最终字符串猜测，便于与规则组保持可追踪对应。
         IoSummaryItems.Clear();
 
         if (selectedByGroup.TryGetValue("Aios", out var analogInputs) &&
@@ -283,6 +290,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private IReadOnlyList<string> ApplyOrderCode(string orderCode)
     {
+        // 每组先静默清空再按 Location 回填；未知位段按当前版本选择可用默认项，并把原值作为导入告警返回。
         var code = (orderCode ?? "").Trim().ToUpperInvariant();
         var notFound = new List<string>();
 
@@ -333,6 +341,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private void NormalizeUnsupportedSelections()
     {
+        // 版本变化后优先保留仍受支持的选择，否则按规则默认项和首个可用项依次回退。
         var selectedByGroup = SelectedByGroup();
         var version = CurrentVersion(selectedByGroup);
         foreach (var group in Groups)
@@ -390,6 +399,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private IEnumerable<ValidationMessageViewModel> Validate(string version)
     {
+        // 离线有效性同时要求各组选项支持当前版本，并且拼接结果保持完整的 18 位结构。
         foreach (var group in Groups)
         {
             var selected = group.SelectedOption;
@@ -524,6 +534,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private async Task ValidateOnlineAsync()
     {
+        // 以请求发起时的代码作为响应令牌；当前代码已改变时不接纳旧订货号结果。
         if (string.IsNullOrWhiteSpace(OrderCode) || IsOnlineValidationBusy)
         {
             return;
@@ -614,6 +625,7 @@ public sealed class Rex600SelectionViewModel : ObservableObject
 
     private void ImportOrderCode()
     {
+        // 输入先去除空白并规范为大写，长度通过后再一次性解析，避免把明显不完整的代码写入选择状态。
         var window = new CombinationCodeImportWindow(
             IsEnglish ? "Import REX600 order code" : "导入 REX600 订货号",
             IsEnglish
